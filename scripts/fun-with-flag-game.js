@@ -1,63 +1,130 @@
+let apiResponse = {};
 
 let countryCodes = [];
+
 let countryNames = [];
+
+let correctCountry = "";
 
 const showCountryFlag = (countries) => {
 
-  // returns all keys in the object as an array
-  countryCodes = Object.keys(countries);
-
-  //returns all values in object as an array
-  countryNames = Object.values(countries);
-
-  // random integer generator
-  const getRandomInt = (maxnumber) => {
-    maxnumber = countryCodes.length;
-    return Math.floor(Math.random() * (maxnumber))
+  // Generates Random Counrty code from counrtyCodes Array
+  const randomCodeGenerator = () => {
+    // random integer generator
+    const getRandomInt = (maxnumber) => {
+      maxnumber = countryCodes.length;
+      return Math.floor(Math.random() * (maxnumber - 1))
+    };
+    // assigns random index to pull form array
+    let randomCode = countryCodes[getRandomInt()];
+    return randomCode;
   };
 
-  randomCode = countryCodes[getRandomInt()];
+  //TODO: us-state flags showing up... do we want them or not?
 
-  // for (let countryCode in countries) {
-  //   // returns country code (i.e. "az")
-  //   console.log(countryCode);
+  let countryCode = randomCodeGenerator();
+  correctCountry = countries[countryCode];
+  console.info(`This country is ${countries[countryCode]}`);
 
-  //   // returns country name
-  //   console.log(countries[countryCode])
-  // }
+  // store the random url 
+  let flagUrl = (`https://flagcdn.com/${countryCode}.svg`)
 
+  // Generate country options
+  let countryOptions = [];
+  countryOptions.push(countries[countryCode]);
 
+  for (let i = 1; i < 4; i++) {
+    let randomCountry = randomCodeGenerator();
+    if (countryCode != randomCountry) {
+      countryOptions[i] = countries[randomCountry];
+    }
+  };
+
+  // Fisher-Yates SHUFFLE ALGORITM https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+  function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  };
+
+  let result = {
+    flag: flagUrl,
+    countries: shuffle(countryOptions),
+  };
+
+  return result;
 };
 
 
+const gameContainer = document.querySelector(".fwf-game__display");
+
+function buildGameContainer(data) {
+  // Flag
+
+  const flagContainer = createPageElement("div", "fwf-game__flag-container", null)
+  gameContainer.appendChild(flagContainer);
+
+  const flagEl = createPageElement("img", "fwf-game__flag", null);
+  flagEl.setAttribute("src", data.flag);
+
+  flagContainer.appendChild(flagEl);
+  gameContainer.appendChild(flagContainer);
+
+  // Country Options
+  const countriesContainer = createPageElement("div", "fwf-game__countries-container", null);
+  gameContainer.appendChild(countriesContainer);
+
+  data.countries.forEach(country => {
+    let countryOption = createPageElement("button", "fwf-game__country-option", country);
+    countryOption.addEventListener("click", handleOptionSelect)
+    countriesContainer.appendChild(countryOption);
+  });
 
 
+  function handleOptionSelect(event) {
+    event.preventDefault();
+    if (event.target.textContent === correctCountry) {
+      event.target.classList.add("fwf-game__country-option--correct");
 
+    } else {
+      event.target.classList.add("fwf-game__country-option--error");
+    };
+
+    gameContainer.innerHTML = "";
+    // flagContainer.innerHTML = ""; //! why is this necessary this is a bug the image should also reset not store 
+    let data = showCountryFlag(apiResponse);
+    buildGameContainer(data);
+  };
+}
+
+// Promise invocation
 axios.get('https://flagcdn.com/en/codes.json')
   .then((response) => {
     return response.data;
   })
   .then(data => {
-    //about 306 different countries
-    showCountryFlag(data)
+    // returns all keys in the object as an array
+    countryCodes = Object.keys(data);
+    //returns all values in object as an array
+    countryNames = Object.values(data);
+
+    apiResponse = data;
+    console.log(data);
+    return showCountryFlag(data);
   })
-  ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// axios.get('https://flagcdn.com/za.svg')
-//   .then((response) => {
-//     console.log(response)
-//   })
+  .then(obj => {
+    // Flag container div to store random flag
+    buildGameContainer(obj)
+  });

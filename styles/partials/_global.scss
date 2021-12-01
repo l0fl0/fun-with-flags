@@ -5,14 +5,16 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.button {
+.footer {
+  height: 10rem;
   background-color: $font-primary-color;
-  color: $font-white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.625rem;
-  margin: 1rem 0;
-  &:hover {
-    background-color: $highlight-color;
+  position: relative;
+  padding: 5% 0;
+  &__sign {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: $font-white;
   }
 }
