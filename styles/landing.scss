@@ -1,1 +1,16 @@
 @use './partials/global';
+@use './partials/colors' as *;
+
+.header {
+    &__title {
+        color: $font-primary-color;
+        text-align: center;
+        font-size: 2.5rem;
+    }
+
+    &__sub-title {
+        color: $font-primary-color;
+        text-align: center;
+        font-size: 1.5625rem;
+    }
+}
