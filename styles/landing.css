@@ -23,6 +23,42 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+  background-color: #e5e5e5;
+}
+
+.header {
+  background-color: #2e2e2e;
+  color: #7c7c7c;
+  position: relative;
+  padding: 1rem;
+  min-height: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .header__logo {
+    width: 200px;
+  }
+}
+@media (min-width: 1280px) {
+  .header__logo {
+    width: 300px;
+  }
+}
+.header__title {
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 2.5rem;
+  color: #ffffff;
+}
+.header__sub-title {
+  margin: 1rem 0;
+  text-align: center;
+  font-size: 1.5625rem;
+}
+
 .footer {
   height: 10rem;
   background-color: #2e2e2e;
@@ -37,26 +73,25 @@ body {
   color: #ffffff;
 }
 
-body {
-  background-color: #e5e5e5;
+.how-to-play {
+  display: grid;
+  place-items: center;
+  text-align: left;
 }
-
-.header {
-  background-color: #2e2e2e;
-  color: #7c7c7c;
-}
-.header__title {
+.how-to-play ol,
+.how-to-play ul,
+.how-to-play li {
   margin: 0;
-  padding: 2rem 0;
-  text-align: center;
-  font-size: 2.5rem;
-  color: #ffffff;
+  padding: 0;
+  list-style: none;
 }
-.header__sub-title {
-  margin: 0;
-  padding: 1rem 0;
-  text-align: center;
-  font-size: 1.5625rem;
+.how-to-play ol {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.how-to-play ul {
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .register {
@@ -122,6 +157,7 @@ body {
 .fwf-game {
   display: grid;
   place-items: center;
+  width: 100%;
 }
 .fwf-game__title {
   margin: 0;
@@ -183,6 +219,9 @@ body {
 }
 .fwf-game__country-option--correct {
   background-color: olive;
+}
+.fwf-game__game-over {
+  width: 30rem;
 }
 
 /*# sourceMappingURL=landing.css.map */

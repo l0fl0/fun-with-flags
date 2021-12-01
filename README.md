@@ -1,5 +1,9 @@
 ## TODOS
 
+> LOUIS
+
+2. prevent user from inputing all answers
+
 setTimeout after button on click for delay to next question;
 
 Trigger game start through form sumbit

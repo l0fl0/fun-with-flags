@@ -1,14 +1,3 @@
-let apiResponse = {};
-
-let countryCodes = [];
-
-let countryNames = [];
-
-let countryCodesWithoutStates = [];
-
-let correctCountry = "";
-
-let indexOfStates = [];
 
 function define(data) {
   // returns all keys in the object as an array
@@ -21,10 +10,7 @@ function define(data) {
       !(code.startsWith("us-"))
       indexOfStates.push(i)
     });
-
-
-
-  console.log(countryCodesWithoutStates)
+  console.log(countryCodesWithoutStates);
 
   apiResponse = data;
 
@@ -48,9 +34,10 @@ const showCountryFlag = (countries) => {
 
   //TODO: us-state flags showing up... do we want them or not?
 
-  let countryCode = randomCodeGenerator();
+  countryCode = randomCodeGenerator();
   correctCountry = countries[countryCode];
   console.info(`This country is ${countries[countryCode]}`);
+
 
   // store the random url 
   let flagUrl = (`https://flagcdn.com/${countryCode}.svg`)
@@ -97,8 +84,12 @@ const showCountryFlag = (countries) => {
 const gameContainer = document.querySelector(".fwf-game__display");
 
 function buildGameContainer(data) {
-  // Flag
 
+  // lives 
+  const userLifeElement = document.querySelector(".fwf-game__lives");
+  userLifeElement.innerText = userLives;
+
+  // Flag
   const flagContainer = createPageElement("div", "fwf-game__flag-container", null)
   gameContainer.appendChild(flagContainer);
 
@@ -123,17 +114,41 @@ function buildGameContainer(data) {
     event.preventDefault();
     if (event.target.textContent === correctCountry) {
       event.target.classList.add("fwf-game__country-option--correct");
-
-    } else {
+      correctFlags.push(countryCode);
+      console.log(correctFlags);
+    }
+    if (event.target.textContent !== correctCountry) {
       event.target.classList.add("fwf-game__country-option--error");
-
+      incorrectFlags.push(countryCode);
+      userLives--;
+      console.log(incorrectFlags);
     };
+
+    if (userLives === 0) {
+      gameContainer.innerHTML = "";
+      let gameOverImage = createPageElement("img", "fwf-game__game-over", null);
+      gameOverImage.src = "../assets/images/bazinga.png";
+      gameOverImage.alt = "Game Over!";
+
+      gameContainer.appendChild(gameOverImage);
+
+      let viewResults = createPageElement("button", "button", "View Results");
+      gameContainer.appendChild(viewResults)
+
+      viewResults.addEventListener("click", () => {
+        window.location.assign("../pages/results.html");
+      })
+      return;
+    }
 
     let data = showCountryFlag(apiResponse);
 
+    gameContainer.innerHTML = "";
+
+    buildGameContainer(data);
+
     setTimeout(() => {
-      gameContainer.innerHTML = "";
-      buildGameContainer(data);
+
     }, 2000)
   };
 }
