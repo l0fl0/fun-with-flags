@@ -1,0 +1,5 @@
+#Ignore scss map files
+*.css.map
+
+#Ignore DS Store files
+.DS_Store
