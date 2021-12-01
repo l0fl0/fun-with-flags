@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -9,6 +11,14 @@ body {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.button {
+  background-color: #e5e5e5;
+  color: #7c7c7c;
+}
+.button:hover {
+  background-color: #cc7363;
 }
 
 .header {

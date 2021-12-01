@@ -1,0 +1,14 @@
+@use "./variables" as *;
+
+// Media queries
+@mixin tablet-breakpoint {
+  @media (max-width: $tablet-screen-size) {
+    @content;
+  }
+}
+
+@mixin desktop-breakpoint {
+  @media (max-width: $desktop-screen-size) {
+    @content;
+  }
+}
