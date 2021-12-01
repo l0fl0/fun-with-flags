@@ -1,2 +1,11 @@
+<<<<<<< HEAD
 @use "./resets";
 @use "./colors" as *;
+=======
+@use './resets';
+@use './colors' as *;
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+>>>>>>> 89c7d12d8873ff63178e55553354ddda21b0da92
