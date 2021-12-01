@@ -63,6 +63,7 @@ body {
   background-color: #e5e5e5;
   background-image: url("../assets/images/sheldon-cooper-background-full-hd-422997.jpg");
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
@@ -118,6 +119,10 @@ body {
   color: #2e2e2e;
 }
 
+.fwf-game {
+  display: grid;
+  place-items: center;
+}
 .fwf-game__title {
   margin: 0;
   padding: 2rem;
@@ -133,7 +138,6 @@ body {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
-    padding: 0 5%;
   }
 }
 .fwf-game__flag-container {

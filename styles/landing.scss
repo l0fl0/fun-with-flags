@@ -34,6 +34,7 @@ body {
   background-color: $background-secondary-color;
   background-image: url("../assets/images/sheldon-cooper-background-full-hd-422997.jpg");
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
@@ -87,6 +88,8 @@ body {
 //* Game
 
 .fwf-game {
+  display: grid;
+  place-items: center;
   &__title {
     margin: 0;
     padding: 2rem;
@@ -101,7 +104,6 @@ body {
       display: flex;
       justify-content: space-evenly;
       flex-direction: column;
-      padding: 0 5%;
     }
   }
 

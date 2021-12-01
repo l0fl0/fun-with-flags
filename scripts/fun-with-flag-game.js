@@ -4,7 +4,33 @@ let countryCodes = [];
 
 let countryNames = [];
 
+let countryCodesWithoutStates = [];
+
 let correctCountry = "";
+
+let indexOfStates = [];
+
+function define(data) {
+  // returns all keys in the object as an array
+  countryCodes = Object.keys(data);
+  //returns all values in object as an array
+  countryNames = Object.values(data);
+
+  countryCodesWithoutStates = countryCodes.slice().filter(
+    (code, i) => {
+      !(code.startsWith("us-"))
+      indexOfStates.push(i)
+    });
+
+
+
+  console.log(countryCodesWithoutStates)
+
+  apiResponse = data;
+
+};
+
+
 
 const showCountryFlag = (countries) => {
 
@@ -100,12 +126,15 @@ function buildGameContainer(data) {
 
     } else {
       event.target.classList.add("fwf-game__country-option--error");
+
     };
 
-    gameContainer.innerHTML = "";
-    // flagContainer.innerHTML = ""; //! why is this necessary this is a bug the image should also reset not store 
     let data = showCountryFlag(apiResponse);
-    buildGameContainer(data);
+
+    setTimeout(() => {
+      gameContainer.innerHTML = "";
+      buildGameContainer(data);
+    }, 2000)
   };
 }
 
@@ -115,16 +144,16 @@ axios.get('https://flagcdn.com/en/codes.json')
     return response.data;
   })
   .then(data => {
-    // returns all keys in the object as an array
-    countryCodes = Object.keys(data);
-    //returns all values in object as an array
-    countryNames = Object.values(data);
-
-    apiResponse = data;
+    define(data);
     console.log(data);
     return showCountryFlag(data);
   })
   .then(obj => {
     // Flag container div to store random flag
+
     buildGameContainer(obj)
-  });
+
+  })
+
+
+
