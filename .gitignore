@@ -2,4 +2,7 @@
 *.css.map
 
 #Ignore DS Store files
-.DS_Store
+*.DS_Store
+
+#Ignore for the 
+.vscode

@@ -16,6 +16,7 @@ body {
 .button {
   background-color: #e5e5e5;
   color: #7c7c7c;
+  padding: 0.5rem 1rem;
 }
 .button:hover {
   background-color: #cc7363;
@@ -57,4 +58,6 @@ body {
 }
 .register__form-field {
   padding: 0.5rem;
-}/*# sourceMappingURL=landing.css.map */
+}
+
+/*# sourceMappingURL=landing.css.map */

@@ -8,6 +8,7 @@ body {
 .button {
   background-color: $background-secondary-color;
   color: $font-secondary-color;
+  padding: 0.5rem 1rem;
   &:hover {
     background-color: $highlight-color;
   }
