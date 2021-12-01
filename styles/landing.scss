@@ -2,15 +2,46 @@
 @use './partials/colors' as *;
 
 .header {
+    background-color: $background-secondary-color;
     &__title {
+        margin: 0;
+        padding: 2rem 0;
         color: $font-primary-color;
         text-align: center;
         font-size: 2.5rem;
     }
 
     &__sub-title {
+        margin: 0;
+        padding: 1rem 0;
         color: $font-primary-color;
         text-align: center;
         font-size: 1.5625rem;
+    }
+}
+
+.register {
+
+    &__form-container {
+        padding: 2rem;
+        display: inline-block;
+        border: .03125rem solid $font-secondary-color;
+        border-radius: .3125rem;
+    }
+
+    &__title {
+        margin: 0;
+        padding: 1rem;
+        text-align: center;
+        color: $font-primary-color;
+    }
+
+    &__form-label {
+        display: block;
+        padding-bottom: 0.5rem;
+    }
+
+    &__form-field {
+        padding: 0.5rem;
     }
 }

@@ -11,13 +11,40 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.header {
+  background-color: #e5e5e5;
+}
 .header__title {
+  margin: 0;
+  padding: 2rem 0;
   color: #2e2e2e;
   text-align: center;
   font-size: 2.5rem;
 }
 .header__sub-title {
+  margin: 0;
+  padding: 1rem 0;
   color: #2e2e2e;
   text-align: center;
   font-size: 1.5625rem;
+}
+
+.register__form-container {
+  padding: 2rem;
+  display: inline-block;
+  border: 0.03125rem solid #7c7c7c;
+  border-radius: 0.3125rem;
+}
+.register__title {
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  color: #2e2e2e;
+}
+.register__form-label {
+  display: block;
+  padding-bottom: 0.5rem;
+}
+.register__form-field {
+  padding: 0.5rem;
 }/*# sourceMappingURL=landing.css.map */
