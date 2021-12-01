@@ -26,6 +26,11 @@ ul {
   list-style: none;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #e5e5e5;
@@ -54,26 +59,35 @@ body {
 .header__title {
   margin: 2rem 0;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 1.5625rem;
   color: #ffffff;
 }
-.header__sub-title {
+.header__play-again {
+  background-color: #2e2e2e;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.625rem;
   margin: 1rem 0;
-  text-align: center;
-  font-size: 1.5625rem;
+  background-color: #ffdf6c;
+  color: #2e2e2e;
+  text-transform: uppercase;
+}
+.header__play-again:hover {
+  background-color: #ffdf6c;
+  color: #2e2e2e;
 }
 
 .footer {
   height: 10rem;
   background-color: #2e2e2e;
-  position: relative;
   padding: 5% 0;
+  display: flex;
+  justify-content: center;
 }
 .footer__sign {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  padding: 1rem;
+  margin: auto;
   color: #ffffff;
 }
 
@@ -86,17 +100,29 @@ body {
 }
 
 .results__container {
-  padding-top: 1rem;
-  display: flex;
+  padding: 1rem;
+}
+@media (min-width: 768px) {
+  .results__container {
+    display: flex;
+  }
 }
 .results__column {
-  width: 50%;
+  border: 0.015625rem solid #2e2e2e;
+  background-color: #ffffff;
+}
+@media (min-width: 768px) {
+  .results__column {
+    width: 50%;
+  }
 }
 .results__column-title {
   margin: 0;
   padding: 2rem;
   text-align: center;
   color: #ffffff;
+  border-bottom: 0.015625rem solid #2e2e2e;
+  text-transform: capitalize;
 }
 .results__column-title--correct {
   background-color: olive;
@@ -106,17 +132,48 @@ body {
 }
 .results__row {
   display: flex;
-  justify-content: space-evenly;
+  max-height: 4rem;
+  padding: 1rem;
   align-items: center;
-  padding: 1rem 0;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+}
+.results__row:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 .results__flag {
   width: 20%;
-  height: 10%;
+  max-height: 4rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
 }
 .results__country {
+  margin-left: 1rem;
   width: 40%;
   color: #2e2e2e;
+}
+
+.scoreboard {
+  width: 100%;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.scoreboard__title {
+  color: #2e2e2e;
+  text-align: center;
+}
+.scoreboard__container {
+  margin: 0 auto;
+}
+.scoreboard__name {
+  font-weight: bold;
+}
+.scoreboard__score {
+  margin-left: 1rem;
+  font-weight: bold;
+  color: olive;
+  border-radius: 0.5rem;
 }
 
 /*# sourceMappingURL=results.css.map */

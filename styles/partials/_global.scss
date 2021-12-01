@@ -30,27 +30,27 @@ body {
   &__title {
     margin: 2rem 0;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 1.5625rem;
     color: $font-white;
   }
 
-  &__sub-title {
-    margin: 1rem 0;
-    text-align: center;
-    font-size: 1.5625rem;
+  &__play-again {
+    @include btn;
+    background-color: $highlight-color;
+    color: $font-primary-color;
+    text-transform: uppercase;
   }
 }
 
 .footer {
   height: 10rem;
   background-color: $font-primary-color;
-  position: relative;
   padding: 5% 0;
+  display: flex;
+  justify-content: center;
   &__sign {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    padding: 1rem;
+    margin: auto;
     color: $font-white;
   }
 }

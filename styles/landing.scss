@@ -8,16 +8,17 @@
   display: grid;
   place-items: center;
   text-align: left;
-  padding: 2rem 0;
+  padding: 1rem;
   color: $font-primary-color;
 
   &__title {
+    padding-bottom: 1rem;
     font-size: 2rem;
     text-transform: uppercase;
   }
 
   &__rules {
-    margin-top: 1rem;
+    padding-top: 1rem;
     font-size: 1.2rem;
     font-weight: bold;
   }
@@ -36,7 +37,6 @@
 //* Register to play
 
 .register {
-  background-color: $background-secondary-color;
   background-image: url("../assets/images/sheldon-cooper-background-full-hd-422997.jpg");
   background-size: cover;
   background-position: center;
@@ -45,10 +45,10 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  height: 80vh;
+  height: 50vh;
 
   @include tablet-breakpoint {
-    height: 60vw;
+    height: 60vh;
   }
   &__background {
     background-color: $background-secondary-color;
@@ -59,18 +59,25 @@
 
   &__container {
     position: absolute;
+    display: grid;
+    place-items: center;
+  }
+  &__form {
+    display: grid;
+    place-items: center;
   }
 
   &__form-container {
     padding: 2rem;
     display: inline-block;
-    background-color: $font-white;
-    border: 0.03125rem solid $font-secondary-color;
     border-radius: 0.3125rem;
     margin: 0 auto;
   }
 
   &__title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2rem;
     margin: 0;
     padding: 1rem;
     text-align: center;
@@ -78,7 +85,9 @@
   }
 
   &__form-label {
-    display: block;
+    display: none;
+    font-weight: bold;
+    text-transform: uppercase;
     padding-bottom: 0.5rem;
   }
 
@@ -113,6 +122,14 @@
       justify-content: space-evenly;
       flex-direction: column;
     }
+  }
+
+  &__user-container {
+    height: 10%;
+  }
+
+  &__user-name {
+    color: $font-primary-color;
   }
 
   &__flag-container {
@@ -152,8 +169,11 @@
     }
   }
 
+  &__button {
+    @include btn;
+  }
+
   &__game-over {
-    width: 30rem;
-    // height: 40%;
+    width: 20rem;
   }
 }

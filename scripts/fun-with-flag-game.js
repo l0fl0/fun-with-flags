@@ -1,7 +1,3 @@
-
-
-
-
 const showCountryFlag = (countries) => {
 
   // Generates Random Counrty code from counrtyCodes Array
@@ -65,13 +61,27 @@ const showCountryFlag = (countries) => {
 };
 
 
-const gameContainer = document.querySelector(".fwf-game__display");
+const userInfoContainer = document.querySelector(".fwf-game__user-container")
+function buildUserInfo(user) {
 
-function buildGameContainer(data) {
+  // let user = JSON.parse(localStorage["user"]);
+  // User info 
+  const userName = createPageElement("div", "fwf-game__username", `User: ${user.name}`);
+  userInfoContainer.appendChild(userName);
 
   // lives 
-  const userLifeElement = document.querySelector(".fwf-game__lives");
-  userLifeElement.innerText = userLives;
+  const userLifeElement = createPageElement("div", "fwf-game__lives", `Lives: ${user.lives}`);
+  userInfoContainer.appendChild(userLifeElement);
+
+  // score 
+  const userScore = createPageElement("div", "fwf-game__score", `Score: ${user.score}`);
+  userInfoContainer.appendChild(userScore);
+}
+
+const gameContainer = document.querySelector(".fwf-game__display");
+
+
+function buildGameContainer(data) {
 
   // Flag
   const flagContainer = createPageElement("div", "fwf-game__flag-container", null)
@@ -93,35 +103,40 @@ function buildGameContainer(data) {
     countriesContainer.appendChild(countryOption);
   });
 
-
   function handleOptionSelect(event) {
     event.preventDefault();
     if (event.target.textContent === correctCountry) {
       event.target.classList.add("fwf-game__country-option--correct");
       correctFlags.push(countryCode);
+      user.score++;
       // console.log(correctFlags);
     }
     if (event.target.textContent !== correctCountry) {
       event.target.classList.add("fwf-game__country-option--error");
       incorrectFlags.push(countryCode);
-      userLives--;
+      user.lives--;
       // console.log(incorrectFlags);
     };
 
-    if (userLives === 0) {
-      userLifeElement.innerHTML = "";
+    if (user.lives === 0) {
+      // let livesContainer = document.querySelector(".fwf-game__lives-container")
+      // // livesContainer.innerHTML = "";
+      userInfoContainer.innerHTML = "";
       gameContainer.innerHTML = "";
 
       localStorage.setItem("correctFlags", JSON.stringify(correctFlags));
       localStorage.setItem("incorrectFlags", JSON.stringify(incorrectFlags));
 
+      users.push(user);
+      localStorage.setItem("users", JSON.stringify(users));
+      // console.log(users)
       let gameOverImage = createPageElement("img", "fwf-game__game-over", null);
       gameOverImage.src = "../assets/images/bazinga.png";
       gameOverImage.alt = "Game Over!";
 
       gameContainer.appendChild(gameOverImage);
 
-      let viewResults = createPageElement("button", "button", "View Results");
+      let viewResults = createPageElement("button", "fwf-game__button", "View Results");
       gameContainer.appendChild(viewResults)
 
       viewResults.addEventListener("click", () => {
@@ -130,15 +145,15 @@ function buildGameContainer(data) {
       return;
     }
 
-    let data = showCountryFlag(apiResponse);
+    setTimeout(() => {
+      let data = showCountryFlag(apiResponse);
 
-    gameContainer.innerHTML = "";
+      gameContainer.innerHTML = "";
+      userInfoContainer.innerHTML = "";
 
-    buildGameContainer(data);
-
-    // setTimeout(() => {
-
-    // }, 2000)
+      buildUserInfo(user)
+      buildGameContainer(data);
+    }, 1000)
   };
 }
 
@@ -153,9 +168,7 @@ axios.get('https://flagcdn.com/en/codes.json')
     return showCountryFlag(data);
   })
   .then(obj => {
-
     buildGameContainer(obj)
-
   })
 
 
