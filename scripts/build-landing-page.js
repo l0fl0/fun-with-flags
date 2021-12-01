@@ -1,6 +1,8 @@
+
+// ? Do we want to dynamically build the form or just have it static?
+
 function buildForm() {
   // Form container 
-
   const formContainer = createPageElement("div", "register__form-container", null);
 
   /* Form
@@ -9,7 +11,6 @@ function buildForm() {
   const formEl = createPageElement("form", "register__form", null);
 
   // Name field
-
   const nameEl = createPageElement("input", "register__form-field", null);
   nameEl.name = "fullName";
   nameEl.id = "fullName";
@@ -26,6 +27,9 @@ function buildForm() {
 
   return formContainer;
 }
+
+
+
 
 function buildRegister() {
   // Get 'register' HTML section
