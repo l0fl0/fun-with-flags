@@ -8,23 +8,28 @@
   display: grid;
   place-items: center;
   text-align: left;
+  padding: 2rem 0;
+  color: $font-primary-color;
 
-  ol,
-  ul,
-  li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  &__title {
+    font-size: 2rem;
+    text-transform: uppercase;
   }
 
-  ol {
-    font-weight: bold;
+  &__rules {
+    margin-top: 1rem;
     font-size: 1.2rem;
+    font-weight: bold;
   }
 
-  ul {
+  &__sub-rules {
+    padding-left: 1rem;
     font-size: 1.1rem;
-    font-weight: 600;
+  }
+
+  &__sub-sub-rules {
+    font-style: italic;
+    padding-left: 2rem;
   }
 }
 
@@ -89,7 +94,7 @@
 //* Game
 
 .fwf-game {
-  display: grid;
+  display: none;
   place-items: center;
   width: 100%;
 
@@ -149,5 +154,6 @@
 
   &__game-over {
     width: 30rem;
+    // height: 40%;
   }
 }

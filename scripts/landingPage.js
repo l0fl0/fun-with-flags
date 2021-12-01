@@ -1,10 +1,54 @@
+let user = {
+  name: "",
+  score: 0,
+  lives: 5
+};
+
+
+
+let users = [
+  {
+    name: "Louis",
+    score: 1,
+    lives: 5
+  },
+  {
+    name: "Mikes friend",
+    score: 35,
+    lives: 5
+  },
+  {
+    name: "Sheldon",
+    score: 36,
+    lives: 5
+  },
+  {
+    name: "Madhura",
+    score: 25,
+    lives: 5
+  }
+];
+const howToEl = document.querySelector(".how-to-play");
+const registerEl = document.querySelector(".register");
+const gameEl = document.querySelector(".fwf-game");
+
+function hideSections() {
+  howToEl.classList.add("hide");
+  registerEl.classList.add("hide");
+}
+function showGame() {
+  gameEl.classList.add("show");
+}
 
 // Form submit handler
 function handleSubmit(event) {
   event.preventDefault();
-  console.log(event.target.name.value);
-
-  formEl.reset();
+  user.name = event.target.name.value;
+  setTimeout(() => {
+    hideSections();
+    showGame()
+  }, 2000)
+  console.log(user);
 };
 
 const formEl = document.querySelector(".register__form");

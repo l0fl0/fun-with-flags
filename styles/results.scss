@@ -3,4 +3,40 @@
 @use "./partials/colors" as *;
 
 .results {
+  &__container {
+    padding-top: 1rem;
+    display: flex;
+  }
+  &__column {
+    width: 50%;
+  }
+  &__column-title {
+    margin: 0;
+    padding: 2rem;
+    text-align: center;
+    color: $font-white;
+
+    &--correct {
+      background-color: $success-color;
+    }
+    &--incorrect {
+      background-color: $error-color;
+    }
+  }
+  &__row {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem 0;
+  }
+
+  &__flag {
+    width: 20%;
+    height: 10%;
+  }
+
+  &__country {
+    width: 40%;
+    color: $font-primary-color;
+  }
 }

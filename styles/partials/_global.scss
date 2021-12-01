@@ -4,9 +4,6 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
   background-color: $background-secondary-color;
 }
 
@@ -56,4 +53,11 @@ body {
     transform: translate(-50%, -50%);
     color: $font-white;
   }
+}
+
+.hide {
+  display: none !important;
+}
+.show {
+  display: grid !important;
 }

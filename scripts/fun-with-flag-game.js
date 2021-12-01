@@ -1,20 +1,4 @@
 
-function define(data) {
-  // returns all keys in the object as an array
-  countryCodes = Object.keys(data);
-  //returns all values in object as an array
-  countryNames = Object.values(data);
-
-  countryCodesWithoutStates = countryCodes.slice().filter(
-    (code, i) => {
-      !(code.startsWith("us-"))
-      indexOfStates.push(i)
-    });
-  console.log(countryCodesWithoutStates);
-
-  apiResponse = data;
-
-};
 
 
 
@@ -115,17 +99,22 @@ function buildGameContainer(data) {
     if (event.target.textContent === correctCountry) {
       event.target.classList.add("fwf-game__country-option--correct");
       correctFlags.push(countryCode);
-      console.log(correctFlags);
+      // console.log(correctFlags);
     }
     if (event.target.textContent !== correctCountry) {
       event.target.classList.add("fwf-game__country-option--error");
       incorrectFlags.push(countryCode);
       userLives--;
-      console.log(incorrectFlags);
+      // console.log(incorrectFlags);
     };
 
     if (userLives === 0) {
+      userLifeElement.innerHTML = "";
       gameContainer.innerHTML = "";
+
+      localStorage.setItem("correctFlags", JSON.stringify(correctFlags));
+      localStorage.setItem("incorrectFlags", JSON.stringify(incorrectFlags));
+
       let gameOverImage = createPageElement("img", "fwf-game__game-over", null);
       gameOverImage.src = "../assets/images/bazinga.png";
       gameOverImage.alt = "Game Over!";
@@ -147,9 +136,9 @@ function buildGameContainer(data) {
 
     buildGameContainer(data);
 
-    setTimeout(() => {
+    // setTimeout(() => {
 
-    }, 2000)
+    // }, 2000)
   };
 }
 
@@ -164,7 +153,6 @@ axios.get('https://flagcdn.com/en/codes.json')
     return showCountryFlag(data);
   })
   .then(obj => {
-    // Flag container div to store random flag
 
     buildGameContainer(obj)
 
