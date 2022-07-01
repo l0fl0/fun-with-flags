@@ -1,16 +1,6 @@
-const showCountryFlag = (countries) => {
+import { randomCodeGenerator, createPageElement } from "../utils/utils.js";
 
-  // Generates Random Counrty code from counrtyCodes Array
-  const randomCodeGenerator = () => {
-    // random integer generator
-    const getRandomInt = (maxnumber) => {
-      maxnumber = countryCodes.length;
-      return Math.floor(Math.random() * (maxnumber - 1))
-    };
-    // assigns random index to pull form array
-    let randomCode = countryCodes[getRandomInt()];
-    return randomCode;
-  };
+const showCountryFlag = (countries) => {
 
   //TODO: us-state flags showing up... do we want them or not?
 
@@ -160,12 +150,8 @@ function buildGameContainer(data) {
 // Promise invocation
 axios.get('https://flagcdn.com/en/codes.json')
   .then((response) => {
-    return response.data;
-  })
-  .then(data => {
-    define(data);
-    console.log(data);
-    return showCountryFlag(data);
+    define(response.data);
+    return showCountryFlag(response.data);
   })
   .then(obj => {
     buildGameContainer(obj)

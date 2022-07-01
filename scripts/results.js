@@ -1,3 +1,5 @@
+import { createPageElement } from "../utils/utils.js";
+
 function buildResults() {
   let results = document.querySelector(".results");
   let resultsContainer = createPageElement("div", "results__container", null);
