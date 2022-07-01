@@ -16,9 +16,7 @@ let incorrectFlags = [];
 // return an array of counrty codes
 let correctFlags = [];
 
-
 let countryCode = "";
-
 
 
 let user = {
@@ -27,38 +25,19 @@ let user = {
   lives: 5
 };
 
+/*
+local storage of previos single games
+*/
+let users = [];
+// check to see if storage exists and then set user obj to local storage
+if (JSON.parse(localStorage.getItem("users"))) users = JSON.parse(localStorage.getItem("users"));
 
-let users = [
-  {
-    name: "Louis",
-    score: 1,
-    lives: 5
-  },
-  {
-    name: "Mikes friend",
-    score: 35,
-    lives: 5
-  },
-  {
-    name: "Sheldon",
-    score: 36,
-    lives: 5
-  },
-  {
-    name: "Madhura",
-    score: 25,
-    lives: 5
-  }
-];
-
-
-
-
-
+/*
+ Defines the variables from API and saves to local storage
+*/
 const define = (data) => {
-  // returns all keys in the object as an array
+
   localStorage.setItem("countryCodes", JSON.stringify(Object.keys(data)))
-  //returns all values in object as an array
   localStorage.setItem("countryNames", JSON.stringify(Object.values(data)));
 
   countryCodes = JSON.parse(localStorage["countryCodes"]);
@@ -69,10 +48,7 @@ const define = (data) => {
       indexOfStates.push(i)
     });
 
-  // console.log(countryCodesWithoutStates);
   localStorage.setItem("apiResponse", JSON.stringify(data));
 
   apiResponse = JSON.parse(localStorage["apiResponse"]);
-  // apiResponse = data;
-
 };
