@@ -259,11 +259,8 @@ body {
     font-size: 1rem;
   }
 }
-.fwf-game__country-option--error {
-  background-color: #cc7363;
-}
-.fwf-game__country-option--correct {
-  background-color: olive;
+.fwf-game__country-option--active {
+  background-color: #ffdf6c;
 }
 .fwf-game__button {
   background-color: #2e2e2e;
@@ -279,6 +276,4 @@ body {
 }
 .fwf-game__game-over {
   width: 20rem;
-}
-
-/*# sourceMappingURL=landing.css.map */
+}/*# sourceMappingURL=landing.css.map */
