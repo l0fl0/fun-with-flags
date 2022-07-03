@@ -1,20 +1,51 @@
 /**
  * Returns Random Country code from counrtyCodes Array
- * */
+ */
 export const randomCodeGenerator = () => {
-  // random integer generator
-  const getRandomInt = (maxnumber) => {
-    maxnumber = countryCodes.length;
-    return Math.floor(Math.random() * (maxnumber - 1));
-  };
+
   // assigns random index to pull form array
-  let randomCode = countryCodes[getRandomInt()];
+  let randomCode = countryCodes[getRandomInt(countryCodes.length)];
   return randomCode;
 };
 
 /**
+ * 
+ * @param {number} maxnumber
+ * @returns a random number
+ */
+export const getRandomInt = (maxnumber) => (Math.floor(Math.random() * (maxnumber - 1)));
+
+
+/**
+ * Fisher - Yates SHUFFLE ALGORITM https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+ * @param {array} array 
+ * @returns a shuffled array
+ */
+export function shuffle(array) {
+  let currentIndex = array.length, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+};
+
+/**
  * Create an element on page
- * * must define params tag and className, inner text is optional
+ * You must define params tag and className, inner text is optional
+ * @param {string} tag 
+ * @param {string} className 
+ * @param {string} innerText 
+ * @returns a shuffled array
  */
 export const createPageElement = (tag, className, innerText) => {
   const element = document.createElement(tag);
@@ -24,3 +55,5 @@ export const createPageElement = (tag, className, innerText) => {
 
   return element;
 };
+
+

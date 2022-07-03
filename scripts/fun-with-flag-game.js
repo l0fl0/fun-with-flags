@@ -1,4 +1,4 @@
-import { randomCodeGenerator, createPageElement } from "../utils/utils.js";
+import { randomCodeGenerator, createPageElement, shuffle } from "../utils/utils.js";
 
 const showCountryFlag = (countries) => {
 
@@ -23,24 +23,6 @@ const showCountryFlag = (countries) => {
     }
   };
 
-  // Fisher-Yates SHUFFLE ALGORITM https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-  function shuffle(array) {
-    let currentIndex = array.length, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (currentIndex != 0) {
-
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-
-    return array;
-  };
 
   let result = {
     flag: flagUrl,
@@ -95,6 +77,8 @@ function buildGameContainer(data) {
 
   function handleOptionSelect(event) {
     event.preventDefault();
+    event.target.classList.add("fwf-game__country-option--active");
+
     if (event.target.textContent === correctCountry) {
       event.target.classList.add("fwf-game__country-option--correct");
       correctFlags.push(countryCode);
@@ -134,7 +118,7 @@ function buildGameContainer(data) {
       })
       return;
     }
-
+    // TODO: Allow for changing answer within time limit
     setTimeout(() => {
       let data = showCountryFlag(apiResponse);
 
