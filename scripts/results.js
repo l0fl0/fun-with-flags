@@ -73,7 +73,7 @@ function displayScoreboard() {
     let row = createPageElement("div", "scoreboard__row", null);
     let name = createPageElement("span", "scoreboard__name", user.name);
 
-    let score = createPageElement("span", "scoreboard__score", user.score);
+    let score = createPageElement("span", "scoreboard__score", user.score ? user.score : "0");
     row.appendChild(name);
     row.appendChild(score);
     scoreboardContainer.appendChild(row);
