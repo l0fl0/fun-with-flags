@@ -1,6 +1,26 @@
+import { createPageElement } from "../utils/utils.js";
+
+
 const howToEl = document.querySelector(".how-to-play");
 const registerEl = document.querySelector(".register");
 const gameEl = document.querySelector(".fwf-game");
+
+const userInfoContainer = document.querySelector(".fwf-game__user")
+function buildUserInfo(user) {
+
+  // let user = JSON.parse(localStorage["user"]);
+  // User info 
+  const userName = createPageElement("div", "fwf-game__user-name", `Player: ${user.name}`);
+  userInfoContainer.appendChild(userName);
+
+  //   // lives 
+  //   const userLifeElement = createPageElement("div", "fwf-game__user-lives", `Lives: ${user.lives}`);
+  //   userInfoContainer.appendChild(userLifeElement);
+
+  //   // score 
+  //   const userScore = createPageElement("div", "fwf-game__user-score", `Score: ${user.score}`);
+  //   userInfoContainer.appendChild(userScore);
+};
 
 function hideSections() {
   howToEl.classList.add("hide");
@@ -21,7 +41,7 @@ function handleSubmit(event) {
   setTimeout(() => {
     hideSections();
     showGame()
-  }, 1000)
+  }, 500)
 
   buildUserInfo(user)
 };
