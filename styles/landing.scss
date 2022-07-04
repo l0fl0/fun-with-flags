@@ -125,11 +125,11 @@
 	}
 
 	&__user {
-		&-container {
-			height: 10%;
-		}
+		margin-bottom: 1rem;
+		width: 100%;
+		padding: 0 1rem;
 		&-name {
-			color: $font-primary-color;
+			color: $success-color;
 		}
 	}
 

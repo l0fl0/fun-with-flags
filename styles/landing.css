@@ -36,6 +36,11 @@ body {
   background-color: #e5e5e5;
 }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #e5e5e5;
+}
+
 .header {
   background-color: #2e2e2e;
   color: #7c7c7c;
@@ -215,11 +220,13 @@ body {
     flex-direction: column;
   }
 }
-.fwf-game__user-container {
-  height: 10%;
+.fwf-game__user {
+  margin-bottom: 1rem;
+  width: 100%;
+  padding: 0 1rem;
 }
 .fwf-game__user-name {
-  color: #2e2e2e;
+  color: olive;
 }
 .fwf-game__flag-container {
   margin: 0 auto;
