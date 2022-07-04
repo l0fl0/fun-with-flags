@@ -18,6 +18,7 @@ let correctFlags = [];
 
 let countryCode = "";
 
+let timeLimit = 3000;
 
 let user = {
   name: "",
