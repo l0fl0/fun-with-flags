@@ -2,8 +2,6 @@ import { randomCodeGenerator, createPageElement, shuffle } from "../utils/utils.
 
 const showCountryFlag = (countries) => {
 
-  //TODO: us-state flags showing up... do we want them or not?
-
   countryCode = randomCodeGenerator();
   correctCountry = countries[countryCode];
   console.info(`This country is ${countries[countryCode]}`);
@@ -33,22 +31,22 @@ const showCountryFlag = (countries) => {
 };
 
 
-const userInfoContainer = document.querySelector(".fwf-game__user-container")
+const userInfoContainer = document.querySelector(".fwf-game__user")
 function buildUserInfo(user) {
 
   // let user = JSON.parse(localStorage["user"]);
   // User info 
-  const userName = createPageElement("div", "fwf-game__username", `User: ${user.name}`);
+  const userName = createPageElement("div", "fwf-game__user-name", `Player: ${user.name}`);
   userInfoContainer.appendChild(userName);
 
-  // lives 
-  const userLifeElement = createPageElement("div", "fwf-game__lives", `Lives: ${user.lives}`);
-  userInfoContainer.appendChild(userLifeElement);
+  //   // lives 
+  //   const userLifeElement = createPageElement("div", "fwf-game__user-lives", `Lives: ${user.lives}`);
+  //   userInfoContainer.appendChild(userLifeElement);
 
-  // score 
-  const userScore = createPageElement("div", "fwf-game__score", `Score: ${user.score}`);
-  userInfoContainer.appendChild(userScore);
-}
+  //   // score 
+  //   const userScore = createPageElement("div", "fwf-game__user-score", `Score: ${user.score}`);
+  //   userInfoContainer.appendChild(userScore);
+};
 
 const gameContainer = document.querySelector(".fwf-game__display");
 
@@ -80,16 +78,12 @@ function buildGameContainer(data) {
     event.target.classList.add("fwf-game__country-option--active");
 
     if (event.target.textContent === correctCountry) {
-      event.target.classList.add("fwf-game__country-option--correct");
       correctFlags.push(countryCode);
       user.score++;
-      // console.log(correctFlags);
     }
     if (event.target.textContent !== correctCountry) {
-      event.target.classList.add("fwf-game__country-option--error");
       incorrectFlags.push(countryCode);
       user.lives--;
-      // console.log(incorrectFlags);
     };
 
     if (user.lives === 0) {
@@ -127,7 +121,7 @@ function buildGameContainer(data) {
 
       buildUserInfo(user)
       buildGameContainer(data);
-    }, 1000)
+    }, timeLimit)
   };
 }
 
