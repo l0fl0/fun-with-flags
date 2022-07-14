@@ -1,83 +1,83 @@
 @use "./partials/global";
 @use "./partials/mixins" as *;
-@use "./partials/colors" as *;
+@use "./partials/variables" as *;
 
 .results {
-  &__container {
-    padding: 1rem;
-    @include tablet-breakpoint {
-      display: flex;
-    }
-  }
-  &__column {
-    border: 0.015625rem solid $font-primary-color;
-    background-color: $font-white;
-    @include tablet-breakpoint {
-      width: 50%;
-    }
-  }
-  &__column-title {
-    margin: 0;
-    padding: 2rem;
-    text-align: center;
-    color: $font-white;
-    border-bottom: 0.015625rem solid $font-primary-color;
-    text-transform: capitalize;
+	&__container {
+		padding: 1rem;
+		@include tablet-breakpoint {
+			display: flex;
+		}
+	}
+	&__column {
+		border: 0.015625rem solid $font-primary-color;
+		background-color: $font-white;
+		@include tablet-breakpoint {
+			width: 50%;
+		}
+	}
+	&__column-title {
+		margin: 0;
+		padding: 2rem;
+		text-align: center;
+		color: $font-white;
+		border-bottom: 0.015625rem solid $font-primary-color;
+		text-transform: capitalize;
 
-    &--correct {
-      background-color: $success-color;
-    }
-    &--incorrect {
-      background-color: $error-color;
-    }
-  }
-  &__row {
-    display: flex;
-    max-height: 4rem;
-    padding: 1rem;
-    align-items: center;
-    background-color: $font-white;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+		&--correct {
+			background-color: $success-color;
+		}
+		&--incorrect {
+			background-color: $error-color;
+		}
+	}
+	&__row {
+		display: flex;
+		max-height: 4rem;
+		padding: 1rem;
+		align-items: center;
+		background-color: $font-white;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
 
-    &:hover {
-      cursor: pointer;
-      transform: scale(1.1);
-    }
-  }
+		&:hover {
+			cursor: pointer;
+			transform: scale(1.1);
+		}
+	}
 
-  &__flag {
-    width: 20%;
-    max-height: 4rem;
+	&__flag {
+		width: 20%;
+		max-height: 4rem;
 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
-  }
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+	}
 
-  &__country {
-    margin-left: 1rem;
-    width: 40%;
-    color: $font-primary-color;
-  }
+	&__country {
+		margin-left: 1rem;
+		width: 40%;
+		color: $font-primary-color;
+	}
 }
 
 .scoreboard {
-  width: 100%;
-  padding-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  &__title {
-    color: $font-primary-color;
-    text-align: center;
-  }
-  &__container {
-    margin: 0 auto;
-  }
-  &__name {
-    font-weight: bold;
-  }
-  &__score {
-    margin-left: 1rem;
-    font-weight: bold;
-    color: $success-color;
-    border-radius: 0.5rem;
-  }
+	width: 100%;
+	padding-bottom: 1rem;
+	display: flex;
+	flex-direction: column;
+	&__title {
+		color: $font-primary-color;
+		text-align: center;
+	}
+	&__container {
+		margin: 0 auto;
+	}
+	&__name {
+		font-weight: bold;
+	}
+	&__score {
+		margin-left: 1rem;
+		font-weight: bold;
+		color: $success-color;
+		border-radius: 0.5rem;
+	}
 }

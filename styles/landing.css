@@ -226,7 +226,7 @@ body {
   padding: 0 1rem;
 }
 .fwf-game__user-name {
-  color: olive;
+  color: #6cbc3d;
 }
 .fwf-game__flag-container {
   margin: 0 auto;
@@ -267,6 +267,7 @@ body {
   }
 }
 .fwf-game__country-option--active {
+  color: #2e2e2e;
   background-color: #ffdf6c;
 }
 .fwf-game__button {

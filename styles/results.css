@@ -130,10 +130,10 @@ body {
   text-transform: capitalize;
 }
 .results__column-title--correct {
-  background-color: olive;
+  background-color: #6cbc3d;
 }
 .results__column-title--incorrect {
-  background-color: #cc7363;
+  background-color: #e2482d;
 }
 .results__row {
   display: flex;
@@ -177,6 +177,6 @@ body {
 .scoreboard__score {
   margin-left: 1rem;
   font-weight: bold;
-  color: olive;
+  color: #6cbc3d;
   border-radius: 0.5rem;
 }/*# sourceMappingURL=results.css.map */
