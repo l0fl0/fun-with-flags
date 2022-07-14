@@ -2,10 +2,8 @@
  * Returns Random Country code from counrtyCodes Array
  */
 export const randomCodeGenerator = () => {
-
   // assigns random index to pull form array
-  let randomCode = countryCodes[getRandomInt(countryCodes.length)];
-  return randomCode;
+  return countryCodes[getRandomInt(countryCodes.length)];
 };
 
 /**
@@ -14,7 +12,6 @@ export const randomCodeGenerator = () => {
  * @returns a random number
  */
 export const getRandomInt = (maxnumber) => (Math.floor(Math.random() * (maxnumber - 1)));
-
 
 /**
  * Fisher - Yates SHUFFLE ALGORITM https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -26,9 +23,8 @@ export function shuffle(array) {
 
   // While there remain elements to shuffle...
   while (currentIndex != 0) {
-
     // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
+    randomIndex = getRandomInt(currentIndex);
     currentIndex--;
 
     // And swap it with the current element.
@@ -41,7 +37,7 @@ export function shuffle(array) {
 
 /**
  * Create an element on page
- * You must define params tag and className, inner text is optional
+ * You must define args tag and className, inner text is optional
  * @param {string} tag 
  * @param {string} className 
  * @param {string} innerText 
@@ -55,5 +51,6 @@ export const createPageElement = (tag, className, innerText) => {
 
   return element;
 };
+
 
 
