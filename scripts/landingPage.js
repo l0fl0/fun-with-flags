@@ -3,7 +3,8 @@ import { startGame } from "./fun-with-flag-game.js";
 const howToEl = document.querySelector(".how-to-play");
 const registerEl = document.querySelector(".register");
 const gameEl = document.querySelector(".fwf-game");
-
+const formEl = document.querySelector(".register__form");
+formEl.addEventListener("submit", handleSubmit);
 
 function hideSections() {
   howToEl.classList.add("hide");
@@ -24,5 +25,3 @@ function handleSubmit(event) {
     startGame();
   }, 500)
 };
-
-const formEl = document.querySelector(".register__form");
