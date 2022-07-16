@@ -1,23 +1,21 @@
 import { randomCodeGenerator, createPageElement, shuffle } from "../utils/utils.js";
 
 const showCountryFlag = (countries) => {
-
-  countryCode = randomCodeGenerator();
-  correctCountry = countries[countryCode];
-  console.info(`This country is ${countries[countryCode]}`);
-
+  let countryCode = randomCodeGenerator();
+  guessOptions.correctChoice = countryCode;
+  // console.info(`This country is ${countries[countryCode]}`);
 
   // store the random url 
   let flagUrl = (`https://flagcdn.com/${countryCode}.svg`)
 
   // Generate country options
   let countryOptions = [];
-  countryOptions.push(countries[countryCode]);
+  countryOptions.push({ countryCode, country: countries[countryCode] });
 
   for (let i = 1; i < 4; i++) {
     let randomCountry = randomCodeGenerator();
     if (countryCode != randomCountry) {
-      countryOptions[i] = countries[randomCountry];
+      countryOptions[i] = { countryCode: randomCountry, country: countries[randomCountry] };
     }
   };
 
@@ -33,26 +31,19 @@ const showCountryFlag = (countries) => {
 
 const userInfoContainer = document.querySelector(".fwf-game__user")
 function buildUserInfo(user) {
-
-  // let user = JSON.parse(localStorage["user"]);
   // User info 
   const userName = createPageElement("div", "fwf-game__user-name", `Player: ${user.name}`);
   userInfoContainer.appendChild(userName);
 
-  //   // lives 
-  //   const userLifeElement = createPageElement("div", "fwf-game__user-lives", `Lives: ${user.lives}`);
-  //   userInfoContainer.appendChild(userLifeElement);
 
-  //   // score 
-  //   const userScore = createPageElement("div", "fwf-game__user-score", `Score: ${user.score}`);
-  //   userInfoContainer.appendChild(userScore);
+  const countdownTimer = createPageElement("div", "fwf-game__countdown", `Countdown: ${timeLimit / 1000}`);
+  countdownTimer.id = "fwf-game__countdown";
+  userInfoContainer.appendChild(countdownTimer);
+  startCountdown(timeLimit);
 };
 
 const gameContainer = document.querySelector(".fwf-game__display");
-
-
 function buildGameContainer(data) {
-
   // Flag
   const flagContainer = createPageElement("div", "fwf-game__flag-container", null)
   gameContainer.appendChild(flagContainer);
@@ -61,79 +52,143 @@ function buildGameContainer(data) {
   flagEl.setAttribute("src", data.flag);
 
   flagContainer.appendChild(flagEl);
-  gameContainer.appendChild(flagContainer);
 
   // Country Options
   const countriesContainer = createPageElement("div", "fwf-game__countries-container", null);
   gameContainer.appendChild(countriesContainer);
 
-  data.countries.forEach(country => {
-    let countryOption = createPageElement("button", "fwf-game__country-option", country);
-    countryOption.addEventListener("click", handleOptionSelect)
-    countriesContainer.appendChild(countryOption);
+  // build buttons
+  data.countries.forEach(countryOption => {
+    let countryOptionBtn = createPageElement("button", "fwf-game__country-option", countryOption.country);
+    countryOptionBtn.addEventListener("click", handleOptionSelect);
+    countryOptionBtn.setAttribute("cc", countryOption.countryCode);
+
+    countriesContainer.appendChild(countryOptionBtn);
   });
 
   function handleOptionSelect(event) {
     event.preventDefault();
+    //remove active choice css
+    if (document.querySelector(".fwf-game__country-option--active")) {
+      document.querySelector(".fwf-game__country-option--active").classList.remove("fwf-game__country-option--active")
+    }
+    //add active choice css
     event.target.classList.add("fwf-game__country-option--active");
-
-    if (event.target.textContent === correctCountry) {
-      correctFlags.push(countryCode);
-      user.score++;
-    }
-    if (event.target.textContent !== correctCountry) {
-      incorrectFlags.push(countryCode);
-      user.lives--;
-    };
-
-    if (user.lives === 0) {
-      // let livesContainer = document.querySelector(".fwf-game__lives-container")
-      // // livesContainer.innerHTML = "";
-      userInfoContainer.innerHTML = "";
-      gameContainer.innerHTML = "";
-
-      localStorage.setItem("correctFlags", JSON.stringify(correctFlags));
-      localStorage.setItem("incorrectFlags", JSON.stringify(incorrectFlags));
-
-      users.push(user);
-      localStorage.setItem("users", JSON.stringify(users));
-      // console.log(users)
-      let gameOverImage = createPageElement("img", "fwf-game__game-over", null);
-      gameOverImage.src = "../assets/images/bazinga.png";
-      gameOverImage.alt = "Game Over!";
-
-      gameContainer.appendChild(gameOverImage);
-
-      let viewResults = createPageElement("button", "fwf-game__button", "View Results");
-      gameContainer.appendChild(viewResults)
-
-      viewResults.addEventListener("click", () => {
-        window.location.assign("../pages/results.html");
-      })
-      return;
-    }
-    // TODO: Allow for changing answer within time limit
-    setTimeout(() => {
-      let data = showCountryFlag(apiResponse);
-
-      gameContainer.innerHTML = "";
-      userInfoContainer.innerHTML = "";
-
-      buildUserInfo(user)
-      buildGameContainer(data);
-    }, timeLimit)
+    //kep track of answer choice
+    guessOptions.choice = event.target.attributes.cc.value;
   };
 }
 
-// Promise invocation
-axios.get('https://flagcdn.com/en/codes.json')
-  .then((response) => {
-    define(response.data);
-    return showCountryFlag(response.data);
-  })
-  .then(obj => {
-    buildGameContainer(obj)
-  })
+function checkAnswer() {
+  if (user.lives === 0) {
+    userInfoContainer.innerHTML = "";
+    gameContainer.innerHTML = "";
+
+    localStorage.setItem("correctFlags", JSON.stringify(user.guessResults.correctFlags));
+    localStorage.setItem("incorrectFlags", JSON.stringify(user.guessResults.incorrectFlags));
+
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+
+    let gameOverImage = createPageElement("img", "fwf-game__game-over", null);
+    gameOverImage.src = "../assets/images/bazinga.png";
+    gameOverImage.alt = "Game Over!";
+
+    gameContainer.appendChild(gameOverImage);
+
+    let viewResults = createPageElement("button", "fwf-game__button", "View Results");
+    gameContainer.appendChild(viewResults)
+
+    viewResults.addEventListener("click", () => {
+      window.location.assign("../pages/results.html");
+    })
+    return;
+  }
+  if (guessOptions.choice === guessOptions.correctChoice) {
+    user.score++;
+    user.guessResults.correctFlags.push(guessOptions.correctChoice);
+    return;
+  }
+  user.lives--;
+  user.guessResults.incorrectFlags.push(guessOptions.correctChoice);
+}
+
+/**
+ * Countdown from the variable set in the args
+ */
+const startCountdown = (timeLimit) => {
+  timerCountdown = timeLimit;
+  const timer = setInterval(() => {
+    timerCountdown = timerCountdown - 1000;
+
+    document.getElementById("fwf-game__countdown").innerText = `Countdown: ${timerCountdown / 1000}`;
+
+    if (timerCountdown === 0) {
+      checkAnswer();
+      gameBuild();
+      clearInterval(timer);
+    }
+  }, 1000);
+
+  if (user.lives === 0) {
+    userInfoContainer.innerHTML = "";
+    gameContainer.innerHTML = "";
+
+    users.push(user);
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("users", JSON.stringify(users));
+
+    let gameOverImage = createPageElement("img", "fwf-game__game-over", null);
+    gameOverImage.src = "../assets/images/bazinga.png";
+    gameOverImage.alt = "Game Over!";
+
+    gameContainer.appendChild(gameOverImage);
+
+    let viewResults = createPageElement("button", "fwf-game__button", "View Results");
+    gameContainer.appendChild(viewResults);
+
+    viewResults.addEventListener("click", () => {
+      window.location.assign("../pages/results.html");
+    })
+
+    clearInterval(timer);
+    return;
+  }
 
 
+}
 
+function gameBuild() {
+  gameContainer.innerHTML = "";
+  userInfoContainer.innerHTML = "";
+
+  buildGameContainer(showCountryFlag(apiResponseWithoutStates));
+  buildUserInfo(user);
+};
+
+/*
+ Defines the variables from API and saves to local storage
+*/
+const define = (data) => {
+  localStorage.setItem("apiResponse", JSON.stringify(data));
+  apiResponse = JSON.parse(localStorage["apiResponse"]);
+
+  const filteredApiResponse = Object.entries(apiResponse).filter(code => !code[0].startsWith("us-"));
+  apiResponseWithoutStates = filteredApiResponse.slice().reduce((acc, curr) => {
+    let key = curr[0], value = curr[1];
+    acc[key] = value;
+    return acc;
+  }, {})
+};
+
+export const startGame = () => {
+  if (user.difficulty === "hard") timeLimit = 4000;
+  if (user.difficulty === "sheldon") timeLimit = 2000;
+
+  fetch('https://flagcdn.com/en/codes.json')
+    .then(response => response.json())
+    .then(data => define(data))
+    .then(() => {
+      gameBuild();
+    })
+}
