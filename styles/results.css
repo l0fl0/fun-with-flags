@@ -171,6 +171,10 @@ body {
 .scoreboard__container {
   margin: 0 auto;
 }
+.scoreboard__difficulty {
+  display: flex;
+  justify-content: space-around;
+}
 .scoreboard__name {
   font-weight: bold;
 }

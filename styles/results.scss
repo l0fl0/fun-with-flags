@@ -71,6 +71,10 @@
 	&__container {
 		margin: 0 auto;
 	}
+	&__difficulty {
+		display: flex;
+		justify-content: space-around;
+	}
 	&__name {
 		font-weight: bold;
 	}
