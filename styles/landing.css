@@ -177,8 +177,6 @@ body {
   color: #2e2e2e;
 }
 .register__form-label {
-  display: none;
-  font-weight: bold;
   text-transform: uppercase;
   padding-bottom: 0.5rem;
 }
