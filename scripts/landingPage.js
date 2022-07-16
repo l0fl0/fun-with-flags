@@ -18,7 +18,10 @@ function showGame() {
 // Form submit handler
 function handleSubmit(event) {
   event.preventDefault();
+
   user.name = event.target.name.value;
+  user.difficulty = event.target.difficulty.value;
+
   setTimeout(() => {
     hideSections();
     showGame();

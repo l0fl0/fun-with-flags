@@ -34,9 +34,20 @@
 
         <div class="register__form-container">
           <form class="register__form">
-            <label for="name" class="register__form-label">Username</label>
             <input maxlength="10" type="text" name="name" id="name" placeholder="Enter a username"
               class="register__form-field">
+
+            <h3 class="register__subtitle">Please select a Difficulty</h3>
+            <div>
+              <input type="radio" name="difficulty" id="difficulty0" value="standard" class="register__form-field"
+                checked>
+              <label for="difficulty0" class="register__form-label">Standard</label>
+              <input type="radio" name="difficulty" id="difficulty1" value="hard" class="register__form-field">
+              <label for="difficulty2" class="register__form-label">Hard</label>
+              <input type="radio" name="difficulty" id="difficulty2" value="sheldon" class="register__form-field">
+              <label for="difficulty1" class="register__form-label">Sheldon</label>
+
+            </div>
             <button class="register__button" type="submit">Let's go!</button>
           </form>
         </div>
