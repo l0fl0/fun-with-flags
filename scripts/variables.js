@@ -1,19 +1,21 @@
-let apiResponse = {};
-let apiResponseWithoutStates = {};
-let countryCodes = [];
-let correctCountry = "";
-let indexOfStates = [];
-let incorrectFlags = [];
-let correctFlags = [];
-let countryCode = "";
-let timeLimit = 5000;
-let timerCountdown = 0;
-let users = [];
+let apiResponse = {}, apiResponseWithoutStates = {};
+let guessOptions = {
+  choice: "",
+  correctChoice: ""
+};
 let user = {
   name: "",
   score: 0,
-  lives: 5
+  lives: 5,
+  difficulty: "standard",
+  guessResults: {
+    incorrectFlags: [],
+    correctFlags: []
+  }
 };
+let timeLimit = 8000, timerCountdown = 0;
 
+
+let users = [];
 // check to see if storage exists and then set user obj to local storage
 if (JSON.parse(localStorage.getItem("users"))) users = JSON.parse(localStorage.getItem("users"));
