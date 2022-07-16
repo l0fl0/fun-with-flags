@@ -1,10 +1,7 @@
 /**
  * Returns Random Country code from counrtyCodes Array
  */
-export const randomCodeGenerator = () => {
-  // assigns random index to pull form array
-  return countryCodes[getRandomInt(countryCodes.length)];
-};
+export const randomCodeGenerator = () => Object.keys(apiResponseWithoutStates)[getRandomInt(Object.keys(apiResponseWithoutStates).length)];
 
 /**
  * 
@@ -43,7 +40,7 @@ export function shuffle(array) {
  * @param {string} innerText 
  * @returns a shuffled array
  */
-export const createPageElement = (tag, className, innerText) => {
+export const createPageElement = (tag, className, innerText = null) => {
   const element = document.createElement(tag);
   element.classList.add(className);
 
