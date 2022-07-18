@@ -1,7 +1,3 @@
-/**
- * Returns Random Country code from counrtyCodes Array
- */
-export const randomCodeGenerator = () => Object.keys(apiResponseWithoutStates)[getRandomInt(Object.keys(apiResponseWithoutStates).length)];
 
 /**
  * 

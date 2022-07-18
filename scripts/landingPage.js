@@ -1,30 +1,30 @@
-import { startGame } from "./fun-with-flag-game.js";
-
 const howToEl = document.querySelector(".how-to-play");
 const registerEl = document.querySelector(".register");
-const gameEl = document.querySelector(".fwf-game");
 const formEl = document.querySelector(".register__form");
 formEl.addEventListener("submit", handleSubmit);
 
-function hideSections() {
-  howToEl.classList.add("hide");
-  registerEl.classList.add("hide");
-}
-
-function showGame() {
-  gameEl.classList.add("show");
-}
+let user = {
+  name: "",
+  score: 0,
+  lives: 200,
+  difficulty: "standard",
+  guessResults: {
+    incorrectFlags: [],
+    correctFlags: []
+  }
+};
 
 // Form submit handler
 function handleSubmit(event) {
   event.preventDefault();
 
+  // Store registration information
   user.name = event.target.name.value;
   user.difficulty = event.target.difficulty.value;
 
-  setTimeout(() => {
-    hideSections();
-    showGame();
-    startGame();
-  }, 500)
+  localStorage.setItem("user", JSON.stringify(user));
+
+  //open game
+  window.location.assign("../pages/game.html");
+
 };

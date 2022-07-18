@@ -1,5 +1,7 @@
 import { createPageElement } from "../utils/utils.js";
 
+
+
 async function buildResults() {
   user = await JSON.parse(localStorage.getItem("user"));
   apiResponse = await JSON.parse(localStorage.getItem("apiResponse"));

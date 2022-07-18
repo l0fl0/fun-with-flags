@@ -23,3 +23,10 @@ post highscore
 gamble your lives with 2 lives remaining double lives or die
 
 Loss page with displaying information about wrong answers;
+
+<!-- Correctly guess three flags consecutivly and gain an extra life
+Extra lives get added to final score
+Answer a maximum of 30 Questions
+Gamble your life!
+An opportnity to double your lives or lose them all.
+Decide before answering the next question -->

@@ -1,0 +1,77 @@
+@use "./partials/global";
+@use "./partials/mixins" as *;
+@use "./partials/variables" as *;
+
+.user-info {
+	margin-bottom: 1rem;
+	width: 100%;
+	padding: 0 1rem;
+	&__username {
+		color: $success-color;
+	}
+}
+
+.fwf {
+	place-items: center;
+	width: 100%;
+
+	&__title {
+		margin: 0;
+		padding: 2rem;
+		text-align: center;
+		color: $font-primary-color;
+	}
+
+	&__display {
+		min-height: 60vh;
+		padding: 0 1rem;
+		@include tablet-breakpoint {
+			display: flex;
+			justify-content: space-evenly;
+			flex-direction: column;
+		}
+	}
+
+	&__flag-container {
+		margin: 0 auto;
+		width: 100%;
+		max-width: 37.5rem;
+		@include tablet-breakpoint {
+			width: 70%;
+		}
+	}
+
+	&__countries-container {
+		@include tablet-breakpoint {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+	}
+
+	&__country-option {
+		@include btn;
+		padding: 1rem 1rem;
+		display: block;
+		width: 100%;
+
+		@include tablet-breakpoint {
+			width: 45%;
+			font-size: 1rem;
+		}
+
+		&--active {
+			color: $font-primary-color;
+			background-color: $highlight-color;
+		}
+	}
+
+	&__button {
+		@include btn;
+	}
+
+	&__game-over {
+		display: none;
+		width: 20rem;
+	}
+}
