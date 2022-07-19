@@ -2,97 +2,115 @@
 @use "./partials/mixins" as *;
 @use "./partials/variables" as *;
 
+main {
+	height: 100%;
+	margin-bottom: auto;
+}
+
 // How to play
 .how-to-play {
-	display: grid;
-	place-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	text-align: left;
 	padding: 1rem;
 	color: $font-primary-color;
 
 	&__title {
-		padding-bottom: 1rem;
-		font-size: 2rem;
-		text-transform: uppercase;
+		@include title;
 	}
 
-	&__rules {
-		padding-top: 1rem;
+	&__rule {
+		margin-top: 1rem;
+		margin-left: 1rem;
 		font-size: 1.2rem;
 		font-weight: bold;
+		list-style-type: disc;
 	}
 
-	&__sub-rules {
-		padding-left: 1rem;
+	&__sub-rule {
+		margin-left: 1rem;
 		font-size: 1.1rem;
-	}
-
-	&__sub-sub-rules {
-		font-style: italic;
-		padding-left: 2rem;
 	}
 }
 
 //* Register to play
 
-.register {
-	background-image: url("../assets/images/sheldon-cooper-background-full-hd-422997.jpg");
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-	height: 50vh;
-
-	@include tablet-breakpoint {
-		height: 60vh;
-	}
-	&__background {
-		background-color: $background-secondary-color;
-		opacity: 60%;
-		width: 100%;
-		height: 100%;
-	}
-
-	&__container {
-		position: absolute;
-		display: grid;
-		place-items: center;
-	}
-	&__form {
-		display: grid;
-		place-items: center;
-	}
-
-	&__form-container {
-		padding: 2rem;
-		display: inline-block;
-		border-radius: 0.3125rem;
-		margin: 0 auto;
+.registration-form {
+	&__content {
+		padding: 0 1rem;
+		text-align: center;
 	}
 
 	&__title {
-		text-transform: uppercase;
-		font-weight: bold;
-		font-size: 2rem;
-		margin: 0;
-		padding: 1rem;
-		text-align: center;
-		color: $font-primary-color;
+		@include title;
 	}
 
-	&__form-label {
+	&__game-options {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		margin: 0 auto;
+	}
+	&__game-option {
+		position: absolute;
+		opacity: 0;
+		width: 0;
+	}
+
+	&__label {
 		text-transform: uppercase;
 		padding-bottom: 0.5rem;
+		width: 100%;
+		&:hover {
+			background-color: $font-primary-color;
+			color: $font-white;
+		}
+
+		&--active {
+			background-color: $success-color;
+			color: $font-white;
+		}
 	}
 
-	&__form-field {
-		padding: 0.5rem;
+	&__background-photo {
+		background-image: url("../assets/images/sheldon-cooper-background-full-hd-422997.jpg");
+		background-size: 50rem;
+		background-position: center;
+		background-repeat: no-repeat;
+		height: 40vh;
+		position: relative;
+		@include tablet-breakpoint {
+			background-size: cover;
+		}
 	}
 
-	&__button {
+	&__overlay {
+		background: linear-gradient(purple, pink);
+		opacity: 60%;
+		width: 100%;
+		height: 100%;
+
+		&-content-container {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			text-align: center;
+		}
+	}
+
+	&__submit-title {
+		@include title;
+		font-weight: bold;
+		color: $font-white;
+	}
+	&__submit {
 		@include btn;
+		width: 8rem;
+		margin: 0 auto;
 	}
 }

@@ -2,9 +2,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-body {
   margin: 0;
   padding: 0;
 }
@@ -39,33 +36,30 @@ body {
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #e5e5e5;
+  position: relative;
 }
 
 .header {
+  position: relative;
   background-color: #2e2e2e;
   color: #7c7c7c;
-  position: relative;
-  padding: 1rem;
-  min-height: 15rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
-@media (min-width: 768px) {
-  .header__logo {
-    width: 200px;
-  }
-}
-@media (min-width: 1280px) {
-  .header__logo {
-    width: 300px;
-  }
+.header__logo {
+  font-size: 0;
+  width: 8rem;
 }
 .header__title {
+  display: none;
   margin: 2rem 0;
   text-align: center;
   font-size: 1.5625rem;
   color: #ffffff;
+  max-width: 20rem;
+  margin: 0 auto;
 }
 .header__play-again {
   background-color: #2e2e2e;
@@ -84,16 +78,16 @@ body {
 }
 
 .footer {
-  height: 10rem;
-  background-color: #2e2e2e;
-  padding: 5% 0;
+  padding: 1rem 0;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  background: #2e2e2e;
+  text-align: center;
+  color: #ffffff;
 }
 .footer__sign {
-  padding: 1rem;
   margin: auto;
-  color: #ffffff;
+  font-size: 0.8rem;
 }
 
 .hide {
@@ -101,97 +95,119 @@ body {
 }
 
 .show {
-  display: grid !important;
+  display: block !important;
+}
+
+main {
+  height: 100%;
+  margin-bottom: auto;
 }
 
 .how-to-play {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: left;
   padding: 1rem;
   color: #2e2e2e;
 }
 .how-to-play__title {
-  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: 2rem;
   text-transform: uppercase;
 }
-.how-to-play__rules {
-  padding-top: 1rem;
+.how-to-play__rule {
+  margin-top: 1rem;
+  margin-left: 1rem;
   font-size: 1.2rem;
   font-weight: bold;
+  list-style-type: disc;
 }
-.how-to-play__sub-rules {
-  padding-left: 1rem;
+.how-to-play__sub-rule {
+  margin-left: 1rem;
   font-size: 1.1rem;
 }
-.how-to-play__sub-sub-rules {
-  font-style: italic;
-  padding-left: 2rem;
-}
 
-.register {
+.registration-form__content {
+  padding: 0 1rem;
+  text-align: center;
+}
+.registration-form__title {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.registration-form__game-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0 auto;
+}
+.registration-form__game-option {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+}
+.registration-form__label {
+  text-transform: uppercase;
+  padding-bottom: 0.5rem;
+  width: 100%;
+}
+.registration-form__label:hover {
+  background-color: #2e2e2e;
+  color: #ffffff;
+}
+.registration-form__label--active {
+  background-color: #6cbc3d;
+  color: #ffffff;
+}
+.registration-form__background-photo {
   background-image: url("../assets/images/sheldon-cooper-background-full-hd-422997.jpg");
-  background-size: cover;
+  background-size: 50rem;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 40vh;
   position: relative;
-  height: 50vh;
 }
 @media (min-width: 768px) {
-  .register {
-    height: 60vh;
+  .registration-form__background-photo {
+    background-size: cover;
   }
 }
-.register__background {
-  background-color: #e5e5e5;
+.registration-form__overlay {
+  background: linear-gradient(purple, pink);
   opacity: 60%;
   width: 100%;
   height: 100%;
 }
-.register__container {
+.registration-form__overlay-content-container {
   position: absolute;
-  display: grid;
-  place-items: center;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
-.register__form {
-  display: grid;
-  place-items: center;
-}
-.register__form-container {
-  padding: 2rem;
-  display: inline-block;
-  border-radius: 0.3125rem;
-  margin: 0 auto;
-}
-.register__title {
+.registration-form__submit-title {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 2rem;
-  margin: 0;
-  padding: 1rem;
-  text-align: center;
-  color: #2e2e2e;
+  color: #ffffff;
 }
-.register__form-label {
-  text-transform: uppercase;
-  padding-bottom: 0.5rem;
-}
-.register__form-field {
-  padding: 0.5rem;
-}
-.register__button {
+.registration-form__submit {
   background-color: #2e2e2e;
   color: #ffffff;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.625rem;
   margin: 1rem 0;
+  width: 8rem;
+  margin: 0 auto;
 }
-.register__button:hover {
+.registration-form__submit:hover {
   background-color: #ffdf6c;
   color: #2e2e2e;
 }/*# sourceMappingURL=index.css.map */

@@ -1,8 +1,3 @@
-const howToEl = document.querySelector(".how-to-play");
-const registerEl = document.querySelector(".register");
-const formEl = document.querySelector(".register__form");
-formEl.addEventListener("submit", handleSubmit);
-
 let user = {
   name: "",
   score: 0,
@@ -13,6 +8,18 @@ let user = {
     correctFlags: []
   }
 };
+
+const formEl = document.querySelector(".registration-form");
+formEl.addEventListener("submit", handleSubmit);
+
+const difficultyOptions = document.querySelectorAll(".registration-form__game-option");
+difficultyOptions.forEach(el => el.addEventListener("click", activeDifficulty))
+
+function activeDifficulty(event) {
+  difficultyOptions.forEach(el => el.labels[0].classList.remove("registration-form__label--active"));
+
+  event.target.labels[0].classList.add("registration-form__label--active")
+}
 
 // Form submit handler
 function handleSubmit(event) {

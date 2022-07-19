@@ -11,54 +11,54 @@
 
 <body>
   <header class="header">
-    <a href="./index.html" class="header__logo"><img src="./assets/images/sheldon-cooper-presents-fun-w-flags.webp"
-        alt=""></a>
-    <h2 class="header__title">Can you beat Sheldon Cooper at his own game?</h2>
+    <div class="header__logo"><img src="./assets/images/sheldon-cooper-presents-fun-w-flags.webp"
+        alt="sheldon cooper presents">
+    </div>
+    <h1 class="header__title">Fun with Flags</h1>
   </header>
+
   <main>
     <section class="how-to-play">
       <h2 class="how-to-play__title">How to play</h2>
-      <ol>
-        <li class="how-to-play__rules">Correctly identify the flag</li>
-        <li class="how-to-play__rules">Answer Incorrectly and you will loose a life</li>
-        <ul>
-          <li class="how-to-play__sub-rules">Run out of lives and it's game over</li>
+      <ul>
+        <li class="how-to-play__rule">Correctly identify the flag within the given time</li>
+        <li class="how-to-play__rule">Answer Incorrectly and you will loose a life</li>
+        <li class="how-to-play__rule">Run out of lives and it's game over</li>
+      </ul>
+    </section>
+
+    <form class="registration-form">
+      <section class="registration-form__content">
+        <h2 class="registration-form__title">Game Settings</h2>
+        <input maxlength="10" type="text" name="name" id="name" placeholder="Enter a username">
+        <h3 class="registration-form__subtitle">Please select a Difficulty</h3>
+        <ul class="registration-form__game-options">
+          <li>
+            <input class="registration-form__game-option" type="radio" name="difficulty" id="difficulty0"
+              value="standard" checked>
+            <label for="difficulty0" class="registration-form__label">Standard</label>
+          </li>
+          <li>
+            <input class="registration-form__game-option" type="radio" name="difficulty" id="difficulty1" value="hard">
+            <label for="difficulty1" class="registration-form__label">Hard</label>
+          </li>
+          <li>
+            <input class="registration-form__game-option" type="radio" name="difficulty" id="difficulty2"
+              value="sheldon">
+            <label for="difficulty2" class="registration-form__label">Sheldon</label>
+          </li>
         </ul>
-      </ol>
-    </section>
+      </section>
 
-    <section class="register">
-      <div class="register__background"></div>
-      <div class="register__container">
-        <h2 class="register__title">Are you ready?</h2>
-
-        <div class="register__form-container">
-          <form class="register__form">
-            <input maxlength="10" type="text" name="name" id="name" placeholder="Enter a username"
-              class="register__form-field">
-
-            <h3 class="register__subtitle">Please select a Difficulty</h3>
-            <div>
-              <input type="radio" name="difficulty" id="difficulty0" value="standard" class="register__form-field"
-                checked>
-              <label for="difficulty0" class="register__form-label">Standard</label>
-              <input type="radio" name="difficulty" id="difficulty1" value="hard" class="register__form-field">
-              <label for="difficulty2" class="register__form-label">Hard</label>
-              <input type="radio" name="difficulty" id="difficulty2" value="sheldon" class="register__form-field">
-              <label for="difficulty1" class="register__form-label">Sheldon</label>
-
-            </div>
-            <button class="register__button" type="submit">Let's go!</button>
-          </form>
+      <section class="registration-form__background-photo">
+        <div class="registration-form__overlay"></div>
+        <div class="registration-form__overlay-content-container">
+          <h2 class="registration-form__submit-title">Are you ready?</h2>
+          <button class="registration-form__submit" type="submit">Let's go!</button>
         </div>
-      </div>
-    </section>
-
+      </section>
+    </form>
   </main>
-  <footer class="footer">
-    <div class="footer__sign">Created by Madhura Pendbhaje & Louis Flores</div>
-  </footer>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="./scripts/landingPage.js" type="module"></script>
 </body>
 
