@@ -3,12 +3,63 @@ import { createPageElement, shuffle, getRandomInt } from "../utils/utils.js";
 let apiResponse = {}, apiResponseWithoutStates = {};
 let user = JSON.parse(localStorage.getItem("user"));
 let users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
-
+let timeLimit = 8000, timerCountdown = 0;
 let guessOptions = {
   choice: "",
   correctChoice: ""
 };
-let timeLimit = 8000, timerCountdown = 0;
+
+function buildUserInfo(user) {
+  // User info 
+  const username = document.querySelector(".user-info__username")
+  username.innerText = `Player: ${user.name}`
+
+  const countdownTimer = document.querySelector(".user-info__countdown");
+  countdownTimer.innerText = `Countdown: ${timeLimit / 1000}`;
+  startCountdown(timeLimit);
+};
+
+function buildGameContainer(data) {
+  const flagContainer = document.querySelector(".fwf__flag-container");
+  const options = document.querySelector(".fwf__options");
+
+  flagContainer.innerHTML = "";
+  options.innerHTML = "";
+
+  console.log(data)
+  // Flag
+
+  const flagEl = createPageElement("img", "fwf__flag");
+  flagEl.setAttribute("src", data.flag);
+  flagContainer.appendChild(flagEl);
+
+
+  // Country Options
+
+
+  data.countries.forEach(countryOption => {
+    let countryOptionBtn = createPageElement("li", "fwf__country-option", countryOption.country);
+    countryOptionBtn.addEventListener("click", handleOptionSelect);
+    countryOptionBtn.setAttribute("cc", countryOption.countryCode);
+
+    options.appendChild(countryOptionBtn);
+  });
+  let guessOptions = {
+    choice: "",
+    correctChoice: ""
+  };
+  function handleOptionSelect(event) {
+    event.preventDefault();
+    //remove active choice css
+    if (document.querySelector(".fwf__country-option--active")) {
+      document.querySelector(".fwf__country-option--active").classList.remove("fwf__country-option--active")
+    }
+    //add active choice css
+    event.target.classList.add("fwf__country-option--active");
+    //kep track of answer choice
+    guessOptions.choice = event.target.attributes.cc.value;
+  };
+}
 
 const showCountryFlag = (countries) => {
   /**
@@ -47,55 +98,6 @@ const showCountryFlag = (countries) => {
 
   return result;
 };
-
-
-const userInfoContainer = document.querySelector(".user-info")
-function buildUserInfo(user) {
-  // User info 
-  const username = document.querySelector(".user-info__username")
-  username.innerText = `Player: ${user.name}`
-
-  const countdownTimer = document.querySelector(".user-info__countdown");
-  countdownTimer.innerText = `Countdown: ${timeLimit / 1000}`;
-  startCountdown(timeLimit);
-};
-
-const gameContainer = document.querySelector(".fwf__display");
-function buildGameContainer(data) {
-  // Flag
-  const flagContainer = createPageElement("div", "fwf__flag-container", null)
-  gameContainer.appendChild(flagContainer);
-
-  const flagEl = createPageElement("img", "fwf__flag", null);
-  flagEl.setAttribute("src", data.flag);
-
-  flagContainer.appendChild(flagEl);
-
-  // Country Options
-  const countriesContainer = createPageElement("div", "fwf__countries-container", null);
-  gameContainer.appendChild(countriesContainer);
-
-  // build buttons
-  data.countries.forEach(countryOption => {
-    let countryOptionBtn = createPageElement("button", "fwf__country-option", countryOption.country);
-    countryOptionBtn.addEventListener("click", handleOptionSelect);
-    countryOptionBtn.setAttribute("cc", countryOption.countryCode);
-
-    countriesContainer.appendChild(countryOptionBtn);
-  });
-
-  function handleOptionSelect(event) {
-    event.preventDefault();
-    //remove active choice css
-    if (document.querySelector(".fwf__country-option--active")) {
-      document.querySelector(".fwf__country-option--active").classList.remove("fwf__country-option--active")
-    }
-    //add active choice css
-    event.target.classList.add("fwf__country-option--active");
-    //kep track of answer choice
-    guessOptions.choice = event.target.attributes.cc.value;
-  };
-}
 
 function checkAnswer() {
   if (user.lives === 0) {
@@ -142,7 +144,6 @@ const startCountdown = (timeLimit) => {
   }, 1000);
 
   if (user.lives === 0) {
-    userInfoContainer.innerHTML = "";
     gameContainer.innerHTML = "";
 
     users.push(user);
@@ -165,8 +166,6 @@ const startCountdown = (timeLimit) => {
 }
 
 function gameBuild() {
-  gameContainer.innerHTML = "";
-
   buildGameContainer(showCountryFlag(apiResponseWithoutStates));
   buildUserInfo(user);
 };
