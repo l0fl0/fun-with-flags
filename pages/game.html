@@ -13,8 +13,14 @@
   <header>
     <h1 class="fwf__title">Fun With Flags</h1>
     <div class="user-info">
-      <div id="user-info__countdown" class="user-info__countdown"></div>
       <h2 class="user-info__username"></h2>
+      <!-- <div id="user-info__countdown" class="user-info__countdown"></div> -->
+
+      <div class="user-info__progressBar">
+        <div id="barStatus" class="user-info__barstatus"></div>
+      </div>
+
+
     </div>
   </header>
 
@@ -28,7 +34,8 @@
     </article>
     <img class="fwf__game-over" src="../assets/images/bazinga.png" alt="Game Over!">
   </main>
-  <script src="../scripts/fun-with-flag-game.js" type="module"></script>
+  <script src="../scripts/FWFGame.js" type="module"></script>
+  <script src="../scripts/ProgressBarAnimation.js" type="module"></script>
 </body>
 
 </html>

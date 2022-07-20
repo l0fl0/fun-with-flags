@@ -1,4 +1,5 @@
 import { createPageElement, shuffle, getRandomInt } from "../utils/utils.js";
+import { move } from "./ProgressBarAnimation.js";
 
 let apiResponse = {}, apiResponseWithoutStates = {};
 let user = JSON.parse(localStorage.getItem("user"));
@@ -12,11 +13,13 @@ let guessOptions = {
 function buildUserInfo(user) {
   // User info 
   const username = document.querySelector(".user-info__username")
-  username.innerText = `Player: ${user.name}`
+  username.innerText = `${user.name}`
 
-  const countdownTimer = document.querySelector(".user-info__countdown");
-  countdownTimer.innerText = `Countdown: ${timeLimit / 1000}`;
+  // const countdownTimer = document.querySelector(".user-info__countdown");
+  // countdownTimer.innerText = `Countdown: ${timeLimit / 1000}`;
+  move(timeLimit);
   startCountdown(timeLimit);
+
 };
 
 function buildGameContainer(data) {
@@ -130,16 +133,16 @@ function checkAnswer() {
  * Countdown from the variable set in the args
  */
 const startCountdown = (timeLimit) => {
-  timerCountdown = timeLimit;
   const timer = setInterval(() => {
-    timerCountdown = timerCountdown - 1000;
+    timeLimit = timeLimit - 1000;
 
-    document.getElementById("user-info__countdown").innerText = `Countdown: ${timerCountdown / 1000}`;
-
-    if (timerCountdown === 0) {
+    // document.getElementById("user-info__countdown").innerText = `Countdown: ${timeLimit / 1000}`;
+    if (timeLimit === 0) {
       checkAnswer();
-      gameBuild();
       clearInterval(timer);
+      setTimeout(() => gameBuild(), 300)
+
+
     }
   }, 1000);
 
