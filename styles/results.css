@@ -95,7 +95,11 @@ body {
 }
 
 .show {
-  display: block !important;
+  display: flex !important;
+}
+
+.header {
+  flex-direction: column;
 }
 
 .results__container {
@@ -154,27 +158,36 @@ body {
 
 .scoreboard {
   width: 100%;
-  padding-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 1rem;
 }
 .scoreboard__title {
   color: #2e2e2e;
   text-align: center;
-}
-.scoreboard__container {
-  margin: 0 auto;
+  margin: 1.5rem 0;
 }
 .scoreboard__difficulty {
   display: flex;
-  justify-content: space-around;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+.scoreboard__difficulty-title {
+  margin-bottom: 1rem;
+}
+.scoreboard__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-top: 0.3rem;
 }
 .scoreboard__name {
   font-weight: bold;
 }
 .scoreboard__score {
-  margin-left: 1rem;
   font-weight: bold;
-  color: #6cbc3d;
-  border-radius: 0.5rem;
+  color: #ffffff;
+  background-color: #6cbc3d;
+  border-radius: 20px;
+  padding: 0 0.3rem;
+  font-family: "Courier New", Courier, monospace;
 }/*# sourceMappingURL=results.css.map */

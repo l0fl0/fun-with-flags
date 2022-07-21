@@ -95,7 +95,7 @@ body {
 }
 
 .show {
-  display: block !important;
+  display: flex !important;
 }
 
 body {
@@ -111,7 +111,7 @@ body {
   text-align: center;
   color: #6cbc3d;
 }
-.user-info__progressBar {
+.user-info__progressbar {
   position: relative;
   width: 100%;
   height: 1.5rem;
@@ -132,10 +132,6 @@ body {
   background-color: #e2482d;
 }
 
-.fwf {
-  place-items: center;
-  width: 100%;
-}
 .fwf__title {
   margin: 0;
   padding: 2rem;
@@ -148,9 +144,7 @@ body {
 }
 @media (min-width: 768px) {
   .fwf__display {
-    display: flex;
     justify-content: space-evenly;
-    flex-direction: column;
   }
 }
 .fwf__flag-container {
@@ -195,7 +189,12 @@ body {
   color: #2e2e2e;
   background-color: #ffdf6c;
 }
-.fwf__button {
+.fwf__game-over {
+  display: none;
+  text-align: center;
+  flex-direction: column;
+}
+.fwf__results-button {
   background-color: #2e2e2e;
   color: #ffffff;
   padding: 0.5rem 1rem;
@@ -203,11 +202,7 @@ body {
   border-radius: 0.625rem;
   margin: 1rem 0;
 }
-.fwf__button:hover {
+.fwf__results-button:hover {
   background-color: #ffdf6c;
   color: #2e2e2e;
-}
-.fwf__game-over {
-  display: none;
-  width: 20rem;
 }/*# sourceMappingURL=game.css.map */
