@@ -1,10 +1,10 @@
 import { createPageElement, shuffle, getRandomInt } from "../utils/utils.js";
 import { move } from "./ProgressBarAnimation.js";
 
-let apiResponse = {}, apiResponseWithoutStates = {};
+let apiResponse = {}, apiResponseWithoutStates = {}, gameFlags = [];
 let user = JSON.parse(localStorage.getItem("user"));
 let users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
-let timeLimit = 8000, timerCountdown = 0;
+let timeLimit = 8000;
 let guessOptions = {
   choice: "",
   correctChoice: ""
@@ -29,17 +29,13 @@ function buildGameContainer(data) {
   flagContainer.innerHTML = "";
   options.innerHTML = "";
 
-  console.log(data)
   // Flag
-
   const flagEl = createPageElement("img", "fwf__flag");
   flagEl.setAttribute("src", data.flag);
   flagContainer.appendChild(flagEl);
 
 
   // Country Options
-
-
   data.countries.forEach(countryOption => {
     let countryOptionBtn = createPageElement("li", "fwf__country-option", countryOption.country);
     countryOptionBtn.addEventListener("click", handleOptionSelect);
@@ -47,10 +43,7 @@ function buildGameContainer(data) {
 
     options.appendChild(countryOptionBtn);
   });
-  let guessOptions = {
-    choice: "",
-    correctChoice: ""
-  };
+
   function handleOptionSelect(event) {
     event.preventDefault();
     //remove active choice css
@@ -65,19 +58,19 @@ function buildGameContainer(data) {
 }
 
 const showCountryFlag = (countries) => {
+  let countryKeys = Object.keys(countries);
+
   /**
  * Returns Random Country code from counrtyCodes Array
  */
   const randomCodeGenerator = () => {
-    let flags = Object.keys(apiResponseWithoutStates);
-    let code = getRandomInt(flags.length);
-
-    return flags[code];
+    let code = getRandomInt(countryKeys.length);
+    return countryKeys[`${code}`]
   };
 
-  let countryCode = randomCodeGenerator();
+  let countryCode = gameFlags[0];
   guessOptions.correctChoice = countryCode;
-  // console.info(`This country is ${countries[countryCode]}`);
+  gameFlags.shift();
 
   // store the random url 
   let flagUrl = (`https://flagcdn.com/${countryCode}.svg`)
@@ -89,42 +82,29 @@ const showCountryFlag = (countries) => {
   for (let i = 1; i < 4; i++) {
     let randomCountry = randomCodeGenerator();
     if (countryCode != randomCountry) {
-      countryOptions[i] = { countryCode: randomCountry, country: countries[randomCountry] };
+      countryOptions.push({ countryCode: randomCountry, country: countries[randomCountry] });
     }
   };
 
-
-  let result = {
+  return {
     flag: flagUrl,
-    countries: shuffle(countryOptions),
+    countries: shuffle(countryOptions)
   };
 
-  return result;
 };
 
 function checkAnswer() {
   if (user.lives === 0) {
-    gameContainer.innerHTML = "";
-
-    users.push(user);
-    localStorage.setItem("users", JSON.stringify(users));
-
-    let gameOver = document.querySelector(".fwf__game-over");
-    gameOver.classList.add(".show");
-
-    let viewResults = createPageElement("button", "fwf__button", "View Results");
-    gameContainer.appendChild(viewResults)
-
-    viewResults.addEventListener("click", () => {
-      window.location.assign("../pages/results.html");
-    })
-    return;
+    gameBuild("results");
+    return "end";
   }
+
   if (guessOptions.choice === guessOptions.correctChoice) {
-    user.score++;
+    user.score += 3;
     user.guessResults.correctFlags.push(guessOptions.correctChoice);
-    return;
+    return "end";
   }
+
   user.lives--;
   user.guessResults.incorrectFlags.push(guessOptions.correctChoice);
 }
@@ -138,37 +118,25 @@ const startCountdown = (timeLimit) => {
 
     // document.getElementById("user-info__countdown").innerText = `Countdown: ${timeLimit / 1000}`;
     if (timeLimit === 0) {
-      checkAnswer();
       clearInterval(timer);
-      setTimeout(() => gameBuild(), 300)
-
-
+      if (checkAnswer() === "end") return;
+      setTimeout(() => gameBuild(), 400)
     }
   }, 1000);
-
-  if (user.lives === 0) {
-    gameContainer.innerHTML = "";
-
-    users.push(user);
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("users", JSON.stringify(users));
-
-    let gameOverImage = document.querySelector(".fwf__game-over");
-    gameOverImage.classList.add(".show");
-
-    let viewResults = createPageElement("button", "fwf__button", "View Results");
-    gameContainer.appendChild(viewResults);
-
-    viewResults.addEventListener("click", () => {
-      window.location.assign("../pages/results.html");
-    });
-
-    clearInterval(timer);
-    return;
-  }
 }
 
-function gameBuild() {
+function gameBuild(results) {
+  if (results === "results") {
+    document.querySelector(".fwf__display").classList.add("hide");
+    document.querySelector(".user-info__progressbar").classList.add("hide");
+    document.querySelector(".fwf__game-over").classList.add("show");
+
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("user", JSON.stringify(user));
+
+    return;
+  }
   buildGameContainer(showCountryFlag(apiResponseWithoutStates));
   buildUserInfo(user);
 };
@@ -187,6 +155,8 @@ const define = (data) => {
     acc[key] = value;
     return acc;
   }, {})
+
+  gameFlags = shuffle(Object.keys(apiResponseWithoutStates));
 };
 
 const startGame = async () => {

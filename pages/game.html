@@ -16,23 +16,26 @@
       <h2 class="user-info__username"></h2>
       <!-- <div id="user-info__countdown" class="user-info__countdown"></div> -->
 
-      <div class="user-info__progressBar">
+      <div class="user-info__progressbar">
         <div id="barStatus" class="user-info__barstatus"></div>
       </div>
-
 
     </div>
   </header>
 
   <main class="fwf">
-    <h2 class="fwf__title">Guess The Correct Country.</h2>
     <article class="fwf__display">
+      <h2 class="fwf__title">Guess The Correct Country</h2>
       <div class="fwf__flag-container">
       </div>
       <ul class="fwf__options">
       </ul>
     </article>
-    <img class="fwf__game-over" src="../assets/images/bazinga.png" alt="Game Over!">
+    <article class="fwf__game-over">
+      <h2>Game Over</h2>
+      <img class="fwf__game-over-img" src="../assets/images/bazinga.png" alt="bazinga">
+      <a class="fwf__results-button" href="./results.html">View Results</a>
+    </article>
   </main>
   <script src="../scripts/FWFGame.js" type="module"></script>
   <script src="../scripts/ProgressBarAnimation.js" type="module"></script>
