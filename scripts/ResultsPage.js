@@ -1,16 +1,16 @@
 import { createPageElement } from "../utils/utils.js";
 
 
-
 async function buildResults() {
-  user = await JSON.parse(localStorage.getItem("user"));
-  apiResponse = await JSON.parse(localStorage.getItem("apiResponse"));
+  let user = await JSON.parse(localStorage.getItem("user"));
+  let apiResponse = await JSON.parse(localStorage.getItem("apiResponse"));
 
   let results = document.querySelector(".results");
   let resultsContainer = createPageElement("div", "results__container");
   results.appendChild(resultsContainer);
 
   let options = ["correct", "incorrect"], flagArray = [];
+
   options.forEach(option => {
     let column = createPageElement("div", "results__column");
     let title = createPageElement("h3", "results__column-title", option);
@@ -48,7 +48,6 @@ async function buildResults() {
 
 async function displayScoreboard() {
   let users = await JSON.parse(localStorage.getItem("users"));
-
   let sortedUsers = await users.sort((a, b) => a.score < b.score);
 
   sortedUsers.forEach(user => {

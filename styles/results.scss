@@ -2,6 +2,10 @@
 @use "./partials/mixins" as *;
 @use "./partials/variables" as *;
 
+.header {
+	flex-direction: column;
+}
+
 .results {
 	&__container {
 		padding: 1rem;
@@ -61,27 +65,42 @@
 
 .scoreboard {
 	width: 100%;
-	padding-bottom: 1rem;
-	display: flex;
-	flex-direction: column;
+	margin-bottom: 1rem;
+
 	&__title {
 		color: $font-primary-color;
 		text-align: center;
+		margin: 1.5rem 0;
 	}
-	&__container {
-		margin: 0 auto;
-	}
+
 	&__difficulty {
 		display: flex;
-		justify-content: space-around;
+		gap: 1rem;
+		padding: 0 1rem;
+
+		&-title {
+			margin-bottom: 1rem;
+		}
 	}
+
+	&__row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		text-align: center;
+		margin-top: 0.3rem;
+	}
+
 	&__name {
 		font-weight: bold;
 	}
+
 	&__score {
-		margin-left: 1rem;
 		font-weight: bold;
-		color: $success-color;
-		border-radius: 0.5rem;
+		color: $font-white;
+		background-color: $success-color;
+		border-radius: 20px;
+		padding: 0 0.3rem;
+		font-family: "Courier New", Courier, monospace;
 	}
 }
