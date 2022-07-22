@@ -73,7 +73,7 @@ const showCountryFlag = (countries) => {
   gameFlags.shift();
 
   // store the random url 
-  let flagUrl = (`https://flagcdn.com/${countryCode}.svg`)
+  let flagUrl = (`https://flagcdn.com/${countryCode}.svg`);
 
   // Generate country options
   let countryOptions = [];
@@ -81,9 +81,10 @@ const showCountryFlag = (countries) => {
 
   for (let i = 1; i < 4; i++) {
     let randomCountry = randomCodeGenerator();
-    if (countryCode != randomCountry) {
-      countryOptions.push({ countryCode: randomCountry, country: countries[randomCountry] });
+    while (countryCode === randomCountry) {
+      randomCountry = randomCodeGenerator();
     }
+    countryOptions.push({ countryCode: randomCountry, country: countries[randomCountry] });
   };
 
   return {
@@ -94,33 +95,30 @@ const showCountryFlag = (countries) => {
 };
 
 function checkAnswer() {
-  if (user.lives === 0) {
-    gameBuild("results");
-    return "end";
-  }
-
   if (guessOptions.choice === guessOptions.correctChoice) {
     user.score += 3;
     user.guessResults.correctFlags.push(guessOptions.correctChoice);
-    return "end";
+    return gameBuild();
   }
-
   user.lives--;
   user.guessResults.incorrectFlags.push(guessOptions.correctChoice);
+
+  if (user.lives === 0) return gameBuild("results");
+  return gameBuild();
 }
 
 /**
  * Countdown from the variable set in the args
  */
-const startCountdown = (timeLimit) => {
+const startCountdown = async (timeLimit) => {
   const timer = setInterval(() => {
     timeLimit = timeLimit - 1000;
 
     // document.getElementById("user-info__countdown").innerText = `Countdown: ${timeLimit / 1000}`;
     if (timeLimit === 0) {
       clearInterval(timer);
-      if (checkAnswer() === "end") return;
-      setTimeout(() => gameBuild(), 400)
+      checkAnswer();
+
     }
   }, 1000);
 }
@@ -150,7 +148,7 @@ const define = (data) => {
 
   const filteredApiResponse = Object.entries(apiResponse).filter(code => !code[0].startsWith("us-"));
 
-  apiResponseWithoutStates = filteredApiResponse.slice().reduce((acc, curr) => {
+  apiResponseWithoutStates = filteredApiResponse.reduce((acc, curr) => {
     let key = curr[0], value = curr[1];
     acc[key] = value;
     return acc;
