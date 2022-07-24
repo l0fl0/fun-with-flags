@@ -9,20 +9,18 @@ async function buildResults() {
   let resultsContainer = createPageElement("div", "results__container");
   results.appendChild(resultsContainer);
 
-  let options = ["correct", "incorrect"], flagArray = [];
-
-  options.forEach(option => {
-    let column = createPageElement("div", "results__column");
-    let title = createPageElement("h3", "results__column-title", option);
-    title.classList.add(`results__column-title--${option}`);
-    column.appendChild(title);
-
-    if (option === "correct") {
-      flagArray = user.guessResults.correctFlags;
-    } else {
-      flagArray = user.guessResults.incorrectFlags;
+  for (let key in user.guessResults) {
+    if (user.guessResults[key].length === 0) {
+      return;
     }
 
+    let trimKey = key.replace("Flags", "")
+    let column = createPageElement("div", "results__column");
+    let title = createPageElement("h3", "results__column-title", trimKey);
+    title.classList.add(`results__column-title--${trimKey}`);
+    column.appendChild(title);
+
+    let flagArray = user.guessResults[key];
     flagArray.forEach(countryCode => {
       let rowContainer = createPageElement("a", "results__row");
       //   Flag url
@@ -43,8 +41,13 @@ async function buildResults() {
       column.appendChild(rowContainer);
     })
     resultsContainer.appendChild(column);
-  })
+
+  }
+
+
+
 }
+
 
 async function displayScoreboard() {
   let users = await JSON.parse(localStorage.getItem("users"));
