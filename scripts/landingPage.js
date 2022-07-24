@@ -1,7 +1,7 @@
 let user = {
   name: "",
   score: 0,
-  lives: 200,
+  lives: 3,
   difficulty: "standard",
   guessResults: {
     incorrectFlags: [],

@@ -100,6 +100,7 @@ function checkAnswer() {
     user.guessResults.correctFlags.push(guessOptions.correctChoice);
     return gameBuild();
   }
+
   user.lives--;
   user.guessResults.incorrectFlags.push(guessOptions.correctChoice);
 
