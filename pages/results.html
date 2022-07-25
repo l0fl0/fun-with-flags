@@ -5,31 +5,40 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fun with flags</title>
-  <link rel="shortcut icon" href="#" type="image/x-icon">
+  <link rel="apple-touch-icon" href="./assets/images/fwf-question.png" type="image/png">
+  <link rel="icon" href="./assets/images/fwf-question.png" type="image/png">
   <link rel="stylesheet" href="../styles/results.css">
+  <title>Fun With Flags</title>
 </head>
 
 <body>
   <header class="header">
     <a href="../index.html" class="header__logo"><img src="../assets/images/sheldon-cooper-presents-fun-w-flags.webp"
         alt=""></a>
-    <div class="header__title-container">
-      <h2 class="header__sub-title">How did you do? Want to play again?</h2>
-    </div>
-    <a href="../index.html" class="header__play-again">Play Again</a>
+    <a href="../index.html" class="header__play-again">Play Again?</a>
   </header>
   <section class="results"></section>
   <section class="scoreboard">
+    <h2 class="scoreboard__title">Scoreboard</h2>
+    <article class="scoreboard__difficulty">
+      <div class="scoreboard__standard-difficulty">
+        <h3 class="scoreboard__difficulty-title">Standard</h3id>
+      </div>
+      <div class="scoreboard__hard-difficulty">
+        <h3 class="scoreboard__difficulty-title">Hard</h3>
+      </div>
+      <div class="scoreboard__sheldon-difficulty">
+        <h3 class="scoreboard__difficulty-title">Sheldon</h3>
+      </div>
+    </article>
   </section>
   <footer class="footer">
-    <div class="footer__sign">Created by Madhura Pendbhaje & Louis Flores</div>
+    <div class="footer__sign">
+      <p>Created by</p>
+      <p>Madhura Pendbhaje & Louis Flores</p>
+    </div>
   </footer>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="../scripts/build-element.js"></script>
-  <script src="../scripts/variables.js"></script>
-  <script src="../scripts/build-element.js"></script>
-  <script src="../scripts/results.js"></script>
+  <script src="../scripts/ResultsPage.js" type="module"></script>
 </body>
 
 </html>

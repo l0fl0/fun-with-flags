@@ -1,28 +1,33 @@
 @use "./variables" as *;
-@use "./colors" as *;
 
 // Media queries
 @mixin tablet-breakpoint {
-  @media (min-width: $tablet-screen-size) {
-    @content;
-  }
+	@media (min-width: $tablet-screen-size) {
+		@content;
+	}
 }
 
 @mixin desktop-breakpoint {
-  @media (min-width: $desktop-screen-size) {
-    @content;
-  }
+	@media (min-width: $desktop-screen-size) {
+		@content;
+	}
 }
 
 @mixin btn {
-  background-color: $font-primary-color;
-  color: $font-white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.625rem;
-  margin: 1rem 0;
-  &:hover {
-    background-color: $highlight-color;
-    color: $font-primary-color;
-  }
+	background-color: $font-primary-color;
+	color: $font-white;
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 0.625rem;
+	margin: 1rem 0;
+	&:hover {
+		background-color: $highlight-color;
+		color: $font-primary-color;
+	}
+}
+
+@mixin title {
+	margin-bottom: 1.5rem;
+	font-size: 2rem;
+	text-transform: uppercase;
 }

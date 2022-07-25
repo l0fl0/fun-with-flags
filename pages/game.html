@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" href="./assets/images/fwf-question.png" type="image/png">
+  <link rel="icon" href="./assets/images/fwf-question.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/game.css">
+  <title>Fun With Flags</title>
+</head>
+
+<body>
+  <header>
+    <h1 class="fwf__title">Fun With Flags</h1>
+    <div class="user-info">
+      <h2 class="user-info__username"></h2>
+      <!-- <div id="user-info__countdown" class="user-info__countdown"></div> -->
+
+      <div class="user-info__progressbar">
+        <div id="barStatus" class="user-info__barstatus"></div>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="fwf">
+    <article class="fwf__display">
+      <h2 class="fwf__title">Guess The Correct Country</h2>
+      <div class="fwf__flag-container">
+      </div>
+      <ul class="fwf__options">
+      </ul>
+    </article>
+    <article class="fwf__game-over">
+      <h2>Game Over</h2>
+      <img class="fwf__game-over-img" src="../assets/images/bazinga.png" alt="bazinga">
+      <a class="fwf__results-button" href="./results.html">View Results</a>
+    </article>
+  </main>
+  <script src="../scripts/FWFGame.js" type="module"></script>
+  <script src="../scripts/ProgressBarAnimation.js" type="module"></script>
+</body>
+
+</html>

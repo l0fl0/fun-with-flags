@@ -1,0 +1,104 @@
+@use "./partials/global";
+@use "./partials/mixins" as *;
+@use "./partials/variables" as *;
+
+body {
+	max-height: 100vh;
+}
+
+.user-info {
+	margin-bottom: 1rem;
+	width: 100%;
+	padding: 0 1rem;
+
+	&__username {
+		text-align: center;
+		color: $success-color;
+	}
+
+	&__progressbar {
+		position: relative;
+		width: 100%;
+		height: 1.5rem;
+		background-color: #ddd;
+		border-radius: 1.25rem;
+	}
+
+	&__barstatus {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: $success-color;
+		border-radius: 1.25rem;
+
+		&--middle {
+			background-color: $highlight-color;
+		}
+
+		&--end {
+			background-color: $error-color;
+		}
+	}
+}
+
+.fwf {
+	&__title {
+		margin: 0;
+		padding: 2rem;
+		text-align: center;
+		color: $font-primary-color;
+	}
+
+	&__display {
+		min-height: 60vh;
+		padding: 0 1rem;
+
+		@include tablet-breakpoint {
+			justify-content: space-evenly;
+		}
+	}
+
+	&__flag-container {
+		margin: 0 auto;
+		width: 100%;
+		height: 10rem;
+		@include tablet-breakpoint {
+			width: 70%;
+		}
+	}
+
+	&__countries-container {
+		@include tablet-breakpoint {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+	}
+
+	&__country-option {
+		@include btn;
+		padding: 1rem 1rem;
+		display: block;
+		width: 100%;
+
+		@include tablet-breakpoint {
+			width: 45%;
+			font-size: 1rem;
+		}
+
+		&--active {
+			color: $font-primary-color;
+			background-color: $highlight-color;
+		}
+	}
+
+	&__game-over {
+		display: none;
+		text-align: center;
+		flex-direction: column;
+	}
+
+	&__results-button {
+		@include btn;
+	}
+}

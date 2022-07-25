@@ -1,0 +1,119 @@
+@use "./partials/global";
+@use "./partials/mixins" as *;
+@use "./partials/variables" as *;
+
+main {
+	height: 100%;
+	margin-bottom: auto;
+}
+
+// How to play
+.how-to-play {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: left;
+	padding: 1rem;
+	color: $font-primary-color;
+
+	&__title {
+		@include title;
+	}
+
+	&__rule {
+		margin-top: 1rem;
+		margin-left: 1rem;
+		font-size: 1.2rem;
+		font-weight: bold;
+		list-style-type: disc;
+	}
+
+	&__sub-rule {
+		margin-left: 1rem;
+		font-size: 1.1rem;
+	}
+}
+
+//* Register to play
+
+.registration-form {
+	&__content {
+		padding: 0 1rem;
+		text-align: center;
+	}
+
+	&__title {
+		@include title;
+	}
+
+	&__game-options {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 0 auto;
+	}
+	&__game-option {
+		position: absolute;
+		opacity: 0;
+		width: 0;
+	}
+
+	&__label {
+		text-transform: uppercase;
+		display: inline-block;
+		padding: 0.3rem;
+		width: 10rem;
+		&:hover {
+			background-color: $font-primary-color;
+			color: $font-white;
+		}
+
+		&--active {
+			background-color: $success-color;
+			color: $font-white;
+		}
+	}
+
+	&__background-photo {
+		background-image: url("../assets/images/sheldon-cooper-background-full-hd-422997.jpg");
+		background-size: 50rem;
+		background-position: center;
+		background-repeat: no-repeat;
+		height: 40vh;
+		position: relative;
+		font-size: 0;
+		@include tablet-breakpoint {
+			background-size: cover;
+		}
+	}
+
+	&__overlay {
+		background: linear-gradient(purple, pink);
+		opacity: 60%;
+		width: 100%;
+		height: 100%;
+
+		&-content-container {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			text-align: center;
+		}
+	}
+
+	&__submit-title {
+		@include title;
+		font-weight: bold;
+		color: $font-white;
+	}
+	&__submit {
+		@include btn;
+		width: 8rem;
+		margin: 0 auto;
+	}
+}
