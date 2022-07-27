@@ -164,7 +164,7 @@ main {
   color: #ffffff;
 }
 .registration-form__background-photo {
-  background-image: url("../assets/images/sheldon-cooper-background-full-hd-422997.jpg");
+  background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
   background-size: 50rem;
   background-position: center;
   background-repeat: no-repeat;
@@ -213,4 +213,4 @@ main {
 .registration-form__submit:hover {
   background-color: #ffdf6c;
   color: #2e2e2e;
-}/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=LandingPage.css.map */

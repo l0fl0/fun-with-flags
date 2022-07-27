@@ -13,7 +13,5 @@ export function move(progressTime) {
     width--;
     elem.style.width = width + '%';
   }
-
-
 }
 

@@ -32,6 +32,6 @@ function handleSubmit(event) {
   localStorage.setItem("user", JSON.stringify(user));
 
   //open game
-  window.location.assign("../pages/game.html");
+  window.location.assign("./pages/FWFGame/index.html");
 
 };
