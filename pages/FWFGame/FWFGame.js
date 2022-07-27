@@ -1,5 +1,5 @@
-import { createPageElement, shuffle, getRandomInt } from "../utils/utils.js";
-import { move } from "./ProgressBarAnimation.js";
+import { createPageElement, shuffle, getRandomInt } from "../../utils/utils.js";
+import { move } from "../../scripts/ProgressBarAnimation.js";
 
 let apiResponse = {}, apiResponseWithoutStates = {}, gameFlags = [];
 let user = JSON.parse(localStorage.getItem("user"));

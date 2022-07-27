@@ -1,6 +1,6 @@
-@use "./partials/global";
-@use "./partials/mixins" as *;
-@use "./partials/variables" as *;
+@use "../../../partials/global";
+@use "../../../partials/mixins" as *;
+@use "../../../partials/variables" as *;
 
 main {
 	height: 100%;
