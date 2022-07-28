@@ -14,13 +14,14 @@ async function buildResults() {
       return;
     }
 
-    let trimKey = key.replace("Flags", "")
+    const trimKey = key.replace("Flags", "");
     let column = createPageElement("div", "results__column");
     let title = createPageElement("h3", "results__column-title", trimKey);
     title.classList.add(`results__column-title--${trimKey}`);
     column.appendChild(title);
 
     let flagArray = user.guessResults[key];
+
     flagArray.forEach(countryCode => {
       let rowContainer = createPageElement("a", "results__row");
       //   Flag url
@@ -41,11 +42,7 @@ async function buildResults() {
       column.appendChild(rowContainer);
     })
     resultsContainer.appendChild(column);
-
   }
-
-
-
 }
 
 

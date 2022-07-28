@@ -2,9 +2,15 @@
 @use "../../../partials/mixins" as *;
 @use "../../../partials/variables" as *;
 
+.header {
+	min-height: 20vh;
+}
+
 main {
-	height: 100%;
-	margin-bottom: auto;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
 }
 
 // How to play
@@ -12,12 +18,15 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	text-align: left;
 	padding: 1rem;
 	color: $font-primary-color;
 
 	&__title {
 		@include title;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	&__rule {
@@ -37,13 +46,19 @@ main {
 //* Register to play
 
 .registration-form {
+	margin-top: auto;
+
 	&__content {
-		padding: 0 1rem;
+		padding: 1rem;
 		text-align: center;
 	}
 
 	&__title {
 		@include title;
+	}
+
+	&__subtitle {
+		margin-bottom: 1rem;
 	}
 
 	&__game-options {
@@ -53,6 +68,7 @@ main {
 		gap: 0.5rem;
 		margin: 0 auto;
 	}
+
 	&__game-option {
 		position: absolute;
 		opacity: 0;
@@ -64,6 +80,7 @@ main {
 		display: inline-block;
 		padding: 0.3rem;
 		width: 10rem;
+
 		&:hover {
 			background-color: $font-primary-color;
 			color: $font-white;
@@ -75,35 +92,51 @@ main {
 		}
 	}
 
-	&__background-photo {
-		background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
-		background-size: 50rem;
-		background-position: center;
-		background-repeat: no-repeat;
-		height: 40vh;
+	&__username {
+		height: 2rem;
+		margin-bottom: 1rem;
+	}
+
+	&__start-section {
 		position: relative;
+	}
+
+	&__background-photo {
+		// https://jsfiddle.net/pyojwq77/1/
+		background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
+		background-position: top center;
+		background-repeat: no-repeat;
 		font-size: 0;
+		background-size: 30rem;
+		position: absolute;
+		padding: 0;
+		border: 0;
+		width: 100%;
+		height: 100%;
+		margin: auto;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+
 		@include tablet-breakpoint {
 			background-size: cover;
 		}
 	}
 
 	&__overlay {
+		position: absolute;
 		background: linear-gradient(purple, pink);
 		opacity: 60%;
 		width: 100%;
 		height: 100%;
+	}
 
-		&-content-container {
-			position: absolute;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			text-align: center;
-		}
+	&__start-content {
+		position: relative;
+		z-index: 1;
+		margin: auto;
+		padding: 3rem 1rem;
 	}
 
 	&__submit-title {

@@ -6,53 +6,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/LandingPage/styles/LandingPage.css">
   <title>Fun with flags</title>
-
-  <!-- General -->
-  <link rel="manifest" href="fwf.webmanifest">
+  <link rel="manifest" href="/manifest.json">
 
   <meta name="theme-color" content="#ffffff">
   <meta name="application-name" content="Fun With Flags">
 
-  <link rel="shortcut icon" href="./assets/icons/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon_32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon_16.png">
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon_32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon_16.png">
+  <!-- Chrome -->
+  <meta name="mobile-web-app-capable" content="yes" />
 
   <!-- Apple -->
   <meta name="apple-mobile-web-app-title" content="Fun With Flags">
-
-  <link rel="apple-touch-icon" sizes="144x144" href="./assets/icons/apple-touch-icon.png">
-  <!-- <link rel="mask-icon" href="./assets/icons/safari-pinned-tab.svg" color="grey"> -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-touch-icon.png">
+  <!-- <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="grey"> -->
 
   <!-- Microsoft -->
   <meta name="msapplication-TileColor" content="grey">
-  <meta name="msapplication-config" content="./assets/icons/browserconfig.xml">
+  <meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
 </head>
 
 <body>
   <header class="header">
-    <div class="header__logo"><img src="./assets/icons/question_384.png" alt="sheldon cooper presents">
-    </div>
     <h1 class="header__title">Fun with Flags</h1>
+    <div class="header__logo">
+      <img src="/assets/icons/question_384.png" alt="sheldon cooper presents">
+    </div>
   </header>
 
   <main>
-    <section class="how-to-play">
-      <h2 class="how-to-play__title">How to play</h2>
-      <ul>
+    <!-- <section class="how-to-play">
+      <h2 class="how-to-play__title">Click to view how to play</h2>
+       <ul>
         <li class="how-to-play__rule">Correctly identify the flag within the given time</li>
         <li class="how-to-play__rule">Answer Incorrectly and you will loose a life</li>
         <li class="how-to-play__rule">Run out of lives and it's game over</li>
-      </ul>
-    </section>
+      </ul> 
+    </section> -->
 
     <form class="registration-form">
       <section class="registration-form__content">
-        <h2 class="registration-form__title">Game Settings</h2>
-        <input maxlength="10" type="text" name="name" id="name" placeholder="Enter a username">
+        <h2 class="registration-form__title">Game Options</h2>
+        <input class="registration-form__username" maxlength="10" type="text" name="username" id="username"
+          placeholder="Enter a username">
         <h3 class="registration-form__subtitle">Please select a Difficulty</h3>
         <ul class="registration-form__game-options">
           <li>
-            <input class="registration-form__game-option" type="radio" name="difficulty" id="difficulty0"
+            <input class="registration-form__game-option " type="radio" name="difficulty" id="difficulty0"
               value="standard" checked>
             <label for="difficulty0" class="registration-form__label">Standard</label>
           </li>
@@ -68,9 +70,11 @@
         </ul>
       </section>
 
-      <section class="registration-form__background-photo">
-        <div class="registration-form__overlay"></div>
-        <div class="registration-form__overlay-content-container">
+      <section class="registration-form__start-section">
+        <div class="registration-form__background-photo">
+          <div class="registration-form__overlay"></div>
+        </div>
+        <div class="registration-form__start-content">
           <h2 class="registration-form__submit-title">Are you ready?</h2>
           <button class="registration-form__submit" type="submit">Let's go!</button>
         </div>

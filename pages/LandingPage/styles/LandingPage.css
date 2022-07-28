@@ -36,30 +36,31 @@ body {
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #e5e5e5;
-  position: relative;
+  min-height: 100%;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+body::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }
 
 .header {
-  position: relative;
   background-color: #2e2e2e;
   color: #7c7c7c;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 1rem;
 }
 .header__logo {
   font-size: 0;
-  width: 8rem;
+  width: 3rem;
 }
 .header__title {
-  display: none;
-  margin: 2rem 0;
   text-align: center;
-  font-size: 1.5625rem;
+  font-size: 2.5rem;
   color: #ffffff;
-  max-width: 20rem;
-  margin: 0 auto;
+  margin-right: 1rem;
 }
 .header__play-again {
   background-color: #2e2e2e;
@@ -98,16 +99,21 @@ body {
   display: flex !important;
 }
 
+.header {
+  min-height: 20vh;
+}
+
 main {
-  height: 100%;
-  margin-bottom: auto;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .how-to-play {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: left;
   padding: 1rem;
   color: #2e2e2e;
 }
@@ -115,6 +121,9 @@ main {
   margin-bottom: 1.5rem;
   font-size: 2rem;
   text-transform: uppercase;
+}
+.how-to-play__title:hover {
+  cursor: pointer;
 }
 .how-to-play__rule {
   margin-top: 1rem;
@@ -128,14 +137,20 @@ main {
   font-size: 1.1rem;
 }
 
+.registration-form {
+  margin-top: auto;
+}
 .registration-form__content {
-  padding: 0 1rem;
+  padding: 1rem;
   text-align: center;
 }
 .registration-form__title {
   margin-bottom: 1.5rem;
   font-size: 2rem;
   text-transform: uppercase;
+}
+.registration-form__subtitle {
+  margin-bottom: 1rem;
 }
 .registration-form__game-options {
   display: flex;
@@ -163,14 +178,29 @@ main {
   background-color: #6cbc3d;
   color: #ffffff;
 }
+.registration-form__username {
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+.registration-form__start-section {
+  position: relative;
+}
 .registration-form__background-photo {
   background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
-  background-size: 50rem;
-  background-position: center;
+  background-position: top center;
   background-repeat: no-repeat;
-  height: 40vh;
-  position: relative;
   font-size: 0;
+  background-size: 30rem;
+  position: absolute;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 @media (min-width: 768px) {
   .registration-form__background-photo {
@@ -178,20 +208,17 @@ main {
   }
 }
 .registration-form__overlay {
+  position: absolute;
   background: linear-gradient(purple, pink);
   opacity: 60%;
   width: 100%;
   height: 100%;
 }
-.registration-form__overlay-content-container {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+.registration-form__start-content {
+  position: relative;
+  z-index: 1;
+  margin: auto;
+  padding: 3rem 1rem;
 }
 .registration-form__submit-title {
   margin-bottom: 1.5rem;
