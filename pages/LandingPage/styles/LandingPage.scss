@@ -3,7 +3,7 @@
 @use "../../../partials/variables" as *;
 
 .header {
-	height: 20vh;
+	min-height: 20vh;
 }
 
 main {
@@ -23,6 +23,7 @@ main {
 
 	&__title {
 		@include title;
+
 		&:hover {
 			cursor: pointer;
 		}
@@ -56,6 +57,10 @@ main {
 		@include title;
 	}
 
+	&__subtitle {
+		margin-bottom: 1rem;
+	}
+
 	&__game-options {
 		display: flex;
 		flex-direction: column;
@@ -75,6 +80,7 @@ main {
 		display: inline-block;
 		padding: 0.3rem;
 		width: 10rem;
+
 		&:hover {
 			background-color: $font-primary-color;
 			color: $font-white;
@@ -84,6 +90,11 @@ main {
 			background-color: $success-color;
 			color: $font-white;
 		}
+	}
+
+	&__username {
+		height: 2rem;
+		margin-bottom: 1rem;
 	}
 
 	&__start-section {

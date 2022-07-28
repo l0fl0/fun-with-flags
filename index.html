@@ -32,28 +32,29 @@
   <header class="header">
     <h1 class="header__title">Fun with Flags</h1>
     <div class="header__logo">
-      <img src="./assets/icons/question_384.png" alt="sheldon cooper presents">
+      <img src="/assets/icons/question_384.png" alt="sheldon cooper presents">
     </div>
   </header>
 
   <main>
-    <section class="how-to-play">
+    <!-- <section class="how-to-play">
       <h2 class="how-to-play__title">Click to view how to play</h2>
-      <!-- <ul>
+       <ul>
         <li class="how-to-play__rule">Correctly identify the flag within the given time</li>
         <li class="how-to-play__rule">Answer Incorrectly and you will loose a life</li>
         <li class="how-to-play__rule">Run out of lives and it's game over</li>
-      </ul> -->
-    </section>
+      </ul> 
+    </section> -->
 
     <form class="registration-form">
       <section class="registration-form__content">
-        <h2 class="registration-form__title">Game Settings</h2>
-        <input maxlength="10" type="text" name="name" id="name" placeholder="Enter a username">
+        <h2 class="registration-form__title">Game Options</h2>
+        <input class="registration-form__username" maxlength="10" type="text" name="username" id="username"
+          placeholder="Enter a username">
         <h3 class="registration-form__subtitle">Please select a Difficulty</h3>
         <ul class="registration-form__game-options">
           <li>
-            <input class="registration-form__game-option" type="radio" name="difficulty" id="difficulty0"
+            <input class="registration-form__game-option " type="radio" name="difficulty" id="difficulty0"
               value="standard" checked>
             <label for="difficulty0" class="registration-form__label">Standard</label>
           </li>

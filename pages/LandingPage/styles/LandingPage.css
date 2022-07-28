@@ -60,7 +60,6 @@ body::-webkit-scrollbar {
   text-align: center;
   font-size: 2.5rem;
   color: #ffffff;
-  margin-bottom: 1.5rem;
   margin-right: 1rem;
 }
 .header__play-again {
@@ -101,7 +100,7 @@ body::-webkit-scrollbar {
 }
 
 .header {
-  height: 20vh;
+  min-height: 20vh;
 }
 
 main {
@@ -150,6 +149,9 @@ main {
   font-size: 2rem;
   text-transform: uppercase;
 }
+.registration-form__subtitle {
+  margin-bottom: 1rem;
+}
 .registration-form__game-options {
   display: flex;
   flex-direction: column;
@@ -175,6 +177,10 @@ main {
 .registration-form__label--active {
   background-color: #6cbc3d;
   color: #ffffff;
+}
+.registration-form__username {
+  height: 2rem;
+  margin-bottom: 1rem;
 }
 .registration-form__start-section {
   position: relative;
