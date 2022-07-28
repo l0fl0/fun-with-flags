@@ -1,6 +1,6 @@
 {
 	"name": "Fun With Flags",
-	"short_name": "FwF",
+	"short_name": "Fun-w-Flags",
 	"icons": [
 		{
 			"src": "assets/favicons/android-chrome_192.png",
@@ -14,5 +14,8 @@
 		}
 	],
 	"theme_color": "#ffffff",
-	"background_color": "#ffffff"
+	"background_color": "#ffffff",
+
+	"start_url": "/index.html",
+	"display": "standalone"
 }

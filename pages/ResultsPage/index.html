@@ -5,16 +5,33 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="apple-touch-icon" href="./assets/images/fwf-question.png" type="image/png">
-  <link rel="icon" href="./assets/images/fwf-question.png" type="image/png">
   <link rel="stylesheet" href="./styles/results.css">
   <title>Fun With Flags</title>
+  <link rel="manifest" href="/manifest.json">
+
+  <meta name="theme-color" content="#ffffff">
+  <meta name="application-name" content="Fun With Flags">
+
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon_32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon_16.png">
+  <!-- Chrome -->
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Apple -->
+  <meta name="apple-mobile-web-app-title" content="Fun With Flags">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-touch-icon.png">
+  <!-- <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="grey"> -->
+
+  <!-- Microsoft -->
+  <meta name="msapplication-TileColor" content="grey">
+  <meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
 </head>
 
 <body>
   <header class="header">
-    <a href="../../index.html" class="header__logo"><img
-        src="../../assets/images/sheldon-cooper-presents-fun-w-flags.webp" alt=""></a>
+    <a href="../../index.html" class="header__logo"><img src="/assets/icons/question_384.png" alt=""></a>
     <a href="../../index.html" class="header__play-again">Play Again?</a>
   </header>
   <section class="results"></section>
@@ -38,7 +55,7 @@
       <p>Madhura Pendbhaje & <a href="https://github.com/l0fl0">Louis Flores</a></p>
     </div>
   </footer>
-  <script src="../scripts/ResultsPage.js" type="module"></script>
+  <script src="./ResultsPage.js" type="module"></script>
 </body>
 
 </html>
