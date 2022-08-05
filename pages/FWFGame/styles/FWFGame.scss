@@ -81,6 +81,11 @@ body {
 		display: block;
 		width: 100%;
 
+		&:hover {
+			background-color: $font-primary-color;
+			color: $font-white;
+		}
+
 		@include tablet-breakpoint {
 			width: 45%;
 			font-size: 1rem;
