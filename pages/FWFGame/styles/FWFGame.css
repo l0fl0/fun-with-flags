@@ -194,6 +194,10 @@ body {
   color: #2e2e2e;
   background-color: #ffdf6c;
 }
+.fwf__country-option--active:hover {
+  color: #2e2e2e;
+  background-color: #ffdf6c;
+}
 .fwf__game-over {
   display: none;
   text-align: center;

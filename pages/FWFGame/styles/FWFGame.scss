@@ -94,6 +94,11 @@ body {
 		&--active {
 			color: $font-primary-color;
 			background-color: $highlight-color;
+
+			&:hover {
+				color: $font-primary-color;
+				background-color: $highlight-color;
+			}
 		}
 	}
 
