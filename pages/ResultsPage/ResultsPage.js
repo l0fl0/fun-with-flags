@@ -48,8 +48,7 @@ async function buildResults() {
 
 async function displayScoreboard() {
   let users = await JSON.parse(localStorage.getItem("users"));
-  let sortedUsers = await users.sort((a, b) => a.score < b.score);
-
+  let sortedUsers = await users.sort((a, b) => b.score - a.score);
   sortedUsers.forEach(user => {
     let row = createPageElement("div", "scoreboard__row");
     let name = createPageElement("span", "scoreboard__name", user.name);
