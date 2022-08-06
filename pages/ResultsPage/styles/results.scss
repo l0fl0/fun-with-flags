@@ -64,6 +64,12 @@
 		width: 40%;
 		color: $font-primary-color;
 	}
+
+	&__incorrect-country {
+		text-decoration: line-through;
+		margin-left: 1rem;
+		color: $error-color;
+	}
 }
 
 .scoreboard {

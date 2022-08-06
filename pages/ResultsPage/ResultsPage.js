@@ -21,25 +21,30 @@ async function buildResults() {
     column.appendChild(title);
 
     let flagArray = user.guessResults[key];
-
-    flagArray.forEach(countryCode => {
+    console.log(flagArray)
+    flagArray.forEach(option => {
       let rowContainer = createPageElement("a", "results__row");
       //   Flag url
-      let flagUrl = (`https://flagcdn.com/${countryCode}.svg`)
+      let flagUrl = (`https://flagcdn.com/${option.correctChoice}.svg`)
       let flagEl = createPageElement("img", "results__flag");
       flagEl.src = flagUrl;
-      flagEl.alt = `${countryCode} flag`;
+      flagEl.alt = `${option.correctChoice} flag`;
 
       rowContainer.appendChild(flagEl);
 
-      let countryName = createPageElement("span", "results__country", apiResponse[countryCode]);
+      let countryName = createPageElement("span", "results__country", apiResponse[option.correctChoice]);
+
+      let incorrectCountryName = createPageElement("span", "results__incorrect-country", apiResponse[option.choice]);
 
       rowContainer.href = `https://en.wikipedia.org/wiki/${countryName.innerText}`;
       rowContainer.target = "_blank";
-      rowContainer.title = apiResponse[countryCode];
+      rowContainer.title = apiResponse[option.correctChoice];
       rowContainer.appendChild(countryName)
       rowContainer.appendChild(flagEl);
-      column.appendChild(rowContainer);
+      if (trimKey === "incorrect") rowContainer.appendChild(incorrectCountryName)
+
+      column.appendChild(rowContainer
+      );
     })
     resultsContainer.appendChild(column);
   }

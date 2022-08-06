@@ -97,13 +97,15 @@ const showCountryFlag = (countries) => {
 function checkAnswer() {
   if (guessOptions.choice === guessOptions.correctChoice) {
     user.score += 3;
-    user.guessResults.correctFlags.push(guessOptions.correctChoice);
+    user.guessResults.correctFlags.push({ choice: guessOptions.choice, correctChoice: guessOptions.correctChoice });
+    console.log(user.guessResults)
     return gameBuild();
   }
 
   user.lives--;
-  user.guessResults.incorrectFlags.push(guessOptions.correctChoice);
+  user.guessResults.incorrectFlags.push({ choice: guessOptions.choice, correctChoice: guessOptions.correctChoice });
 
+  console.log(user.guessResults)
   if (user.lives === 0) return gameBuild("results");
   return gameBuild();
 }
