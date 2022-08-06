@@ -180,6 +180,10 @@ body {
   background-color: #ffdf6c;
   color: #2e2e2e;
 }
+.fwf__country-option:hover {
+  background-color: #2e2e2e;
+  color: #ffffff;
+}
 @media (min-width: 768px) {
   .fwf__country-option {
     width: 45%;
@@ -187,6 +191,10 @@ body {
   }
 }
 .fwf__country-option--active {
+  color: #2e2e2e;
+  background-color: #ffdf6c;
+}
+.fwf__country-option--active:hover {
   color: #2e2e2e;
   background-color: #ffdf6c;
 }

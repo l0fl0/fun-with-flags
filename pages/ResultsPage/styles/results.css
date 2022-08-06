@@ -158,6 +158,11 @@ body::-webkit-scrollbar {
   width: 40%;
   color: #2e2e2e;
 }
+.results__incorrect-country {
+  text-decoration: line-through;
+  margin-left: 1rem;
+  color: #e2482d;
+}
 
 .scoreboard {
   width: 100%;
