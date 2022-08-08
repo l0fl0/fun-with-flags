@@ -28,15 +28,22 @@ a {
   text-decoration: none;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #e5e5e5;
+@font-face {
+  font-family: "ArcadeInterlaced";
+  src: url(/assets/fonts/ARCADE_I.TTF) format("truetype"), url(/assets/fonts/ARCADE_I.woff) format("woff"), url(/assets/fonts/ARCADE_I.woff2) format("woff2"), url(/assets/fonts/ARCADE_I.svg) format("svg");
+  font-style: normal;
+  font-weight: normal;
 }
-
+@font-face {
+  font-family: "Arcade";
+  src: url(/assets/fonts/ARCADE_N.TTF) format("truetype"), url(/assets/fonts/ARCADE_N.woff) format("woff"), url(/assets/fonts/ARCADE_N.woff2) format("woff2"), url(/assets/fonts/ARCADE_N.svg) format("svg");
+  font-style: normal;
+  font-weight: normal;
+}
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #e5e5e5;
+  font-family: "Arcade", "Courier New", Courier, monospace;
   min-height: 100%;
+  background-color: #e5e5e5;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
   overflow-y: scroll;
@@ -63,6 +70,8 @@ body::-webkit-scrollbar {
   margin-right: 1rem;
 }
 .header__play-again {
+  font-family: "Arcade";
+  font-size: 0.6rem;
   background-color: #2e2e2e;
   color: #ffffff;
   padding: 0.5rem 1rem;
@@ -228,6 +237,8 @@ main {
   color: #ffffff;
 }
 .registration-form__submit {
+  font-family: "Arcade";
+  font-size: 0.6rem;
   background-color: #2e2e2e;
   color: #ffffff;
   padding: 0.5rem 1rem;
