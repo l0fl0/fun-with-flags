@@ -65,8 +65,11 @@ body::-webkit-scrollbar {
   width: 3rem;
 }
 .header__title {
+  margin: 1.5rem 0;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
   text-align: center;
-  font-size: 2.5rem;
   color: #ffffff;
   margin-right: 1rem;
 }
@@ -178,13 +181,13 @@ body::-webkit-scrollbar {
   background-color: #e2482d;
 }
 .results__row {
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: space-evenly;
   max-height: 4rem;
   padding: 1rem;
   align-items: center;
   background-color: #ffffff;
-  font-size: 0.7rem;
 }
 .results__row:hover {
   cursor: pointer;

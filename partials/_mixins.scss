@@ -29,8 +29,8 @@
 	}
 }
 
-@mixin title {
-	margin-bottom: 1.5rem;
+@mixin heading {
+	margin: 1.5rem 0;
 	font-size: 2rem;
 	text-transform: uppercase;
 	color: $font-primary-color;

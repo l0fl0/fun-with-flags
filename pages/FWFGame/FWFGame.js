@@ -6,8 +6,9 @@ let user = JSON.parse(localStorage.getItem("user"));
 let users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
 let timeLimit = 6000;
 let guessOptions = {
-  choice: "",
-  correctChoice: ""
+  choice: null,
+  correctChoice: null,
+  timeRemaining: null
 };
 
 function buildUserInfo(user) {
@@ -15,11 +16,10 @@ function buildUserInfo(user) {
   const username = document.querySelector(".user-info__username")
   username.innerText = `${user.name}`
 
-  // const countdownTimer = document.querySelector(".user-info__countdown");
-  // countdownTimer.innerText = `Countdown: ${timeLimit / 1000}`;
-  move(timeLimit);
-  startCountdown(timeLimit);
+  const countdownTimer = document.querySelector(".user-info__countdown");
+  countdownTimer.innerText = `Countdown: ${timeLimit / 1000}`;
 
+  startCountdown(timeLimit);
 };
 
 function buildGameContainer(data) {
@@ -96,17 +96,20 @@ const showCountryFlag = (countries) => {
 
 function checkAnswer() {
   if (guessOptions.choice === guessOptions.correctChoice) {
+    if (user.difficulty === "standard") {
+      // unlimited lives as long as you dont get two guesses incorrect conssecutively
+      if (user.lives === 1) user.lives = 2;
+    }
+
     user.score += 3;
     user.guessResults.correctFlags.push({ choice: guessOptions.choice, correctChoice: guessOptions.correctChoice });
-    console.log(user.guessResults)
     return gameBuild();
   }
 
   user.lives--;
   user.guessResults.incorrectFlags.push({ choice: guessOptions.choice, correctChoice: guessOptions.correctChoice });
 
-  console.log(user.guessResults)
-  if (user.lives === 0) return gameBuild("results");
+  if (user.lives === 0) return gameBuild("results", "Ran out of lives");
   return gameBuild();
 }
 
@@ -114,6 +117,8 @@ function checkAnswer() {
  * Countdown from the variable set in the args
  */
 const startCountdown = async (timeLimit) => {
+  move(timeLimit);
+
   const timer = setInterval(() => {
     timeLimit = timeLimit - 1000;
 
@@ -126,20 +131,25 @@ const startCountdown = async (timeLimit) => {
   }, 1000);
 }
 
-function gameBuild(results) {
+function gameBuild(results, string) {
+  if ((user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length) === user.questionLimit) return gameBuild("results", "Question Limit Reached");
+
   if (results === "results") {
     document.querySelector(".fwf__display").classList.add("hide");
-    document.querySelector(".user-info__progressbar").classList.add("hide");
-    document.querySelector(".fwf__game-over").classList.add("show");
+    document.querySelector(".user-info").classList.add("hide");
 
+    document.querySelector(".fwf__gameover").classList.add("show");
+    document.querySelector(".fwf__gameover-reason").innerText = string
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(user));
 
     return;
   }
-  buildGameContainer(showCountryFlag(apiResponseWithoutStates));
+
+  guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
   buildUserInfo(user);
+  buildGameContainer(showCountryFlag(apiResponseWithoutStates));
 };
 
 /*
@@ -161,8 +171,8 @@ const define = (data) => {
 };
 
 const startGame = async () => {
-  if (user.difficulty === "hard") timeLimit = 4000;
-  if (user.difficulty === "sheldon") timeLimit = 2000;
+  if (user.lives === 0) return gameBuild("results", "ran out of lives")
+  if (user.difficulty === "hard") user.lives = 3;
 
   await fetch('https://flagcdn.com/en/codes.json')
     .then(response => response.json())

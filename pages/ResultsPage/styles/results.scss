@@ -59,13 +59,13 @@
 	}
 
 	&__row {
+		font-family: Arial, Helvetica, sans-serif;
 		display: flex;
 		justify-content: space-evenly;
 		max-height: 4rem;
 		padding: 1rem;
 		align-items: center;
 		background-color: $font-white;
-		font-size: 0.7rem;
 
 		&:hover {
 			cursor: pointer;

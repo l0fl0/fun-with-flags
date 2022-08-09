@@ -2,8 +2,11 @@
 @use "../../../partials/mixins" as *;
 @use "../../../partials/variables" as *;
 
+body {
+	max-height: 100vh;
+}
 .header {
-	min-height: 20vh;
+	height: 20vh;
 }
 
 main {
@@ -11,36 +14,6 @@ main {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
-}
-
-// How to play
-.how-to-play {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 1rem;
-	color: $font-primary-color;
-
-	&__title {
-		@include title;
-
-		&:hover {
-			cursor: pointer;
-		}
-	}
-
-	&__rule {
-		margin-top: 1rem;
-		margin-left: 1rem;
-		font-size: 1.2rem;
-		font-weight: bold;
-		list-style-type: disc;
-	}
-
-	&__sub-rule {
-		margin-left: 1rem;
-		font-size: 1.1rem;
-	}
 }
 
 //* Register to play
@@ -53,38 +26,34 @@ main {
 		text-align: center;
 	}
 
-	&__title {
-		@include title;
+	&__heading {
+		@include heading;
 	}
 
-	&__subtitle {
-		margin-bottom: 1rem;
+	&__sub-heading {
+		@include table-heading;
+		margin-top: 1rem;
 	}
 
 	&__game-options {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 0.5rem;
-		margin: 0 auto;
 	}
 
-	&__game-option {
+	&__difficulty-option,
+	&__limit-option {
 		position: absolute;
 		opacity: 0;
 		width: 0;
 	}
 
-	&__label {
+	&__label,
+	&__limit-label {
 		text-transform: uppercase;
 		display: inline-block;
 		padding: 0.3rem;
 		width: 10rem;
-
-		&:hover {
-			background-color: $font-primary-color;
-			color: $font-white;
-		}
 
 		&--active {
 			background-color: $success-color;
@@ -93,8 +62,13 @@ main {
 	}
 
 	&__username {
+		font-family: "Arcade";
+		font-size: 0.7rem;
 		height: 2rem;
-		margin-bottom: 1rem;
+		border: none;
+		background-color: $background-secondary-color;
+		text-align: center;
+		caret-color: $highlight-color;
 	}
 
 	&__start-section {

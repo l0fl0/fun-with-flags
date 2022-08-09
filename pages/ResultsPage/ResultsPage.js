@@ -21,7 +21,7 @@ async function buildResults() {
     column.appendChild(title);
 
     let flagArray = user.guessResults[key];
-    console.log(flagArray)
+
     flagArray.forEach(option => {
       let rowContainer = createPageElement("a", "results__row");
       //   Flag url
@@ -58,13 +58,10 @@ async function displayScoreboard() {
   localStorage.setItem("users", JSON.stringify(sortedUsers))
 
   let sufixes = (number) => {
-    number = number.toString();
-    let ending = number[number.length - 1]
-
-    if (ending === "1") return number + "st";
-    if (ending === "2") return number + "nd";
-    if (ending === "3") return number + "rd";
-
+    if (number > 10) return number;
+    if (number === 1) return number + "st";
+    if (number === 2) return number + "nd";
+    if (number === 3) return number + "rd";
     return number + "th";
   };
 
@@ -79,7 +76,7 @@ async function displayScoreboard() {
     row.appendChild(score);
     row.appendChild(name);
 
-    document.querySelector(`.scoreboard__difficulty-${user.difficulty}`).appendChild(row);
+    document.querySelector(".scoreboard__difficulty-standard").appendChild(row);
   })
 }
 

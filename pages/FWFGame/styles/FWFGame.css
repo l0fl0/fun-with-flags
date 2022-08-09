@@ -65,8 +65,11 @@ body::-webkit-scrollbar {
   width: 3rem;
 }
 .header__title {
+  margin: 1.5rem 0;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
   text-align: center;
-  font-size: 2.5rem;
   color: #ffffff;
   margin-right: 1rem;
 }
@@ -120,6 +123,10 @@ body {
   padding: 0 1rem;
 }
 .user-info__username {
+  margin: 1.5rem 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
   text-align: center;
   color: #6cbc3d;
 }
@@ -145,10 +152,11 @@ body {
 }
 
 .fwf__title {
-  margin: 0;
-  padding: 2rem;
-  text-align: center;
+  margin: 1.5rem 0;
+  font-size: 2rem;
+  text-transform: uppercase;
   color: #2e2e2e;
+  text-align: center;
 }
 .fwf__display {
   min-height: 60vh;
@@ -185,7 +193,9 @@ body {
   border: none;
   border-radius: 0.625rem;
   margin: 1rem 0;
-  padding: 1rem 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  padding: 1rem;
   display: block;
   width: 100%;
 }
@@ -211,10 +221,28 @@ body {
   color: #2e2e2e;
   background-color: #ffdf6c;
 }
-.fwf__game-over {
+.fwf__gameover {
   display: none;
   text-align: center;
   flex-direction: column;
+}
+.fwf__gameover-heading {
+  margin: 1.5rem 0;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
+  color: #e2482d;
+}
+.fwf__gameover-reason {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
+  margin-top: -1rem;
+}
+.fwf__gameover-img {
+  height: 40vh;
+  margin: 1rem;
 }
 .fwf__results-button {
   font-family: "Arcade";
@@ -225,6 +253,8 @@ body {
   border: none;
   border-radius: 0.625rem;
   margin: 1rem 0;
+  font-size: 1rem;
+  margin: 1rem;
 }
 .fwf__results-button:hover {
   background-color: #ffdf6c;
