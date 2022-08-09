@@ -1,4 +1,5 @@
 let user = {
+  // id: uuid(),
   name: "",
   score: 0,
   lives: 3,

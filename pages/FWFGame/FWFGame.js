@@ -4,7 +4,7 @@ import { move } from "../../scripts/ProgressBarAnimation.js";
 let apiResponse = {}, apiResponseWithoutStates = {}, gameFlags = [];
 let user = JSON.parse(localStorage.getItem("user"));
 let users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
-let timeLimit = 8000;
+let timeLimit = 6000;
 let guessOptions = {
   choice: "",
   correctChoice: ""
@@ -117,7 +117,7 @@ const startCountdown = async (timeLimit) => {
   const timer = setInterval(() => {
     timeLimit = timeLimit - 1000;
 
-    // document.getElementById("user-info__countdown").innerText = `Countdown: ${timeLimit / 1000}`;
+    document.getElementById("user-info__countdown").innerText = `Countdown: ${timeLimit / 1000}`;
     if (timeLimit === 0) {
       clearInterval(timer);
       checkAnswer();
