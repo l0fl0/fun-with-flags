@@ -103,14 +103,14 @@ function checkAnswer() {
 
     user.score += 3;
     user.guessResults.correctFlags.push({ choice: guessOptions.choice, correctChoice: guessOptions.correctChoice });
-    return gameBuild();
+    return gameBuild("correct");
   }
 
   user.lives--;
   user.guessResults.incorrectFlags.push({ choice: guessOptions.choice, correctChoice: guessOptions.correctChoice });
 
   if (user.lives === 0) return gameBuild("results", "Ran out of lives");
-  return gameBuild();
+  return gameBuild("incorrect");
 }
 
 /**
@@ -126,7 +126,6 @@ const startCountdown = async (timeLimit) => {
     if (timeLimit === 0) {
       clearInterval(timer);
       checkAnswer();
-
     }
   }, 1000);
 }
@@ -146,10 +145,16 @@ function gameBuild(results, string) {
 
     return;
   }
+  // Choice confirmation
+  if (results === "correct") document.body.style.backgroundColor = "green";
+  if (results === "incorrect") document.body.style.backgroundColor = "red";
 
   guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
-  buildUserInfo(user);
-  buildGameContainer(showCountryFlag(apiResponseWithoutStates));
+  setTimeout(() => {
+    document.body.style.backgroundColor = "#e5e5e5";
+    buildUserInfo(user);
+    buildGameContainer(showCountryFlag(apiResponseWithoutStates));
+  }, 1000);
 };
 
 /*
@@ -171,14 +176,17 @@ const define = (data) => {
 };
 
 const startGame = async () => {
-  if (user.lives === 0) return gameBuild("results", "ran out of lives")
+  if (user.lives === 0) return gameBuild("results", "ran out of lives");
+  if ((user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length) === user.questionLimit) return gameBuild("results", "Question Limit Reached");
+
   if (user.difficulty === "hard") user.lives = 3;
 
   await fetch('https://flagcdn.com/en/codes.json')
     .then(response => response.json())
     .then(data => define(data))
     .then(() => {
-      gameBuild();
+      buildUserInfo(user);
+      buildGameContainer(showCountryFlag(apiResponseWithoutStates));
     })
 }
 
