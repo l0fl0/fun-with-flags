@@ -81,9 +81,13 @@ const showCountryFlag = (countries) => {
 
   for (let i = 1; i < 4; i++) {
     let randomCountry = randomCodeGenerator();
-    while (countryCode === randomCountry) {
-      randomCountry = randomCodeGenerator();
+
+    for (let option in countryOptions) {
+      while (countryOptions[option].countryCode === randomCountry) {
+        randomCountry = randomCodeGenerator();
+      }
     }
+
     countryOptions.push({ countryCode: randomCountry, country: countries[randomCountry] });
   };
 
