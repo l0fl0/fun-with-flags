@@ -5,8 +5,10 @@
 
 body {
 	font-family: "Arcade", "Courier New", Courier, monospace;
+	font-size: 0.8rem;
 	min-height: 100%;
 	background-color: $background-secondary-color;
+
 	-ms-overflow-style: none; /* for Internet Explorer, Edge */
 	scrollbar-width: none; /* for Firefox */
 	overflow-y: scroll;
@@ -37,6 +39,7 @@ body {
 
 	&__play-again {
 		@include btn;
+		font-size: 1rem;
 		background-color: $highlight-color;
 		color: $font-primary-color;
 		text-transform: uppercase;
@@ -50,15 +53,17 @@ body {
 	background: $font-primary-color;
 	text-align: center;
 	color: $font-white;
+
 	&__sign {
 		margin: auto;
-		font-size: 0.8rem;
+		font-size: 0.5rem;
 	}
 }
 
 .hide {
 	display: none !important;
 }
+
 .show {
-	display: flex !important;
+	display: block !important;
 }

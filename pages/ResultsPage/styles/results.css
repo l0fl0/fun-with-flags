@@ -28,15 +28,23 @@ a {
   text-decoration: none;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #e5e5e5;
+@font-face {
+  font-family: "ArcadeInterlaced";
+  src: url(/assets/fonts/ARCADE_I.TTF) format("truetype"), url(/assets/fonts/ARCADE_I.woff) format("woff"), url(/assets/fonts/ARCADE_I.woff2) format("woff2"), url(/assets/fonts/ARCADE_I.svg) format("svg");
+  font-style: normal;
+  font-weight: normal;
 }
-
+@font-face {
+  font-family: "Arcade";
+  src: url(/assets/fonts/ARCADE_N.TTF) format("truetype"), url(/assets/fonts/ARCADE_N.woff) format("woff"), url(/assets/fonts/ARCADE_N.woff2) format("woff2"), url(/assets/fonts/ARCADE_N.svg) format("svg");
+  font-style: normal;
+  font-weight: normal;
+}
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #e5e5e5;
+  font-family: "Arcade", "Courier New", Courier, monospace;
+  font-size: 0.8rem;
   min-height: 100%;
+  background-color: #e5e5e5;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
   overflow-y: scroll;
@@ -63,12 +71,15 @@ body::-webkit-scrollbar {
   margin-right: 1rem;
 }
 .header__play-again {
+  font-family: "Arcade";
+  font-size: 0.6rem;
   background-color: #2e2e2e;
   color: #ffffff;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.625rem;
   margin: 1rem 0;
+  font-size: 1rem;
   background-color: #ffdf6c;
   color: #2e2e2e;
   text-transform: uppercase;
@@ -88,7 +99,7 @@ body::-webkit-scrollbar {
 }
 .footer__sign {
   margin: auto;
-  font-size: 0.8rem;
+  font-size: 0.5rem;
 }
 
 .hide {
@@ -96,15 +107,42 @@ body::-webkit-scrollbar {
 }
 
 .show {
-  display: flex !important;
+  display: block !important;
 }
 
 .header {
   flex-direction: column;
 }
 
-.results__container {
-  padding: 1rem;
+@-webkit-keyframes blink {
+  from {
+    background-color: #e5e5e5;
+  }
+  50% {
+    background-color: aqua;
+  }
+  to {
+    background-color: #e5e5e5;
+  }
+}
+
+@keyframes blink {
+  from {
+    background-color: #e5e5e5;
+  }
+  50% {
+    background-color: aqua;
+  }
+  to {
+    background-color: #e5e5e5;
+  }
+}
+.results__title {
+  margin: 1.5rem 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
+  text-align: center;
 }
 @media (min-width: 768px) {
   .results__container {
@@ -114,7 +152,8 @@ body::-webkit-scrollbar {
 .results__column {
   border: 0.015625rem solid #2e2e2e;
   background-color: #ffffff;
-  padding-bottom: 1rem;
+  margin: 0 1rem 1rem;
+  padding-bottom: 0.5rem;
 }
 @media (min-width: 768px) {
   .results__column {
@@ -122,13 +161,15 @@ body::-webkit-scrollbar {
   }
 }
 .results__column-title {
-  margin: 0;
-  padding: 2rem;
   margin-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
+  padding: 2rem;
   text-align: center;
   color: #ffffff;
   border-bottom: 0.015625rem solid #2e2e2e;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 .results__column-title--correct {
   background-color: #6cbc3d;
@@ -138,10 +179,12 @@ body::-webkit-scrollbar {
 }
 .results__row {
   display: flex;
+  justify-content: space-evenly;
   max-height: 4rem;
   padding: 1rem;
   align-items: center;
   background-color: #ffffff;
+  font-size: 0.7rem;
 }
 .results__row:hover {
   cursor: pointer;
@@ -149,53 +192,66 @@ body::-webkit-scrollbar {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px -4px 4px rgba(0, 0, 0, 0.3);
 }
 .results__flag {
-  width: 20%;
+  width: 30%;
   max-height: 4rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
 }
 .results__country {
-  margin-left: 1rem;
-  width: 40%;
-  color: #2e2e2e;
+  padding-right: 0.5rem;
+  margin-right: auto;
 }
 .results__incorrect-country {
+  padding-right: 0.5rem;
+  text-align: right;
   text-decoration: line-through;
-  margin-left: 1rem;
   color: #e2482d;
 }
 
 .scoreboard {
-  width: 100%;
   margin-bottom: 1rem;
+  margin: 0 auto;
 }
 .scoreboard__title {
+  margin: 1.5rem 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
   color: #2e2e2e;
   text-align: center;
   margin: 1.5rem 0;
 }
 .scoreboard__difficulty {
-  display: flex;
-  gap: 1rem;
+  font-family: "ArcadeInterlaced";
   padding: 0 1rem;
 }
-.scoreboard__difficulty-title {
+.scoreboard__table-header {
   margin-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
+  display: flex;
+  justify-content: space-between;
 }
 .scoreboard__row {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
   margin-top: 0.3rem;
 }
-.scoreboard__name {
-  font-weight: bold;
+.scoreboard__rank {
+  font-size: 0.8rem;
+  text-align: left;
+  width: 22%;
 }
 .scoreboard__score {
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #6cbc3d;
-  border-radius: 20px;
-  padding: 0 0.3rem;
-  font-family: "Courier New", Courier, monospace;
+  font-size: 1rem;
+  text-align: right;
+  width: 33%;
+}
+.scoreboard__name {
+  text-align: right;
+  width: 44%;
+}
+.scoreboard__current-score {
+  background-color: #e5e5e5;
+  -webkit-animation: blink 1500ms infinite ease-in;
+          animation: blink 1500ms infinite ease-in;
 }/*# sourceMappingURL=results.css.map */
