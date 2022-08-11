@@ -1,4 +1,4 @@
-import { createPageElement } from "../../utils/utils.js";
+import { createPageElement } from "../../scripts/utils.js";
 
 
 async function buildResults() {

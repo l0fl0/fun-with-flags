@@ -65,8 +65,11 @@ body::-webkit-scrollbar {
   width: 3rem;
 }
 .header__title {
+  margin: 1.5rem 0;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
   text-align: center;
-  font-size: 2.5rem;
   color: #ffffff;
   margin-right: 1rem;
 }
@@ -116,6 +119,7 @@ body {
 
 .header {
   height: 20vh;
+  justify-content: center;
 }
 
 main {
@@ -134,7 +138,7 @@ main {
 }
 .registration-form__heading {
   margin: 1.5rem 0;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   color: #2e2e2e;
 }

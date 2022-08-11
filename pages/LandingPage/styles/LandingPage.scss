@@ -5,8 +5,10 @@
 body {
 	max-height: 100vh;
 }
+
 .header {
 	height: 20vh;
+	justify-content: center;
 }
 
 main {
@@ -27,7 +29,7 @@ main {
 	}
 
 	&__heading {
-		@include heading;
+		@include sub-heading;
 	}
 
 	&__sub-heading {
@@ -114,7 +116,7 @@ main {
 	}
 
 	&__submit-title {
-		@include title;
+		@include heading;
 		font-weight: bold;
 		color: $font-white;
 	}
