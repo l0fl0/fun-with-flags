@@ -17,9 +17,6 @@ function buildUserInfo(user) {
   const username = document.querySelector(".user-info__username")
   username.innerText = `${user.name}`
 
-  const countdownTimer = document.querySelector(".user-info__countdown");
-  countdownTimer.innerText = `Countdown: ${timeLimit / 1000}`;
-
   startCountdown(timeLimit);
 };
 
@@ -118,18 +115,18 @@ function checkAnswer() {
 
     // More points rewarded for faster response times
     if (guessOptions.timeRemaining >= 5000) {
-      user.score += 60;
-      resultsObject.points = 60;
+      user.score += 29;
+      resultsObject.points = 29;
     }
 
     if (guessOptions.timeRemaining === 4000 || guessOptions.timeRemaining === 3000) {
-      user.score += 40;
-      resultsObject.points = 40;
+      user.score += 26;
+      resultsObject.points = 26;
     }
 
     if (guessOptions.timeRemaining <= 2000) {
-      user.score += 20;
-      resultsObject.points = 20;
+      user.score += 23;
+      resultsObject.points = 23;
     }
 
     user.guessResults.correctFlags.push(resultsObject);
@@ -159,8 +156,6 @@ const startCountdown = async (timeLimit) => {
   const timer = setInterval(() => {
     countdown = countdown - 1000;
 
-    document.getElementById("user-info__countdown").innerText = `Countdown: ${countdown / 1000}`;
-
     if (countdown === 0) {
       clearInterval(timer);
       checkAnswer();
@@ -179,6 +174,7 @@ function gameBuild(results, string) {
     document.querySelector(".fwf__gameover-reason").innerText = string;
 
     new Audio("/assets/audio/themusicalnomad__negative-beeps.wav").play();
+
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(user));
@@ -186,20 +182,33 @@ function gameBuild(results, string) {
     return;
   };
 
+
+
   // Choice confirmation animation
-  if (results === "correct") {
-    document.body.style.backgroundColor = "green";
-    new Audio("/assets/audio/troym1__correct.mp3").play();
+  if (guessOptions.timeRemaining) {
+    document.querySelector(".fwf__country-option--active").classList.add(".fwf__country-option--incorrect");
   }
+
+
+  if (results === "correct") {
+    document.querySelector(".fwf__country-option--active").style.backgroundColor = "#6cbc3d";
+
+    new Audio("/assets/audio/bertrof__game-sound-correct.wav").play();
+
+
+  }
+
   if (results === "incorrect") {
-    document.body.style.backgroundColor = "red";
-    new Audio("/assets/audio/troym1__wrong.mp3").play();
+    if (guessOptions.timeRemaining) {
+      document.querySelector(".fwf__country-option--active").style.backgroundColor = "#e2482d";
+    }
+
+    new Audio("/assets/audio/bertrof__game-sound-incorrect-with-delay.wav").play();
   }
 
 
   // timeout for animation between questions
   setTimeout(() => {
-    document.body.style.backgroundColor = "#e5e5e5";
     // reset game options
     guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
 
