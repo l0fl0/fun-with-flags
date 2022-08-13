@@ -1,5 +1,5 @@
 let user = {
-  // id: uuid(),
+  id: null,
   name: "",
   score: 0,
   lives: 2,
@@ -35,14 +35,13 @@ function activeLimit(event) {
 
 
 
-
-
 // Form submit handler
 function handleSubmit(event) {
   event.preventDefault();
   new Audio('/assets/audio/fartbiscuit1700__8-bit-arcade-video-game-start-sound-effect-gun-reload-and-jump.wav').play();
 
   // Store registration information
+  user.id = crypto.randomUUID();
   user.name = event.target.username.value;
   user.difficulty = event.target.difficulty.value;
   user.questionLimit = event.target.questionLimit.value;
