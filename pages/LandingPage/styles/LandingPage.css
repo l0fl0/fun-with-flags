@@ -40,6 +40,12 @@ a {
   font-style: normal;
   font-weight: normal;
 }
+@font-face {
+  font-family: "AvenirNext";
+  src: url(/assets/fonts/AvenirNext-Regular.ttf) format("truetype"), url(/assets/fonts/AvenirNext-Regular.woff) format("woff"), url(/assets/fonts/AvenirNext-Regular.woff2) format("woff2"), url(/assets/fonts/AvenirNext-Regular.svg) format("svg");
+  font-style: normal;
+  font-weight: normal;
+}
 body {
   font-family: "Arcade", "Courier New", Courier, monospace;
   font-size: 0.8rem;

@@ -1,4 +1,5 @@
 @use "./variables" as *;
+@use "./typography" as *;
 
 // Media queries
 @mixin tablet-breakpoint {
@@ -48,4 +49,8 @@
 	font-size: 1rem;
 	text-transform: uppercase;
 	color: $font-primary-color;
+}
+
+@mixin clear-text {
+	font-family: "AvenirNext", Arial, Helvetica, sans-serif;
 }

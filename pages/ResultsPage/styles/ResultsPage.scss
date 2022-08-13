@@ -59,7 +59,7 @@
 	}
 
 	&__row {
-		font-family: Arial, Helvetica, sans-serif;
+		@include clear-text;
 		display: flex;
 		justify-content: space-evenly;
 		max-height: 4rem;
