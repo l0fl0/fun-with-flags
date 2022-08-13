@@ -30,9 +30,17 @@ function activeLimit(event) {
   event.target.labels[0].classList.add("registration-form__limit-label--active");
 }
 
+
+
+
+
+
+
+
 // Form submit handler
 function handleSubmit(event) {
   event.preventDefault();
+  new Audio('/assets/audio/fartbiscuit1700__8-bit-arcade-video-game-start-sound-effect-gun-reload-and-jump.wav').play();
 
   // Store registration information
   user.name = event.target.username.value;
@@ -41,8 +49,10 @@ function handleSubmit(event) {
 
   localStorage.setItem("user", JSON.stringify(user));
 
-  //open game
-  window.location.assign("./pages/FWFGame/index.html");
+  setTimeout(() => {
+    //open game
+    window.location.assign("./pages/FWFGame/index.html");
+  }, 700)
 };
 
 let usernameInput = document.getElementById("username");

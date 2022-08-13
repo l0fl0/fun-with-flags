@@ -80,5 +80,8 @@ async function displayScoreboard() {
   })
 }
 
+
+new Audio("/assets/audio/stavsounds__correct3.wav").play();
+
 buildResults();
 displayScoreboard();

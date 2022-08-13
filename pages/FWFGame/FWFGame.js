@@ -175,9 +175,10 @@ function gameBuild(results, string) {
   if (results === "results") {
     document.querySelector(".fwf__display").classList.add("hide");
     document.querySelector(".user-info").classList.add("hide");
-
     document.querySelector(".fwf__gameover").classList.add("show");
-    document.querySelector(".fwf__gameover-reason").innerText = string
+    document.querySelector(".fwf__gameover-reason").innerText = string;
+
+    new Audio("/assets/audio/themusicalnomad__negative-beeps.wav").play();
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(user));
@@ -186,9 +187,14 @@ function gameBuild(results, string) {
   };
 
   // Choice confirmation animation
-  if (results === "correct") document.body.style.backgroundColor = "green";
-  if (results === "incorrect") document.body.style.backgroundColor = "red";
-
+  if (results === "correct") {
+    document.body.style.backgroundColor = "green";
+    new Audio("/assets/audio/troym1__correct.mp3").play();
+  }
+  if (results === "incorrect") {
+    document.body.style.backgroundColor = "red";
+    new Audio("/assets/audio/troym1__wrong.mp3").play();
+  }
 
 
   // timeout for animation between questions
@@ -234,7 +240,6 @@ const startGame = async () => {
       buildGameContainer(showCountryFlag(apiResponseWithoutStates));
     })
 }
-
 
 
 
