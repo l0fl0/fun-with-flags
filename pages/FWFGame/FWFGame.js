@@ -102,25 +102,44 @@ const showCountryFlag = (countries) => {
 };
 
 function checkAnswer() {
+  let userScore = user.score;
+  let resultsObject = { choice: guessOptions.choice, correctChoice: guessOptions.correctChoice, points: 0 };
+  console.log(user.score)
+  console.log(userScore)
 
   if (guessOptions.choice === guessOptions.correctChoice) {
     if (user.difficulty === "standard") {
       // unlimited lives as long as you dont get two questions incorrect conssecutively
       if (user.lives === 1) user.lives = 2;
     }
-    // More points rewarded for faster response times
-    guessOptions.timeRemaining >= 5000 ? user.score += 60 :
-      guessOptions.timeRemaining === 4000 ? user.score += 40 :
-        guessOptions.timeRemaining === 3000 ? user.score += 30 : guessOptions.timeRemaining === 2000 ? user.score += 20 : user.score += 10;
 
-    user.guessResults.correctFlags.push({ choice: guessOptions.choice, correctChoice: guessOptions.correctChoice });
+    // More points rewarded for faster response times
+    if (guessOptions.timeRemaining >= 5000) {
+      user.score += 60;
+      resultsObject.points = 60;
+    }
+
+    if (guessOptions.timeRemaining === 4000 || guessOptions.timeRemaining === 3000) {
+      user.score += 40;
+      resultsObject.points = 40;
+    }
+
+    if (guessOptions.timeRemaining <= 2000) {
+      user.score += 20;
+      resultsObject.points = 20;
+    }
+
+    user.guessResults.correctFlags.push(resultsObject);
     return gameBuild("correct");
   }
-  // if user makes an incorrect guess then give 5 points
-  if (guessOptions.timeRemaining) user.score += 5;
+  // if user makes an incorrect guess then give 10 points
+  if (guessOptions.timeRemaining) {
+    user.score += 5;
+    resultsObject.points = 5;
+  };
 
   user.lives--;
-  user.guessResults.incorrectFlags.push({ choice: guessOptions.choice, correctChoice: guessOptions.correctChoice });
+  user.guessResults.incorrectFlags.push(resultsObject);
 
 
   if (user.lives === 0) return gameBuild("results", "Ran out of lives");
