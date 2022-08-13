@@ -45,20 +45,21 @@ function buildGameContainer(data) {
     options.appendChild(countryOptionBtn);
   });
 
-  function handleOptionSelect(event) {
-    event.preventDefault();
-    guessOptions.timeRemaining = countdown;
-
-    //remove active choice css
-    if (document.querySelector(".fwf__country-option--active")) {
-      document.querySelector(".fwf__country-option--active").classList.remove("fwf__country-option--active")
-    }
-    //add active choice css
-    event.target.classList.add("fwf__country-option--active");
-    //kep track of answer choice
-    guessOptions.choice = event.target.attributes.cc.value;
-  };
 }
+
+function handleOptionSelect(event) {
+  event.preventDefault();
+  guessOptions.timeRemaining = countdown;
+
+  //remove active choice css
+  if (document.querySelector(".fwf__country-option--active")) {
+    document.querySelector(".fwf__country-option--active").classList.remove("fwf__country-option--active")
+  }
+  //add active choice css
+  event.target.classList.add("fwf__country-option--active");
+  //kep track of answer choice
+  guessOptions.choice = event.target.attributes.cc.value;
+};
 
 const showCountryFlag = (countries) => {
   let countryKeys = Object.keys(countries);
@@ -102,10 +103,12 @@ const showCountryFlag = (countries) => {
 };
 
 function checkAnswer() {
-  let userScore = user.score;
+  let options = document.querySelectorAll(".fwf__country-option");
+  for (let option of options) {
+    option.removeEventListener("click", handleOptionSelect);
+  }
+
   let resultsObject = { choice: guessOptions.choice, correctChoice: guessOptions.correctChoice, points: 0 };
-  console.log(user.score)
-  console.log(userScore)
 
   if (guessOptions.choice === guessOptions.correctChoice) {
     if (user.difficulty === "standard") {
@@ -186,12 +189,14 @@ function gameBuild(results, string) {
   if (results === "correct") document.body.style.backgroundColor = "green";
   if (results === "incorrect") document.body.style.backgroundColor = "red";
 
-  // reset game options
-  guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
+
 
   // timeout for animation between questions
   setTimeout(() => {
     document.body.style.backgroundColor = "#e5e5e5";
+    // reset game options
+    guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
+
     buildUserInfo(user);
     buildGameContainer(showCountryFlag(apiResponseWithoutStates));
   }, 1000);
