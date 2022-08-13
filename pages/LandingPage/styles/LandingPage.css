@@ -89,13 +89,17 @@ body::-webkit-scrollbar {
   border-radius: 0.625rem;
   margin: 1rem 0;
   font-size: 1rem;
-  background-color: #ffdf6c;
-  color: #2e2e2e;
   text-transform: uppercase;
 }
-.header__play-again:hover {
+.header__play-again:active {
   background-color: #ffdf6c;
   color: #2e2e2e;
+}
+@media (min-width: 1280px) {
+  .header__play-again:hover {
+    background-color: #ffdf6c;
+    color: #2e2e2e;
+  }
 }
 
 .footer {
@@ -191,11 +195,9 @@ main {
   background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
   background-position: top center;
   background-repeat: no-repeat;
+  background-size: cover;
   font-size: 0;
-  background-size: 30rem;
   position: absolute;
-  padding: 0;
-  border: 0;
   width: 100%;
   height: 100%;
   margin: auto;
@@ -239,10 +241,17 @@ main {
   border: none;
   border-radius: 0.625rem;
   margin: 1rem 0;
-  width: 8rem;
+  font-size: 1.5rem;
+  padding: 1rem;
   margin: 0 auto;
 }
-.registration-form__submit:hover {
+.registration-form__submit:active {
   background-color: #ffdf6c;
   color: #2e2e2e;
+}
+@media (min-width: 1280px) {
+  .registration-form__submit:hover {
+    background-color: #ffdf6c;
+    color: #2e2e2e;
+  }
 }/*# sourceMappingURL=LandingPage.css.map */

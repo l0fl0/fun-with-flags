@@ -89,13 +89,17 @@ body::-webkit-scrollbar {
   border-radius: 0.625rem;
   margin: 1rem 0;
   font-size: 1rem;
-  background-color: #ffdf6c;
-  color: #2e2e2e;
   text-transform: uppercase;
 }
-.header__play-again:hover {
+.header__play-again:active {
   background-color: #ffdf6c;
   color: #2e2e2e;
+}
+@media (min-width: 1280px) {
+  .header__play-again:hover {
+    background-color: #ffdf6c;
+    color: #2e2e2e;
+  }
 }
 
 .footer {
@@ -121,6 +125,12 @@ body::-webkit-scrollbar {
 
 .header {
   flex-direction: column;
+}
+.header__play-again {
+  padding: 1rem;
+  font-size: 1.3rem;
+  background-color: #6cbc3d;
+  color: #ffffff;
 }
 
 @-webkit-keyframes blink {

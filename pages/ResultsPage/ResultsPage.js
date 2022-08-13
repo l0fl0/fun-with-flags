@@ -86,8 +86,8 @@ async function displayScoreboard() {
 }
 //play again sound
 document.getElementById("playAgain").addEventListener("click", () => {
-  new Audio("/assets/audio/bertrof__game-sound-correct.wav").play();
-  setTimeout(() => (window.location = "../../index.html"), 500)
+  new Audio("/assets/audio/stavsounds__correct3.wav").play();
+  setTimeout(() => (window.location.assign("/index.html")), 500)
 })
 
 // on loading screen 

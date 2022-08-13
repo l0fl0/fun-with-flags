@@ -40,8 +40,6 @@ body {
 	&__play-again {
 		@include btn;
 		font-size: 1rem;
-		background-color: $highlight-color;
-		color: $font-primary-color;
 		text-transform: uppercase;
 	}
 }
