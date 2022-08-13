@@ -84,11 +84,6 @@ body {
 		display: block;
 		width: 100%;
 
-		&:hover {
-			background-color: $font-primary-color;
-			color: $font-white;
-		}
-
 		@include tablet-breakpoint {
 			width: 45%;
 			font-size: 1rem;
@@ -102,6 +97,14 @@ body {
 				color: $font-primary-color;
 				background-color: $highlight-color;
 			}
+		}
+
+		&--incorrect {
+			background-color: $error-color !important;
+		}
+
+		&--correct {
+			background-color: $success-color !important;
 		}
 	}
 

@@ -82,11 +82,9 @@ main {
 		background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
 		background-position: top center;
 		background-repeat: no-repeat;
+		background-size: cover;
 		font-size: 0;
-		background-size: 30rem;
 		position: absolute;
-		padding: 0;
-		border: 0;
 		width: 100%;
 		height: 100%;
 		margin: auto;
@@ -120,9 +118,11 @@ main {
 		font-weight: bold;
 		color: $font-white;
 	}
+
 	&__submit {
 		@include btn;
-		width: 8rem;
+		font-size: 1.5rem;
+		padding: 1rem;
 		margin: 0 auto;
 	}
 }

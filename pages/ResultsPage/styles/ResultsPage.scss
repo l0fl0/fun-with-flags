@@ -4,7 +4,14 @@
 
 .header {
 	flex-direction: column;
+	&__play-again {
+		padding: 1rem;
+		font-size: 1.3rem;
+		background-color: $success-color;
+		color: $font-white;
+	}
 }
+
 @keyframes blink {
 	from {
 		background-color: $background-secondary-color;

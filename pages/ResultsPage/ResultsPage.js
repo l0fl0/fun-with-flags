@@ -1,16 +1,16 @@
 import { createPageElement } from "../../scripts/utils.js";
 
+let currentUser = await JSON.parse(localStorage.getItem("user"));
 
 async function buildResults() {
-  let user = await JSON.parse(localStorage.getItem("user"));
   let apiResponse = await JSON.parse(localStorage.getItem("apiResponse"));
 
   let results = document.querySelector(".results");
   let resultsContainer = createPageElement("div", "results__container");
   results.appendChild(resultsContainer);
 
-  for (let key in user.guessResults) {
-    if (user.guessResults[key].length === 0) {
+  for (let key in currentUser.guessResults) {
+    if (currentUser.guessResults[key].length === 0) {
       return;
     }
 
@@ -20,7 +20,7 @@ async function buildResults() {
     title.classList.add(`results__column-title--${trimKey}`);
     column.appendChild(title);
 
-    let flagArray = user.guessResults[key];
+    let flagArray = currentUser.guessResults[key];
 
     flagArray.forEach(option => {
       let rowContainer = createPageElement("a", "results__row");
@@ -68,6 +68,11 @@ async function displayScoreboard() {
 
   sortedUsers.forEach(user => {
     let row = createPageElement("div", "scoreboard__row");
+    if (user.id === currentUser.id) {
+      row.classList.add("scoreboard__current-score");
+      row.focus();
+    }
+
     let rank = createPageElement("span", "scoreboard__rank", sufixes(sortedUsers.indexOf(user) + 1));
     let name = createPageElement("span", "scoreboard__name", user.name);
     let score = createPageElement("span", "scoreboard__score", user.score ? user.score : "0");
@@ -79,6 +84,14 @@ async function displayScoreboard() {
     document.querySelector(".scoreboard__difficulty-standard").appendChild(row);
   })
 }
+//play again sound
+document.getElementById("playAgain").addEventListener("click", () => {
+  new Audio("/assets/audio/stavsounds__correct3.wav").play();
+  setTimeout(() => (window.location.assign("/index.html")), 500)
+})
+
+// on loading screen 
+new Audio("/assets/audio/stavsounds__correct3.wav").play();
 
 buildResults();
 displayScoreboard();

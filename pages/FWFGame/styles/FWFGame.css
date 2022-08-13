@@ -89,13 +89,17 @@ body::-webkit-scrollbar {
   border-radius: 0.625rem;
   margin: 1rem 0;
   font-size: 1rem;
-  background-color: #ffdf6c;
-  color: #2e2e2e;
   text-transform: uppercase;
 }
-.header__play-again:hover {
+.header__play-again:active {
   background-color: #ffdf6c;
   color: #2e2e2e;
+}
+@media (min-width: 1280px) {
+  .header__play-again:hover {
+    background-color: #ffdf6c;
+    color: #2e2e2e;
+  }
 }
 
 .footer {
@@ -206,13 +210,15 @@ body {
   display: block;
   width: 100%;
 }
-.fwf__country-option:hover {
+.fwf__country-option:active {
   background-color: #ffdf6c;
   color: #2e2e2e;
 }
-.fwf__country-option:hover {
-  background-color: #2e2e2e;
-  color: #ffffff;
+@media (min-width: 1280px) {
+  .fwf__country-option:hover {
+    background-color: #ffdf6c;
+    color: #2e2e2e;
+  }
 }
 @media (min-width: 768px) {
   .fwf__country-option {
@@ -227,6 +233,12 @@ body {
 .fwf__country-option--active:hover {
   color: #2e2e2e;
   background-color: #ffdf6c;
+}
+.fwf__country-option--incorrect {
+  background-color: #e2482d !important;
+}
+.fwf__country-option--correct {
+  background-color: #6cbc3d !important;
 }
 .fwf__gameover {
   display: none;
@@ -263,7 +275,13 @@ body {
   font-size: 1rem;
   margin: 1rem;
 }
-.fwf__results-button:hover {
+.fwf__results-button:active {
   background-color: #ffdf6c;
   color: #2e2e2e;
+}
+@media (min-width: 1280px) {
+  .fwf__results-button:hover {
+    background-color: #ffdf6c;
+    color: #2e2e2e;
+  }
 }/*# sourceMappingURL=FWFGame.css.map */
