@@ -119,151 +119,148 @@ body::-webkit-scrollbar {
   display: block !important;
 }
 
-body {
-  max-height: 100vh;
+.header {
+  flex-direction: column;
 }
 
-.user-info {
-  margin-bottom: 1rem;
-  width: 100%;
-  padding: 0 1rem;
+@-webkit-keyframes blink {
+  from {
+    background-color: #e5e5e5;
+  }
+  50% {
+    background-color: aqua;
+  }
+  to {
+    background-color: #e5e5e5;
+  }
 }
-.user-info__username {
+
+@keyframes blink {
+  from {
+    background-color: #e5e5e5;
+  }
+  50% {
+    background-color: aqua;
+  }
+  to {
+    background-color: #e5e5e5;
+  }
+}
+.results__title {
   margin: 1.5rem 0;
   font-size: 1.5rem;
   text-transform: uppercase;
   color: #2e2e2e;
   text-align: center;
-  color: #6cbc3d;
-}
-.user-info__progressbar {
-  position: relative;
-  width: 100%;
-  height: 1.5rem;
-  background-color: #ddd;
-  border-radius: 1.25rem;
-}
-.user-info__barstatus {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #6cbc3d;
-  border-radius: 1.25rem;
-  transition: background-color 500ms ease;
-}
-.user-info__barstatus--middle {
-  background-color: #ffdf6c;
-}
-.user-info__barstatus--end {
-  background-color: #e2482d;
-}
-
-.fwf__title {
-  margin: 1.5rem 0;
-  font-size: 2rem;
-  text-transform: uppercase;
-  color: #2e2e2e;
-  text-align: center;
-}
-.fwf__display {
-  min-height: 60vh;
-  padding: 0 1rem;
 }
 @media (min-width: 768px) {
-  .fwf__display {
-    justify-content: space-evenly;
-  }
-}
-.fwf__flag-container {
-  margin: 0 auto;
-  width: 100%;
-  height: 10rem;
-}
-@media (min-width: 768px) {
-  .fwf__flag-container {
-    width: 70%;
-  }
-}
-@media (min-width: 768px) {
-  .fwf__countries-container {
+  .results__container {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
   }
 }
-.fwf__country-option {
-  font-family: "Arcade";
-  font-size: 0.6rem;
-  background-color: #2e2e2e;
-  color: #ffffff;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.625rem;
-  margin: 1rem 0;
-  font-family: "AvenirNext", Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  padding: 1rem;
-  display: block;
-  width: 100%;
-}
-.fwf__country-option:hover {
-  background-color: #ffdf6c;
-  color: #2e2e2e;
-}
-.fwf__country-option:hover {
-  background-color: #2e2e2e;
-  color: #ffffff;
+.results__column {
+  border: 0.015625rem solid #2e2e2e;
+  background-color: #ffffff;
+  margin: 0 1rem 1rem;
+  padding-bottom: 0.5rem;
 }
 @media (min-width: 768px) {
-  .fwf__country-option {
-    width: 45%;
-    font-size: 1rem;
+  .results__column {
+    width: 50%;
   }
 }
-.fwf__country-option--active {
-  color: #2e2e2e;
-  background-color: #ffdf6c;
-}
-.fwf__country-option--active:hover {
-  color: #2e2e2e;
-  background-color: #ffdf6c;
-}
-.fwf__gameover {
-  display: none;
-  text-align: center;
-  flex-direction: column;
-}
-.fwf__gameover-heading {
-  margin: 1.5rem 0;
-  font-size: 2rem;
-  text-transform: uppercase;
-  color: #2e2e2e;
-  color: #e2482d;
-}
-.fwf__gameover-reason {
+.results__column-title {
   margin-bottom: 1rem;
   font-size: 1rem;
   text-transform: uppercase;
   color: #2e2e2e;
-  margin-top: -1rem;
-}
-.fwf__gameover-img {
-  height: 40vh;
-  margin: 1rem;
-}
-.fwf__results-button {
-  font-family: "Arcade";
-  font-size: 0.6rem;
-  background-color: #2e2e2e;
+  padding: 2rem;
+  text-align: center;
   color: #ffffff;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.625rem;
-  margin: 1rem 0;
-  font-size: 1rem;
-  margin: 1rem;
+  border-bottom: 0.015625rem solid #2e2e2e;
+  text-transform: uppercase;
 }
-.fwf__results-button:hover {
-  background-color: #ffdf6c;
+.results__column-title--correct {
+  background-color: #6cbc3d;
+}
+.results__column-title--incorrect {
+  background-color: #e2482d;
+}
+.results__row {
+  font-family: "AvenirNext", Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: space-evenly;
+  max-height: 4rem;
+  padding: 1rem;
+  align-items: center;
+  background-color: #ffffff;
+}
+.results__row:hover {
+  cursor: pointer;
+  transform: scaleY(1.2);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px -4px 4px rgba(0, 0, 0, 0.3);
+}
+.results__flag {
+  width: 30%;
+  max-height: 4rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+}
+.results__country {
+  padding-right: 0.5rem;
+  margin-right: auto;
+}
+.results__incorrect-country {
+  padding-right: 0.5rem;
+  text-align: right;
+  text-decoration: line-through;
+  color: #e2482d;
+}
+
+.scoreboard {
+  margin-bottom: 1rem;
+  margin: 0 auto;
+}
+.scoreboard__title {
+  margin: 1.5rem 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
   color: #2e2e2e;
-}/*# sourceMappingURL=FWFGame.css.map */
+  color: #2e2e2e;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+.scoreboard__difficulty {
+  font-family: "ArcadeInterlaced";
+  padding: 0 1rem;
+}
+.scoreboard__table-header {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #2e2e2e;
+  display: flex;
+  justify-content: space-between;
+}
+.scoreboard__row {
+  display: flex;
+  margin-top: 0.3rem;
+}
+.scoreboard__rank {
+  font-size: 0.8rem;
+  text-align: left;
+  width: 22%;
+}
+.scoreboard__score {
+  font-size: 1rem;
+  text-align: right;
+  width: 33%;
+}
+.scoreboard__name {
+  text-align: right;
+  width: 44%;
+}
+.scoreboard__current-score {
+  background-color: #e5e5e5;
+  -webkit-animation: blink 1500ms infinite ease-in;
+          animation: blink 1500ms infinite ease-in;
+}/*# sourceMappingURL=ResultsPage.css.map */

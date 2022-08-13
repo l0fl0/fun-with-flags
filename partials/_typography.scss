@@ -1,0 +1,29 @@
+@font-face {
+	font-family: "ArcadeInterlaced";
+	src: url(/assets/fonts/ARCADE_I.TTF) format("truetype"),
+		url(/assets/fonts/ARCADE_I.woff) format("woff"),
+		url(/assets/fonts/ARCADE_I.woff2) format("woff2"),
+		url(/assets/fonts/ARCADE_I.svg) format("svg");
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: "Arcade";
+	src: url(/assets/fonts/ARCADE_N.TTF) format("truetype"),
+		url(/assets/fonts/ARCADE_N.woff) format("woff"),
+		url(/assets/fonts/ARCADE_N.woff2) format("woff2"),
+		url(/assets/fonts/ARCADE_N.svg) format("svg");
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: "AvenirNext";
+	src: url(/assets/fonts/AvenirNext-Regular.ttf) format("truetype"),
+		url(/assets/fonts/AvenirNext-Regular.woff) format("woff"),
+		url(/assets/fonts/AvenirNext-Regular.woff2) format("woff2"),
+		url(/assets/fonts/AvenirNext-Regular.svg) format("svg");
+	font-style: normal;
+	font-weight: normal;
+}

@@ -32,40 +32,56 @@
   <header class="header">
     <h1 class="header__title">Fun with Flags</h1>
     <div class="header__logo">
-      <img src="/assets/icons/question_384.png" alt="sheldon cooper presents">
+      <img src="/assets/icons/question_384.png" alt="fwf logo">
     </div>
   </header>
 
   <main>
-    <!-- <section class="how-to-play">
-      <h2 class="how-to-play__title">Click to view how to play</h2>
-       <ul>
-        <li class="how-to-play__rule">Correctly identify the flag within the given time</li>
-        <li class="how-to-play__rule">Answer Incorrectly and you will loose a life</li>
-        <li class="how-to-play__rule">Run out of lives and it's game over</li>
-      </ul> 
-    </section> -->
+
 
     <form class="registration-form">
       <section class="registration-form__content">
-        <h2 class="registration-form__title">Game Options</h2>
+        <h2 class="registration-form__heading">Game Options</h2>
+        <h3 class="registration-form__sub-heading">Enter a Name</h3>
         <input class="registration-form__username" maxlength="10" type="text" name="username" id="username"
-          placeholder="Enter a username">
-        <h3 class="registration-form__subtitle">Please select a Difficulty</h3>
+          placeholder="Username" autocomplete="off">
+
         <ul class="registration-form__game-options">
+          <h3 class="registration-form__sub-heading">Difficulty</h3>
           <li>
-            <input class="registration-form__game-option " type="radio" name="difficulty" id="difficulty0"
+            <input class="registration-form__difficulty-option " type="radio" name="difficulty" id="difficulty0"
               value="standard" checked>
-            <label for="difficulty0" class="registration-form__label">Standard</label>
+            <label for="difficulty0" class="registration-form__label registration-form__label--active">Standard</label>
           </li>
           <li>
-            <input class="registration-form__game-option" type="radio" name="difficulty" id="difficulty1" value="hard">
+            <input class="registration-form__difficulty-option" type="radio" name="difficulty" id="difficulty1"
+              value="hard">
             <label for="difficulty1" class="registration-form__label">Hard</label>
           </li>
+        </ul>
+
+        <ul class="registration-form__game-options">
+          <h3 class="registration-form__sub-heading">Question Limit</h3>
           <li>
-            <input class="registration-form__game-option" type="radio" name="difficulty" id="difficulty2"
-              value="sheldon">
-            <label for="difficulty2" class="registration-form__label">Sheldon</label>
+            <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit30"
+              value="30" checked>
+            <label for="questionLimit30"
+              class="registration-form__limit-label registration-form__limit-label--active">30</label>
+          </li>
+          <li>
+            <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit60"
+              value="60">
+            <label for="questionLimit60" class="registration-form__limit-label">60</label>
+          </li>
+          <li>
+            <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit90"
+              value="90">
+            <label for="questionLimit90" class="registration-form__limit-label">90</label>
+          </li>
+          <li>
+            <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit256"
+              value="256">
+            <label for="questionLimit256" class="registration-form__limit-label">256</label>
           </li>
         </ul>
       </section>

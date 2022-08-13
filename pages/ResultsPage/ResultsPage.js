@@ -1,4 +1,4 @@
-import { createPageElement } from "../../utils/utils.js";
+import { createPageElement } from "../../scripts/utils.js";
 
 
 async function buildResults() {
@@ -21,7 +21,7 @@ async function buildResults() {
     column.appendChild(title);
 
     let flagArray = user.guessResults[key];
-    console.log(flagArray)
+
     flagArray.forEach(option => {
       let rowContainer = createPageElement("a", "results__row");
       //   Flag url
@@ -39,9 +39,10 @@ async function buildResults() {
       rowContainer.href = `https://en.wikipedia.org/wiki/${countryName.innerText}`;
       rowContainer.target = "_blank";
       rowContainer.title = apiResponse[option.correctChoice];
-      rowContainer.appendChild(countryName)
-      rowContainer.appendChild(flagEl);
+      rowContainer.appendChild(countryName);
       if (trimKey === "incorrect") rowContainer.appendChild(incorrectCountryName)
+      rowContainer.appendChild(flagEl);
+
 
       column.appendChild(rowContainer
       );
@@ -54,14 +55,28 @@ async function buildResults() {
 async function displayScoreboard() {
   let users = await JSON.parse(localStorage.getItem("users"));
   let sortedUsers = await users.sort((a, b) => b.score - a.score);
+  localStorage.setItem("users", JSON.stringify(sortedUsers))
+
+  let sufixes = (number) => {
+    if (number > 10) return number;
+    if (number === 1) return number + "st";
+    if (number === 2) return number + "nd";
+    if (number === 3) return number + "rd";
+    return number + "th";
+  };
+
+
   sortedUsers.forEach(user => {
     let row = createPageElement("div", "scoreboard__row");
+    let rank = createPageElement("span", "scoreboard__rank", sufixes(sortedUsers.indexOf(user) + 1));
     let name = createPageElement("span", "scoreboard__name", user.name);
     let score = createPageElement("span", "scoreboard__score", user.score ? user.score : "0");
 
-    row.appendChild(name);
+    row.appendChild(rank);
     row.appendChild(score);
-    document.querySelector(`.scoreboard__${user.difficulty}-difficulty`).appendChild(row);
+    row.appendChild(name);
+
+    document.querySelector(".scoreboard__difficulty-standard").appendChild(row);
   })
 }
 

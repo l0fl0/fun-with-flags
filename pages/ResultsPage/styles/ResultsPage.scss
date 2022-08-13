@@ -5,40 +5,63 @@
 .header {
 	flex-direction: column;
 }
+@keyframes blink {
+	from {
+		background-color: $background-secondary-color;
+	}
+
+	50% {
+		background-color: aqua;
+	}
+
+	to {
+		background-color: $background-secondary-color;
+	}
+}
 
 .results {
+	&__title {
+		@include sub-heading;
+		text-align: center;
+	}
+
 	&__container {
-		padding: 1rem;
 		@include tablet-breakpoint {
 			display: flex;
 		}
 	}
+
 	&__column {
 		border: 0.015625rem solid $font-primary-color;
 		background-color: $font-white;
-		padding-bottom: 1rem;
+		margin: 0 1rem 1rem;
+		padding-bottom: 0.5rem;
 		@include tablet-breakpoint {
 			width: 50%;
 		}
 	}
+
 	&__column-title {
-		margin: 0;
+		@include table-heading;
 		padding: 2rem;
-		margin-bottom: 1rem;
 		text-align: center;
 		color: $font-white;
 		border-bottom: 0.015625rem solid $font-primary-color;
-		text-transform: capitalize;
+		text-transform: uppercase;
 
 		&--correct {
 			background-color: $success-color;
 		}
+
 		&--incorrect {
 			background-color: $error-color;
 		}
 	}
+
 	&__row {
+		@include clear-text;
 		display: flex;
+		justify-content: space-evenly;
 		max-height: 4rem;
 		padding: 1rem;
 		align-items: center;
@@ -53,63 +76,68 @@
 	}
 
 	&__flag {
-		width: 20%;
+		width: 30%;
 		max-height: 4rem;
-
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
 	}
 
 	&__country {
-		margin-left: 1rem;
-		width: 40%;
-		color: $font-primary-color;
+		padding-right: 0.5rem;
+		margin-right: auto;
 	}
 
 	&__incorrect-country {
+		padding-right: 0.5rem;
+		text-align: right;
 		text-decoration: line-through;
-		margin-left: 1rem;
 		color: $error-color;
 	}
 }
 
 .scoreboard {
-	width: 100%;
 	margin-bottom: 1rem;
+	margin: 0 auto;
 
 	&__title {
+		@include sub-heading;
 		color: $font-primary-color;
 		text-align: center;
 		margin: 1.5rem 0;
 	}
 
 	&__difficulty {
-		display: flex;
-		gap: 1rem;
+		font-family: "ArcadeInterlaced";
 		padding: 0 1rem;
+	}
 
-		&-title {
-			margin-bottom: 1rem;
-		}
+	&__table-header {
+		@include table-heading;
+		display: flex;
+		justify-content: space-between;
 	}
 
 	&__row {
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		text-align: center;
 		margin-top: 0.3rem;
 	}
 
+	&__rank {
+		font-size: 0.8rem;
+		text-align: left;
+		width: 22%;
+	}
+	&__score {
+		font-size: 1rem;
+		text-align: right;
+		width: 33%;
+	}
 	&__name {
-		font-weight: bold;
+		text-align: right;
+		width: 44%;
 	}
 
-	&__score {
-		font-weight: bold;
-		color: $font-white;
-		background-color: $success-color;
-		border-radius: 20px;
-		padding: 0 0.3rem;
-		font-family: "Courier New", Courier, monospace;
+	&__current-score {
+		background-color: $background-secondary-color;
+		animation: blink 1500ms infinite ease-in;
 	}
 }
