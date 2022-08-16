@@ -58,13 +58,18 @@ body {
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
+@media (min-width: 768px) {
+  body {
+    font-size: 1rem;
+  }
+}
 
 .header {
   background-color: #2e2e2e;
   color: #7c7c7c;
-  padding: 1rem;
   display: flex;
   align-items: center;
+  padding: 1rem;
 }
 .header__logo {
   font-size: 0;
@@ -79,15 +84,20 @@ body::-webkit-scrollbar {
   color: #ffffff;
   margin-right: 1rem;
 }
+@media (min-width: 768px) {
+  .header__title {
+    font-size: 2.5rem;
+  }
+}
 .header__play-again {
   font-family: "Arcade";
-  font-size: 0.6rem;
   background-color: #2e2e2e;
+  font-size: 1rem;
   color: #ffffff;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.625rem;
-  margin: 1rem 0;
+  text-align: center;
   font-size: 1rem;
   text-transform: uppercase;
 }
@@ -140,19 +150,31 @@ body {
   text-align: center;
   color: #6cbc3d;
 }
+@media (min-width: 768px) {
+  .user-info__username {
+    font-size: 2rem;
+  }
+}
 .user-info__progressbar {
   position: relative;
   width: 100%;
-  height: 1.5rem;
+  height: 2rem;
+  margin: 0 auto;
   background-color: #ddd;
-  border-radius: 1.25rem;
+  border-radius: 0.625rem;
+}
+@media (min-width: 768px) {
+  .user-info__progressbar {
+    height: 3rem;
+    width: 80%;
+  }
 }
 .user-info__barstatus {
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: #6cbc3d;
-  border-radius: 1.25rem;
+  border-radius: 0.625rem;
   transition: background-color 500ms ease;
 }
 .user-info__barstatus--middle {
@@ -169,45 +191,57 @@ body {
   color: #2e2e2e;
   text-align: center;
 }
+@media (min-width: 768px) {
+  .fwf__title {
+    font-size: 2.5rem;
+  }
+}
 .fwf__display {
   min-height: 60vh;
-  padding: 0 1rem;
+  max-width: 36rem;
+  padding: 1rem;
+  margin: 0 auto;
 }
 @media (min-width: 768px) {
   .fwf__display {
-    justify-content: space-evenly;
+    max-width: 46rem;
   }
 }
 .fwf__flag-container {
-  margin: 0 auto;
-  width: 100%;
-  height: 10rem;
+  margin: 1rem auto 2rem;
+  max-width: 25rem;
+  position: relative;
+  aspect-ratio: 6/3;
 }
 @media (min-width: 768px) {
   .fwf__flag-container {
-    width: 70%;
+    max-width: 46rem;
   }
 }
+.fwf__options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
 @media (min-width: 768px) {
-  .fwf__countries-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  .fwf__options {
+    flex-flow: row wrap;
+    gap: 2rem;
   }
 }
 .fwf__country-option {
   font-family: "Arcade";
-  font-size: 0.6rem;
   background-color: #2e2e2e;
+  font-size: 1rem;
   color: #ffffff;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.625rem;
-  margin: 1rem 0;
+  text-align: center;
   font-family: "AvenirNext", Arial, Helvetica, sans-serif;
-  font-size: 1rem;
   padding: 1rem;
-  display: block;
   width: 100%;
 }
 .fwf__country-option:active {
@@ -223,7 +257,7 @@ body {
 @media (min-width: 768px) {
   .fwf__country-option {
     width: 45%;
-    font-size: 1rem;
+    padding: 1.5rem;
   }
 }
 .fwf__country-option--active {
@@ -243,14 +277,18 @@ body {
 .fwf__gameover {
   display: none;
   text-align: center;
-  flex-direction: column;
 }
 .fwf__gameover-heading {
   margin: 1.5rem 0;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   color: #2e2e2e;
   color: #e2482d;
+}
+@media (min-width: 768px) {
+  .fwf__gameover-heading {
+    font-size: 2rem;
+  }
 }
 .fwf__gameover-reason {
   margin-bottom: 1rem;
@@ -259,20 +297,28 @@ body {
   color: #2e2e2e;
   margin-top: -1rem;
 }
+@media (min-width: 768px) {
+  .fwf__gameover-reason {
+    font-size: 1.5rem;
+  }
+}
 .fwf__gameover-img {
-  height: 40vh;
+  aspect-ratio: 6/6;
   margin: 1rem;
+  max-height: 30rem;
+  margin: auto;
 }
 .fwf__results-button {
   font-family: "Arcade";
-  font-size: 0.6rem;
   background-color: #2e2e2e;
   color: #ffffff;
-  padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.625rem;
-  margin: 1rem 0;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  margin: 0 auto;
+  display: inline-block;
+  position: relative;
   margin: 1rem;
 }
 .fwf__results-button:active {

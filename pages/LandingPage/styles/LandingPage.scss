@@ -3,16 +3,17 @@
 @use "../../../partials/variables" as *;
 
 body {
-	max-height: 100vh;
+	min-height: 100vh;
+	display: grid;
 }
 
 .header {
-	height: 20vh;
 	justify-content: center;
 }
 
 main {
-	height: 80vh;
+	margin-top: auto;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	text-align: center;
@@ -120,9 +121,6 @@ main {
 	}
 
 	&__submit {
-		@include btn;
-		font-size: 1.5rem;
-		padding: 1rem;
-		margin: 0 auto;
+		@include btn-large;
 	}
 }

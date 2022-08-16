@@ -20,9 +20,15 @@ body {
 	&__progressbar {
 		position: relative;
 		width: 100%;
-		height: 1.5rem;
+		height: 2rem;
+		margin: 0 auto;
 		background-color: #ddd;
-		border-radius: 1.25rem;
+		border-radius: 0.625rem;
+
+		@include tablet-breakpoint {
+			height: 3rem;
+			width: 80%;
+		}
 	}
 
 	&__barstatus {
@@ -30,7 +36,7 @@ body {
 		width: 100%;
 		height: 100%;
 		background-color: $success-color;
-		border-radius: 1.25rem;
+		border-radius: 0.625rem;
 		transition: background-color 500ms ease;
 
 		&--middle {
@@ -51,42 +57,46 @@ body {
 
 	&__display {
 		min-height: 60vh;
-		padding: 0 1rem;
-
+		max-width: 36rem;
+		padding: 1rem;
+		margin: 0 auto;
 		@include tablet-breakpoint {
-			justify-content: space-evenly;
+			max-width: 46rem;
 		}
 	}
 
 	&__flag-container {
-		margin: 0 auto;
-		width: 100%;
-		height: 10rem;
-
+		margin: 1rem auto 2rem;
+		max-width: 25rem;
+		position: relative;
+		aspect-ratio: 6/3;
 		@include tablet-breakpoint {
-			width: 70%;
+			max-width: 46rem;
 		}
 	}
 
-	&__countries-container {
+	&__options {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+
 		@include tablet-breakpoint {
-			display: flex;
-			justify-content: space-between;
-			flex-wrap: wrap;
+			flex-flow: row wrap;
+			gap: 2rem;
 		}
 	}
 
 	&__country-option {
 		@include btn;
 		@include clear-text;
-		font-size: 1rem;
 		padding: 1rem;
-		display: block;
 		width: 100%;
 
 		@include tablet-breakpoint {
 			width: 45%;
-			font-size: 1rem;
+			padding: 1.5rem;
 		}
 
 		&--active {
@@ -111,10 +121,9 @@ body {
 	&__gameover {
 		display: none;
 		text-align: center;
-		flex-direction: column;
 
 		&-heading {
-			@include heading;
+			@include sub-heading;
 			color: $error-color;
 		}
 
@@ -124,14 +133,17 @@ body {
 		}
 
 		&-img {
-			height: 40vh;
+			aspect-ratio: 6/6;
 			margin: 1rem;
+			max-height: 30rem;
+			margin: auto;
 		}
 	}
 
 	&__results-button {
-		@include btn;
-		font-size: 1rem;
+		@include btn-large;
+		display: inline-block;
+		position: relative;
 		margin: 1rem;
 	}
 }

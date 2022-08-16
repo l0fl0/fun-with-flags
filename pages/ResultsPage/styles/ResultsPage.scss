@@ -4,9 +4,10 @@
 
 .header {
 	flex-direction: column;
+
 	&__play-again {
-		padding: 1rem;
-		font-size: 1.3rem;
+		@include btn-large;
+		margin: 1rem 0;
 		background-color: $success-color;
 		color: $font-white;
 	}
