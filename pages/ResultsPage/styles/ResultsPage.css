@@ -143,8 +143,9 @@ body::-webkit-scrollbar {
   border: none;
   border-radius: 0.625rem;
   font-size: 1.5rem;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   margin: 0 auto;
+  line-height: 2.5rem;
   margin: 1rem 0;
   background-color: #6cbc3d;
   color: #ffffff;

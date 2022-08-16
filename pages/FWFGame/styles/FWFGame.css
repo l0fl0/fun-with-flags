@@ -184,6 +184,9 @@ body {
   background-color: #e2482d;
 }
 
+.fwf {
+  padding: 0 1rem 1rem;
+}
 .fwf__title {
   margin: 1.5rem 0;
   font-size: 2rem;
@@ -199,7 +202,6 @@ body {
 .fwf__display {
   min-height: 60vh;
   max-width: 36rem;
-  padding: 1rem;
   margin: 0 auto;
 }
 @media (min-width: 768px) {
@@ -304,9 +306,13 @@ body {
 }
 .fwf__gameover-img {
   aspect-ratio: 6/6;
-  margin: 1rem;
+  margin: 1rem 0;
   max-height: 30rem;
-  margin: auto;
+}
+@media (min-width: 768px) {
+  .fwf__gameover-img {
+    margin: auto;
+  }
 }
 .fwf__results-button {
   font-family: "Arcade";
@@ -315,8 +321,9 @@ body {
   border: none;
   border-radius: 0.625rem;
   font-size: 1.5rem;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   margin: 0 auto;
+  line-height: 2.5rem;
   display: inline-block;
   position: relative;
   margin: 1rem;

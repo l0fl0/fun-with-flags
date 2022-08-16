@@ -50,6 +50,8 @@ body {
 }
 
 .fwf {
+	padding: 0 1rem 1rem;
+
 	&__title {
 		@include heading;
 		text-align: center;
@@ -58,7 +60,7 @@ body {
 	&__display {
 		min-height: 60vh;
 		max-width: 36rem;
-		padding: 1rem;
+
 		margin: 0 auto;
 		@include tablet-breakpoint {
 			max-width: 46rem;
@@ -134,9 +136,11 @@ body {
 
 		&-img {
 			aspect-ratio: 6/6;
-			margin: 1rem;
+			margin: 1rem 0;
 			max-height: 30rem;
-			margin: auto;
+			@include tablet-breakpoint {
+				margin: auto;
+			}
 		}
 	}
 
