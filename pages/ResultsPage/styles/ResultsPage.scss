@@ -27,8 +27,35 @@
 	}
 }
 
+.nav {
+	display: flex;
+	width: 100%;
+	align-items: center;
+
+	&__slide {
+		font-size: 3rem;
+		margin-top: -15px;
+		cursor: pointer;
+
+		&:active {
+			color: $highlight-color;
+		}
+
+		&--left {
+			margin-right: auto;
+		}
+
+		&--right {
+			margin-left: auto;
+		}
+	}
+}
+
 .results {
+	overflow: hidden;
+
 	&__title {
+		overflow: hidden;
 		@include sub-heading;
 		text-align: center;
 	}
@@ -44,6 +71,7 @@
 		background-color: $font-white;
 		margin: 0 1rem 1rem;
 		padding-bottom: 0.5rem;
+
 		@include tablet-breakpoint {
 			width: 50%;
 		}
@@ -103,10 +131,12 @@
 }
 
 .scoreboard {
+	overflow: hidden;
 	margin-bottom: 1rem;
 	margin: 0 auto;
 
 	&__title {
+		overflow: hidden;
 		@include sub-heading;
 		color: $font-primary-color;
 		text-align: center;
@@ -134,11 +164,13 @@
 		text-align: left;
 		width: 22%;
 	}
+
 	&__score {
 		font-size: 1rem;
 		text-align: right;
 		width: 33%;
 	}
+
 	&__name {
 		text-align: right;
 		width: 44%;

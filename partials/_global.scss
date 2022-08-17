@@ -6,9 +6,8 @@
 body {
 	font-family: "Arcade", "Courier New", Courier, monospace;
 	font-size: 0.8rem;
-	min-height: 100%;
+	min-height: 100vh;
 	background-color: $background-secondary-color;
-
 	-ms-overflow-style: none; /* for Internet Explorer, Edge */
 	scrollbar-width: none; /* for Firefox */
 	overflow-y: scroll;

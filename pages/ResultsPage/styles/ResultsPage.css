@@ -49,7 +49,7 @@ a {
 body {
   font-family: "Arcade", "Courier New", Courier, monospace;
   font-size: 0.8rem;
-  min-height: 100%;
+  min-height: 100vh;
   background-color: #e5e5e5;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
@@ -126,11 +126,11 @@ body::-webkit-scrollbar {
 }
 
 .hide {
-  display: none !important;
+  display: none;
 }
 
 .show {
-  display: block !important;
+  display: block;
 }
 
 .header {
@@ -184,7 +184,31 @@ body::-webkit-scrollbar {
     background-color: #e5e5e5;
   }
 }
+.nav {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.nav__slide {
+  font-size: 3rem;
+  margin-top: -15px;
+  cursor: pointer;
+}
+.nav__slide:active {
+  color: #ffdf6c;
+}
+.nav__slide--left {
+  margin-right: auto;
+}
+.nav__slide--right {
+  margin-left: auto;
+}
+
+.results {
+  overflow: hidden;
+}
 .results__title {
+  overflow: hidden;
   margin: 1.5rem 0;
   font-size: 1.5rem;
   text-transform: uppercase;
@@ -265,10 +289,12 @@ body::-webkit-scrollbar {
 }
 
 .scoreboard {
+  overflow: hidden;
   margin-bottom: 1rem;
   margin: 0 auto;
 }
 .scoreboard__title {
+  overflow: hidden;
   margin: 1.5rem 0;
   font-size: 1.5rem;
   text-transform: uppercase;
