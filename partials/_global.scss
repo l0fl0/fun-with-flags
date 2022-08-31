@@ -6,7 +6,7 @@
 body {
 	font-family: "Arcade", "Courier New", Courier, monospace;
 	font-size: 0.8rem;
-	height: 100vh;
+	min-height: 100%;
 	background-color: $background-secondary-color;
 	color: $font-primary-color;
 	-ms-overflow-style: none; /* for Internet Explorer, Edge */

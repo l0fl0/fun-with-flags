@@ -2,13 +2,6 @@
 @use "../../../partials/mixins" as *;
 @use "../../../partials/variables" as *;
 
-header {
-	height: 20%;
-}
-main {
-	height: 80%;
-}
-
 //* Register to play
 .registration-form {
 	margin-top: auto;
@@ -63,7 +56,7 @@ main {
 		height: 2rem;
 		border: none;
 		background-color: $background-secondary-color;
-		color: $font-primary-color;
+		color: $highlight-color;
 		text-align: center;
 		caret-color: $highlight-color;
 	}
