@@ -27,7 +27,6 @@
 
 	&:active {
 		background-color: $highlight-second;
-		box-shadow: 4px 4px 0px 2px $highlight-color;
 	}
 
 	@include desktop-breakpoint() {

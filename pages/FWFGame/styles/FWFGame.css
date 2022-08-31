@@ -249,7 +249,6 @@ body {
 }
 .fwf__country-option:active {
   background-color: rgb(210, 174, 28);
-  box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
 }
 @media (min-width: 1280px) {
   .fwf__country-option:hover {
