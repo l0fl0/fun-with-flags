@@ -72,6 +72,7 @@ body {
 		max-width: 25rem;
 		position: relative;
 		aspect-ratio: 6/3;
+
 		@include tablet-breakpoint {
 			max-width: 46rem;
 		}
@@ -93,6 +94,7 @@ body {
 	&__country-option {
 		@include btn;
 		@include clear-text;
+		font-weight: bold;
 		padding: 1rem;
 		width: 100%;
 
@@ -102,21 +104,18 @@ body {
 		}
 
 		&--active {
-			color: $font-primary-color;
-			background-color: $highlight-color;
-
-			&:hover {
-				color: $font-primary-color;
-				background-color: $highlight-color;
-			}
+			background-color: $highlight-second;
+			box-shadow: 4px 4px 0px 2px $highlight-second;
 		}
 
 		&--incorrect {
 			background-color: $error-color !important;
+			box-shadow: 4px 4px 0px 2px $error-color !important;
 		}
 
 		&--correct {
 			background-color: $success-color !important;
+			box-shadow: 4px 4px 0px 2px $success-color !important;
 		}
 	}
 
@@ -135,7 +134,7 @@ body {
 
 		&-img {
 			aspect-ratio: 6/6;
-			margin: 1rem 0;
+			margin: 1rem auto;
 			max-height: 30rem;
 			@include tablet-breakpoint {
 				margin: auto;

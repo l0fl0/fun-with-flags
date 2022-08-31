@@ -3,13 +3,22 @@
 @use "../../../partials/variables" as *;
 
 .header {
-	flex-direction: column;
+	padding-top: 1rem;
+
+	&__logo {
+		aspect-ratio: 4/6;
+		width: 30%;
+		max-width: 9.375rem;
+		margin: 0 auto;
+	}
 
 	&__play-again {
 		@include btn-large;
-		margin: 1rem 0;
-		background-color: $success-color;
-		color: $font-white;
+		margin: 1rem auto;
+		width: 90%;
+		@include tablet-breakpoint {
+			width: 50%;
+		}
 	}
 }
 
@@ -68,7 +77,6 @@
 
 	&__column {
 		border: 0.015625rem solid $font-primary-color;
-		background-color: $font-white;
 		margin: 0 1rem 1rem;
 		padding-bottom: 0.5rem;
 
@@ -101,20 +109,20 @@
 		max-height: 4rem;
 		padding: 1rem;
 		align-items: center;
-		background-color: $font-white;
 
 		&:hover {
 			cursor: pointer;
 			transform: scaleY(1.2);
-			box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3),
-				0px -4px 4px rgba(0, 0, 0, 0.3);
+			box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.3),
+				0px -4px 4px rgba(255, 255, 255, 0.3);
 		}
 	}
 
 	&__flag {
 		width: 30%;
 		max-height: 4rem;
-		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+		box-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3),
+			-2px -2px 4px rgba(255, 255, 255, 0.3);
 	}
 
 	&__country {
@@ -152,6 +160,8 @@
 		@include table-heading;
 		display: flex;
 		justify-content: space-between;
+		border-bottom: 1px solid $font-primary-color;
+		padding-bottom: 0.35rem;
 	}
 
 	&__row {

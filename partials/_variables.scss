@@ -3,18 +3,28 @@ $tablet-screen-size: 768px;
 $desktop-screen-size: 1280px;
 
 // Font colors
-$font-primary-color: #2e2e2e;
+$font-primary-color: #e5e5e5;
 $font-secondary-color: #7c7c7c;
 $font-white: #ffffff;
 
 // Highlight color
-$highlight-color: #ffdf6c;
+$highlight-color: rgb(255, 216, 62);
+$highlight-second: rgb(210, 174, 28);
+
+$title-gradient: linear-gradient(
+	rgb(255, 216, 62),
+	rgb(255, 182, 43),
+	rgb(255, 135, 45),
+	rgb(255, 105, 27),
+	rgb(255, 69, 19),
+	rgb(255, 45, 16)
+);
 
 // Error color
-$error-color: #e2482d;
+$error-color: rgb(255, 45, 16);
 
 // Correct color
 $success-color: #6cbc3d;
 
 // Background color
-$background-secondary-color: #e5e5e5;
+$background-secondary-color: #2e2e2e;

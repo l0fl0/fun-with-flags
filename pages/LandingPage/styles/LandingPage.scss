@@ -7,10 +7,6 @@ body {
 	display: grid;
 }
 
-.header {
-	justify-content: center;
-}
-
 main {
 	margin-top: auto;
 	height: 100%;
@@ -25,7 +21,7 @@ main {
 	margin-top: auto;
 
 	&__content {
-		padding: 1rem;
+		padding: 0 1rem;
 		text-align: center;
 	}
 
@@ -42,6 +38,7 @@ main {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		margin-bottom: 1rem;
 	}
 
 	&__difficulty-option,
@@ -57,10 +54,10 @@ main {
 		display: inline-block;
 		padding: 0.3rem;
 		width: 10rem;
+		color: $font-white;
 
 		&--active {
 			background-color: $success-color;
-			color: $font-white;
 		}
 	}
 
@@ -78,49 +75,68 @@ main {
 		position: relative;
 	}
 
-	&__background-photo {
-		// https://jsfiddle.net/pyojwq77/1/
-		background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
-		background-position: top center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		font-size: 0;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		margin: auto;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
+	// &__background-photo {
+	// 	// https://jsfiddle.net/pyojwq77/1/
+	// 	background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
+	// 	background-position: top center;
+	// 	background-repeat: no-repeat;
+	// 	background-size: cover;
+	// 	font-size: 0;
+	// 	position: absolute;
+	// 	width: 100%;
+	// 	height: 100%;
+	// 	margin: auto;
+	// 	top: 0;
+	// 	left: 0;
+	// 	bottom: 0;
+	// 	right: 0;
 
-		@include tablet-breakpoint {
-			background-size: cover;
-		}
-	}
+	// 	@include tablet-breakpoint {
+	// 		background-size: cover;
+	// 	}
+	// }
 
-	&__overlay {
-		position: absolute;
-		background: linear-gradient(purple, pink);
-		opacity: 60%;
-		width: 100%;
-		height: 100%;
-	}
+	// &__overlay {
+	// 	position: absolute;
+	// 	background: linear-gradient(purple, pink);
+	// 	opacity: 60%;
+	// 	width: 100%;
+	// 	height: 100%;
+	// }
 
 	&__start-content {
 		position: relative;
 		z-index: 1;
-		margin: auto;
-		padding: 3rem 1rem;
+		margin: 3rem auto;
+		padding: 1rem;
 	}
 
 	&__submit-title {
 		@include heading;
-		font-weight: bold;
-		color: $font-white;
+		font-family: "Arcade";
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		height: 90px;
+		color: $font-primary-color;
+		background: transparent;
+		outline: none;
+		border: none;
+		width: 100%;
+		text-align: center;
+		margin: auto;
+		letter-spacing: 5px;
+		text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe,
+			4px 0 0 #4405fc;
+		animation: blink 1s steps(4, start) infinite;
+		padding: 0 1rem;
 	}
+}
 
-	&__submit {
-		@include btn-large;
+@keyframes blink {
+	to {
+		visibility: hidden;
 	}
 }

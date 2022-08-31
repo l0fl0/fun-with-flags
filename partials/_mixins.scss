@@ -16,59 +16,63 @@
 
 @mixin btn {
 	font-family: "Arcade";
-	background-color: $font-primary-color;
+	background-color: $highlight-color;
+	color: $background-secondary-color;
+	box-shadow: 4px 4px 0px 2px $highlight-second;
 	font-size: 1rem;
-	color: $font-white;
 	padding: 0.5rem 1rem;
 	border: none;
 	border-radius: 0.625rem;
 	text-align: center;
 
 	&:active {
-		background-color: $highlight-color;
-		color: $font-primary-color;
+		background-color: $highlight-second;
+		box-shadow: 4px 4px 0px 2px $highlight-color;
 	}
 
 	@include desktop-breakpoint() {
 		&:hover {
-			background-color: $highlight-color;
-			color: $font-primary-color;
+			background-color: $highlight-second;
+			box-shadow: 4px 4px 0px 2px $highlight-color;
 		}
 	}
 }
 
 @mixin btn-large {
 	font-family: "Arcade";
-	background-color: $font-primary-color;
-	color: $font-white;
+	background-color: $highlight-color;
+	color: $background-secondary-color;
 	border: none;
+	box-shadow: 4px 4px 0px 2px $highlight-second;
 	border-radius: 0.625rem;
 	font-size: 1.5rem;
 	padding: 1rem 1.5rem;
 	margin: 0 auto;
 	line-height: 2.5rem;
+	text-align: center;
 
 	&:active {
-		background-color: $highlight-color;
-		color: $font-primary-color;
+		background-color: $highlight-second;
+		box-shadow: 4px 4px 0px 2px $highlight-color;
 	}
 
 	@include desktop-breakpoint() {
 		&:hover {
-			background-color: $highlight-color;
-			color: $font-primary-color;
+			background-color: $highlight-second;
+			box-shadow: 4px 4px 0px 2px $highlight-color;
 		}
 	}
 }
 
 @mixin heading {
+	font-family: "ArcadeInterlaced", "Arcade";
 	margin: 1.5rem 0;
-	font-size: 2rem;
+	font-size: 2.5rem;
 	text-transform: uppercase;
 	color: $font-primary-color;
 
 	@include tablet-breakpoint() {
-		font-size: 2.5rem;
+		font-size: 4rem;
 	}
 }
 

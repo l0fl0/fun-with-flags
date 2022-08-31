@@ -71,9 +71,9 @@ async function displayScoreboard() {
 		return number + "th";
 	};
 
-	sortedUsers.forEach((user) => {
+	for (let i = 0; i < 10; i++) {
 		let row = createPageElement("div", "scoreboard__row");
-		if (user.id === currentUser.id) {
+		if (sortedUsers[i].id === currentUser.id) {
 			row.classList.add("scoreboard__current-score");
 			row.focus();
 		}
@@ -81,13 +81,19 @@ async function displayScoreboard() {
 		let rank = createPageElement(
 			"span",
 			"scoreboard__rank",
-			sufixes(sortedUsers.indexOf(user) + 1)
+			sufixes(sortedUsers.indexOf(sortedUsers[i]) + 1)
 		);
-		let name = createPageElement("span", "scoreboard__name", user.name);
+
+		let name = createPageElement(
+			"span",
+			"scoreboard__name",
+			sortedUsers[i].name
+		);
+
 		let score = createPageElement(
 			"span",
 			"scoreboard__score",
-			user.score ? user.score : "0"
+			sortedUsers[i].score ? sortedUsers[i].score : "0"
 		);
 
 		row.appendChild(rank);
@@ -95,7 +101,7 @@ async function displayScoreboard() {
 		row.appendChild(name);
 
 		document.querySelector(".scoreboard__difficulty-standard").appendChild(row);
-	});
+	}
 }
 //play again sound
 document.getElementById("playAgain").addEventListener("click", () => {

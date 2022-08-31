@@ -6,8 +6,9 @@
 body {
 	font-family: "Arcade", "Courier New", Courier, monospace;
 	font-size: 0.8rem;
-	min-height: 100vh;
+	height: calc(100vh - calc(100vh - 100%));
 	background-color: $background-secondary-color;
+	color: $font-primary-color;
 	-ms-overflow-style: none; /* for Internet Explorer, Edge */
 	scrollbar-width: none; /* for Firefox */
 	overflow-y: scroll;
@@ -22,28 +23,42 @@ body {
 
 //* Header
 .header {
-	background-color: $font-primary-color;
-	color: $font-secondary-color;
-	display: flex;
-	align-items: center;
-	padding: 1rem;
-
-	&__logo {
-		font-size: 0;
-		width: 3rem;
-	}
-
 	&__title {
 		@include heading;
-		text-align: center;
-		color: $font-white;
-		margin-right: 1rem;
-	}
+		display: flex;
+		flex-flow: wrap row;
+		gap: 1rem;
+		justify-content: center;
+		@include tablet-breakpoint {
+			flex-direction: row;
+		}
 
-	&__play-again {
-		@include btn;
-		font-size: 1rem;
-		text-transform: uppercase;
+		&-word-container {
+			position: relative;
+			display: flex;
+			justify-content: center;
+		}
+
+		&-word {
+			background: $title-gradient;
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			// -webkit-text-stroke: 0.1px black; /* width and color */
+			z-index: 1;
+
+			&--shadow {
+				z-index: 0;
+				position: absolute;
+				-webkit-text-fill-color: transparent;
+				text-shadow: 2px 4px 2px blue;
+
+				@include tablet-breakpoint {
+					font-size: 3.9rem;
+					text-shadow: 2px 9px 2px blue;
+				}
+			}
+		}
 	}
 }
 
@@ -51,9 +66,8 @@ body {
 	padding: 1rem 0;
 	width: 100%;
 	display: flex;
-	background: $font-primary-color;
 	text-align: center;
-	color: $font-white;
+	color: $font-primary-color;
 
 	&__sign {
 		margin: auto;

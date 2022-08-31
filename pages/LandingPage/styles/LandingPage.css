@@ -49,8 +49,9 @@ a {
 body {
   font-family: "Arcade", "Courier New", Courier, monospace;
   font-size: 0.8rem;
-  min-height: 100vh;
-  background-color: #e5e5e5;
+  height: calc(100vh - (100vh - 100%));
+  background-color: #2e2e2e;
+  color: #e5e5e5;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
   overflow-y: scroll;
@@ -64,51 +65,49 @@ body::-webkit-scrollbar {
   }
 }
 
-.header {
-  background-color: #2e2e2e;
-  color: #7c7c7c;
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-}
-.header__logo {
-  font-size: 0;
-  width: 3rem;
-}
 .header__title {
+  font-family: "ArcadeInterlaced", "Arcade";
   margin: 1.5rem 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
   text-transform: uppercase;
-  color: #2e2e2e;
-  text-align: center;
-  color: #ffffff;
-  margin-right: 1rem;
+  color: #e5e5e5;
+  display: flex;
+  flex-flow: wrap row;
+  gap: 1rem;
+  justify-content: center;
 }
 @media (min-width: 768px) {
   .header__title {
-    font-size: 2.5rem;
+    font-size: 4rem;
   }
 }
-.header__play-again {
-  font-family: "Arcade";
-  background-color: #2e2e2e;
-  font-size: 1rem;
-  color: #ffffff;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.625rem;
-  text-align: center;
-  font-size: 1rem;
-  text-transform: uppercase;
+@media (min-width: 768px) {
+  .header__title {
+    flex-direction: row;
+  }
 }
-.header__play-again:active {
-  background-color: #ffdf6c;
-  color: #2e2e2e;
+.header__title-word-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
-@media (min-width: 1280px) {
-  .header__play-again:hover {
-    background-color: #ffdf6c;
-    color: #2e2e2e;
+.header__title-word {
+  background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 69, 19), rgb(255, 45, 16));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 1;
+}
+.header__title-word--shadow {
+  z-index: 0;
+  position: absolute;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 4px 2px blue;
+}
+@media (min-width: 768px) {
+  .header__title-word--shadow {
+    font-size: 3.9rem;
+    text-shadow: 2px 9px 2px blue;
   }
 }
 
@@ -116,9 +115,8 @@ body::-webkit-scrollbar {
   padding: 1rem 0;
   width: 100%;
   display: flex;
-  background: #2e2e2e;
   text-align: center;
-  color: #ffffff;
+  color: #e5e5e5;
 }
 .footer__sign {
   margin: auto;
@@ -126,20 +124,16 @@ body::-webkit-scrollbar {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .show {
-  display: block;
+  display: block !important;
 }
 
 body {
   min-height: 100vh;
   display: grid;
-}
-
-.header {
-  justify-content: center;
 }
 
 main {
@@ -154,14 +148,14 @@ main {
   margin-top: auto;
 }
 .registration-form__content {
-  padding: 1rem;
+  padding: 0 1rem;
   text-align: center;
 }
 .registration-form__heading {
   margin: 1.5rem 0;
   font-size: 1.5rem;
   text-transform: uppercase;
-  color: #2e2e2e;
+  color: #e5e5e5;
 }
 @media (min-width: 768px) {
   .registration-form__heading {
@@ -172,7 +166,7 @@ main {
   margin-bottom: 1rem;
   font-size: 1rem;
   text-transform: uppercase;
-  color: #2e2e2e;
+  color: #e5e5e5;
   margin-top: 1rem;
 }
 @media (min-width: 768px) {
@@ -184,6 +178,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1rem;
 }
 .registration-form__difficulty-option, .registration-form__limit-option {
   position: absolute;
@@ -195,87 +190,69 @@ main {
   display: inline-block;
   padding: 0.3rem;
   width: 10rem;
+  color: #ffffff;
 }
 .registration-form__label--active, .registration-form__limit-label--active {
   background-color: #6cbc3d;
-  color: #ffffff;
 }
 .registration-form__username {
   font-family: "Arcade";
   font-size: 0.7rem;
   height: 2rem;
   border: none;
-  background-color: #e5e5e5;
+  background-color: #2e2e2e;
   text-align: center;
-  caret-color: #ffdf6c;
+  caret-color: rgb(255, 216, 62);
 }
 .registration-form__start-section {
   position: relative;
 }
-.registration-form__background-photo {
-  background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  font-size: 0;
+.registration-form__start-content {
+  position: relative;
+  z-index: 1;
+  margin: 3rem auto;
+  padding: 1rem;
+}
+.registration-form__submit-title {
+  font-family: "ArcadeInterlaced", "Arcade";
+  margin: 1.5rem 0;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: #e5e5e5;
+  font-family: "Arcade";
   position: absolute;
-  width: 100%;
-  height: 100%;
-  margin: auto;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-}
-@media (min-width: 768px) {
-  .registration-form__background-photo {
-    background-size: cover;
-  }
-}
-.registration-form__overlay {
-  position: absolute;
-  background: linear-gradient(purple, pink);
-  opacity: 60%;
+  height: 90px;
+  color: #e5e5e5;
+  background: transparent;
+  outline: none;
+  border: none;
   width: 100%;
-  height: 100%;
-}
-.registration-form__start-content {
-  position: relative;
-  z-index: 1;
+  text-align: center;
   margin: auto;
-  padding: 3rem 1rem;
-}
-.registration-form__submit-title {
-  margin: 1.5rem 0;
-  font-size: 2rem;
-  text-transform: uppercase;
-  color: #2e2e2e;
-  font-weight: bold;
-  color: #ffffff;
+  letter-spacing: 5px;
+  text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe, 4px 0 0 #4405fc;
+  -webkit-animation: blink 1s steps(4, start) infinite;
+          animation: blink 1s steps(4, start) infinite;
+  padding: 0 1rem;
 }
 @media (min-width: 768px) {
   .registration-form__submit-title {
-    font-size: 2.5rem;
+    font-size: 4rem;
   }
 }
-.registration-form__submit {
-  font-family: "Arcade";
-  background-color: #2e2e2e;
-  color: #ffffff;
-  border: none;
-  border-radius: 0.625rem;
-  font-size: 1.5rem;
-  padding: 1rem 1.5rem;
-  margin: 0 auto;
-  line-height: 2.5rem;
+
+@-webkit-keyframes blink {
+  to {
+    visibility: hidden;
+  }
 }
-.registration-form__submit:active {
-  background-color: #ffdf6c;
-  color: #2e2e2e;
-}
-@media (min-width: 1280px) {
-  .registration-form__submit:hover {
-    background-color: #ffdf6c;
-    color: #2e2e2e;
+
+@keyframes blink {
+  to {
+    visibility: hidden;
   }
 }/*# sourceMappingURL=LandingPage.css.map */
