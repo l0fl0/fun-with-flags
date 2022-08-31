@@ -14,13 +14,27 @@ let user = {
 const formEl = document.querySelector(".registration-form");
 formEl.addEventListener("submit", handleSubmit);
 
+// Username
+const usernameInput = document.querySelector("#username");
+usernameInput.focus();
+usernameInput.addEventListener("input", () =>
+	new Audio("/assets/audio/keypress.wav").play()
+);
+usernameInput.addEventListener("click", () =>
+	new Audio("/assets/audio/click.wav").play()
+);
+
 // Difficutly Option
 const difficultyOptions = document.querySelectorAll(
 	".registration-form__difficulty-option"
 );
-difficultyOptions.forEach((el) =>
-	el.addEventListener("click", activeDifficulty)
-);
+difficultyOptions.forEach((el) => {
+	el.addEventListener("click", activeDifficulty);
+	el.addEventListener("click", () =>
+		new Audio("/assets/audio/click.wav").play()
+	);
+});
+
 function activeDifficulty(event) {
 	difficultyOptions.forEach((el) =>
 		el.labels[0].classList.remove("registration-form__label--active")
@@ -32,7 +46,12 @@ function activeDifficulty(event) {
 const limitOptions = document.querySelectorAll(
 	".registration-form__limit-option"
 );
-limitOptions.forEach((el) => el.addEventListener("click", activeLimit));
+limitOptions.forEach((el) => {
+	el.addEventListener("click", activeLimit);
+	el.addEventListener("click", () =>
+		new Audio("/assets/audio/click.wav").play()
+	);
+});
 function activeLimit(event) {
 	limitOptions.forEach((el) =>
 		el.labels[0].classList.remove("registration-form__limit-label--active")
@@ -61,6 +80,3 @@ function handleSubmit(event) {
 
 	setTimeout(() => window.location.assign("/pages/FWFGame/index.html"), 700);
 }
-
-let usernameInput = document.getElementById("username");
-usernameInput.focus();

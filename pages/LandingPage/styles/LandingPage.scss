@@ -2,23 +2,18 @@
 @use "../../../partials/mixins" as *;
 @use "../../../partials/variables" as *;
 
-body {
-	min-height: 100vh;
-	display: grid;
+header {
+	height: 20%;
 }
-
 main {
-	margin-top: auto;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	text-align: center;
+	height: 80%;
 }
 
 //* Register to play
-
 .registration-form {
 	margin-top: auto;
+	display: flex;
+	flex-direction: column;
 
 	&__content {
 		padding: 0 1rem;
@@ -54,25 +49,59 @@ main {
 		display: inline-block;
 		padding: 0.3rem;
 		width: 10rem;
-		color: $font-white;
+		color: $font-secondary-color;
 
 		&--active {
+			color: $font-primary-color;
 			background-color: $success-color;
 		}
 	}
 
 	&__username {
 		font-family: "Arcade";
-		font-size: 0.7rem;
+		font-size: 0.8rem;
 		height: 2rem;
 		border: none;
 		background-color: $background-secondary-color;
+		color: $font-primary-color;
 		text-align: center;
 		caret-color: $highlight-color;
 	}
 
-	&__start-section {
-		position: relative;
+	&__start {
+		margin-top: auto;
+
+		&-content {
+			z-index: 1;
+		}
+	}
+
+	&__submit-title {
+		@include heading;
+		font-family: "Arcade";
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		height: 90px;
+		color: $font-primary-color;
+		background: transparent;
+		outline: none;
+		border: none;
+		width: 100%;
+		text-align: center;
+		margin: auto;
+		letter-spacing: 5px;
+		text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe,
+			4px 0 0 #4405fc;
+		animation: blink 1s steps(4, start) infinite;
+		padding: 0 1rem;
+	}
+}
+
+@keyframes blink {
+	to {
+		visibility: hidden;
 	}
 
 	// &__background-photo {
@@ -103,40 +132,4 @@ main {
 	// 	width: 100%;
 	// 	height: 100%;
 	// }
-
-	&__start-content {
-		position: relative;
-		z-index: 1;
-		margin: 3rem auto;
-		padding: 1rem;
-	}
-
-	&__submit-title {
-		@include heading;
-		font-family: "Arcade";
-		position: absolute;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		height: 90px;
-		color: $font-primary-color;
-		background: transparent;
-		outline: none;
-		border: none;
-		width: 100%;
-		text-align: center;
-		margin: auto;
-		letter-spacing: 5px;
-		text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe,
-			4px 0 0 #4405fc;
-		animation: blink 1s steps(4, start) infinite;
-		padding: 0 1rem;
-	}
-}
-
-@keyframes blink {
-	to {
-		visibility: hidden;
-	}
 }
