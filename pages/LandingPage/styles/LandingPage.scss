@@ -2,12 +2,13 @@
 @use "../../../partials/mixins" as *;
 @use "../../../partials/variables" as *;
 
-//* Register to play
-.registration-form {
-	margin-top: auto;
+body {
 	display: flex;
 	flex-direction: column;
+}
 
+//* Register to play
+.registration-form {
 	&__content {
 		padding: 0 1rem;
 		text-align: center;
@@ -83,7 +84,6 @@
 		border: none;
 		width: 100%;
 		text-align: center;
-		margin: auto;
 		letter-spacing: 5px;
 		text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe,
 			4px 0 0 #4405fc;

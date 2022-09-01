@@ -2,6 +2,11 @@
 @use "../../../partials/mixins" as *;
 @use "../../../partials/variables" as *;
 
+body {
+	display: flex;
+	flex-direction: column;
+}
+
 .header {
 	padding-top: 1rem;
 
@@ -22,11 +27,7 @@
 	}
 }
 
-@keyframes blink {
-	from {
-		background-color: $background-secondary-color;
-	}
-
+@keyframes blink-aqua {
 	50% {
 		background-color: aqua;
 	}
@@ -140,8 +141,7 @@
 
 .scoreboard {
 	overflow: hidden;
-	margin-bottom: 1rem;
-	margin: 0 auto;
+	margin: 0 1rem;
 
 	&__title {
 		overflow: hidden;
@@ -153,7 +153,6 @@
 
 	&__difficulty {
 		font-family: "ArcadeInterlaced";
-		padding: 0 1rem;
 	}
 
 	&__table-header {
@@ -188,6 +187,18 @@
 
 	&__current-score {
 		background-color: $background-secondary-color;
-		animation: blink 1500ms infinite ease-in;
+		animation: blink-aqua 1500ms infinite ease-in;
+	}
+}
+
+.footer {
+	margin-top: auto;
+	width: 100%;
+	text-align: center;
+	color: $font-secondary-color;
+
+	&__sign {
+		margin: 1rem 0;
+		font-size: 0.5rem;
 	}
 }

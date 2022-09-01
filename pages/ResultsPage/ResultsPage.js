@@ -24,6 +24,11 @@ async function buildResults() {
 
 		flagArray.forEach((option) => {
 			let rowContainer = createPageElement("a", "results__row");
+			// Audio
+			rowContainer.addEventListener("mousedown", () =>
+				new Audio("/assets/audio/click.wav").play()
+			);
+
 			//   Flag url
 			let flagUrl = `https://flagcdn.com/${option.correctChoice}.svg`;
 			let flagEl = createPageElement("img", "results__flag");
@@ -44,8 +49,8 @@ async function buildResults() {
 				apiResponse[option.choice]
 			);
 
-			rowContainer.href = `https://en.wikipedia.org/wiki/${countryName.innerText}`;
-			rowContainer.target = "_blank";
+			rowContainer.href = `javascript:setTimeout(function() {window.open("https://en.wikipedia.org/wiki/${countryName.innerText}", '_blank')},500)`;
+
 			rowContainer.title = apiResponse[option.correctChoice];
 			rowContainer.appendChild(countryName);
 			if (trimKey === "incorrect")
@@ -116,6 +121,8 @@ for (let button of slideButtons) {
 let position = 0;
 
 function handleNavSlide(event) {
+	new Audio("/assets/audio/click.wav").play();
+
 	const sections = [
 		[
 			document.querySelector(".results"),

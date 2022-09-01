@@ -23,8 +23,7 @@ ul {
   list-style: none;
 }
 
-a,
-a:visited {
+a {
   color: inherit;
   text-decoration: none;
 }
@@ -48,9 +47,11 @@ a:visited {
   font-weight: normal;
 }
 body {
+  position: relative;
   font-family: "Arcade", "Courier New", Courier, monospace;
   font-size: 0.8rem;
-  min-height: 100%;
+  height: 100%;
+  min-height: 97vh;
   background-color: #2e2e2e;
   color: #e5e5e5;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -112,18 +113,6 @@ body::-webkit-scrollbar {
   }
 }
 
-.footer {
-  padding: 1rem 0;
-  width: 100%;
-  display: flex;
-  text-align: center;
-  color: #e5e5e5;
-}
-.footer__sign {
-  margin: auto;
-  font-size: 0.5rem;
-}
-
 .hide {
   display: none !important;
 }
@@ -147,7 +136,7 @@ body {
   text-transform: uppercase;
   color: #e5e5e5;
   text-align: center;
-  color: #6cbc3d;
+  color: rgb(255, 216, 62);
 }
 @media (min-width: 768px) {
   .user-info__username {
@@ -278,7 +267,7 @@ body {
 .fwf__gameover {
   text-align: center;
 }
-.fwf__gameover-heading {
+.fwf__gameover-reason {
   margin: 1.5rem 0;
   font-size: 1.5rem;
   text-transform: uppercase;
@@ -286,20 +275,8 @@ body {
   color: rgb(255, 45, 16);
 }
 @media (min-width: 768px) {
-  .fwf__gameover-heading {
-    font-size: 2rem;
-  }
-}
-.fwf__gameover-reason {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  text-transform: uppercase;
-  color: #e5e5e5;
-  margin-top: -1rem;
-}
-@media (min-width: 768px) {
   .fwf__gameover-reason {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 }
 .fwf__gameover-img {

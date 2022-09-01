@@ -12,11 +12,21 @@ let user = {
 };
 
 const formEl = document.querySelector(".registration-form");
+formEl.addEventListener("keydown", handleKeypress);
 formEl.addEventListener("submit", handleSubmit);
 
+// handle enter for mobile enter does not start game
+function handleKeypress(e) {
+	if (e.key === "Enter") {
+		e.preventDefault();
+		new Audio("/assets/audio/keypress.wav").play();
+		const index = [...formEl].indexOf(e.target);
+		formEl.elements[index + 1].focus();
+		return false;
+	}
+}
 // Username
 const usernameInput = document.querySelector("#username");
-usernameInput.focus();
 usernameInput.addEventListener("input", () =>
 	new Audio("/assets/audio/keypress.wav").play()
 );
@@ -52,6 +62,7 @@ limitOptions.forEach((el) => {
 		new Audio("/assets/audio/click.wav").play()
 	);
 });
+
 function activeLimit(event) {
 	limitOptions.forEach((el) =>
 		el.labels[0].classList.remove("registration-form__limit-label--active")
@@ -64,6 +75,7 @@ function activeLimit(event) {
 // Form submit handler
 function handleSubmit(event) {
 	event.preventDefault();
+
 	new Audio(
 		"/assets/audio/fartbiscuit1700__8-bit-arcade-video-game-start-sound-effect-gun-reload-and-jump.wav"
 	).play();

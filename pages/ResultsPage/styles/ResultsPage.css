@@ -23,8 +23,7 @@ ul {
   list-style: none;
 }
 
-a,
-a:visited {
+a {
   color: inherit;
   text-decoration: none;
 }
@@ -48,9 +47,11 @@ a:visited {
   font-weight: normal;
 }
 body {
+  position: relative;
   font-family: "Arcade", "Courier New", Courier, monospace;
   font-size: 0.8rem;
-  min-height: 100%;
+  height: 100%;
+  min-height: 97vh;
   background-color: #2e2e2e;
   color: #e5e5e5;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -112,24 +113,17 @@ body::-webkit-scrollbar {
   }
 }
 
-.footer {
-  padding: 1rem 0;
-  width: 100%;
-  display: flex;
-  text-align: center;
-  color: #e5e5e5;
-}
-.footer__sign {
-  margin: auto;
-  font-size: 0.5rem;
-}
-
 .hide {
   display: none !important;
 }
 
 .show {
   display: block !important;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -172,10 +166,7 @@ body::-webkit-scrollbar {
   }
 }
 
-@-webkit-keyframes blink {
-  from {
-    background-color: #2e2e2e;
-  }
+@-webkit-keyframes blink-aqua {
   50% {
     background-color: aqua;
   }
@@ -184,10 +175,7 @@ body::-webkit-scrollbar {
   }
 }
 
-@keyframes blink {
-  from {
-    background-color: #2e2e2e;
-  }
+@keyframes blink-aqua {
   50% {
     background-color: aqua;
   }
@@ -299,8 +287,7 @@ body::-webkit-scrollbar {
 
 .scoreboard {
   overflow: hidden;
-  margin-bottom: 1rem;
-  margin: 0 auto;
+  margin: 0 1rem;
 }
 .scoreboard__title {
   overflow: hidden;
@@ -319,7 +306,6 @@ body::-webkit-scrollbar {
 }
 .scoreboard__difficulty {
   font-family: "ArcadeInterlaced";
-  padding: 0 1rem;
 }
 .scoreboard__table-header {
   margin-bottom: 1rem;
@@ -356,6 +342,17 @@ body::-webkit-scrollbar {
 }
 .scoreboard__current-score {
   background-color: #2e2e2e;
-  -webkit-animation: blink 1500ms infinite ease-in;
-          animation: blink 1500ms infinite ease-in;
+  -webkit-animation: blink-aqua 1500ms infinite ease-in;
+          animation: blink-aqua 1500ms infinite ease-in;
+}
+
+.footer {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  color: #7c7c7c;
+}
+.footer__sign {
+  margin: 1rem 0;
+  font-size: 0.5rem;
 }/*# sourceMappingURL=ResultsPage.css.map */

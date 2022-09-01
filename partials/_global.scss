@@ -4,9 +4,11 @@
 @use "./mixins" as *;
 
 body {
+	position: relative;
 	font-family: "Arcade", "Courier New", Courier, monospace;
 	font-size: 0.8rem;
-	min-height: 100%;
+	height: 100%;
+	min-height: 97vh;
 	background-color: $background-secondary-color;
 	color: $font-primary-color;
 	-ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -59,19 +61,6 @@ body {
 				}
 			}
 		}
-	}
-}
-
-.footer {
-	padding: 1rem 0;
-	width: 100%;
-	display: flex;
-	text-align: center;
-	color: $font-primary-color;
-
-	&__sign {
-		margin: auto;
-		font-size: 0.5rem;
 	}
 }
 

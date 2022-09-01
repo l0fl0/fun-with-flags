@@ -57,6 +57,7 @@ function buildGameContainer(data) {
 function handleOptionSelect(event) {
 	event.preventDefault();
 	guessOptions.timeRemaining = countdown;
+	new Audio("/assets/audio/click.wav").play();
 
 	//remove active choice css
 	if (document.querySelector(".fwf__country-option--active")) {

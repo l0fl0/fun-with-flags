@@ -14,7 +14,7 @@ body {
 	&__username {
 		@include sub-heading;
 		text-align: center;
-		color: $success-color;
+		color: $highlight-color;
 	}
 
 	&__progressbar {
@@ -60,7 +60,6 @@ body {
 	&__display {
 		min-height: 60vh;
 		max-width: 36rem;
-
 		margin: 0 auto;
 		@include tablet-breakpoint {
 			max-width: 46rem;
@@ -122,20 +121,16 @@ body {
 	&__gameover {
 		text-align: center;
 
-		&-heading {
+		&-reason {
 			@include sub-heading;
 			color: $error-color;
-		}
-
-		&-reason {
-			@include table-heading;
-			margin-top: -1rem;
 		}
 
 		&-img {
 			aspect-ratio: 6/6;
 			margin: 1rem auto;
 			max-height: 30rem;
+
 			@include tablet-breakpoint {
 				margin: auto;
 			}
