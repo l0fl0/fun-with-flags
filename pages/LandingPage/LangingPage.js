@@ -27,6 +27,7 @@ function handleKeypress(e) {
 }
 // Username
 const usernameInput = document.querySelector("#username");
+usernameInput.value = JSON.parse(localStorage.getItem("user")).name;
 usernameInput.addEventListener("input", () =>
 	new Audio("/assets/audio/keypress.wav").play()
 );
