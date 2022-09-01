@@ -2,21 +2,32 @@
 @use "../../../partials/mixins" as *;
 @use "../../../partials/variables" as *;
 
-.header {
+body {
+	display: flex;
 	flex-direction: column;
+}
+
+.header {
+	padding-top: 1rem;
+
+	&__logo {
+		aspect-ratio: 4/6;
+		width: 30%;
+		max-width: 9.375rem;
+		margin: 0 auto;
+	}
+
 	&__play-again {
-		padding: 1rem;
-		font-size: 1.3rem;
-		background-color: $success-color;
-		color: $font-white;
+		@include btn-large;
+		margin: 1rem auto;
+		width: 90%;
+		@include tablet-breakpoint {
+			width: 50%;
+		}
 	}
 }
 
-@keyframes blink {
-	from {
-		background-color: $background-secondary-color;
-	}
-
+@keyframes blink-aqua {
 	50% {
 		background-color: aqua;
 	}
@@ -26,8 +37,35 @@
 	}
 }
 
+.nav {
+	display: flex;
+	width: 100%;
+	align-items: center;
+
+	&__slide {
+		font-size: 3rem;
+		margin-top: -15px;
+		cursor: pointer;
+
+		&:active {
+			color: $highlight-color;
+		}
+
+		&--left {
+			margin-right: auto;
+		}
+
+		&--right {
+			margin-left: auto;
+		}
+	}
+}
+
 .results {
+	overflow: hidden;
+
 	&__title {
+		overflow: hidden;
 		@include sub-heading;
 		text-align: center;
 	}
@@ -40,9 +78,9 @@
 
 	&__column {
 		border: 0.015625rem solid $font-primary-color;
-		background-color: $font-white;
 		margin: 0 1rem 1rem;
 		padding-bottom: 0.5rem;
+
 		@include tablet-breakpoint {
 			width: 50%;
 		}
@@ -72,20 +110,20 @@
 		max-height: 4rem;
 		padding: 1rem;
 		align-items: center;
-		background-color: $font-white;
 
 		&:hover {
 			cursor: pointer;
 			transform: scaleY(1.2);
-			box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3),
-				0px -4px 4px rgba(0, 0, 0, 0.3);
+			box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.3),
+				0px -4px 4px rgba(255, 255, 255, 0.3);
 		}
 	}
 
 	&__flag {
 		width: 30%;
 		max-height: 4rem;
-		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+		box-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3),
+			-2px -2px 4px rgba(255, 255, 255, 0.3);
 	}
 
 	&__country {
@@ -102,10 +140,11 @@
 }
 
 .scoreboard {
-	margin-bottom: 1rem;
-	margin: 0 auto;
+	overflow: hidden;
+	margin: 0 1rem;
 
 	&__title {
+		overflow: hidden;
 		@include sub-heading;
 		color: $font-primary-color;
 		text-align: center;
@@ -114,13 +153,14 @@
 
 	&__difficulty {
 		font-family: "ArcadeInterlaced";
-		padding: 0 1rem;
 	}
 
 	&__table-header {
 		@include table-heading;
 		display: flex;
 		justify-content: space-between;
+		border-bottom: 1px solid $font-primary-color;
+		padding-bottom: 0.35rem;
 	}
 
 	&__row {
@@ -133,11 +173,13 @@
 		text-align: left;
 		width: 22%;
 	}
+
 	&__score {
 		font-size: 1rem;
 		text-align: right;
 		width: 33%;
 	}
+
 	&__name {
 		text-align: right;
 		width: 44%;
@@ -145,6 +187,29 @@
 
 	&__current-score {
 		background-color: $background-secondary-color;
-		animation: blink 1500ms infinite ease-in;
+		animation: blink-aqua 1500ms infinite ease-in;
+	}
+
+	&__elipsis {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: "Arcade";
+		font-size: 1rem;
+		text-align: center;
+		margin: 0.5rem auto;
+		margin-left: 1rem;
+	}
+}
+
+.footer {
+	margin-top: auto;
+	width: 100%;
+	text-align: center;
+	color: $font-secondary-color;
+
+	&__sign {
+		margin: 1rem 0;
+		font-size: 0.5rem;
 	}
 }

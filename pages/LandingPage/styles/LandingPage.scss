@@ -3,28 +3,14 @@
 @use "../../../partials/variables" as *;
 
 body {
-	max-height: 100vh;
-}
-
-.header {
-	height: 20vh;
-	justify-content: center;
-}
-
-main {
-	height: 80vh;
 	display: flex;
 	flex-direction: column;
-	text-align: center;
 }
 
 //* Register to play
-
 .registration-form {
-	margin-top: auto;
-
 	&__content {
-		padding: 1rem;
+		padding: 0 1rem;
 		text-align: center;
 	}
 
@@ -41,6 +27,7 @@ main {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		margin-bottom: 1rem;
 	}
 
 	&__difficulty-option,
@@ -50,79 +37,92 @@ main {
 		width: 0;
 	}
 
-	&__label,
+	&__difficulty-label,
 	&__limit-label {
 		text-transform: uppercase;
 		display: inline-block;
 		padding: 0.3rem;
 		width: 10rem;
+		color: $font-secondary-color;
 
 		&--active {
+			color: $font-primary-color;
 			background-color: $success-color;
-			color: $font-white;
 		}
 	}
 
 	&__username {
 		font-family: "Arcade";
-		font-size: 0.7rem;
+		font-size: 0.8rem;
 		height: 2rem;
 		border: none;
 		background-color: $background-secondary-color;
+		color: $highlight-color;
 		text-align: center;
 		caret-color: $highlight-color;
 	}
 
-	&__start-section {
-		position: relative;
-	}
+	&__start {
+		margin-top: auto;
 
-	&__background-photo {
-		// https://jsfiddle.net/pyojwq77/1/
-		background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
-		background-position: top center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		font-size: 0;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		margin: auto;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-
-		@include tablet-breakpoint {
-			background-size: cover;
+		&-content {
+			z-index: 1;
 		}
-	}
-
-	&__overlay {
-		position: absolute;
-		background: linear-gradient(purple, pink);
-		opacity: 60%;
-		width: 100%;
-		height: 100%;
-	}
-
-	&__start-content {
-		position: relative;
-		z-index: 1;
-		margin: auto;
-		padding: 3rem 1rem;
 	}
 
 	&__submit-title {
 		@include heading;
-		font-weight: bold;
-		color: $font-white;
+		font-family: "Arcade";
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		height: 90px;
+		color: $font-primary-color;
+		background: transparent;
+		outline: none;
+		border: none;
+		width: 100%;
+		text-align: center;
+		letter-spacing: 5px;
+		text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe,
+			4px 0 0 #4405fc;
+		animation: blink 1s steps(4, start) infinite;
+		padding: 0 1rem;
+	}
+}
+
+@keyframes blink {
+	to {
+		visibility: hidden;
 	}
 
-	&__submit {
-		@include btn;
-		font-size: 1.5rem;
-		padding: 1rem;
-		margin: 0 auto;
-	}
+	// &__background-photo {
+	// 	// https://jsfiddle.net/pyojwq77/1/
+	// 	background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
+	// 	background-position: top center;
+	// 	background-repeat: no-repeat;
+	// 	background-size: cover;
+	// 	font-size: 0;
+	// 	position: absolute;
+	// 	width: 100%;
+	// 	height: 100%;
+	// 	margin: auto;
+	// 	top: 0;
+	// 	left: 0;
+	// 	bottom: 0;
+	// 	right: 0;
+
+	// 	@include tablet-breakpoint {
+	// 		background-size: cover;
+	// 	}
+	// }
+
+	// &__overlay {
+	// 	position: absolute;
+	// 	background: linear-gradient(purple, pink);
+	// 	opacity: 60%;
+	// 	width: 100%;
+	// 	height: 100%;
+	// }
 }
