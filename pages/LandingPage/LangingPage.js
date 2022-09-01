@@ -1,17 +1,19 @@
-let user = JSON.parse(localStorage.getItem("user"))
+let localUser = JSON.parse(localStorage.getItem("user"))
 	? JSON.parse(localStorage.getItem("user"))
-	: {
-			id: null,
-			name: "",
-			score: 0,
-			lives: 2,
-			difficulty: "standard",
-			questionLimit: 30,
-			guessResults: {
-				incorrectFlags: [],
-				correctFlags: [],
-			},
-	  };
+	: null;
+console.log(localUser.name || "");
+let user = {
+	id: null,
+	name: localUser.name || "",
+	score: 0,
+	lives: 2,
+	difficulty: localUser.difficulty || "standard",
+	questionLimit: localUser.questionLimit || 30,
+	guessResults: {
+		incorrectFlags: [],
+		correctFlags: [],
+	},
+};
 
 const formEl = document.querySelector(".registration-form");
 formEl.addEventListener("keydown", handleKeypress);
@@ -72,8 +74,10 @@ const limitOptions = document.querySelectorAll(
 	".registration-form__limit-option"
 );
 limitOptions.forEach((el) => {
-	if (el.value === user.questionLimit)
+	if (el.value === user.questionLimit) {
 		el.labels[0].classList.add("registration-form__limit-label--active");
+		el.setAttribute("checked", "true");
+	}
 
 	el.addEventListener("click", activeLimit);
 	el.addEventListener("click", () =>

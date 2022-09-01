@@ -134,21 +134,21 @@ function checkAnswer() {
 
 		// More points rewarded for faster response times
 		if (guessOptions.timeRemaining >= 5000) {
-			user.score += 29;
-			resultsObject.points = 29;
+			user.score += 24;
+			resultsObject.points = 24;
 		}
 
 		if (
 			guessOptions.timeRemaining === 4000 ||
 			guessOptions.timeRemaining === 3000
 		) {
-			user.score += 26;
-			resultsObject.points = 26;
+			user.score += 22;
+			resultsObject.points = 22;
 		}
 
 		if (guessOptions.timeRemaining <= 2000) {
-			user.score += 23;
-			resultsObject.points = 23;
+			user.score += 20;
+			resultsObject.points = 20;
 		}
 
 		user.guessResults.correctFlags.push(resultsObject);
