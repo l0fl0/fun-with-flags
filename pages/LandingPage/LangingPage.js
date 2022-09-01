@@ -1,7 +1,6 @@
 let localUser = JSON.parse(localStorage.getItem("user"))
 	? JSON.parse(localStorage.getItem("user"))
 	: null;
-console.log(localUser.name || "");
 let user = {
 	id: null,
 	name: localUser.name || "",

@@ -152,19 +152,52 @@ function checkAnswer() {
 		}
 
 		user.guessResults.correctFlags.push(resultsObject);
-		return gameBuild("correct");
+
+		document.querySelector(
+			".fwf__country-option--active"
+		).style.backgroundColor = "#6cbc3d";
+		document.querySelector(".fwf__country-option--active").style.boxShadow =
+			" 4px 4px 0px 2px #6cbc3d";
+
+		new Audio("/assets/audio/bertrof__game-sound-correct.wav").play();
+
+		if (
+			user.guessResults.correctFlags.length +
+				user.guessResults.incorrectFlags.length ==
+			4
+		)
+			return gameBuild("results", "Question Limit Reached");
+
+		return gameBuild();
 	}
+
 	// if user makes an incorrect guess then give 10 points
 	if (guessOptions.timeRemaining) {
 		user.score += 5;
 		resultsObject.points = 5;
+		document.querySelector(
+			".fwf__country-option--active"
+		).style.backgroundColor = "#e2482d";
+		document.querySelector(".fwf__country-option--active").style.boxShadow =
+			" 4px 4px 0px 2px #e2482d";
 	}
+
+	new Audio(
+		"/assets/audio/bertrof__game-sound-incorrect-with-delay.wav"
+	).play();
 
 	user.lives--;
 	user.guessResults.incorrectFlags.push(resultsObject);
 
-	if (user.lives === 0) return gameBuild("results", "Ran out of lives");
-	return gameBuild("incorrect");
+	if (
+		user.guessResults.correctFlags.length +
+			user.guessResults.incorrectFlags.length ==
+		user.questionLimit
+	)
+		return gameBuild("results", "Question Limit Reached");
+
+	if (user.lives === 0) return gameBuild("results", "You ran out of lives");
+	return gameBuild();
 }
 
 /**
@@ -186,12 +219,6 @@ const startCountdown = async (timeLimit) => {
 
 function gameBuild(results, string) {
 	// if question limit reached end the game
-	if (
-		user.guessResults.correctFlags.length +
-			user.guessResults.incorrectFlags.length ===
-		user.questionLimit
-	)
-		return gameBuild("results", "Question Limit Reached");
 
 	if (results === "results") {
 		document.querySelector(".fwf__display").classList.add("hide");
@@ -206,32 +233,6 @@ function gameBuild(results, string) {
 		localStorage.setItem("user", JSON.stringify(user));
 
 		return;
-	}
-
-	// Choice confirmation animation
-
-	if (results === "correct") {
-		document.querySelector(
-			".fwf__country-option--active"
-		).style.backgroundColor = "#6cbc3d";
-		document.querySelector(".fwf__country-option--active").style.boxShadow =
-			" 4px 4px 0px 2px #6cbc3d";
-
-		new Audio("/assets/audio/bertrof__game-sound-correct.wav").play();
-	}
-
-	if (results === "incorrect") {
-		if (guessOptions.timeRemaining) {
-			document.querySelector(
-				".fwf__country-option--active"
-			).style.backgroundColor = "#e2482d";
-			document.querySelector(".fwf__country-option--active").style.boxShadow =
-				" 4px 4px 0px 2px #e2482d";
-		}
-
-		new Audio(
-			"/assets/audio/bertrof__game-sound-incorrect-with-delay.wav"
-		).play();
 	}
 
 	// timeout for animation between questions
