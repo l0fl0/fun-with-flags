@@ -274,8 +274,6 @@ const startGame = async () => {
 	)
 		return gameBuild("results", "Question Limit Reached");
 
-	if (user.difficulty === "hard") user.lives = 3;
-
 	await fetch("https://flagcdn.com/en/codes.json")
 		.then((response) => response.json())
 		.then((data) => define(data))

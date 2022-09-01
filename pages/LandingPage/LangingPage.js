@@ -1,15 +1,17 @@
-let user = {
-	id: null,
-	name: "",
-	score: 0,
-	lives: 2,
-	difficulty: "standard",
-	questionLimit: 0,
-	guessResults: {
-		incorrectFlags: [],
-		correctFlags: [],
-	},
-};
+let user = JSON.parse(localStorage.getItem("user"))
+	? JSON.parse(localStorage.getItem("user"))
+	: {
+			id: null,
+			name: "",
+			score: 0,
+			lives: 2,
+			difficulty: "standard",
+			questionLimit: 30,
+			guessResults: {
+				incorrectFlags: [],
+				correctFlags: [],
+			},
+	  };
 
 const formEl = document.querySelector(".registration-form");
 formEl.addEventListener("keydown", handleKeypress);
@@ -25,9 +27,10 @@ function handleKeypress(e) {
 		return false;
 	}
 }
+
 // Username
 const usernameInput = document.querySelector("#username");
-usernameInput.value = JSON.parse(localStorage.getItem("user")).name;
+usernameInput.value = user.name;
 usernameInput.addEventListener("input", () =>
 	new Audio("/assets/audio/keypress.wav").play()
 );
@@ -40,6 +43,11 @@ const difficultyOptions = document.querySelectorAll(
 	".registration-form__difficulty-option"
 );
 difficultyOptions.forEach((el) => {
+	if (el.value === user.difficulty) {
+		el.labels[0].classList.add("registration-form__difficulty-label--active");
+		el.setAttribute("checked", "true");
+	}
+
 	el.addEventListener("click", activeDifficulty);
 	el.addEventListener("click", () =>
 		new Audio("/assets/audio/click.wav").play()
@@ -47,10 +55,16 @@ difficultyOptions.forEach((el) => {
 });
 
 function activeDifficulty(event) {
-	difficultyOptions.forEach((el) =>
-		el.labels[0].classList.remove("registration-form__label--active")
+	difficultyOptions.forEach((el) => {
+		el.labels[0].classList.remove(
+			"registration-form__difficulty-label--active"
+		);
+		el.setAttribute("checked", "false");
+	});
+	event.target.setAttribute("checked", "true");
+	event.target.labels[0].classList.add(
+		"registration-form__difficulty-label--active"
 	);
-	event.target.labels[0].classList.add("registration-form__label--active");
 }
 
 // Question Limit Option
@@ -58,6 +72,9 @@ const limitOptions = document.querySelectorAll(
 	".registration-form__limit-option"
 );
 limitOptions.forEach((el) => {
+	if (el.value === user.questionLimit)
+		el.labels[0].classList.add("registration-form__limit-label--active");
+
 	el.addEventListener("click", activeLimit);
 	el.addEventListener("click", () =>
 		new Audio("/assets/audio/click.wav").play()
@@ -65,9 +82,11 @@ limitOptions.forEach((el) => {
 });
 
 function activeLimit(event) {
-	limitOptions.forEach((el) =>
-		el.labels[0].classList.remove("registration-form__limit-label--active")
-	);
+	limitOptions.forEach((el) => {
+		el.labels[0].classList.remove("registration-form__limit-label--active");
+		el.setAttribute("checked", "false");
+	});
+	event.target.setAttribute("checked", "true");
 	event.target.labels[0].classList.add(
 		"registration-form__limit-label--active"
 	);
@@ -85,9 +104,14 @@ function handleSubmit(event) {
 	user.id = crypto.randomUUID
 		? crypto.randomUUID()
 		: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+
 	user.name = event.target.username.value;
 	user.difficulty = event.target.difficulty.value;
 	user.questionLimit = event.target.questionLimit.value;
+	user.score = 0;
+
+	if (user.difficulty === "hard") user.lives = 3;
+	else user.lives = 2;
 
 	localStorage.setItem("user", JSON.stringify(user));
 

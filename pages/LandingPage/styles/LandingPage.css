@@ -164,14 +164,14 @@ body {
   opacity: 0;
   width: 0;
 }
-.registration-form__label, .registration-form__limit-label {
+.registration-form__difficulty-label, .registration-form__limit-label {
   text-transform: uppercase;
   display: inline-block;
   padding: 0.3rem;
   width: 10rem;
   color: #7c7c7c;
 }
-.registration-form__label--active, .registration-form__limit-label--active {
+.registration-form__difficulty-label--active, .registration-form__limit-label--active {
   color: #e5e5e5;
   background-color: #6cbc3d;
 }
