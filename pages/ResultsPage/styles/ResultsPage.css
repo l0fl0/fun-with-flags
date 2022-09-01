@@ -345,6 +345,16 @@ body {
   -webkit-animation: blink-aqua 1500ms infinite ease-in;
           animation: blink-aqua 1500ms infinite ease-in;
 }
+.scoreboard__elipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Arcade";
+  font-size: 1rem;
+  text-align: center;
+  margin: 0.5rem auto;
+  margin-left: 1rem;
+}
 
 .footer {
   margin-top: auto;

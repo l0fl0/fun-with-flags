@@ -63,11 +63,30 @@ async function buildResults() {
 	}
 }
 
+let users = await JSON.parse(localStorage.getItem("users"));
+let sortedUsers = await users.sort((a, b) => b.score - a.score);
+
 async function displayScoreboard() {
-	let users = await JSON.parse(localStorage.getItem("users"));
-	let sortedUsers = await users.sort((a, b) => b.score - a.score);
 	localStorage.setItem("users", JSON.stringify(sortedUsers));
 
+	for (let i = 0; i < 10; i++) {
+		buildScoreRow(sortedUsers[i], ".scoreboard__difficulty-standard");
+	}
+
+	// User index in scoreboard
+	const currentUserIndex = sortedUsers.findIndex(
+		(obj) => obj.id === currentUser.id
+	);
+
+	// display score under elipsis
+	if (currentUserIndex > 9)
+		buildScoreRow(
+			sortedUsers[currentUserIndex],
+			".scoreboard__current-user-score"
+		);
+}
+
+function buildScoreRow(userObj, parent) {
 	let sufixes = (number) => {
 		if (number > 10) return number;
 		if (number === 1) return number + "st";
@@ -76,44 +95,33 @@ async function displayScoreboard() {
 		return number + "th";
 	};
 
-	for (let i = 0; i < 10; i++) {
-		let row = createPageElement("div", "scoreboard__row");
-		if (sortedUsers[i].id === currentUser.id) {
-			row.classList.add("scoreboard__current-score");
-			row.focus();
-		}
-
-		let rank = createPageElement(
-			"span",
-			"scoreboard__rank",
-			sufixes(sortedUsers.indexOf(sortedUsers[i]) + 1)
-		);
-
-		let name = createPageElement(
-			"span",
-			"scoreboard__name",
-			sortedUsers[i].name
-		);
-
-		let score = createPageElement(
-			"span",
-			"scoreboard__score",
-			sortedUsers[i].score ? sortedUsers[i].score : "0"
-		);
-
-		row.appendChild(rank);
-		row.appendChild(score);
-		row.appendChild(name);
-
-		document.querySelector(".scoreboard__difficulty-standard").appendChild(row);
+	let row = createPageElement("div", "scoreboard__row");
+	if (userObj.id === currentUser.id) {
+		row.classList.add("scoreboard__current-score");
+		row.focus();
 	}
-}
-//play again sound
-document.getElementById("playAgain").addEventListener("click", () => {
-	new Audio("/assets/audio/stavsounds__correct3.wav").play();
-	setTimeout(() => window.location.assign("/index.html"), 1000);
-});
 
+	let rank = createPageElement(
+		"span",
+		"scoreboard__rank",
+		sufixes(sortedUsers.indexOf(userObj) + 1)
+	);
+
+	let name = createPageElement("span", "scoreboard__name", userObj.name);
+
+	let score = createPageElement(
+		"span",
+		"scoreboard__score",
+		userObj.score ? userObj.score : "0"
+	);
+
+	row.appendChild(rank);
+	row.appendChild(score);
+	row.appendChild(name);
+
+	document.querySelector(parent).appendChild(row);
+}
+// Slider
 let slideButtons = document.querySelectorAll(".nav__slide");
 for (let button of slideButtons) {
 	button.addEventListener("click", handleNavSlide);
@@ -152,6 +160,31 @@ function handleNavSlide(event) {
 	if ((event.target.id = "leftSide")) {
 	}
 }
+
+//view all scores
+let viewAllScores = document.querySelector(".scoreboard__elipsis");
+let showAllScores = true;
+viewAllScores.addEventListener("click", () => {
+	if (showAllScores) {
+		showAllScores = false;
+		for (let i = 10; i < sortedUsers.length; i++) {
+			buildScoreRow(sortedUsers[i], ".scoreboard__difficulty-standard");
+		}
+
+		document.querySelector(".scoreboard__current-user-score").innerHTML = "";
+		return;
+	}
+
+	showAllScores = true;
+	document.querySelector(".scoreboard__difficulty-standard").innerHTML = "";
+	displayScoreboard();
+});
+
+//play again sound
+document.getElementById("playAgain").addEventListener("click", () => {
+	new Audio("/assets/audio/stavsounds__correct3.wav").play();
+	setTimeout(() => window.location.assign("/index.html"), 1000);
+});
 
 // on loading screen
 new Audio("/assets/audio/stavsounds__correct3.wav").play();
