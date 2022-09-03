@@ -67,6 +67,10 @@ body::-webkit-scrollbar {
   }
 }
 
+main {
+  z-index: 3;
+}
+
 .header__title {
   font-family: "ArcadeInterlaced", "Arcade";
   margin: 1.5rem 0;

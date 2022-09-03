@@ -52,6 +52,7 @@ body {
   font-size: 0.8rem;
   height: 100%;
   min-height: 97vh;
+  overflow: hidden;
   background-color: #2e2e2e;
   color: #e5e5e5;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -65,6 +66,10 @@ body::-webkit-scrollbar {
   body {
     font-size: 1rem;
   }
+}
+
+main {
+  z-index: 3;
 }
 
 .header__title {
@@ -121,9 +126,23 @@ body::-webkit-scrollbar {
   display: block !important;
 }
 
-body {
+main {
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.background__container {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  opacity: 5%;
+  max-height: 100vh;
+}
+.background__image {
+  width: 15%;
+  height: 5%;
 }
 
 .registration-form__content {
@@ -180,7 +199,7 @@ body {
   font-size: 0.8rem;
   height: 2rem;
   border: none;
-  background-color: #2e2e2e;
+  background-color: transparent;
   color: rgb(255, 216, 62);
   text-align: center;
   caret-color: rgb(255, 216, 62);

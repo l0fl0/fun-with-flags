@@ -1,6 +1,7 @@
-let localUser = JSON.parse(localStorage.getItem("user"))
-	? JSON.parse(localStorage.getItem("user"))
-	: null;
+import { shuffle } from "../../scripts/utils.js";
+import { createPageElement } from "../../scripts/utils.js";
+
+let localUser = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")) : {};
 let user = {
 	id: null,
 	name: localUser.name || "",
@@ -32,17 +33,11 @@ function handleKeypress(e) {
 // Username
 const usernameInput = document.querySelector("#username");
 usernameInput.value = user.name;
-usernameInput.addEventListener("input", () =>
-	new Audio("/assets/audio/keypress.wav").play()
-);
-usernameInput.addEventListener("click", () =>
-	new Audio("/assets/audio/click.wav").play()
-);
+usernameInput.addEventListener("input", () => new Audio("/assets/audio/keypress.wav").play());
+usernameInput.addEventListener("click", () => new Audio("/assets/audio/click.wav").play());
 
 // Difficutly Option
-const difficultyOptions = document.querySelectorAll(
-	".registration-form__difficulty-option"
-);
+const difficultyOptions = document.querySelectorAll(".registration-form__difficulty-option");
 difficultyOptions.forEach((el) => {
 	if (el.value === user.difficulty) {
 		el.labels[0].classList.add("registration-form__difficulty-label--active");
@@ -50,38 +45,28 @@ difficultyOptions.forEach((el) => {
 	}
 
 	el.addEventListener("click", activeDifficulty);
-	el.addEventListener("click", () =>
-		new Audio("/assets/audio/click.wav").play()
-	);
+	el.addEventListener("click", () => new Audio("/assets/audio/click.wav").play());
 });
 
 function activeDifficulty(event) {
 	difficultyOptions.forEach((el) => {
-		el.labels[0].classList.remove(
-			"registration-form__difficulty-label--active"
-		);
+		el.labels[0].classList.remove("registration-form__difficulty-label--active");
 		el.setAttribute("checked", "false");
 	});
 	event.target.setAttribute("checked", "true");
-	event.target.labels[0].classList.add(
-		"registration-form__difficulty-label--active"
-	);
+	event.target.labels[0].classList.add("registration-form__difficulty-label--active");
 }
 
 // Question Limit Option
-const limitOptions = document.querySelectorAll(
-	".registration-form__limit-option"
-);
+const limitOptions = document.querySelectorAll(".registration-form__limit-option");
 limitOptions.forEach((el) => {
-	if (el.value === user.questionLimit) {
+	if (el.value == user.questionLimit) {
 		el.labels[0].classList.add("registration-form__limit-label--active");
 		el.setAttribute("checked", "true");
 	}
 
 	el.addEventListener("click", activeLimit);
-	el.addEventListener("click", () =>
-		new Audio("/assets/audio/click.wav").play()
-	);
+	el.addEventListener("click", () => new Audio("/assets/audio/click.wav").play());
 });
 
 function activeLimit(event) {
@@ -90,18 +75,14 @@ function activeLimit(event) {
 		el.setAttribute("checked", "false");
 	});
 	event.target.setAttribute("checked", "true");
-	event.target.labels[0].classList.add(
-		"registration-form__limit-label--active"
-	);
+	event.target.labels[0].classList.add("registration-form__limit-label--active");
 }
 
 // Form submit handler
 function handleSubmit(event) {
 	event.preventDefault();
 
-	new Audio(
-		"/assets/audio/fartbiscuit1700__8-bit-arcade-video-game-start-sound-effect-gun-reload-and-jump.wav"
-	).play();
+	new Audio("/assets/audio/stavsounds__correct3.wav").play();
 
 	// Store registration information
 	user.id = crypto.randomUUID
@@ -120,3 +101,19 @@ function handleSubmit(event) {
 
 	setTimeout(() => window.location.assign("/pages/FWFGame/index.html"), 700);
 }
+
+function backgroundFlags() {
+	const backgroundEL = document.querySelector(".background__container");
+	const flagsObjects = JSON.parse(localStorage.getItem("apiResponse"));
+
+	for (let countryCode of shuffle(Object.keys(flagsObjects))) {
+		if (backgroundEL.clientHeight === window.innerHeight) break;
+
+		let flag = createPageElement("img", "background__image");
+		flag.setAttribute("src", `https://flagcdn.com/${countryCode}.svg`);
+
+		backgroundEL.appendChild(flag);
+	}
+}
+
+backgroundFlags();

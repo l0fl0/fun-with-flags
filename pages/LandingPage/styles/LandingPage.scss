@@ -2,9 +2,26 @@
 @use "../../../partials/mixins" as *;
 @use "../../../partials/variables" as *;
 
-body {
+main {
 	display: flex;
 	flex-direction: column;
+	position: relative;
+}
+
+.background {
+	&__container {
+		position: absolute;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		opacity: 5%;
+		max-height: 100vh;
+	}
+
+	&__image {
+		width: 15%;
+		height: 5%;
+	}
 }
 
 //* Register to play
@@ -56,7 +73,7 @@ body {
 		font-size: 0.8rem;
 		height: 2rem;
 		border: none;
-		background-color: $background-secondary-color;
+		background-color: transparent;
 		color: $highlight-color;
 		text-align: center;
 		caret-color: $highlight-color;
@@ -85,8 +102,7 @@ body {
 		width: 100%;
 		text-align: center;
 		letter-spacing: 5px;
-		text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe,
-			4px 0 0 #4405fc;
+		text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe, 4px 0 0 #4405fc;
 		animation: blink 1s steps(4, start) infinite;
 		padding: 0 1rem;
 	}

@@ -189,11 +189,11 @@ function checkAnswer() {
 	user.lives--;
 	user.guessResults.incorrectFlags.push(resultsObject);
 
-	if (
+	let questionNumber =
 		user.guessResults.correctFlags.length +
-			user.guessResults.incorrectFlags.length ==
-		user.questionLimit
-	)
+		user.guessResults.incorrectFlags.length;
+
+	if (questionNumber == user.questionLimit)
 		return gameBuild("results", "Question Limit Reached");
 
 	if (user.lives === 0) return gameBuild("results", "You ran out of lives");
