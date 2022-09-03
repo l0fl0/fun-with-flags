@@ -138,6 +138,7 @@ body {
 .user-info__container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .user-info__username {
   margin: 1.5rem 0;
@@ -163,6 +164,10 @@ body {
   .user-info__currentscore {
     font-size: 2rem;
   }
+}
+.user-info__question-total {
+  margin-left: auto;
+  font-size: 0.7rem;
 }
 
 .progressbar {
