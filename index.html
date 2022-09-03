@@ -29,88 +29,92 @@
 </head>
 
 <body>
-  <header class="header">
-    <h1 class="header__title">
-      <div class="header__title-word-container">
-        <span class="header__title-word">fun</span>
-        <span class="header__title-word--shadow">fun</span>
-      </div>
-      <div class="header__title-word-container">
-        <span class="header__title-word">with</span>
-        <span class="header__title-word--shadow">with</span>
-      </div>
-      <div class="header__title-word-container">
-        <span class="header__title-word">flags</span>
-        <span class="header__title-word--shadow">flags</span>
-      </div>
-    </h1>
-    <!-- <div class="header__logo">
-      <img src="/assets/icons/question_384.png" alt="fwf logo">
-    </div> -->
-  </header>
+  <div class="background__container">
+  </div>
+  <main>
+    <header class="header">
+      <h1 class="header__title">
+        <div class="header__title-word-container">
+          <span class="header__title-word">fun</span>
+          <span class="header__title-word--shadow">fun</span>
+        </div>
+        <div class="header__title-word-container">
+          <span class="header__title-word">with</span>
+          <span class="header__title-word--shadow">with</span>
+        </div>
+        <div class="header__title-word-container">
+          <span class="header__title-word">flags</span>
+          <span class="header__title-word--shadow">flags</span>
+        </div>
+      </h1>
+      <!-- <div class="header__logo">
+        <img src="/assets/icons/question_384.png" alt="fwf logo">
+      </div> -->
+    </header>
 
 
-  <form class="registration-form">
-    <section class="registration-form__content">
-      <h2 class="registration-form__heading">Game Options</h2>
-      <h3 class="registration-form__sub-heading">Enter a Name</h3>
-      <label for="username">
-        <input class="registration-form__username" maxlength="10" type="text" name="username" id="username"
-          placeholder="Username" autocomplete="off">
-      </label>
+    <form class="registration-form">
+      <section class="registration-form__content">
+        <h2 class="registration-form__heading">Game Options</h2>
+        <h3 class="registration-form__sub-heading">Enter a Name</h3>
+        <label for="username">
+          <input class="registration-form__username" maxlength="10" type="text" name="username" id="username"
+            placeholder="Username" autocomplete="off">
+        </label>
 
-      <ul class="registration-form__game-options">
-        <h3 class="registration-form__sub-heading">Difficulty</h3>
-        <li>
-          <input class="registration-form__difficulty-option " type="radio" name="difficulty" id="difficulty0"
-            value="standard">
-          <label for="difficulty0" class="registration-form__difficulty-label">Standard</label>
-        </li>
-        <li>
-          <input class="registration-form__difficulty-option" type="radio" name="difficulty" id="difficulty1"
-            value="hard">
-          <label for="difficulty1" class="registration-form__difficulty-label">Hard</label>
-        </li>
-      </ul>
+        <ul class="registration-form__game-options">
+          <h3 class="registration-form__sub-heading">Difficulty</h3>
+          <li>
+            <input class="registration-form__difficulty-option " type="radio" name="difficulty" id="difficulty0"
+              value="standard">
+            <label for="difficulty0" class="registration-form__difficulty-label">Standard</label>
+          </li>
+          <li>
+            <input class="registration-form__difficulty-option" type="radio" name="difficulty" id="difficulty1"
+              value="hard">
+            <label for="difficulty1" class="registration-form__difficulty-label">Hard</label>
+          </li>
+        </ul>
 
-      <ul class="registration-form__game-options">
-        <h3 class="registration-form__sub-heading">Question Limit</h3>
-        <li>
-          <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit30"
-            value="30">
-          <label for="questionLimit30" class="registration-form__limit-label">30</label>
-        </li>
-        <li>
-          <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit60"
-            value="60">
-          <label for="questionLimit60" class="registration-form__limit-label">60</label>
-        </li>
-        <li>
-          <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit90"
-            value="90">
-          <label for="questionLimit90" class="registration-form__limit-label">90</label>
-        </li>
-        <li>
-          <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit256"
-            value="256">
-          <label for="questionLimit256" class="registration-form__limit-label">256</label>
-        </li>
-      </ul>
-    </section>
+        <ul class="registration-form__game-options">
+          <h3 class="registration-form__sub-heading">Question Limit</h3>
+          <li>
+            <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit30"
+              value="30">
+            <label for="questionLimit30" class="registration-form__limit-label">30</label>
+          </li>
+          <li>
+            <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit60"
+              value="60">
+            <label for="questionLimit60" class="registration-form__limit-label">60</label>
+          </li>
+          <li>
+            <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit90"
+              value="90">
+            <label for="questionLimit90" class="registration-form__limit-label">90</label>
+          </li>
+          <li>
+            <input class="registration-form__limit-option" type="radio" name="questionLimit" id="questionLimit256"
+              value="256">
+            <label for="questionLimit256" class="registration-form__limit-label">256</label>
+          </li>
+        </ul>
+      </section>
 
-    <section class="registration-form__start">
-      <!-- <div class="registration-form__background-photo">
-          <div class="registration-form__overlay"></div>
-        </div> -->
+      <section class="registration-form__start">
+        <!-- <div class="registration-form__background-photo">
+            <div class="registration-form__overlay"></div>
+          </div> -->
 
-      <div class="registration-form__start-content">
-        <button class="registration-form__submit-title" type="submit">
-          Insert Coin
-        </button>
-      </div>
+        <div class="registration-form__start-content">
+          <button class="registration-form__submit-title" type="submit">
+            Insert Coin
+          </button>
+        </div>
 
-    </section>
-  </form>
+      </section>
+    </form>
+  </main>
   <script src="./pages/LandingPage/LangingPage.js" type="module"></script>
 </body>
 

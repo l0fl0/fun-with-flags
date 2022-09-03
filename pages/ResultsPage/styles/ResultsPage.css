@@ -52,6 +52,7 @@ body {
   font-size: 0.8rem;
   height: 100%;
   min-height: 97vh;
+  overflow: hidden;
   background-color: #2e2e2e;
   color: #e5e5e5;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -65,6 +66,10 @@ body::-webkit-scrollbar {
   body {
     font-size: 1rem;
   }
+}
+
+main {
+  z-index: 3;
 }
 
 .header__title {
