@@ -102,11 +102,10 @@ function handleSubmit(event) {
 	setTimeout(() => window.location.assign("/pages/FWFGame/index.html"), 700);
 }
 
-function backgroundFlags() {
+function backgroundFlags(flagObject) {
 	const backgroundEL = document.querySelector(".background__container");
-	const flagsObjects = JSON.parse(localStorage.getItem("apiResponse"));
 
-	for (let countryCode of shuffle(Object.keys(flagsObjects))) {
+	for (let countryCode of flagObject) {
 		if (backgroundEL.clientHeight === window.innerHeight) break;
 
 		let flag = createPageElement("img", "background__image");
@@ -116,4 +115,41 @@ function backgroundFlags() {
 	}
 }
 
-backgroundFlags();
+/*
+ Defines the variables from API and saves to local storage
+*/
+const define = (data) => {
+	const filteredApiResponse = Object.entries(data).filter((code) => !code[0].startsWith("us-"));
+
+	sessionStorage.setItem(
+		"apiResponseWithoutStates",
+		JSON.stringify(
+			filteredApiResponse.reduce((acc, curr) => {
+				let key = curr[0],
+					value = curr[1];
+				acc[key] = value;
+				return acc;
+			}, {})
+		)
+	);
+
+	sessionStorage.setItem(
+		"gameFlags",
+		JSON.stringify(shuffle(Object.keys(JSON.parse(sessionStorage.getItem("apiResponseWithoutStates")))))
+	);
+
+	backgroundFlags(JSON.parse(sessionStorage.getItem("gameFlags")));
+};
+
+const flagData = async () => {
+	if (!localStorage.getItem("apiResponse")) {
+		await fetch("https://flagcdn.com/en/codes.json")
+			.then((response) => response.json())
+			.then((data) => {
+				localStorage.setItem("apiResponse", JSON.stringify(data));
+				define(data);
+			});
+	} else define(JSON.parse(localStorage.getItem("apiResponse")));
+};
+
+flagData();
