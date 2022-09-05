@@ -22,10 +22,10 @@ function buildUserInfo(user) {
 	const currentscore = document.querySelector(".user-info__currentscore");
 	currentscore.innerText = `${user.score}`;
 
-	let currentQuestion = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length;
+	let currentQuestion = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
 
 	const questionTotal = document.querySelector(".user-info__question-total");
-	questionTotal.innerText = `${currentQuestion + 1}/${user.questionLimit}`;
+	questionTotal.innerText = `${currentQuestion}/${user.questionLimit}`;
 
 	startCountdown(timeLimit); //! why is this here?
 }
@@ -112,6 +112,7 @@ const showCountryFlag = (countries) => {
 
 function checkAnswer() {
 	let options = document.querySelectorAll(".fwf__country-option");
+	// Dont allow clicking of a new answer after time
 	for (let option of options) {
 		option.removeEventListener("click", handleOptionSelect);
 	}
@@ -121,7 +122,8 @@ function checkAnswer() {
 		correctChoice: guessOptions.correctChoice,
 		points: 0,
 	};
-	let questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length;
+
+	let questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
 
 	if (guessOptions.choice === guessOptions.correctChoice) {
 		if (user.difficulty === "standard") {
@@ -240,12 +242,13 @@ const define = (data) => {
 	gameFlags = shuffle(Object.keys(apiResponseWithoutStates));
 };
 
-const startGame = async () => {
+const startGame = () => {
 	if (user.lives === 0) return gameBuild("results", "ran out of lives");
+
 	if (user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length === user.questionLimit)
 		return gameBuild("results", "Question Limit Reached");
 
-	await fetch("https://flagcdn.com/en/codes.json")
+	fetch("https://flagcdn.com/en/codes.json")
 		.then((response) => response.json())
 		.then((data) => define(data))
 		.then(() => {
