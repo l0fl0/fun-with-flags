@@ -1,13 +1,14 @@
 import { createPageElement, shuffle, getRandomInt } from "../../scripts/utils.js";
 import { move } from "../../scripts/ProgressBarAnimation.js";
 
-let apiResponse = {},
-	apiResponseWithoutStates = {},
-	gameFlags = [];
-let user = JSON.parse(localStorage.getItem("user"));
-let users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
-let timeLimit = 6000;
-let countdown = 0;
+let apiResponse = JSON.parse(localStorage.getItem("apiResoponse")),
+	apiResponseWithoutStates = JSON.parse(sessionStorage.getItem("apiResponseWithoutStates")),
+	gameFlags = JSON.parse(sessionStorage.getItem("gameFlags")),
+	user = JSON.parse(localStorage.getItem("user")),
+	users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
+
+let timeLimit = 6000,
+	countdown = 0;
 let guessOptions = {
 	choice: null,
 	correctChoice: null,
@@ -26,8 +27,6 @@ function buildUserInfo(user) {
 
 	const questionTotal = document.querySelector(".user-info__question-total");
 	questionTotal.innerText = `${currentQuestion}/${user.questionLimit}`;
-
-	startCountdown(timeLimit); //! why is this here?
 }
 
 function buildGameContainer(data) {
@@ -50,11 +49,15 @@ function buildGameContainer(data) {
 
 		options.appendChild(countryOptionBtn);
 	});
+
+	startCountdown(timeLimit);
 }
 
 function handleOptionSelect(event) {
 	event.preventDefault();
+	//set variable for time remaining if choice is selected
 	guessOptions.timeRemaining = countdown;
+
 	new Audio("/assets/audio/click.wav").play();
 
 	//remove active choice css
@@ -118,33 +121,31 @@ function checkAnswer() {
 	}
 
 	let resultsObject = {
-		choice: guessOptions.choice,
-		correctChoice: guessOptions.correctChoice,
 		points: 0,
+		correctChoice: guessOptions.correctChoice,
 	};
 
-	let questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
+	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
 
+	// For correct response
 	if (guessOptions.choice === guessOptions.correctChoice) {
-		if (user.difficulty === "standard") {
+		if (user.difficulty === "standard" && user.lives === 1) {
 			// unlimited lives as long as you dont get two questions incorrect conssecutively
-			if (user.lives === 1) user.lives = 2;
+			user.lives = 2;
 		}
 
 		// More points rewarded for faster response times
 		if (guessOptions.timeRemaining >= 5000) {
+			user.score += 30;
+			resultsObject.points = 30;
+		}
+		if (guessOptions.timeRemaining === 4000 || guessOptions.timeRemaining === 3000) {
+			user.score += 27;
+			resultsObject.points = 27;
+		}
+		if (guessOptions.timeRemaining <= 2000) {
 			user.score += 24;
 			resultsObject.points = 24;
-		}
-
-		if (guessOptions.timeRemaining === 4000 || guessOptions.timeRemaining === 3000) {
-			user.score += 22;
-			resultsObject.points = 22;
-		}
-
-		if (guessOptions.timeRemaining <= 2000) {
-			user.score += 20;
-			resultsObject.points = 20;
 		}
 
 		user.guessResults.correctFlags.push(resultsObject);
@@ -154,27 +155,32 @@ function checkAnswer() {
 
 		new Audio("/assets/audio/bertrof__game-sound-correct.wav").play();
 
-		if (questionNumber == user.questionLimit) return gameBuild("results", "Question Limit Reached");
+		if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
 
 		return gameBuild();
 	}
 
-	// if user makes an incorrect guess then give 10 points
+	// if user makes an incorrect guess then give points
 	if (guessOptions.timeRemaining) {
-		user.score += 5;
-		resultsObject.points = 5;
+		user.score += 9;
+		resultsObject.points = 9;
 		document.querySelector(".fwf__country-option--active").style.backgroundColor = "#e2482d";
 		document.querySelector(".fwf__country-option--active").style.boxShadow = " 4px 4px 0px 2px #e2482d";
 	}
 
+	// play audio for incorrect response
 	new Audio("/assets/audio/bertrof__game-sound-incorrect-with-delay.wav").play();
 
+	// subtract lives and store result
 	user.lives--;
+
+	resultsObject["choice"] = guessOptions.choice;
 	user.guessResults.incorrectFlags.push(resultsObject);
 
-	if (questionNumber == user.questionLimit) return gameBuild("results", "Question Limit Reached");
+	if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
 
-	if (user.lives === 0) return gameBuild("results", "You ran out of lives");
+	if (user.lives === 0) return gameBuild("lives", "You ran out of lives");
+
 	return gameBuild();
 }
 
@@ -196,25 +202,28 @@ const startCountdown = async (timeLimit) => {
 };
 
 function gameBuild(results, string) {
-	// if question limit reached end the game
-
-	if (results === "results") {
-		document.querySelector(".fwf__display").classList.add("hide");
-		document.querySelector(".user-info").classList.add("hide");
-		document.querySelector(".fwf__gameover").classList.add("show");
-		document.querySelector(".fwf__gameover-reason").innerText = string;
-
-		new Audio("/assets/audio/themusicalnomad__negative-beeps.wav").play();
-
-		users.push(user);
-		localStorage.setItem("users", JSON.stringify(users));
-		localStorage.setItem("user", JSON.stringify(user));
-
-		return;
-	}
-
 	// timeout for animation between questions
 	setTimeout(() => {
+		if (results) {
+			document.querySelector(".fwf__display").classList.add("hide");
+			document.querySelector(".user-info").classList.add("hide");
+			document.querySelector(".fwf__gameover").classList.add("show");
+			document.querySelector(".fwf__gameover-reason").innerText = string;
+
+			users.push(user);
+			localStorage.setItem("users", JSON.stringify(users));
+			localStorage.setItem("user", JSON.stringify(user));
+
+			if (results === "limit") {
+				new Audio(
+					"/assets/audio/fartbiscuit1700__8-bit-arcade-video-game-start-sound-effect-gun-reload-and-jump.wav"
+				).play();
+			}
+			if (results === "lives") new Audio("/assets/audio/themusicalnomad__negative-beeps.wav").play();
+
+			return;
+		}
+
 		// reset game options
 		guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
 
@@ -223,38 +232,9 @@ function gameBuild(results, string) {
 	}, 1000);
 }
 
-/*
- Defines the variables from API and saves to local storage
-*/
-const define = (data) => {
-	localStorage.setItem("apiResponse", JSON.stringify(data));
-	apiResponse = data;
-
-	const filteredApiResponse = Object.entries(apiResponse).filter((code) => !code[0].startsWith("us-"));
-
-	apiResponseWithoutStates = filteredApiResponse.reduce((acc, curr) => {
-		let key = curr[0],
-			value = curr[1];
-		acc[key] = value;
-		return acc;
-	}, {});
-
-	gameFlags = shuffle(Object.keys(apiResponseWithoutStates));
-};
-
 const startGame = () => {
-	if (user.lives === 0) return gameBuild("results", "ran out of lives");
-
-	if (user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length === user.questionLimit)
-		return gameBuild("results", "Question Limit Reached");
-
-	fetch("https://flagcdn.com/en/codes.json")
-		.then((response) => response.json())
-		.then((data) => define(data))
-		.then(() => {
-			buildUserInfo(user);
-			buildGameContainer(showCountryFlag(apiResponseWithoutStates));
-		});
+	buildUserInfo(user);
+	buildGameContainer(showCountryFlag(apiResponseWithoutStates));
 };
 
 startGame();

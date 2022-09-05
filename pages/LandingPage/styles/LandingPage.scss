@@ -11,16 +11,10 @@ main {
 .background {
 	&__container {
 		position: absolute;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-around;
-		opacity: 5%;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		opacity: 7%;
 		max-height: 100vh;
-	}
-
-	&__image {
-		width: 15%;
-		height: 5%;
 	}
 }
 

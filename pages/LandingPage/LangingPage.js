@@ -91,7 +91,7 @@ function handleSubmit(event) {
 
 	user.name = event.target.username.value;
 	user.difficulty = event.target.difficulty.value;
-	user.questionLimit = event.target.questionLimit.value;
+	user.questionLimit = Number(event.target.questionLimit.value);
 	user.score = 0;
 
 	if (user.difficulty === "hard") user.lives = 3;
@@ -102,12 +102,13 @@ function handleSubmit(event) {
 	setTimeout(() => window.location.assign("/pages/FWFGame/index.html"), 700);
 }
 
-function backgroundFlags(flagObject) {
+function backgroundFlags(flagCodeArray) {
 	const backgroundEL = document.querySelector(".background__container");
 
-	for (let countryCode of flagObject) {
-		if (backgroundEL.clientHeight === window.innerHeight) break;
+	//TODO: Create recursive function and add a delay for each call
 
+	for (let countryCode of flagCodeArray) {
+		if (backgroundEL.clientHeight === window.innerHeight) break;
 		let flag = createPageElement("img", "background__image");
 		flag.setAttribute("src", `https://flagcdn.com/${countryCode}.svg`);
 
