@@ -1,4 +1,4 @@
-import { createPageElement, shuffle, getRandomInt } from "../../scripts/utils.js";
+import { createPageElement, shuffle, getRandomInt, playFile } from "../../scripts/utils.js";
 import { move } from "../../scripts/ProgressBarAnimation.js";
 
 let apiResponse = JSON.parse(localStorage.getItem("apiResoponse")),
@@ -9,11 +9,17 @@ let apiResponse = JSON.parse(localStorage.getItem("apiResoponse")),
 
 let timeLimit = 6000,
 	countdown = 0;
+
 let guessOptions = {
 	choice: null,
 	correctChoice: null,
 	timeRemaining: null,
 };
+
+// Audio api
+// for cross browser
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioContext();
 
 function buildUserInfo(user) {
 	// User info
@@ -58,7 +64,7 @@ function handleOptionSelect(event) {
 	//set variable for time remaining if choice is selected
 	guessOptions.timeRemaining = countdown;
 
-	new Audio("/assets/audio/click.wav").play();
+	playFile("/assets/audio/click.wav", audioCtx);
 
 	//remove active choice css
 	if (document.querySelector(".fwf__country-option--active")) {
@@ -70,20 +76,20 @@ function handleOptionSelect(event) {
 	guessOptions.choice = event.target.attributes.cc.value;
 }
 
-const showCountryFlag = (countries) => {
-	let countryKeys = Object.keys(countries);
+function showCountryFlag(countries) {
+	const countryKeys = Object.keys(countries);
 
 	/**
 	 * Returns Random Country code from counrtyCodes Array
 	 */
 	const randomCodeGenerator = () => {
-		let code = getRandomInt(countryKeys.length);
+		const code = getRandomInt(countryKeys.length);
 		return countryKeys[`${code}`];
 	};
 
-	let countryCode = gameFlags[0];
+	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length;
+	const countryCode = gameFlags[questionNumber];
 	guessOptions.correctChoice = countryCode;
-	gameFlags.shift();
 
 	// store the random url
 	let flagUrl = `https://flagcdn.com/${countryCode}.svg`;
@@ -92,7 +98,7 @@ const showCountryFlag = (countries) => {
 	let countryOptions = [];
 	countryOptions.push({ countryCode, country: countries[countryCode] });
 
-	for (let i = 1; i < 4; i++) {
+	for (let i = 0; i < 3; i++) {
 		let randomCountry = randomCodeGenerator();
 
 		for (let option in countryOptions) {
@@ -111,12 +117,12 @@ const showCountryFlag = (countries) => {
 		flag: flagUrl,
 		countries: shuffle(countryOptions),
 	};
-};
+}
 
 function checkAnswer() {
-	let options = document.querySelectorAll(".fwf__country-option");
+	const options = document.querySelectorAll(".fwf__country-option");
 	// Dont allow clicking of a new answer after time
-	for (let option of options) {
+	for (const option of options) {
 		option.removeEventListener("click", handleOptionSelect);
 	}
 
@@ -153,7 +159,8 @@ function checkAnswer() {
 		document.querySelector(".fwf__country-option--active").style.backgroundColor = "#6cbc3d";
 		document.querySelector(".fwf__country-option--active").style.boxShadow = " 4px 4px 0px 2px #6cbc3d";
 
-		new Audio("/assets/audio/bertrof__game-sound-correct.wav").play();
+		// play audio for correct response
+		playFile("/assets/audio/bertrof__game-sound-correct.wav", audioCtx);
 
 		if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
 
@@ -169,12 +176,12 @@ function checkAnswer() {
 	}
 
 	// play audio for incorrect response
-	new Audio("/assets/audio/bertrof__game-sound-incorrect-with-delay.wav").play();
+	playFile("/assets/audio/bertrof__game-sound-incorrect-with-delay.wav", audioCtx);
 
 	// subtract lives and store result
 	user.lives--;
 
-	resultsObject["choice"] = guessOptions.choice;
+	resultsObject.choice = guessOptions.choice;
 	user.guessResults.incorrectFlags.push(resultsObject);
 
 	if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
@@ -187,7 +194,7 @@ function checkAnswer() {
 /**
  * Countdown from the variable set in the args
  */
-const startCountdown = async (timeLimit) => {
+function startCountdown(timeLimit) {
 	countdown = timeLimit;
 	move(timeLimit);
 
@@ -199,7 +206,7 @@ const startCountdown = async (timeLimit) => {
 			checkAnswer();
 		}
 	}, 1000);
-};
+}
 
 function gameBuild(results, string) {
 	// timeout for animation between questions
@@ -215,11 +222,10 @@ function gameBuild(results, string) {
 			localStorage.setItem("user", JSON.stringify(user));
 
 			if (results === "limit") {
-				new Audio(
-					"/assets/audio/fartbiscuit1700__8-bit-arcade-video-game-start-sound-effect-gun-reload-and-jump.wav"
-				).play();
+				playFile("/assets/audio/bertrof__game-sound-correct.wav", audioCtx);
+				document.querySelector(".fwf__gameover-reason").style.color = "#6cbc3d";
 			}
-			if (results === "lives") new Audio("/assets/audio/themusicalnomad__negative-beeps.wav").play();
+			if (results === "lives") playFile("/assets/audio/themusicalnomad__negative-beeps.wav", audioCtx);
 
 			return;
 		}
@@ -232,9 +238,14 @@ function gameBuild(results, string) {
 	}, 1000);
 }
 
-const startGame = () => {
+function startGame() {
 	buildUserInfo(user);
 	buildGameContainer(showCountryFlag(apiResponseWithoutStates));
-};
+}
 
 startGame();
+
+document.querySelector(".fwf__results-button").addEventListener("click", () => {
+	playFile("/assets/audio/click.wav", audioCtx);
+	setTimeout(() => window.location.assign("../ResultsPage/index.html"), 350);
+});

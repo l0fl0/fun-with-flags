@@ -1,19 +1,25 @@
 import { shuffle } from "../../scripts/utils.js";
-import { createPageElement } from "../../scripts/utils.js";
+import { createPageElement, playFile } from "../../scripts/utils.js";
 
-let localUser = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")) : {};
-let user = {
-	id: null,
-	name: localUser.name || "",
-	score: 0,
-	lives: 2,
-	difficulty: localUser.difficulty || "standard",
-	questionLimit: localUser.questionLimit || 30,
-	guessResults: {
-		incorrectFlags: [],
-		correctFlags: [],
-	},
-};
+let user = localStorage.getItem("user")
+	? JSON.parse(localStorage.getItem("user"))
+	: {
+			id: null,
+			name: "",
+			score: 0,
+			lives: 2,
+			difficulty: "standard",
+			questionLimit: 30,
+			guessResults: {
+				incorrectFlags: [],
+				correctFlags: [],
+			},
+	  };
+
+// Audio api
+// for cross browser
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioContext();
 
 const formEl = document.querySelector(".registration-form");
 formEl.addEventListener("keydown", handleKeypress);
@@ -23,18 +29,45 @@ formEl.addEventListener("submit", handleSubmit);
 function handleKeypress(e) {
 	if (e.key === "Enter") {
 		e.preventDefault();
-		new Audio("/assets/audio/keypress.wav").play();
+		playFile("/assets/audio/keypress.wav", audioCtx);
 		const index = [...formEl].indexOf(e.target);
 		formEl.elements[index + 1].focus();
 		return false;
 	}
 }
 
+// Form submit handler
+function handleSubmit(event) {
+	event.preventDefault();
+	playFile("/assets/audio/stavsounds__correct3.wav", audioCtx);
+
+	// Store registration information
+	user.id = crypto.randomUUID
+		? crypto.randomUUID()
+		: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+
+	user.name = event.target.username.value;
+	user.difficulty = event.target.difficulty.value;
+	user.questionLimit = Number(event.target.questionLimit.value);
+	user.score = 0;
+	user.guessResults = {
+		incorrectFlags: [],
+		correctFlags: [],
+	};
+
+	if (user.difficulty === "hard") user.lives = 3;
+	else user.lives = 2;
+
+	localStorage.setItem("user", JSON.stringify(user));
+
+	setTimeout(() => window.location.assign("/pages/FWFGame/index.html"), 1000);
+}
+
 // Username
 const usernameInput = document.querySelector("#username");
 usernameInput.value = user.name;
-usernameInput.addEventListener("input", () => new Audio("/assets/audio/keypress.wav").play());
-usernameInput.addEventListener("click", () => new Audio("/assets/audio/click.wav").play());
+usernameInput.addEventListener("input", () => playFile("/assets/audio/keypress.wav", audioCtx));
+usernameInput.addEventListener("click", () => playFile("/assets/audio/click.wav", audioCtx));
 
 // Difficutly Option
 const difficultyOptions = document.querySelectorAll(".registration-form__difficulty-option");
@@ -45,10 +78,11 @@ difficultyOptions.forEach((el) => {
 	}
 
 	el.addEventListener("click", activeDifficulty);
-	el.addEventListener("click", () => new Audio("/assets/audio/click.wav").play());
 });
 
 function activeDifficulty(event) {
+	playFile("/assets/audio/click.wav", audioCtx);
+
 	difficultyOptions.forEach((el) => {
 		el.labels[0].classList.remove("registration-form__difficulty-label--active");
 		el.setAttribute("checked", "false");
@@ -66,54 +100,17 @@ limitOptions.forEach((el) => {
 	}
 
 	el.addEventListener("click", activeLimit);
-	el.addEventListener("click", () => new Audio("/assets/audio/click.wav").play());
 });
 
 function activeLimit(event) {
+	playFile("/assets/audio/click.wav", audioCtx);
+
 	limitOptions.forEach((el) => {
 		el.labels[0].classList.remove("registration-form__limit-label--active");
 		el.setAttribute("checked", "false");
 	});
 	event.target.setAttribute("checked", "true");
 	event.target.labels[0].classList.add("registration-form__limit-label--active");
-}
-
-// Form submit handler
-function handleSubmit(event) {
-	event.preventDefault();
-
-	new Audio("/assets/audio/stavsounds__correct3.wav").play();
-
-	// Store registration information
-	user.id = crypto.randomUUID
-		? crypto.randomUUID()
-		: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
-
-	user.name = event.target.username.value;
-	user.difficulty = event.target.difficulty.value;
-	user.questionLimit = Number(event.target.questionLimit.value);
-	user.score = 0;
-
-	if (user.difficulty === "hard") user.lives = 3;
-	else user.lives = 2;
-
-	localStorage.setItem("user", JSON.stringify(user));
-
-	setTimeout(() => window.location.assign("/pages/FWFGame/index.html"), 700);
-}
-
-function backgroundFlags(flagCodeArray) {
-	const backgroundEL = document.querySelector(".background__container");
-
-	//TODO: Create recursive function and add a delay for each call
-
-	for (let countryCode of flagCodeArray) {
-		if (backgroundEL.clientHeight === window.innerHeight) break;
-		let flag = createPageElement("img", "background__image");
-		flag.setAttribute("src", `https://flagcdn.com/${countryCode}.svg`);
-
-		backgroundEL.appendChild(flag);
-	}
 }
 
 /*
@@ -139,7 +136,7 @@ const define = (data) => {
 		JSON.stringify(shuffle(Object.keys(JSON.parse(sessionStorage.getItem("apiResponseWithoutStates")))))
 	);
 
-	backgroundFlags(JSON.parse(sessionStorage.getItem("gameFlags")));
+	// backgroundFlags(JSON.parse(sessionStorage.getItem("gameFlags")));
 };
 
 const flagData = async () => {
@@ -153,4 +150,22 @@ const flagData = async () => {
 	} else define(JSON.parse(localStorage.getItem("apiResponse")));
 };
 
+// instigate audio
+console.clear();
+// call to api
 flagData();
+
+// helper functions
+function backgroundFlags(flagCodeArray) {
+	const backgroundEL = document.querySelector(".background__container");
+
+	//TODO: Create recursive function and add a delay for each call
+
+	for (let countryCode of flagCodeArray) {
+		if (backgroundEL.clientHeight === window.innerHeight) break;
+		let flag = createPageElement("img", "background__image");
+		flag.setAttribute("src", `https://flagcdn.com/${countryCode}.svg`);
+
+		backgroundEL.appendChild(flag);
+	}
+}
