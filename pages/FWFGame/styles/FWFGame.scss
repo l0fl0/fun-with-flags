@@ -16,6 +16,7 @@ body {
 		min-height: 60vh;
 		max-width: 40rem;
 		margin: 0 1rem;
+		padding-bottom: 2%;
 
 		@include tablet-breakpoint {
 			max-width: 46rem;
@@ -134,18 +135,23 @@ body {
 		}
 
 		&--active {
+			color: $font-primary-color;
 			background-color: $highlight-second;
-			box-shadow: 4px 4px 0px 2px $highlight-second;
+			box-shadow: 4px 4px 0px 4px $highlight-second;
+
+			@include desktop-breakpoint {
+				box-shadow: 4px 4px 0px 4px $highlight-second;
+			}
 		}
 
 		&--incorrect {
 			background-color: $error-color !important;
-			box-shadow: 4px 4px 0px 2px $error-color !important;
+			box-shadow: 4px 4px 0px 4px $error-color !important;
 		}
 
 		&--correct {
 			background-color: $success-color !important;
-			box-shadow: 4px 4px 0px 2px $success-color !important;
+			box-shadow: 4px 4px 0px 4px $success-color !important;
 		}
 	}
 }

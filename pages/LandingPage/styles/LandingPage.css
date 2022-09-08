@@ -79,10 +79,6 @@ body::-webkit-scrollbar {
   }
 }
 
-main {
-  z-index: 3;
-}
-
 .title {
   font-family: "ArcadeInterlaced", "Arcade";
   margin: 1.5rem 0;
@@ -93,7 +89,7 @@ main {
   flex-flow: wrap row;
   gap: 1rem;
   justify-content: center;
-  margin: 0 1rem;
+  margin: 1rem;
 }
 @media (min-width: 768px) {
   .title {
@@ -104,11 +100,13 @@ main {
   .title {
     flex-direction: row;
     gap: 1.5rem;
+    margin: 2rem 1rem;
   }
 }
 @media (min-width: 1280px) {
   .title {
     gap: 3rem;
+    margin: 3rem 1rem;
   }
 }
 .title__word-container {

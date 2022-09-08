@@ -79,10 +79,6 @@ body::-webkit-scrollbar {
   }
 }
 
-main {
-  z-index: 3;
-}
-
 .title {
   font-family: "ArcadeInterlaced", "Arcade";
   margin: 1.5rem 0;
@@ -93,7 +89,7 @@ main {
   flex-flow: wrap row;
   gap: 1rem;
   justify-content: center;
-  margin: 0 1rem;
+  margin: 1rem;
 }
 @media (min-width: 768px) {
   .title {
@@ -104,11 +100,13 @@ main {
   .title {
     flex-direction: row;
     gap: 1.5rem;
+    margin: 2rem 1rem;
   }
 }
 @media (min-width: 1280px) {
   .title {
     gap: 3rem;
+    margin: 3rem 1rem;
   }
 }
 .title__word-container {
@@ -165,6 +163,7 @@ body {
   min-height: 60vh;
   max-width: 40rem;
   margin: 0 1rem;
+  padding-bottom: 2%;
 }
 @media (min-width: 768px) {
   .fwf__display {
@@ -177,7 +176,7 @@ body {
   background-color: rgb(255, 216, 62);
   color: #2e2e2e;
   border: none;
-  box-shadow: 4px 4px 0px 2px rgb(210, 174, 28);
+  box-shadow: 4px 4px 0px 4px rgb(210, 174, 28);
   border-radius: 0.625rem;
   font-size: 1.5rem;
   padding: 1rem 1.5rem;
@@ -190,12 +189,12 @@ body {
 }
 .fwf__results-button:active {
   background-color: rgb(210, 174, 28);
-  box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
+  box-shadow: 4px 4px 0px 4px rgb(255, 216, 62);
 }
 @media (min-width: 1280px) {
   .fwf__results-button:hover {
     background-color: rgb(210, 174, 28);
-    box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
+    box-shadow: 4px 4px 0px 4px rgb(255, 216, 62);
   }
 }
 
@@ -305,7 +304,7 @@ body {
   font-family: "Arcade";
   background-color: rgb(255, 216, 62);
   color: #2e2e2e;
-  box-shadow: 4px 4px 0px 2px rgb(210, 174, 28);
+  box-shadow: 4px 4px 0px 4px rgb(210, 174, 28);
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border: none;
@@ -326,7 +325,6 @@ body {
 @media (min-width: 1280px) {
   .trivia__country-option:hover {
     background-color: rgb(210, 174, 28);
-    box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
   }
 }
 @media (min-width: 768px) {
@@ -336,16 +334,22 @@ body {
   }
 }
 .trivia__country-option--active {
+  color: #e5e5e5;
   background-color: rgb(210, 174, 28);
-  box-shadow: 4px 4px 0px 2px rgb(210, 174, 28);
+  box-shadow: 4px 4px 0px 4px rgb(210, 174, 28);
+}
+@media (min-width: 1280px) {
+  .trivia__country-option--active {
+    box-shadow: 4px 4px 0px 4px rgb(210, 174, 28);
+  }
 }
 .trivia__country-option--incorrect {
   background-color: rgb(255, 45, 16) !important;
-  box-shadow: 4px 4px 0px 2px rgb(255, 45, 16) !important;
+  box-shadow: 4px 4px 0px 4px rgb(255, 45, 16) !important;
 }
 .trivia__country-option--correct {
   background-color: #6cbc3d !important;
-  box-shadow: 4px 4px 0px 2px #6cbc3d !important;
+  box-shadow: 4px 4px 0px 4px #6cbc3d !important;
 }
 
 .gameover {

@@ -29,10 +29,6 @@ body {
 	}
 }
 
-main {
-	z-index: 3;
-}
-
 //* Header
 .title {
 	@include heading;
@@ -40,15 +36,17 @@ main {
 	flex-flow: wrap row;
 	gap: 1rem;
 	justify-content: center;
-	margin: 0 1rem;
+	margin: 1rem;
 
 	@include tablet-breakpoint {
 		flex-direction: row;
 		gap: 1.5rem;
+		margin: 2rem 1rem;
 	}
 
 	@include desktop-breakpoint {
 		gap: 3rem;
+		margin: 3rem 1rem;
 	}
 
 	&__word-container {
