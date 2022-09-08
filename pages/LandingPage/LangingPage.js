@@ -131,7 +131,7 @@ const define = (data) => {
 		)
 	);
 
-	const strippedResponse = Object.keys(JSON.parse(sessionStorage.getItem("apiResponseWithoutStates"))),
+	const strippedResponse = Object.keys(JSON.parse(sessionStorage.getItem("filteredApiResponse"))),
 		gameCodes = JSON.stringify(shuffle(strippedResponse.map((correctCode) => options(correctCode))));
 
 	sessionStorage.setItem("gameCodes", gameCodes);

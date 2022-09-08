@@ -57,7 +57,7 @@ body {
   font-family: "Arcade", "Courier New", Courier, monospace;
   font-size: 0.8rem;
   height: 100%;
-  min-height: 97vh;
+  min-height: 99.9vh;
   overflow: hidden;
   background-color: #2e2e2e;
   color: #e5e5e5;
@@ -67,6 +67,11 @@ body {
 }
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
+}
+@media (min-width: 500px) {
+  body {
+    font-size: 0.9rem;
+  }
 }
 @media (min-width: 768px) {
   body {
@@ -88,6 +93,7 @@ main {
   flex-flow: wrap row;
   gap: 1rem;
   justify-content: center;
+  margin: 0 1rem;
 }
 @media (min-width: 768px) {
   .title {
@@ -203,25 +209,41 @@ main {
   width: 0;
 }
 .registration-form__difficulty-label, .registration-form__limit-label {
+  font-size: 0.8rem;
   text-transform: uppercase;
   display: inline-block;
   padding: 0.3rem;
   width: 10rem;
   color: #7c7c7c;
 }
+@media (min-width: 500px) {
+  .registration-form__difficulty-label, .registration-form__limit-label {
+    font-size: 0.9rem;
+  }
+}
+@media (min-width: 768px) {
+  .registration-form__difficulty-label, .registration-form__limit-label {
+    font-size: 1rem;
+  }
+}
 .registration-form__difficulty-label--active, .registration-form__limit-label--active {
   color: #e5e5e5;
   background-color: #6cbc3d;
 }
 .registration-form__username {
-  font-family: "Arcade";
   font-size: 0.8rem;
+  font-family: "Arcade";
   height: 2rem;
   border: none;
   background-color: transparent;
   color: rgb(255, 216, 62);
   text-align: center;
   caret-color: rgb(255, 216, 62);
+}
+@media (min-width: 500px) {
+  .registration-form__username {
+    font-size: 0.9rem;
+  }
 }
 @media (min-width: 768px) {
   .registration-form__username {

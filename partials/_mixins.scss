@@ -2,6 +2,12 @@
 @use "./typography" as *;
 
 // Media queries
+@mixin mobile-breakpoint {
+	@media (min-width: 500px) {
+		@content;
+	}
+}
+
 @mixin tablet-breakpoint {
 	@media (min-width: $tablet-screen-size) {
 		@content;
@@ -98,6 +104,18 @@
 
 	@include tablet-breakpoint() {
 		font-size: 1.5rem;
+	}
+}
+
+@mixin inputs {
+	font-size: 0.8rem;
+
+	@include mobile-breakpoint() {
+		font-size: 0.9rem;
+	}
+
+	@include tablet-breakpoint() {
+		font-size: 1rem;
 	}
 }
 

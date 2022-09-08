@@ -63,6 +63,7 @@ main {
 
 	&__difficulty-label,
 	&__limit-label {
+		@include inputs;
 		text-transform: uppercase;
 		display: inline-block;
 		padding: 0.3rem;
@@ -76,18 +77,14 @@ main {
 	}
 
 	&__username {
+		@include inputs;
 		font-family: "Arcade";
-		font-size: 0.8rem;
 		height: 2rem;
 		border: none;
 		background-color: transparent;
 		color: $highlight-color;
 		text-align: center;
 		caret-color: $highlight-color;
-
-		@include tablet-breakpoint {
-			font-size: 1rem;
-		}
 	}
 
 	&__start {

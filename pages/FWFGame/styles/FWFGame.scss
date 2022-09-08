@@ -15,10 +15,11 @@ body {
 	&__display {
 		min-height: 60vh;
 		max-width: 40rem;
-		margin: 0 auto;
+		margin: 0 1rem;
 
 		@include tablet-breakpoint {
 			max-width: 46rem;
+			margin: 0 auto;
 		}
 	}
 
@@ -31,7 +32,7 @@ body {
 }
 
 .user-info {
-	margin: 0 1rem 1rem;
+	margin-bottom: 1rem;
 	width: 100%;
 
 	@include tablet-breakpoint {

@@ -57,7 +57,7 @@ body {
   font-family: "Arcade", "Courier New", Courier, monospace;
   font-size: 0.8rem;
   height: 100%;
-  min-height: 97vh;
+  min-height: 99.9vh;
   overflow: hidden;
   background-color: #2e2e2e;
   color: #e5e5e5;
@@ -67,6 +67,11 @@ body {
 }
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
+}
+@media (min-width: 500px) {
+  body {
+    font-size: 0.9rem;
+  }
 }
 @media (min-width: 768px) {
   body {
@@ -88,6 +93,7 @@ main {
   flex-flow: wrap row;
   gap: 1rem;
   justify-content: center;
+  margin: 0 1rem;
 }
 @media (min-width: 768px) {
   .title {

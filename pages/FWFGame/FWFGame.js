@@ -36,8 +36,8 @@ function buildUserInfo(user) {
 }
 
 function buildGameContainer(data) {
-	const flagContainer = document.querySelector(".trivia__flag-container");
-	const options = document.querySelector(".trivia__options");
+	const flagContainer = document.querySelector(".trivia__flag-container"),
+		options = document.querySelector(".trivia__options");
 
 	flagContainer.innerHTML = "";
 	options.innerHTML = "";
@@ -51,7 +51,7 @@ function buildGameContainer(data) {
 	data.countries.forEach((countryOption) => {
 		let countryOptionBtn = createPageElement("li", "trivia__country-option", countryOption.country);
 		countryOptionBtn.addEventListener("click", handleOptionSelect);
-		countryOptionBtn.setAttribute("cc", countryOption.countryCode);
+		countryOptionBtn.setAttribute("data-cc", countryOption.code);
 
 		options.appendChild(countryOptionBtn);
 	});
@@ -73,10 +73,10 @@ function handleOptionSelect(event) {
 	//add active choice css
 	event.target.classList.add("trivia__country-option--active");
 	//kep track of answer choice
-	guessOptions.choice = event.target.attributes.cc.value;
+	guessOptions.choice = event.target.attributes["data-cc"].value;
 }
 
-function showCountryFlag(countries) {
+function createTriviaObject(countries) {
 	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length,
 		countryCode = gameCodes[questionNumber][0];
 
@@ -85,7 +85,6 @@ function showCountryFlag(countries) {
 
 	// Generate country options
 	let countryOptions = gameCodes[questionNumber].map((code) => ({ code, country: countries[code] }));
-
 	return {
 		flag: `https://flagcdn.com/${countryCode}.svg`,
 		countries: shuffle(countryOptions),
@@ -207,7 +206,7 @@ function gameBuild(results, string) {
 		guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
 
 		buildUserInfo(user);
-		buildGameContainer(showCountryFlag(filteredApiResponse));
+		buildGameContainer(createTriviaObject(filteredApiResponse));
 	}, 1000);
 }
 
