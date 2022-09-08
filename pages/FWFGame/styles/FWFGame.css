@@ -72,7 +72,7 @@ main {
   z-index: 3;
 }
 
-.header__title {
+.title {
   font-family: "ArcadeInterlaced", "Arcade";
   margin: 1.5rem 0;
   font-size: 2.5rem;
@@ -84,35 +84,35 @@ main {
   justify-content: center;
 }
 @media (min-width: 768px) {
-  .header__title {
+  .title {
     font-size: 4rem;
   }
 }
 @media (min-width: 768px) {
-  .header__title {
+  .title {
     flex-direction: row;
   }
 }
-.header__title-word-container {
+.title__word-container {
   position: relative;
   display: flex;
   justify-content: center;
 }
-.header__title-word {
+.title__word {
   background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 69, 19), rgb(255, 45, 16));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   z-index: 1;
 }
-.header__title-word--shadow {
+.title__word--shadow {
   z-index: 0;
   position: absolute;
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 4px 2px blue;
 }
 @media (min-width: 768px) {
-  .header__title-word--shadow {
+  .title__word--shadow {
     font-size: 3.9rem;
     text-shadow: 2px 9px 2px blue;
   }
@@ -291,31 +291,6 @@ body {
   background-color: #6cbc3d !important;
   box-shadow: 4px 4px 0px 2px #6cbc3d !important;
 }
-.fwf__gameover {
-  text-align: center;
-}
-.fwf__gameover-reason {
-  margin: 1.5rem 0;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  color: #e5e5e5;
-  color: rgb(255, 45, 16);
-}
-@media (min-width: 768px) {
-  .fwf__gameover-reason {
-    font-size: 2rem;
-  }
-}
-.fwf__gameover-img {
-  aspect-ratio: 6/6;
-  margin: 1rem auto;
-  max-height: 30rem;
-}
-@media (min-width: 768px) {
-  .fwf__gameover-img {
-    margin: auto;
-  }
-}
 .fwf__results-button {
   font-family: "Arcade";
   background-color: rgb(255, 216, 62);
@@ -340,5 +315,31 @@ body {
   .fwf__results-button:hover {
     background-color: rgb(210, 174, 28);
     box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
+  }
+}
+
+.gameover {
+  text-align: center;
+}
+.gameover__reason {
+  margin: 1.5rem 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #e5e5e5;
+  color: rgb(255, 45, 16);
+}
+@media (min-width: 768px) {
+  .gameover__reason {
+    font-size: 2rem;
+  }
+}
+.gameover__img {
+  aspect-ratio: 6/6;
+  margin: 1rem auto;
+  max-height: 30rem;
+}
+@media (min-width: 768px) {
+  .gameover__img {
+    margin: auto;
   }
 }/*# sourceMappingURL=FWFGame.css.map */

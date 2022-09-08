@@ -134,29 +134,29 @@ body {
 		}
 	}
 
-	&__gameover {
-		text-align: center;
-
-		&-reason {
-			@include sub-heading;
-			color: $error-color;
-		}
-
-		&-img {
-			aspect-ratio: 6/6;
-			margin: 1rem auto;
-			max-height: 30rem;
-
-			@include tablet-breakpoint {
-				margin: auto;
-			}
-		}
-	}
-
 	&__results-button {
 		@include btn-large;
 		display: inline-block;
 		position: relative;
 		margin: 1rem;
+	}
+}
+
+.gameover {
+	text-align: center;
+
+	&__reason {
+		@include sub-heading;
+		color: $error-color;
+	}
+
+	&__img {
+		aspect-ratio: 6/6;
+		margin: 1rem auto;
+		max-height: 30rem;
+
+		@include tablet-breakpoint {
+			margin: auto;
+		}
 	}
 }

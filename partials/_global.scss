@@ -30,41 +30,39 @@ main {
 }
 
 //* Header
-.header {
-	&__title {
-		@include heading;
+.title {
+	@include heading;
+	display: flex;
+	flex-flow: wrap row;
+	gap: 1rem;
+	justify-content: center;
+	@include tablet-breakpoint {
+		flex-direction: row;
+	}
+
+	&__word-container {
+		position: relative;
 		display: flex;
-		flex-flow: wrap row;
-		gap: 1rem;
 		justify-content: center;
-		@include tablet-breakpoint {
-			flex-direction: row;
-		}
+	}
 
-		&-word-container {
-			position: relative;
-			display: flex;
-			justify-content: center;
-		}
+	&__word {
+		background: $title-gradient;
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		// -webkit-text-stroke: 0.1px black; /* width and color */
+		z-index: 1;
 
-		&-word {
-			background: $title-gradient;
-			background-clip: text;
-			-webkit-background-clip: text;
+		&--shadow {
+			z-index: 0;
+			position: absolute;
 			-webkit-text-fill-color: transparent;
-			// -webkit-text-stroke: 0.1px black; /* width and color */
-			z-index: 1;
+			text-shadow: 2px 4px 2px blue;
 
-			&--shadow {
-				z-index: 0;
-				position: absolute;
-				-webkit-text-fill-color: transparent;
-				text-shadow: 2px 4px 2px blue;
-
-				@include tablet-breakpoint {
-					font-size: 3.9rem;
-					text-shadow: 2px 9px 2px blue;
-				}
+			@include tablet-breakpoint {
+				font-size: 3.9rem;
+				text-shadow: 2px 9px 2px blue;
 			}
 		}
 	}

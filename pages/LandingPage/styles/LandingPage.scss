@@ -97,8 +97,8 @@ main {
 		text-align: center;
 		letter-spacing: 5px;
 		text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe, 4px 0 0 #4405fc;
-		animation: blink 1s steps(4, start) infinite;
 		padding: 0 1rem;
+		animation: blink 1s steps(4, start) infinite;
 	}
 }
 
@@ -106,33 +106,4 @@ main {
 	to {
 		visibility: hidden;
 	}
-
-	// &__background-photo {
-	// 	// https://jsfiddle.net/pyojwq77/1/
-	// 	background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
-	// 	background-position: top center;
-	// 	background-repeat: no-repeat;
-	// 	background-size: cover;
-	// 	font-size: 0;
-	// 	position: absolute;
-	// 	width: 100%;
-	// 	height: 100%;
-	// 	margin: auto;
-	// 	top: 0;
-	// 	left: 0;
-	// 	bottom: 0;
-	// 	right: 0;
-
-	// 	@include tablet-breakpoint {
-	// 		background-size: cover;
-	// 	}
-	// }
-
-	// &__overlay {
-	// 	position: absolute;
-	// 	background: linear-gradient(purple, pink);
-	// 	opacity: 60%;
-	// 	width: 100%;
-	// 	height: 100%;
-	// }
 }

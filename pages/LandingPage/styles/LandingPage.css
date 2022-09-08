@@ -72,7 +72,7 @@ main {
   z-index: 3;
 }
 
-.header__title {
+.title {
   font-family: "ArcadeInterlaced", "Arcade";
   margin: 1.5rem 0;
   font-size: 2.5rem;
@@ -84,35 +84,35 @@ main {
   justify-content: center;
 }
 @media (min-width: 768px) {
-  .header__title {
+  .title {
     font-size: 4rem;
   }
 }
 @media (min-width: 768px) {
-  .header__title {
+  .title {
     flex-direction: row;
   }
 }
-.header__title-word-container {
+.title__word-container {
   position: relative;
   display: flex;
   justify-content: center;
 }
-.header__title-word {
+.title__word {
   background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 69, 19), rgb(255, 45, 16));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   z-index: 1;
 }
-.header__title-word--shadow {
+.title__word--shadow {
   z-index: 0;
   position: absolute;
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 4px 2px blue;
 }
 @media (min-width: 768px) {
-  .header__title-word--shadow {
+  .title__word--shadow {
     font-size: 3.9rem;
     text-shadow: 2px 9px 2px blue;
   }
@@ -225,9 +225,9 @@ main {
   text-align: center;
   letter-spacing: 5px;
   text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe, 4px 0 0 #4405fc;
+  padding: 0 1rem;
   -webkit-animation: blink 1s steps(4, start) infinite;
           animation: blink 1s steps(4, start) infinite;
-  padding: 0 1rem;
 }
 @media (min-width: 768px) {
   .registration-form__submit-title {
