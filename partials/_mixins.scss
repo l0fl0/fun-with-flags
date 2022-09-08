@@ -3,7 +3,7 @@
 
 // Media queries
 @mixin mobile-breakpoint {
-	@media (min-width: 500px) {
+	@media (min-width: 512px) {
 		@content;
 	}
 }

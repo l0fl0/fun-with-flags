@@ -68,7 +68,7 @@ body {
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
-@media (min-width: 500px) {
+@media (min-width: 512px) {
   body {
     font-size: 0.9rem;
   }
@@ -115,7 +115,7 @@ body::-webkit-scrollbar {
   justify-content: center;
 }
 .title__word {
-  background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 69, 19), rgb(255, 45, 16));
+  background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 45, 16));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -160,10 +160,13 @@ body {
   }
 }
 .fwf__display {
-  min-height: 60vh;
-  max-width: 40rem;
   margin: 0 1rem;
-  padding-bottom: 2%;
+}
+@media (min-width: 512px) {
+  .fwf__display {
+    max-width: 30rem;
+    margin: 0 auto;
+  }
 }
 @media (min-width: 768px) {
   .fwf__display {
@@ -199,7 +202,6 @@ body {
 }
 
 .user-info {
-  margin-bottom: 1rem;
   width: 100%;
 }
 @media (min-width: 768px) {
@@ -276,6 +278,26 @@ body {
   background-color: rgb(255, 45, 16);
 }
 
+.trivia {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(100vw - 2rem);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+@media (min-width: 512px) {
+  .trivia {
+    grid-auto-columns: 30rem;
+  }
+}
+@media (min-width: 768px) {
+  .trivia {
+    grid-auto-columns: 46rem;
+  }
+}
+.trivia__question {
+  margin-bottom: 2rem;
+}
 .trivia__flag-container {
   margin: 1rem auto 2rem;
   max-width: 25rem;
@@ -293,6 +315,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  padding-right: 8px;
 }
 @media (min-width: 768px) {
   .trivia__options {
@@ -355,17 +378,41 @@ body {
 .gameover {
   text-align: center;
 }
+.gameover .title {
+  font-size: 2.6rem;
+}
+@media (min-width: 768px) {
+  .gameover .title {
+    font-size: 4.2rem;
+  }
+}
+.gameover .title__word {
+  background: linear-gradient(rgb(255, 45, 16), rgb(255, 69, 19), rgb(255, 45, 16));
+  -webkit-background-clip: text;
+          background-clip: text;
+}
+.gameover .title__word--shadow {
+  text-shadow: 2px 4px 2px rgb(210, 174, 28);
+}
+@media (min-width: 768px) {
+  .gameover .title__word--shadow {
+    text-shadow: 2px 9px 2px rgb(255, 135, 45);
+  }
+}
 .gameover__reason {
-  margin: 1.5rem 0;
-  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
   text-transform: uppercase;
   color: #e5e5e5;
   color: rgb(255, 45, 16);
 }
 @media (min-width: 768px) {
   .gameover__reason {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
+}
+.gameover__reason--success {
+  color: #6cbc3d;
 }
 .gameover__img {
   aspect-ratio: 6/6;

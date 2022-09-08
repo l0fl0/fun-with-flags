@@ -68,7 +68,7 @@ body {
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
-@media (min-width: 500px) {
+@media (min-width: 512px) {
   body {
     font-size: 0.9rem;
   }
@@ -115,7 +115,7 @@ body::-webkit-scrollbar {
   justify-content: center;
 }
 .title__word {
-  background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 69, 19), rgb(255, 45, 16));
+  background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 45, 16));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -214,7 +214,7 @@ main {
   width: 10rem;
   color: #7c7c7c;
 }
-@media (min-width: 500px) {
+@media (min-width: 512px) {
   .registration-form__difficulty-label, .registration-form__limit-label {
     font-size: 0.9rem;
   }
@@ -238,7 +238,7 @@ main {
   text-align: center;
   caret-color: rgb(255, 216, 62);
 }
-@media (min-width: 500px) {
+@media (min-width: 512px) {
   .registration-form__username {
     font-size: 0.9rem;
   }

@@ -31,23 +31,23 @@
 </head>
 
 <body>
+  <h1 class="title">
+    <div class="title__word-container">
+      <span class="title__word">fun</span>
+      <span class="title__word--shadow">fun</span>
+    </div>
+    <div class="title__word-container">
+      <span class="title__word">with</span>
+      <span class="title__word--shadow">with</span>
+    </div>
+    <div class="title__word-container">
+      <span class="title__word">flags</span>
+      <span class="title__word--shadow">flags</span>
+    </div>
+  </h1>
   <main class="fwf">
+    <section class="fwf__display hide">
 
-    <section class="fwf__display">
-      <h1 class="title">
-        <div class="title__word-container">
-          <span class="title__word">fun</span>
-          <span class="title__word--shadow">fun</span>
-        </div>
-        <div class="title__word-container">
-          <span class="title__word">with</span>
-          <span class="title__word--shadow">with</span>
-        </div>
-        <div class="title__word-container">
-          <span class="title__word">flags</span>
-          <span class="title__word--shadow">flags</span>
-        </div>
-      </h1>
       <div class="user-info">
         <div class=user-info__container>
           <p class="user-info__question-total"></p>
@@ -56,13 +56,21 @@
           <h2 class="user-info__username"></h2>
           <p class="user-info__currentscore"></p>
         </div>
-        <div class="progressbar">
-          <div id="barStatus" class="progressbar__barstatus"></div>
-        </div>
+
       </div>
       </header>
 
       <section class="trivia">
+        <article class="trivia__question">
+          <div class="progressbar">
+            <div id="barStatus" class="progressbar__barstatus"></div>
+          </div>
+          <div class="trivia__flag-container">
+          </div>
+          <ul class="trivia__options">
+          </ul>
+        </article>
+
         <article class="trivia__question">
           <div class="trivia__flag-container">
           </div>

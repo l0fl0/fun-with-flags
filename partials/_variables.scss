@@ -16,9 +16,10 @@ $title-gradient: linear-gradient(
 	rgb(255, 182, 43),
 	rgb(255, 135, 45),
 	rgb(255, 105, 27),
-	rgb(255, 69, 19),
 	rgb(255, 45, 16)
 );
+
+$error-gradient: linear-gradient(rgb(255, 45, 16), rgb(255, 69, 19), rgb(255, 45, 16));
 
 // Error color
 $error-color: rgb(255, 45, 16);

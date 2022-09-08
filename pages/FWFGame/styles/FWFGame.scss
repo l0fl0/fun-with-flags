@@ -13,10 +13,12 @@ body {
 	}
 
 	&__display {
-		min-height: 60vh;
-		max-width: 40rem;
 		margin: 0 1rem;
-		padding-bottom: 2%;
+
+		@include mobile-breakpoint {
+			max-width: 30rem;
+			margin: 0 auto;
+		}
 
 		@include tablet-breakpoint {
 			max-width: 46rem;
@@ -33,7 +35,6 @@ body {
 }
 
 .user-info {
-	margin-bottom: 1rem;
 	width: 100%;
 
 	@include tablet-breakpoint {
@@ -99,6 +100,24 @@ body {
 }
 
 .trivia {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: calc(100vw - 2rem);
+	overflow-x: auto;
+	overscroll-behavior-inline: contain;
+
+	@include mobile-breakpoint {
+		grid-auto-columns: 30rem;
+	}
+
+	@include tablet-breakpoint {
+		grid-auto-columns: 46rem;
+	}
+
+	&__question {
+		margin-bottom: 2rem;
+	}
+
 	&__flag-container {
 		margin: 1rem auto 2rem;
 		max-width: 25rem;
@@ -116,6 +135,7 @@ body {
 		justify-content: center;
 		align-items: center;
 		gap: 1rem;
+		padding-right: 8px;
 
 		@include tablet-breakpoint {
 			flex-flow: row wrap;
@@ -159,9 +179,34 @@ body {
 .gameover {
 	text-align: center;
 
+	.title {
+		font-size: 2.6rem;
+
+		@include tablet-breakpoint() {
+			font-size: 4.2rem;
+		}
+
+		&__word {
+			background: $error-gradient;
+			background-clip: text;
+		}
+
+		&__word--shadow {
+			text-shadow: 2px 4px 2px $highlight-second;
+
+			@include tablet-breakpoint {
+				text-shadow: 2px 9px 2px rgb(255, 135, 45);
+			}
+		}
+	}
+
 	&__reason {
-		@include sub-heading;
+		@include table-heading;
 		color: $error-color;
+
+		&--success {
+			color: $success-color;
+		}
 	}
 
 	&__img {
