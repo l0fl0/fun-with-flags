@@ -29,6 +29,10 @@
 		background-color: $highlight-second;
 	}
 
+	@include tablet-breakpoint() {
+		font-size: 1.5rem;
+	}
+
 	@include desktop-breakpoint() {
 		&:hover {
 			background-color: $highlight-second;

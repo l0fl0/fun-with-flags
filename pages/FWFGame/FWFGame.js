@@ -24,10 +24,10 @@ const audioCtx = new AudioContext();
 function buildUserInfo(user) {
 	// User info
 	const username = document.querySelector(".user-info__username");
-	username.innerText = `${user.name}`;
+	if (!username.innerText) username.innerText = `${user.name}`;
 
 	const currentscore = document.querySelector(".user-info__currentscore");
-	currentscore.innerText = `${user.score}`;
+	if (Number(currentscore.innerText) === user.score) currentscore.innerText = `${user.score}`;
 
 	let currentQuestion = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
 
@@ -210,6 +210,8 @@ function startCountdown(timeLimit) {
 
 function gameBuild(results, string) {
 	// timeout for animation between questions
+	localStorage.setItem("user", JSON.stringify(user));
+
 	setTimeout(() => {
 		if (results) {
 			document.querySelector(".fwf__display").classList.add("hide");
@@ -218,7 +220,6 @@ function gameBuild(results, string) {
 
 			users.push(user);
 			localStorage.setItem("users", JSON.stringify(users));
-			localStorage.setItem("user", JSON.stringify(user));
 
 			if (results === "limit") {
 				playFile("/assets/audio/bertrof__game-sound-correct.wav", audioCtx);
@@ -238,6 +239,10 @@ function gameBuild(results, string) {
 }
 
 function startGame() {
+	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
+	if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
+	if (user.lives <= 0) return gameBuild("lives", "You ran out of lives");
+
 	buildUserInfo(user);
 	buildGameContainer(showCountryFlag(apiResponseWithoutStates));
 }

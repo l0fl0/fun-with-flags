@@ -46,6 +46,12 @@ a {
   font-style: normal;
   font-weight: normal;
 }
+@font-face {
+  font-family: "AvenirNext";
+  src: url(/assets/fonts/AvenirNext-Demi.ttc) format("truetype");
+  font-style: normal;
+  font-weight: bold;
+}
 body {
   position: relative;
   font-family: "Arcade", "Courier New", Courier, monospace;
@@ -230,6 +236,11 @@ body {
   margin-left: auto;
   font-size: 0.7rem;
 }
+@media (min-width: 768px) {
+  .user-info__question-total {
+    font-size: 1rem;
+  }
+}
 
 .progressbar {
   position: relative;
@@ -294,12 +305,16 @@ body {
   border-radius: 0.625rem;
   text-align: center;
   font-family: "AvenirNext", Arial, Helvetica, sans-serif;
-  font-weight: bold;
   padding: 1rem;
   width: 100%;
 }
 .trivia__country-option:active {
   background-color: rgb(210, 174, 28);
+}
+@media (min-width: 768px) {
+  .trivia__country-option {
+    font-size: 1.5rem;
+  }
 }
 @media (min-width: 1280px) {
   .trivia__country-option:hover {

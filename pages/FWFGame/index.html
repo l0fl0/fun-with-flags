@@ -32,7 +32,8 @@
 
 <body>
   <main class="fwf">
-    <header>
+
+    <section class="fwf__display">
       <h1 class="title">
         <div class="title__word-container">
           <span class="title__word">fun</span>
@@ -47,34 +48,18 @@
           <span class="title__word--shadow">flags</span>
         </div>
       </h1>
-
-      <h2 class="title gameover hide">
-        <div class="title__word-container">
-          <span class="title__word">game</span>
-          <span class="title__word--shadow">game</span>
+      <div class="user-info">
+        <div class=user-info__container>
+          <p class="user-info__question-total"></p>
         </div>
-        <div class="title__word-container">
-          <span class="title__word">over</span>
-          <span class="title__word--shadow">over</span>
+        <div class=user-info__container>
+          <h2 class="user-info__username"></h2>
+          <p class="user-info__currentscore"></p>
         </div>
-      </h2>
-    </header>
-
-    <section class="fwf__display">
-      <header>
-        <div class="user-info">
-          <div class=user-info__container>
-            <p class="user-info__question-total"></p>
-          </div>
-          <div class=user-info__container>
-            <h2 class="user-info__username"></h2>
-            <p class="user-info__currentscore">1</p>
-          </div>
-
-          <div class="progressbar">
-            <div id="barStatus" class="progressbar__barstatus"></div>
-          </div>
+        <div class="progressbar">
+          <div id="barStatus" class="progressbar__barstatus"></div>
         </div>
+      </div>
       </header>
 
       <section class="trivia">
@@ -89,6 +74,16 @@
     </section>
 
     <section class="gameover hide">
+      <h2 class="title">
+        <div class="title__word-container">
+          <span class="title__word">game</span>
+          <span class="title__word--shadow">game</span>
+        </div>
+        <div class="title__word-container">
+          <span class="title__word">over</span>
+          <span class="title__word--shadow">over</span>
+        </div>
+      </h2>
       <p class="gameover__reason"></p>
       <div class="gameover__img">
         <img src="../../assets/images/bazinga.png" alt="bazinga">

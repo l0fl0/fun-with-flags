@@ -46,6 +46,12 @@ a {
   font-style: normal;
   font-weight: normal;
 }
+@font-face {
+  font-family: "AvenirNext";
+  src: url(/assets/fonts/AvenirNext-Demi.ttc) format("truetype");
+  font-style: normal;
+  font-weight: bold;
+}
 body {
   position: relative;
   font-family: "Arcade", "Courier New", Courier, monospace;
