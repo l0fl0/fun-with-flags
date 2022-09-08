@@ -150,10 +150,9 @@ const define = (data) => {
 			let randomCountry = randomCodeGenerator();
 
 			for (let option in countryOptions) {
-				while (countryOptions[option].correctCode === randomCountry) {
-					randomCountry = randomCodeGenerator();
-				}
+				while (countryOptions[option] === randomCountry) randomCountry = randomCodeGenerator();
 			}
+
 			countryOptions.push(randomCountry);
 		}
 		return countryOptions;
