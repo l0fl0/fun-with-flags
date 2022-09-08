@@ -1,8 +1,7 @@
 import { createPageElement, shuffle, playFile } from "../../scripts/utils.js";
 import { move } from "../../scripts/ProgressBarAnimation.js";
 
-let apiResponse = JSON.parse(localStorage.getItem("apiResoponse")),
-	filteredApiResponse = JSON.parse(sessionStorage.getItem("filteredApiResponse")),
+let filteredApiResponse = JSON.parse(sessionStorage.getItem("filteredApiResponse")),
 	gameCodes = JSON.parse(sessionStorage.getItem("gameCodes")),
 	user = JSON.parse(localStorage.getItem("user")),
 	users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
@@ -18,8 +17,8 @@ let guessOptions = {
 
 // Audio api
 // for cross browser
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioCtx = new AudioContext();
+const AudioContext = window.AudioContext || window.webkitAudioContext,
+	audioCtx = new AudioContext();
 
 function buildUserInfo(user) {
 	// User info
@@ -32,7 +31,7 @@ function buildUserInfo(user) {
 	let currentQuestion = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
 
 	const questionTotal = document.querySelector(".user-info__question-total");
-	questionTotal.innerText = `${currentQuestion}/${user.questionLimit}`;
+	questionTotal.innerText = `${currentQuestion}/${gameCodes.length}`;
 }
 
 function buildGameContainer(data) {
@@ -132,7 +131,7 @@ function checkAnswer() {
 		document.querySelector(".trivia__country-option--active").style.boxShadow = " 4px 4px 0px 2px #6cbc3d";
 
 		// play audio for correct response
-		playFile("/assets/audio/bertrof__game-sound-correct.wav", audioCtx);
+		playFile("/assets/audio/correct.mp3", audioCtx);
 
 		if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
 
@@ -148,7 +147,7 @@ function checkAnswer() {
 	}
 
 	// play audio for incorrect response
-	playFile("/assets/audio/bertrof__game-sound-incorrect-with-delay.wav", audioCtx);
+	playFile("/assets/audio/incorrect.mp3", audioCtx);
 
 	// subtract lives and store result
 	user.lives--;
@@ -194,10 +193,10 @@ function gameBuild(results, string) {
 			localStorage.setItem("users", JSON.stringify(users));
 
 			if (results === "limit") {
-				playFile("/assets/audio/bertrof__game-sound-correct.wav", audioCtx);
+				playFile("/assets/audio/tada.wav", audioCtx);
 				document.querySelector(".gameover__reason").style.color = "#6cbc3d";
 			}
-			if (results === "lives") playFile("/assets/audio/themusicalnomad__negative-beeps.wav", audioCtx);
+			if (results === "lives") playFile("/assets/audio/failure.wav", audioCtx);
 
 			return;
 		}
@@ -212,8 +211,8 @@ function gameBuild(results, string) {
 
 function startGame() {
 	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
-	if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
-	if (user.lives <= 0) return gameBuild("lives", "You ran out of lives");
+	// if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
+	// if (user.lives <= 0) return gameBuild("lives", "You ran out of lives");
 
 	gameBuild();
 }

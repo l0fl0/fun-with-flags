@@ -1,21 +1,22 @@
 import { shuffle } from "../../scripts/utils.js";
 import { createPageElement, playFile, getRandomInt } from "../../scripts/utils.js";
 
-let user = localStorage.getItem("user")
-	? JSON.parse(localStorage.getItem("user"))
-	: {
-			id: null,
-			name: "",
-			score: 0,
-			lives: 2,
-			difficulty: "standard",
-			questionLimit: 30,
-			guessResults: {
-				incorrectFlags: [],
-				correctFlags: [],
-			},
-	  };
-
+let gameCodes,
+	user = localStorage.getItem("user")
+		? JSON.parse(localStorage.getItem("user"))
+		: {
+				id: null,
+				name: "",
+				score: 0,
+				lives: 2,
+				difficulty: "standard",
+				questionLimit: 30,
+				guessResults: {
+					incorrectFlags: [],
+					correctFlags: [],
+				},
+		  };
+console.log(gameCodes);
 // Audio api
 // for cross browser
 const AudioContext = window.AudioContext || window.webkitAudioContext,
@@ -39,7 +40,7 @@ function handleKeypress(e) {
 // Form submit handler
 function handleSubmit(event) {
 	event.preventDefault();
-	playFile("/assets/audio/stavsounds__correct3.wav", audioCtx);
+	playFile("/assets/audio/action.wav", audioCtx);
 
 	// Store registration information
 	user.id = crypto.randomUUID
@@ -59,6 +60,7 @@ function handleSubmit(event) {
 	else user.lives = 2;
 
 	localStorage.setItem("user", JSON.stringify(user));
+	sessionStorage.setItem("gameCodes", JSON.stringify(gameCodes.slice(0, user.questionLimit)));
 
 	setTimeout(() => window.location.assign("/pages/FWFGame/index.html"), 1000);
 }
@@ -118,7 +120,6 @@ function activeLimit(event) {
 */
 const define = (data) => {
 	const filteredApiResponse = Object.entries(data).filter((code) => !code[0].startsWith("us-"));
-
 	sessionStorage.setItem(
 		"filteredApiResponse",
 		JSON.stringify(
@@ -131,10 +132,11 @@ const define = (data) => {
 		)
 	);
 
-	const strippedResponse = Object.keys(JSON.parse(sessionStorage.getItem("filteredApiResponse"))),
-		gameCodes = JSON.stringify(shuffle(strippedResponse.map((correctCode) => options(correctCode))));
+	const strippedResponse = Object.keys(JSON.parse(sessionStorage.getItem("filteredApiResponse")));
 
-	sessionStorage.setItem("gameCodes", gameCodes);
+	gameCodes = shuffle(strippedResponse.map((correctCode) => options(correctCode)));
+
+	sessionStorage.setItem("gameCodes", JSON.stringify(gameCodes));
 
 	function options(correctCode) {
 		let countryOptions = [correctCode];
@@ -156,6 +158,7 @@ const define = (data) => {
 		}
 		return countryOptions;
 	}
+
 	backgroundFlags([
 		...JSON.parse(sessionStorage.getItem("gameCodes"))[0],
 		...JSON.parse(sessionStorage.getItem("gameCodes"))[1],
@@ -168,7 +171,7 @@ const flagData = async () => {
 			.then((response) => response.json())
 			.then((data) => {
 				localStorage.setItem("apiResponse", JSON.stringify(data));
-				define(data);
+				// define(data);
 			});
 	} else define(JSON.parse(localStorage.getItem("apiResponse")));
 };
