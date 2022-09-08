@@ -36,8 +36,14 @@ main {
 	flex-flow: wrap row;
 	gap: 1rem;
 	justify-content: center;
+
 	@include tablet-breakpoint {
 		flex-direction: row;
+		gap: 1.5rem;
+	}
+
+	@include desktop-breakpoint {
+		gap: 3rem;
 	}
 
 	&__word-container {

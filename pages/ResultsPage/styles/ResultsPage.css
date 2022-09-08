@@ -91,6 +91,12 @@ main {
 @media (min-width: 768px) {
   .title {
     flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .title {
+    gap: 3rem;
   }
 }
 .title__word-container {

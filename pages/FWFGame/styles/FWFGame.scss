@@ -6,10 +6,38 @@ body {
 	max-height: 100vh;
 }
 
+.fwf {
+	&__title {
+		@include heading;
+		text-align: center;
+	}
+
+	&__display {
+		min-height: 60vh;
+		max-width: 40rem;
+		margin: 0 auto;
+
+		@include tablet-breakpoint {
+			max-width: 46rem;
+		}
+	}
+
+	&__results-button {
+		@include btn-large;
+		display: inline-block;
+		position: relative;
+		margin: 1rem;
+	}
+}
+
 .user-info {
-	margin-bottom: 1rem;
+	margin: 0 1rem 1rem;
 	width: 100%;
-	padding: 0 1rem;
+
+	@include tablet-breakpoint {
+		margin: 0 auto 2rem;
+		width: 80%;
+	}
 
 	&__container {
 		display: flex;
@@ -44,7 +72,6 @@ body {
 
 	@include tablet-breakpoint {
 		height: 3rem;
-		width: 80%;
 	}
 
 	&__barstatus {
@@ -65,23 +92,7 @@ body {
 	}
 }
 
-.fwf {
-	padding: 0 1rem 1rem;
-
-	&__title {
-		@include heading;
-		text-align: center;
-	}
-
-	&__display {
-		min-height: 60vh;
-		max-width: 36rem;
-		margin: 0 auto;
-		@include tablet-breakpoint {
-			max-width: 46rem;
-		}
-	}
-
+.trivia {
 	&__flag-container {
 		margin: 1rem auto 2rem;
 		max-width: 25rem;
@@ -132,13 +143,6 @@ body {
 			background-color: $success-color !important;
 			box-shadow: 4px 4px 0px 2px $success-color !important;
 		}
-	}
-
-	&__results-button {
-		@include btn-large;
-		display: inline-block;
-		position: relative;
-		margin: 1rem;
 	}
 }
 

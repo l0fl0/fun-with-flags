@@ -36,20 +36,20 @@ function buildUserInfo(user) {
 }
 
 function buildGameContainer(data) {
-	const flagContainer = document.querySelector(".fwf__flag-container");
-	const options = document.querySelector(".fwf__options");
+	const flagContainer = document.querySelector(".trivia__flag-container");
+	const options = document.querySelector(".trivia__options");
 
 	flagContainer.innerHTML = "";
 	options.innerHTML = "";
 
 	// Flag
-	const flagEl = createPageElement("img", "fwf__flag");
+	const flagEl = createPageElement("img", "trivia__flag");
 	flagEl.setAttribute("src", data.flag);
 	flagContainer.appendChild(flagEl);
 
 	// Country Options
 	data.countries.forEach((countryOption) => {
-		let countryOptionBtn = createPageElement("li", "fwf__country-option", countryOption.country);
+		let countryOptionBtn = createPageElement("li", "trivia__country-option", countryOption.country);
 		countryOptionBtn.addEventListener("click", handleOptionSelect);
 		countryOptionBtn.setAttribute("cc", countryOption.countryCode);
 
@@ -67,11 +67,11 @@ function handleOptionSelect(event) {
 	playFile("/assets/audio/click.wav", audioCtx);
 
 	//remove active choice css
-	if (document.querySelector(".fwf__country-option--active")) {
-		document.querySelector(".fwf__country-option--active").classList.remove("fwf__country-option--active");
+	if (document.querySelector(".trivia__country-option--active")) {
+		document.querySelector(".trivia__country-option--active").classList.remove("trivia__country-option--active");
 	}
 	//add active choice css
-	event.target.classList.add("fwf__country-option--active");
+	event.target.classList.add("trivia__country-option--active");
 	//kep track of answer choice
 	guessOptions.choice = event.target.attributes.cc.value;
 }
@@ -120,7 +120,7 @@ function showCountryFlag(countries) {
 }
 
 function checkAnswer() {
-	const options = document.querySelectorAll(".fwf__country-option");
+	const options = document.querySelectorAll(".trivia__country-option");
 	// Dont allow clicking of a new answer after time
 	for (const option of options) {
 		option.removeEventListener("click", handleOptionSelect);
@@ -156,8 +156,8 @@ function checkAnswer() {
 
 		user.guessResults.correctFlags.push(resultsObject);
 
-		document.querySelector(".fwf__country-option--active").style.backgroundColor = "#6cbc3d";
-		document.querySelector(".fwf__country-option--active").style.boxShadow = " 4px 4px 0px 2px #6cbc3d";
+		document.querySelector(".trivia__country-option--active").style.backgroundColor = "#6cbc3d";
+		document.querySelector(".trivia__country-option--active").style.boxShadow = " 4px 4px 0px 2px #6cbc3d";
 
 		// play audio for correct response
 		playFile("/assets/audio/bertrof__game-sound-correct.wav", audioCtx);
@@ -171,8 +171,8 @@ function checkAnswer() {
 	if (guessOptions.timeRemaining) {
 		user.score += 9;
 		resultsObject.points = 9;
-		document.querySelector(".fwf__country-option--active").style.backgroundColor = "#e2482d";
-		document.querySelector(".fwf__country-option--active").style.boxShadow = " 4px 4px 0px 2px #e2482d";
+		document.querySelector(".trivia__country-option--active").style.backgroundColor = "#e2482d";
+		document.querySelector(".trivia__country-option--active").style.boxShadow = " 4px 4px 0px 2px #e2482d";
 	}
 
 	// play audio for incorrect response
@@ -213,9 +213,8 @@ function gameBuild(results, string) {
 	setTimeout(() => {
 		if (results) {
 			document.querySelector(".fwf__display").classList.add("hide");
-			document.querySelector(".user-info").classList.add("hide");
-			document.querySelector(".fwf__gameover").classList.add("show");
-			document.querySelector(".fwf__gameover-reason").innerText = string;
+			document.querySelector(".gameover").classList.add("show");
+			document.querySelector(".gameover__reason").innerText = string;
 
 			users.push(user);
 			localStorage.setItem("users", JSON.stringify(users));
@@ -223,7 +222,7 @@ function gameBuild(results, string) {
 
 			if (results === "limit") {
 				playFile("/assets/audio/bertrof__game-sound-correct.wav", audioCtx);
-				document.querySelector(".fwf__gameover-reason").style.color = "#6cbc3d";
+				document.querySelector(".gameover__reason").style.color = "#6cbc3d";
 			}
 			if (results === "lives") playFile("/assets/audio/themusicalnomad__negative-beeps.wav", audioCtx);
 

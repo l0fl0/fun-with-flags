@@ -91,6 +91,12 @@ main {
 @media (min-width: 768px) {
   .title {
     flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .title {
+    gap: 3rem;
   }
 }
 .title__word-container {
@@ -198,6 +204,11 @@ main {
   color: rgb(255, 216, 62);
   text-align: center;
   caret-color: rgb(255, 216, 62);
+}
+@media (min-width: 768px) {
+  .registration-form__username {
+    font-size: 1rem;
+  }
 }
 .registration-form__start {
   margin-top: auto;

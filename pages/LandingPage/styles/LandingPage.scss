@@ -71,6 +71,10 @@ main {
 		color: $highlight-color;
 		text-align: center;
 		caret-color: $highlight-color;
+
+		@include tablet-breakpoint {
+			font-size: 1rem;
+		}
 	}
 
 	&__start {

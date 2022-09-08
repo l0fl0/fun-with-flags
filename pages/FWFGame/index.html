@@ -32,24 +32,36 @@
 
 <body>
   <main class="fwf">
+    <header>
+      <h1 class="title">
+        <div class="title__word-container">
+          <span class="title__word">fun</span>
+          <span class="title__word--shadow">fun</span>
+        </div>
+        <div class="title__word-container">
+          <span class="title__word">with</span>
+          <span class="title__word--shadow">with</span>
+        </div>
+        <div class="title__word-container">
+          <span class="title__word">flags</span>
+          <span class="title__word--shadow">flags</span>
+        </div>
+      </h1>
 
-    <article class="fwf__display">
+      <h2 class="title gameover hide">
+        <div class="title__word-container">
+          <span class="title__word">game</span>
+          <span class="title__word--shadow">game</span>
+        </div>
+        <div class="title__word-container">
+          <span class="title__word">over</span>
+          <span class="title__word--shadow">over</span>
+        </div>
+      </h2>
+    </header>
+
+    <section class="fwf__display">
       <header>
-        <h1 class="title">
-          <div class="title__word-container">
-            <span class="title__word">fun</span>
-            <span class="title__word--shadow">fun</span>
-          </div>
-          <div class="title__word-container">
-            <span class="title__word">with</span>
-            <span class="title__word--shadow">with</span>
-          </div>
-          <div class="title__word-container">
-            <span class="title__word">flags</span>
-            <span class="title__word--shadow">flags</span>
-          </div>
-        </h1>
-
         <div class="user-info">
           <div class=user-info__container>
             <p class="user-info__question-total"></p>
@@ -64,25 +76,19 @@
           </div>
         </div>
       </header>
-      <div class="fwf__flag-container">
-      </div>
-      <ul class="fwf__options">
-      </ul>
-    </article>
+
+      <section class="trivia">
+        <article class="trivia__question">
+          <div class="trivia__flag-container">
+          </div>
+          <ul class="trivia__options">
+          </ul>
+        </article>
+        <!-- next questions -->
+      </section>
+    </section>
 
     <section class="gameover hide">
-      <header>
-        <h2 class="title">
-          <div class="title__word-container">
-            <span class="title__word">game</span>
-            <span class="title__word--shadow">game</span>
-          </div>
-          <div class="title__word-container">
-            <span class="title__word">over</span>
-            <span class="title__word--shadow">over</span>
-          </div>
-        </h2>
-      </header>
       <p class="gameover__reason"></p>
       <div class="gameover__img">
         <img src="../../assets/images/bazinga.png" alt="bazinga">

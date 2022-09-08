@@ -91,6 +91,12 @@ main {
 @media (min-width: 768px) {
   .title {
     flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .title {
+    gap: 3rem;
   }
 }
 .title__word-container {
@@ -130,10 +136,65 @@ body {
   max-height: 100vh;
 }
 
+.fwf__title {
+  font-family: "ArcadeInterlaced", "Arcade";
+  margin: 1.5rem 0;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: #e5e5e5;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .fwf__title {
+    font-size: 4rem;
+  }
+}
+.fwf__display {
+  min-height: 60vh;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .fwf__display {
+    max-width: 46rem;
+  }
+}
+.fwf__results-button {
+  font-family: "Arcade";
+  background-color: rgb(255, 216, 62);
+  color: #2e2e2e;
+  border: none;
+  box-shadow: 4px 4px 0px 2px rgb(210, 174, 28);
+  border-radius: 0.625rem;
+  font-size: 1.5rem;
+  padding: 1rem 1.5rem;
+  margin: 0 auto;
+  line-height: 2.5rem;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  margin: 1rem;
+}
+.fwf__results-button:active {
+  background-color: rgb(210, 174, 28);
+  box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
+}
+@media (min-width: 1280px) {
+  .fwf__results-button:hover {
+    background-color: rgb(210, 174, 28);
+    box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
+  }
+}
+
 .user-info {
-  margin-bottom: 1rem;
+  margin: 0 1rem 1rem;
   width: 100%;
-  padding: 0 1rem;
+}
+@media (min-width: 768px) {
+  .user-info {
+    margin: 0 auto 2rem;
+    width: 80%;
+  }
 }
 .user-info__container {
   display: flex;
@@ -181,7 +242,6 @@ body {
 @media (min-width: 768px) {
   .progressbar {
     height: 3rem;
-    width: 80%;
   }
 }
 .progressbar__barstatus {
@@ -199,44 +259,18 @@ body {
   background-color: rgb(255, 45, 16);
 }
 
-.fwf {
-  padding: 0 1rem 1rem;
-}
-.fwf__title {
-  font-family: "ArcadeInterlaced", "Arcade";
-  margin: 1.5rem 0;
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  color: #e5e5e5;
-  text-align: center;
-}
-@media (min-width: 768px) {
-  .fwf__title {
-    font-size: 4rem;
-  }
-}
-.fwf__display {
-  min-height: 60vh;
-  max-width: 36rem;
-  margin: 0 auto;
-}
-@media (min-width: 768px) {
-  .fwf__display {
-    max-width: 46rem;
-  }
-}
-.fwf__flag-container {
+.trivia__flag-container {
   margin: 1rem auto 2rem;
   max-width: 25rem;
   position: relative;
   aspect-ratio: 6/3;
 }
 @media (min-width: 768px) {
-  .fwf__flag-container {
+  .trivia__flag-container {
     max-width: 46rem;
   }
 }
-.fwf__options {
+.trivia__options {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -244,12 +278,12 @@ body {
   gap: 1rem;
 }
 @media (min-width: 768px) {
-  .fwf__options {
+  .trivia__options {
     flex-flow: row wrap;
     gap: 2rem;
   }
 }
-.fwf__country-option {
+.trivia__country-option {
   font-family: "Arcade";
   background-color: rgb(255, 216, 62);
   color: #2e2e2e;
@@ -264,58 +298,32 @@ body {
   padding: 1rem;
   width: 100%;
 }
-.fwf__country-option:active {
+.trivia__country-option:active {
   background-color: rgb(210, 174, 28);
 }
 @media (min-width: 1280px) {
-  .fwf__country-option:hover {
+  .trivia__country-option:hover {
     background-color: rgb(210, 174, 28);
     box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
   }
 }
 @media (min-width: 768px) {
-  .fwf__country-option {
+  .trivia__country-option {
     width: 45%;
     padding: 1.5rem;
   }
 }
-.fwf__country-option--active {
+.trivia__country-option--active {
   background-color: rgb(210, 174, 28);
   box-shadow: 4px 4px 0px 2px rgb(210, 174, 28);
 }
-.fwf__country-option--incorrect {
+.trivia__country-option--incorrect {
   background-color: rgb(255, 45, 16) !important;
   box-shadow: 4px 4px 0px 2px rgb(255, 45, 16) !important;
 }
-.fwf__country-option--correct {
+.trivia__country-option--correct {
   background-color: #6cbc3d !important;
   box-shadow: 4px 4px 0px 2px #6cbc3d !important;
-}
-.fwf__results-button {
-  font-family: "Arcade";
-  background-color: rgb(255, 216, 62);
-  color: #2e2e2e;
-  border: none;
-  box-shadow: 4px 4px 0px 2px rgb(210, 174, 28);
-  border-radius: 0.625rem;
-  font-size: 1.5rem;
-  padding: 1rem 1.5rem;
-  margin: 0 auto;
-  line-height: 2.5rem;
-  text-align: center;
-  display: inline-block;
-  position: relative;
-  margin: 1rem;
-}
-.fwf__results-button:active {
-  background-color: rgb(210, 174, 28);
-  box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
-}
-@media (min-width: 1280px) {
-  .fwf__results-button:hover {
-    background-color: rgb(210, 174, 28);
-    box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
-  }
 }
 
 .gameover {
