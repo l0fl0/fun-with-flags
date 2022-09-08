@@ -156,10 +156,10 @@ const define = (data) => {
 		}
 		return countryOptions;
 	}
-	backgroundFlags(
-		JSON.parse(sessionStorage.getItem("gameCodes"))[0],
-		...JSON.parse(sessionStorage.getItem("gameCodes"))[1]
-	);
+	backgroundFlags([
+		...JSON.parse(sessionStorage.getItem("gameCodes"))[0],
+		...JSON.parse(sessionStorage.getItem("gameCodes"))[1],
+	]);
 };
 
 const flagData = async () => {

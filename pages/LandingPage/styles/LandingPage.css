@@ -147,9 +147,21 @@ main {
 .background__container {
   position: absolute;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  opacity: 7%;
-  max-height: 100vh;
+  grid-template-rows: repeat(4, 25%);
+  grid-template-columns: repeat(2, 50%);
+  opacity: 5%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.background__image {
+  width: auto;
+}
+@media (min-width: 768px) {
+  .background__image {
+    height: auto;
+    width: 100%;
+  }
 }
 
 .registration-form__content {

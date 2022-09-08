@@ -12,9 +12,22 @@ main {
 	&__container {
 		position: absolute;
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		opacity: 7%;
-		max-height: 100vh;
+		grid-template-rows: repeat(4, 25%);
+		grid-template-columns: repeat(2, 50%);
+
+		opacity: 5%;
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+	}
+
+	&__image {
+		width: auto;
+
+		@include tablet-breakpoint {
+			height: auto;
+			width: 100%;
+		}
 	}
 }
 
