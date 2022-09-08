@@ -1,5 +1,5 @@
 import { shuffle } from "../../scripts/utils.js";
-import { createPageElement, playFile } from "../../scripts/utils.js";
+import { createPageElement, playFile, getRandomInt } from "../../scripts/utils.js";
 
 let user = localStorage.getItem("user")
 	? JSON.parse(localStorage.getItem("user"))
@@ -18,8 +18,8 @@ let user = localStorage.getItem("user")
 
 // Audio api
 // for cross browser
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioCtx = new AudioContext();
+const AudioContext = window.AudioContext || window.webkitAudioContext,
+	audioCtx = new AudioContext();
 
 const formEl = document.querySelector(".registration-form");
 formEl.addEventListener("keydown", handleKeypress);
@@ -120,7 +120,7 @@ const define = (data) => {
 	const filteredApiResponse = Object.entries(data).filter((code) => !code[0].startsWith("us-"));
 
 	sessionStorage.setItem(
-		"apiResponseWithoutStates",
+		"filteredApiResponse",
 		JSON.stringify(
 			filteredApiResponse.reduce((acc, curr) => {
 				let key = curr[0],
@@ -131,12 +131,35 @@ const define = (data) => {
 		)
 	);
 
-	sessionStorage.setItem(
-		"gameFlags",
-		JSON.stringify(shuffle(Object.keys(JSON.parse(sessionStorage.getItem("apiResponseWithoutStates")))))
-	);
+	const strippedResponse = Object.keys(JSON.parse(sessionStorage.getItem("apiResponseWithoutStates"))),
+		gameCodes = JSON.stringify(shuffle(strippedResponse.map((correctCode) => options(correctCode))));
 
-	// backgroundFlags(JSON.parse(sessionStorage.getItem("gameFlags")));
+	sessionStorage.setItem("gameCodes", gameCodes);
+
+	function options(correctCode) {
+		let countryOptions = [correctCode];
+
+		const randomCodeGenerator = () => {
+			const code = getRandomInt(strippedResponse.length);
+			return strippedResponse[`${code}`];
+		};
+
+		for (let i = 0; i < 3; i++) {
+			let randomCountry = randomCodeGenerator();
+
+			for (let option in countryOptions) {
+				while (countryOptions[option].correctCode === randomCountry) {
+					randomCountry = randomCodeGenerator();
+				}
+			}
+			countryOptions.push(randomCountry);
+		}
+		return countryOptions;
+	}
+	backgroundFlags(
+		JSON.parse(sessionStorage.getItem("gameCodes"))[0],
+		...JSON.parse(sessionStorage.getItem("gameCodes"))[1]
+	);
 };
 
 const flagData = async () => {

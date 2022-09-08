@@ -1,9 +1,9 @@
-import { createPageElement, shuffle, getRandomInt, playFile } from "../../scripts/utils.js";
+import { createPageElement, shuffle, playFile } from "../../scripts/utils.js";
 import { move } from "../../scripts/ProgressBarAnimation.js";
 
 let apiResponse = JSON.parse(localStorage.getItem("apiResoponse")),
-	apiResponseWithoutStates = JSON.parse(sessionStorage.getItem("apiResponseWithoutStates")),
-	gameFlags = JSON.parse(sessionStorage.getItem("gameFlags")),
+	filteredApiResponse = JSON.parse(sessionStorage.getItem("filteredApiResponse")),
+	gameCodes = JSON.parse(sessionStorage.getItem("gameCodes")),
 	user = JSON.parse(localStorage.getItem("user")),
 	users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
 
@@ -77,44 +77,17 @@ function handleOptionSelect(event) {
 }
 
 function showCountryFlag(countries) {
-	const countryKeys = Object.keys(countries);
+	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length,
+		countryCode = gameCodes[questionNumber][0];
 
-	/**
-	 * Returns Random Country code from counrtyCodes Array
-	 */
-	const randomCodeGenerator = () => {
-		const code = getRandomInt(countryKeys.length);
-		return countryKeys[`${code}`];
-	};
-
-	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length;
-	const countryCode = gameFlags[questionNumber];
+	//set the correct answer
 	guessOptions.correctChoice = countryCode;
 
-	// store the random url
-	let flagUrl = `https://flagcdn.com/${countryCode}.svg`;
-
 	// Generate country options
-	let countryOptions = [];
-	countryOptions.push({ countryCode, country: countries[countryCode] });
-
-	for (let i = 0; i < 3; i++) {
-		let randomCountry = randomCodeGenerator();
-
-		for (let option in countryOptions) {
-			while (countryOptions[option].countryCode === randomCountry) {
-				randomCountry = randomCodeGenerator();
-			}
-		}
-
-		countryOptions.push({
-			countryCode: randomCountry,
-			country: countries[randomCountry],
-		});
-	}
+	let countryOptions = gameCodes[questionNumber].map((code) => ({ code, country: countries[code] }));
 
 	return {
-		flag: flagUrl,
+		flag: `https://flagcdn.com/${countryCode}.svg`,
 		countries: shuffle(countryOptions),
 	};
 }
@@ -234,7 +207,7 @@ function gameBuild(results, string) {
 		guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
 
 		buildUserInfo(user);
-		buildGameContainer(showCountryFlag(apiResponseWithoutStates));
+		buildGameContainer(showCountryFlag(filteredApiResponse));
 	}, 1000);
 }
 
@@ -243,8 +216,7 @@ function startGame() {
 	if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
 	if (user.lives <= 0) return gameBuild("lives", "You ran out of lives");
 
-	buildUserInfo(user);
-	buildGameContainer(showCountryFlag(apiResponseWithoutStates));
+	gameBuild();
 }
 
 startGame();
