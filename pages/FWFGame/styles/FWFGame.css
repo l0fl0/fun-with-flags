@@ -46,12 +46,18 @@ a {
   font-style: normal;
   font-weight: normal;
 }
+@font-face {
+  font-family: "AvenirNext";
+  src: url(/assets/fonts/AvenirNext-Demi.ttc) format("truetype");
+  font-style: normal;
+  font-weight: bold;
+}
 body {
   position: relative;
   font-family: "Arcade", "Courier New", Courier, monospace;
   font-size: 0.8rem;
   height: 100%;
-  min-height: 97vh;
+  min-height: 99.9vh;
   overflow: hidden;
   background-color: #2e2e2e;
   color: #e5e5e5;
@@ -62,17 +68,18 @@ body {
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
+@media (min-width: 512px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
 @media (min-width: 768px) {
   body {
     font-size: 1rem;
   }
 }
 
-main {
-  z-index: 3;
-}
-
-.header__title {
+.title {
   font-family: "ArcadeInterlaced", "Arcade";
   margin: 1.5rem 0;
   font-size: 2.5rem;
@@ -82,37 +89,46 @@ main {
   flex-flow: wrap row;
   gap: 1rem;
   justify-content: center;
+  margin: 1rem;
 }
 @media (min-width: 768px) {
-  .header__title {
+  .title {
     font-size: 4rem;
   }
 }
 @media (min-width: 768px) {
-  .header__title {
+  .title {
     flex-direction: row;
+    gap: 1.5rem;
+    margin: 2rem 1rem;
   }
 }
-.header__title-word-container {
+@media (min-width: 1280px) {
+  .title {
+    gap: 3rem;
+    margin: 3rem 1rem;
+  }
+}
+.title__word-container {
   position: relative;
   display: flex;
   justify-content: center;
 }
-.header__title-word {
-  background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 69, 19), rgb(255, 45, 16));
+.title__word {
+  background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 45, 16));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   z-index: 1;
 }
-.header__title-word--shadow {
+.title__word--shadow {
   z-index: 0;
   position: absolute;
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 4px 2px blue;
 }
 @media (min-width: 768px) {
-  .header__title-word--shadow {
+  .title__word--shadow {
     font-size: 3.9rem;
     text-shadow: 2px 9px 2px blue;
   }
@@ -130,10 +146,69 @@ body {
   max-height: 100vh;
 }
 
+.fwf__title {
+  font-family: "ArcadeInterlaced", "Arcade";
+  margin: 1.5rem 0;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: #e5e5e5;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .fwf__title {
+    font-size: 4rem;
+  }
+}
+.fwf__display {
+  margin: 0 2rem;
+}
+@media (min-width: 512px) {
+  .fwf__display {
+    max-width: 30rem;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 768px) {
+  .fwf__display {
+    max-width: 46rem;
+    margin: 0 auto;
+  }
+}
+.fwf__results-button {
+  font-family: "Arcade";
+  background-color: rgb(255, 216, 62);
+  color: #2e2e2e;
+  border: none;
+  box-shadow: 4px 4px 0px 4px rgb(210, 174, 28);
+  border-radius: 0.625rem;
+  font-size: 1.5rem;
+  padding: 1rem 1.5rem;
+  margin: 0 auto;
+  line-height: 2.5rem;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  margin: 1rem;
+}
+.fwf__results-button:active {
+  background-color: rgb(210, 174, 28);
+  box-shadow: 4px 4px 0px 4px rgb(255, 216, 62);
+}
+@media (min-width: 1280px) {
+  .fwf__results-button:hover {
+    background-color: rgb(210, 174, 28);
+    box-shadow: 4px 4px 0px 4px rgb(255, 216, 62);
+  }
+}
+
 .user-info {
-  margin-bottom: 1rem;
   width: 100%;
-  padding: 0 1rem;
+}
+@media (min-width: 768px) {
+  .user-info {
+    margin: 0 auto 2rem;
+    width: 80%;
+  }
 }
 .user-info__container {
   display: flex;
@@ -169,6 +244,11 @@ body {
   margin-left: auto;
   font-size: 0.7rem;
 }
+@media (min-width: 768px) {
+  .user-info__question-total {
+    font-size: 1rem;
+  }
+}
 
 .progressbar {
   position: relative;
@@ -181,7 +261,6 @@ body {
 @media (min-width: 768px) {
   .progressbar {
     height: 3rem;
-    width: 80%;
   }
 }
 .progressbar__barstatus {
@@ -199,146 +278,166 @@ body {
   background-color: rgb(255, 45, 16);
 }
 
-.fwf {
-  padding: 0 1rem 1rem;
+.trivia {
+  outline: blue 2px dotted;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(100vw - 4rem);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  gap: 2rem;
+  transition: margin-left;
 }
-.fwf__title {
-  font-family: "ArcadeInterlaced", "Arcade";
-  margin: 1.5rem 0;
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  color: #e5e5e5;
-  text-align: center;
-}
-@media (min-width: 768px) {
-  .fwf__title {
-    font-size: 4rem;
+@media (min-width: 512px) {
+  .trivia {
+    grid-auto-columns: 30rem;
   }
 }
-.fwf__display {
-  min-height: 60vh;
-  max-width: 36rem;
-  margin: 0 auto;
-}
 @media (min-width: 768px) {
-  .fwf__display {
-    max-width: 46rem;
+  .trivia {
+    grid-auto-columns: 46rem;
   }
 }
-.fwf__flag-container {
+.trivia__question {
+  margin-bottom: 2rem;
+}
+.trivia__flag-container {
   margin: 1rem auto 2rem;
   max-width: 25rem;
   position: relative;
   aspect-ratio: 6/3;
 }
 @media (min-width: 768px) {
-  .fwf__flag-container {
+  .trivia__flag-container {
     max-width: 46rem;
   }
 }
-.fwf__options {
+.trivia__options {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  padding-right: 8px;
 }
 @media (min-width: 768px) {
-  .fwf__options {
+  .trivia__options {
     flex-flow: row wrap;
     gap: 2rem;
   }
 }
-.fwf__country-option {
+.trivia__country-option {
   font-family: "Arcade";
   background-color: rgb(255, 216, 62);
   color: #2e2e2e;
-  box-shadow: 4px 4px 0px 2px rgb(210, 174, 28);
+  box-shadow: 4px 4px 0px 4px rgb(210, 174, 28);
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.625rem;
   text-align: center;
   font-family: "AvenirNext", Arial, Helvetica, sans-serif;
-  font-weight: bold;
   padding: 1rem;
   width: 100%;
 }
-.fwf__country-option:active {
+.trivia__country-option:active {
   background-color: rgb(210, 174, 28);
 }
+@media (min-width: 768px) {
+  .trivia__country-option {
+    font-size: 1.5rem;
+  }
+}
 @media (min-width: 1280px) {
-  .fwf__country-option:hover {
+  .trivia__country-option:hover {
     background-color: rgb(210, 174, 28);
-    box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
   }
 }
 @media (min-width: 768px) {
-  .fwf__country-option {
+  .trivia__country-option {
     width: 45%;
     padding: 1.5rem;
   }
 }
-.fwf__country-option--active {
+.trivia__country-option--active {
+  color: #e5e5e5;
   background-color: rgb(210, 174, 28);
-  box-shadow: 4px 4px 0px 2px rgb(210, 174, 28);
+  box-shadow: 4px 4px 0px 4px rgb(210, 174, 28);
 }
-.fwf__country-option--incorrect {
+@media (min-width: 1280px) {
+  .trivia__country-option--active {
+    box-shadow: 4px 4px 0px 4px rgb(210, 174, 28);
+  }
+}
+.trivia__country-option--incorrect {
   background-color: rgb(255, 45, 16) !important;
-  box-shadow: 4px 4px 0px 2px rgb(255, 45, 16) !important;
+  box-shadow: 4px 4px 0px 4px rgb(255, 45, 16) !important;
 }
-.fwf__country-option--correct {
+.trivia__country-option--correct {
   background-color: #6cbc3d !important;
-  box-shadow: 4px 4px 0px 2px #6cbc3d !important;
+  box-shadow: 4px 4px 0px 4px #6cbc3d !important;
 }
-.fwf__gameover {
+.trivia__animate {
+  margin-left: -30rem;
+}
+
+@-webkit-keyframes sweep {
+  to {
+    margin-left: -30rem;
+  }
+}
+
+@keyframes sweep {
+  to {
+    margin-left: -30rem;
+  }
+}
+.gameover {
   text-align: center;
 }
-.fwf__gameover-reason {
-  margin: 1.5rem 0;
-  font-size: 1.5rem;
+.gameover .title {
+  font-size: 2.6rem;
+}
+@media (min-width: 768px) {
+  .gameover .title {
+    font-size: 4.2rem;
+  }
+}
+.gameover .title__word {
+  background: linear-gradient(rgb(255, 45, 16), rgb(255, 69, 19), rgb(255, 45, 16));
+  -webkit-background-clip: text;
+          background-clip: text;
+}
+.gameover .title__word--shadow {
+  text-shadow: 2px 4px 2px rgb(210, 174, 28);
+}
+@media (min-width: 768px) {
+  .gameover .title__word--shadow {
+    text-shadow: 2px 9px 2px rgb(255, 135, 45);
+  }
+}
+.gameover__reason {
+  margin-bottom: 1rem;
+  font-size: 1rem;
   text-transform: uppercase;
   color: #e5e5e5;
   color: rgb(255, 45, 16);
 }
 @media (min-width: 768px) {
-  .fwf__gameover-reason {
-    font-size: 2rem;
+  .gameover__reason {
+    font-size: 1.5rem;
   }
 }
-.fwf__gameover-img {
+.gameover__reason--success {
+  color: #6cbc3d;
+}
+.gameover__img {
   aspect-ratio: 6/6;
   margin: 1rem auto;
   max-height: 30rem;
 }
 @media (min-width: 768px) {
-  .fwf__gameover-img {
+  .gameover__img {
     margin: auto;
-  }
-}
-.fwf__results-button {
-  font-family: "Arcade";
-  background-color: rgb(255, 216, 62);
-  color: #2e2e2e;
-  border: none;
-  box-shadow: 4px 4px 0px 2px rgb(210, 174, 28);
-  border-radius: 0.625rem;
-  font-size: 1.5rem;
-  padding: 1rem 1.5rem;
-  margin: 0 auto;
-  line-height: 2.5rem;
-  text-align: center;
-  display: inline-block;
-  position: relative;
-  margin: 1rem;
-}
-.fwf__results-button:active {
-  background-color: rgb(210, 174, 28);
-  box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
-}
-@media (min-width: 1280px) {
-  .fwf__results-button:hover {
-    background-color: rgb(210, 174, 28);
-    box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
   }
 }/*# sourceMappingURL=FWFGame.css.map */

@@ -6,10 +6,41 @@ body {
 	max-height: 100vh;
 }
 
+.fwf {
+	&__title {
+		@include heading;
+		text-align: center;
+	}
+
+	&__display {
+		margin: 0 2rem;
+
+		@include mobile-breakpoint {
+			max-width: 30rem;
+			margin: 0 auto;
+		}
+
+		@include tablet-breakpoint {
+			max-width: 46rem;
+			margin: 0 auto;
+		}
+	}
+
+	&__results-button {
+		@include btn-large;
+		display: inline-block;
+		position: relative;
+		margin: 1rem;
+	}
+}
+
 .user-info {
-	margin-bottom: 1rem;
 	width: 100%;
-	padding: 0 1rem;
+
+	@include tablet-breakpoint {
+		margin: 0 auto 2rem;
+		width: 80%;
+	}
 
 	&__container {
 		display: flex;
@@ -31,6 +62,10 @@ body {
 	&__question-total {
 		margin-left: auto;
 		font-size: 0.7rem;
+
+		@include tablet-breakpoint {
+			font-size: 1rem;
+		}
 	}
 }
 
@@ -44,7 +79,6 @@ body {
 
 	@include tablet-breakpoint {
 		height: 3rem;
-		width: 80%;
 	}
 
 	&__barstatus {
@@ -65,21 +99,26 @@ body {
 	}
 }
 
-.fwf {
-	padding: 0 1rem 1rem;
+.trivia {
+	outline: blue 2px dotted;
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: calc(100vw - 4rem);
+	overflow-x: auto;
+	overscroll-behavior-inline: contain;
+	gap: 2rem;
+	transition: margin-left;
 
-	&__title {
-		@include heading;
-		text-align: center;
+	@include mobile-breakpoint {
+		grid-auto-columns: 30rem;
 	}
 
-	&__display {
-		min-height: 60vh;
-		max-width: 36rem;
-		margin: 0 auto;
-		@include tablet-breakpoint {
-			max-width: 46rem;
-		}
+	@include tablet-breakpoint {
+		grid-auto-columns: 46rem;
+	}
+
+	&__question {
+		margin-bottom: 2rem;
 	}
 
 	&__flag-container {
@@ -99,6 +138,7 @@ body {
 		justify-content: center;
 		align-items: center;
 		gap: 1rem;
+		padding-right: 8px;
 
 		@include tablet-breakpoint {
 			flex-flow: row wrap;
@@ -109,7 +149,6 @@ body {
 	&__country-option {
 		@include btn;
 		@include clear-text;
-		font-weight: bold;
 		padding: 1rem;
 		width: 100%;
 
@@ -119,44 +158,77 @@ body {
 		}
 
 		&--active {
+			color: $font-primary-color;
 			background-color: $highlight-second;
-			box-shadow: 4px 4px 0px 2px $highlight-second;
+			box-shadow: 4px 4px 0px 4px $highlight-second;
+
+			@include desktop-breakpoint {
+				box-shadow: 4px 4px 0px 4px $highlight-second;
+			}
 		}
 
 		&--incorrect {
 			background-color: $error-color !important;
-			box-shadow: 4px 4px 0px 2px $error-color !important;
+			box-shadow: 4px 4px 0px 4px $error-color !important;
 		}
 
 		&--correct {
 			background-color: $success-color !important;
-			box-shadow: 4px 4px 0px 2px $success-color !important;
+			box-shadow: 4px 4px 0px 4px $success-color !important;
 		}
 	}
 
-	&__gameover {
-		text-align: center;
+	&__animate {
+		margin-left: -30rem;
+	}
+}
 
-		&-reason {
-			@include sub-heading;
-			color: $error-color;
+@keyframes sweep {
+	to {
+		margin-left: -30rem;
+	}
+}
+
+.gameover {
+	text-align: center;
+
+	.title {
+		font-size: 2.6rem;
+
+		@include tablet-breakpoint() {
+			font-size: 4.2rem;
 		}
 
-		&-img {
-			aspect-ratio: 6/6;
-			margin: 1rem auto;
-			max-height: 30rem;
+		&__word {
+			background: $error-gradient;
+			background-clip: text;
+		}
+
+		&__word--shadow {
+			text-shadow: 2px 4px 2px $highlight-second;
 
 			@include tablet-breakpoint {
-				margin: auto;
+				text-shadow: 2px 9px 2px rgb(255, 135, 45);
 			}
 		}
 	}
 
-	&__results-button {
-		@include btn-large;
-		display: inline-block;
-		position: relative;
-		margin: 1rem;
+	&__reason {
+		@include table-heading;
+		color: $error-color;
+
+		&--success {
+			color: $success-color;
+		}
+	}
+
+	&__img {
+		aspect-ratio: 6/6;
+		margin: 1rem auto;
+		max-height: 30rem;
+
+		@include tablet-breakpoint {
+			margin: auto;
+		}
 	}
 }

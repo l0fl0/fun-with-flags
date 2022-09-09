@@ -1,19 +1,26 @@
 import { shuffle } from "../../scripts/utils.js";
-import { createPageElement } from "../../scripts/utils.js";
+import { createPageElement, playFile, getRandomInt } from "../../scripts/utils.js";
 
-let localUser = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")) : {};
-let user = {
-	id: null,
-	name: localUser.name || "",
-	score: 0,
-	lives: 2,
-	difficulty: localUser.difficulty || "standard",
-	questionLimit: localUser.questionLimit || 30,
-	guessResults: {
-		incorrectFlags: [],
-		correctFlags: [],
-	},
-};
+let gameCodes,
+	user = localStorage.getItem("user")
+		? JSON.parse(localStorage.getItem("user"))
+		: {
+				id: null,
+				name: "",
+				score: 0,
+				lives: 2,
+				difficulty: "standard",
+				questionLimit: 30,
+				guessResults: {
+					incorrectFlags: [],
+					correctFlags: [],
+				},
+		  };
+console.log(gameCodes);
+// Audio api
+// for cross browser
+const AudioContext = window.AudioContext || window.webkitAudioContext,
+	audioCtx = new AudioContext();
 
 const formEl = document.querySelector(".registration-form");
 formEl.addEventListener("keydown", handleKeypress);
@@ -23,18 +30,46 @@ formEl.addEventListener("submit", handleSubmit);
 function handleKeypress(e) {
 	if (e.key === "Enter") {
 		e.preventDefault();
-		new Audio("/assets/audio/keypress.wav").play();
+		playFile("/assets/audio/keypress.wav", audioCtx);
 		const index = [...formEl].indexOf(e.target);
 		formEl.elements[index + 1].focus();
 		return false;
 	}
 }
 
+// Form submit handler
+function handleSubmit(event) {
+	event.preventDefault();
+	playFile("/assets/audio/action.wav", audioCtx);
+
+	// Store registration information
+	user.id = crypto.randomUUID
+		? crypto.randomUUID()
+		: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+
+	user.name = event.target.username.value;
+	user.difficulty = event.target.difficulty.value;
+	user.questionLimit = Number(event.target.questionLimit.value);
+	user.score = 0;
+	user.guessResults = {
+		incorrectFlags: [],
+		correctFlags: [],
+	};
+
+	if (user.difficulty === "hard") user.lives = 3;
+	else user.lives = 2;
+
+	localStorage.setItem("user", JSON.stringify(user));
+	sessionStorage.setItem("gameCodes", JSON.stringify(gameCodes.slice(0, user.questionLimit)));
+
+	setTimeout(() => window.location.assign("/pages/FWFGame/index.html"), 1000);
+}
+
 // Username
 const usernameInput = document.querySelector("#username");
 usernameInput.value = user.name;
-usernameInput.addEventListener("input", () => new Audio("/assets/audio/keypress.wav").play());
-usernameInput.addEventListener("click", () => new Audio("/assets/audio/click.wav").play());
+usernameInput.addEventListener("input", () => playFile("/assets/audio/keypress.wav", audioCtx));
+usernameInput.addEventListener("click", () => playFile("/assets/audio/click.wav", audioCtx));
 
 // Difficutly Option
 const difficultyOptions = document.querySelectorAll(".registration-form__difficulty-option");
@@ -45,10 +80,11 @@ difficultyOptions.forEach((el) => {
 	}
 
 	el.addEventListener("click", activeDifficulty);
-	el.addEventListener("click", () => new Audio("/assets/audio/click.wav").play());
 });
 
 function activeDifficulty(event) {
+	playFile("/assets/audio/click.wav", audioCtx);
+
 	difficultyOptions.forEach((el) => {
 		el.labels[0].classList.remove("registration-form__difficulty-label--active");
 		el.setAttribute("checked", "false");
@@ -66,10 +102,11 @@ limitOptions.forEach((el) => {
 	}
 
 	el.addEventListener("click", activeLimit);
-	el.addEventListener("click", () => new Audio("/assets/audio/click.wav").play());
 });
 
 function activeLimit(event) {
+	playFile("/assets/audio/click.wav", audioCtx);
+
 	limitOptions.forEach((el) => {
 		el.labels[0].classList.remove("registration-form__limit-label--active");
 		el.setAttribute("checked", "false");
@@ -78,42 +115,82 @@ function activeLimit(event) {
 	event.target.labels[0].classList.add("registration-form__limit-label--active");
 }
 
-// Form submit handler
-function handleSubmit(event) {
-	event.preventDefault();
+/*
+ Defines the variables from API and saves to local storage
+*/
+const define = (data) => {
+	const filteredApiResponse = Object.entries(data).filter((code) => !code[0].startsWith("us-"));
+	sessionStorage.setItem(
+		"filteredApiResponse",
+		JSON.stringify(
+			filteredApiResponse.reduce((acc, curr) => {
+				let key = curr[0],
+					value = curr[1];
+				acc[key] = value;
+				return acc;
+			}, {})
+		)
+	);
 
-	new Audio("/assets/audio/stavsounds__correct3.wav").play();
+	const strippedResponse = Object.keys(JSON.parse(sessionStorage.getItem("filteredApiResponse")));
 
-	// Store registration information
-	user.id = crypto.randomUUID
-		? crypto.randomUUID()
-		: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+	gameCodes = shuffle(strippedResponse.map((correctCode) => options(correctCode)));
 
-	user.name = event.target.username.value;
-	user.difficulty = event.target.difficulty.value;
-	user.questionLimit = event.target.questionLimit.value;
-	user.score = 0;
+	sessionStorage.setItem("gameCodes", JSON.stringify(gameCodes));
 
-	if (user.difficulty === "hard") user.lives = 3;
-	else user.lives = 2;
+	function options(correctCode) {
+		let countryOptions = [correctCode];
 
-	localStorage.setItem("user", JSON.stringify(user));
+		const randomCodeGenerator = () => {
+			const code = getRandomInt(strippedResponse.length);
+			return strippedResponse[`${code}`];
+		};
 
-	setTimeout(() => window.location.assign("/pages/FWFGame/index.html"), 700);
-}
+		for (let i = 0; i < 3; i++) {
+			let randomCountry = randomCodeGenerator();
 
-function backgroundFlags() {
+			for (let option in countryOptions) {
+				while (countryOptions[option] === randomCountry) randomCountry = randomCodeGenerator();
+			}
+
+			countryOptions.push(randomCountry);
+		}
+		return countryOptions;
+	}
+
+	backgroundFlags([
+		...JSON.parse(sessionStorage.getItem("gameCodes"))[0],
+		...JSON.parse(sessionStorage.getItem("gameCodes"))[1],
+	]);
+};
+
+const flagData = async () => {
+	if (!localStorage.getItem("apiResponse")) {
+		await fetch("https://flagcdn.com/en/codes.json")
+			.then((response) => response.json())
+			.then((data) => {
+				localStorage.setItem("apiResponse", JSON.stringify(data));
+				// define(data);
+			});
+	} else define(JSON.parse(localStorage.getItem("apiResponse")));
+};
+
+// instigate audio
+console.clear();
+// call to api
+flagData();
+
+// helper functions
+function backgroundFlags(flagCodeArray) {
 	const backgroundEL = document.querySelector(".background__container");
-	const flagsObjects = JSON.parse(localStorage.getItem("apiResponse"));
 
-	for (let countryCode of shuffle(Object.keys(flagsObjects))) {
+	//TODO: Create recursive function and add a delay for each call
+
+	for (let countryCode of flagCodeArray) {
 		if (backgroundEL.clientHeight === window.innerHeight) break;
-
 		let flag = createPageElement("img", "background__image");
 		flag.setAttribute("src", `https://flagcdn.com/${countryCode}.svg`);
 
 		backgroundEL.appendChild(flag);
 	}
 }
-
-backgroundFlags();

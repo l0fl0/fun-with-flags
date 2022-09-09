@@ -1,187 +1,209 @@
-import { createPageElement, shuffle, getRandomInt } from "../../scripts/utils.js";
+import { createPageElement, shuffle, playFile } from "../../scripts/utils.js";
 import { move } from "../../scripts/ProgressBarAnimation.js";
 
-let apiResponse = {},
-	apiResponseWithoutStates = {},
-	gameFlags = [];
-let user = JSON.parse(localStorage.getItem("user"));
-let users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
-let timeLimit = 6000;
-let countdown = 0;
+let filteredApiResponse = JSON.parse(sessionStorage.getItem("filteredApiResponse")),
+	gameCodes = JSON.parse(sessionStorage.getItem("gameCodes")),
+	user = JSON.parse(localStorage.getItem("user")),
+	users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
+
+let timeLimit = 6000,
+	countdown = 0;
+
 let guessOptions = {
 	choice: null,
 	correctChoice: null,
 	timeRemaining: null,
 };
 
+/** Returns the current question index position */
+function questionIndex() {
+	return user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length;
+}
+
+// Audio api
+// for cross browser
+const AudioContext = window.AudioContext || window.webkitAudioContext,
+	audioCtx = new AudioContext();
+
 function buildUserInfo(user) {
 	// User info
 	const username = document.querySelector(".user-info__username");
-	username.innerText = `${user.name}`;
+	if (!username.innerText) username.innerText = `${user.name}`;
 
 	const currentscore = document.querySelector(".user-info__currentscore");
-	currentscore.innerText = `${user.score}`;
-
-	let currentQuestion = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length;
+	if (Number(currentscore.innerText) !== user.score) currentscore.innerText = `${user.score}`;
 
 	const questionTotal = document.querySelector(".user-info__question-total");
-	questionTotal.innerText = `${currentQuestion + 1}/${user.questionLimit}`;
-
-	startCountdown(timeLimit); //! why is this here?
+	questionTotal.innerText = `${questionIndex() + 1}/${gameCodes.length}`;
 }
 
 function buildGameContainer(data) {
-	const flagContainer = document.querySelector(".fwf__flag-container");
-	const options = document.querySelector(".fwf__options");
+	const triviaQuestion = createPageElement("article", "trivia__question"),
+		flagContainer = createPageElement("div", "trivia__flag-container"),
+		options = createPageElement("ul", "trivia__options"),
+		progressBar = createPageElement("div", "progressbar"),
+		barStatus = createPageElement("div", "progressbar__barstatus");
 
-	flagContainer.innerHTML = "";
-	options.innerHTML = "";
+	// Progressbar
+	barStatus.setAttribute("id", `barStatus${questionIndex()}`);
+	progressBar.appendChild(barStatus);
 
 	// Flag
-	const flagEl = createPageElement("img", "fwf__flag");
+	const flagEl = createPageElement("img", "trivia__flag");
 	flagEl.setAttribute("src", data.flag);
 	flagContainer.appendChild(flagEl);
 
 	// Country Options
 	data.countries.forEach((countryOption) => {
-		let countryOptionBtn = createPageElement("li", "fwf__country-option", countryOption.country);
+		let countryOptionBtn = createPageElement("li", "trivia__country-option", countryOption.country);
 		countryOptionBtn.addEventListener("click", handleOptionSelect);
-		countryOptionBtn.setAttribute("cc", countryOption.countryCode);
+		countryOptionBtn.setAttribute("data-cc", countryOption.code);
 
 		options.appendChild(countryOptionBtn);
 	});
+
+	triviaQuestion.appendChild(progressBar);
+	triviaQuestion.appendChild(flagContainer);
+	triviaQuestion.appendChild(options);
+	const trivia = document.querySelector(".trivia");
+	trivia.appendChild(triviaQuestion);
+	trivia.addEventListener("touchmove", noScroll);
+
+	let scrollTrivia = setInterval(scroll, 5);
+	function scroll() {
+		trivia.scrollLeft += 10;
+		if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
+			clearInterval(scrollTrivia);
+			startCountdown(timeLimit);
+		}
+	}
+}
+
+function scrollAnimation() {
+	const trivia = document.querySelector(".trivia");
+
+	let scrollTrivia = setInterval(scroll, 5);
+	function scroll() {
+		trivia.scrollLeft += 10;
+		if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
+			clearInterval(scrollTrivia);
+			startCountdown(timeLimit);
+		}
+	}
+}
+
+function noScroll(e) {
+	return e.preventDefault();
 }
 
 function handleOptionSelect(event) {
 	event.preventDefault();
+
+	// allow scroll after guessing
+	const trivia = document.querySelector(".trivia");
+	trivia.removeEventListener("touchmove", noScroll);
+
+	//set variable for time remaining if choice is selected
 	guessOptions.timeRemaining = countdown;
-	new Audio("/assets/audio/click.wav").play();
+
+	playFile("/assets/audio/click.wav", audioCtx);
 
 	//remove active choice css
-	if (document.querySelector(".fwf__country-option--active")) {
-		document.querySelector(".fwf__country-option--active").classList.remove("fwf__country-option--active");
+	if (document.querySelector(".trivia__country-option--active")) {
+		document.querySelector(".trivia__country-option--active").classList.remove("trivia__country-option--active");
 	}
 	//add active choice css
-	event.target.classList.add("fwf__country-option--active");
+	event.target.classList.add("trivia__country-option--active");
 	//kep track of answer choice
-	guessOptions.choice = event.target.attributes.cc.value;
+	guessOptions.choice = event.target.attributes["data-cc"].value;
 }
 
-const showCountryFlag = (countries) => {
-	let countryKeys = Object.keys(countries);
-
-	/**
-	 * Returns Random Country code from counrtyCodes Array
-	 */
-	const randomCodeGenerator = () => {
-		let code = getRandomInt(countryKeys.length);
-		return countryKeys[`${code}`];
-	};
-
-	let countryCode = gameFlags[0];
+function createTriviaObject() {
+	const countryCode = gameCodes[questionIndex()][0];
+	//set the correct answer
 	guessOptions.correctChoice = countryCode;
-	gameFlags.shift();
-
-	// store the random url
-	let flagUrl = `https://flagcdn.com/${countryCode}.svg`;
 
 	// Generate country options
-	let countryOptions = [];
-	countryOptions.push({ countryCode, country: countries[countryCode] });
-
-	for (let i = 1; i < 4; i++) {
-		let randomCountry = randomCodeGenerator();
-
-		for (let option in countryOptions) {
-			while (countryOptions[option].countryCode === randomCountry) {
-				randomCountry = randomCodeGenerator();
-			}
-		}
-
-		countryOptions.push({
-			countryCode: randomCountry,
-			country: countries[randomCountry],
-		});
-	}
-
+	let countryOptions = gameCodes[questionIndex()].map((code) => ({ code, country: filteredApiResponse[code] }));
 	return {
-		flag: flagUrl,
+		flag: `https://flagcdn.com/${countryCode}.svg`,
 		countries: shuffle(countryOptions),
 	};
-};
+}
 
 function checkAnswer() {
-	let options = document.querySelectorAll(".fwf__country-option");
-	for (let option of options) {
+	const options = document.querySelectorAll(".trivia__country-option");
+	// Dont allow clicking of a new answer after time
+	for (const option of options) {
 		option.removeEventListener("click", handleOptionSelect);
 	}
 
 	let resultsObject = {
-		choice: guessOptions.choice,
-		correctChoice: guessOptions.correctChoice,
 		points: 0,
+		correctChoice: guessOptions.correctChoice,
 	};
-	let questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length;
 
+	// For correct response
 	if (guessOptions.choice === guessOptions.correctChoice) {
-		if (user.difficulty === "standard") {
+		if (user.difficulty === "standard" && user.lives === 1) {
 			// unlimited lives as long as you dont get two questions incorrect conssecutively
-			if (user.lives === 1) user.lives = 2;
+			user.lives = 2;
 		}
 
 		// More points rewarded for faster response times
 		if (guessOptions.timeRemaining >= 5000) {
+			user.score += 30;
+			resultsObject.points = 30;
+		}
+		if (guessOptions.timeRemaining === 4000 || guessOptions.timeRemaining === 3000) {
+			user.score += 27;
+			resultsObject.points = 27;
+		}
+		if (guessOptions.timeRemaining <= 2000) {
 			user.score += 24;
 			resultsObject.points = 24;
 		}
 
-		if (guessOptions.timeRemaining === 4000 || guessOptions.timeRemaining === 3000) {
-			user.score += 22;
-			resultsObject.points = 22;
-		}
-
-		if (guessOptions.timeRemaining <= 2000) {
-			user.score += 20;
-			resultsObject.points = 20;
-		}
-
 		user.guessResults.correctFlags.push(resultsObject);
 
-		document.querySelector(".fwf__country-option--active").style.backgroundColor = "#6cbc3d";
-		document.querySelector(".fwf__country-option--active").style.boxShadow = " 4px 4px 0px 2px #6cbc3d";
+		document.querySelector(".trivia__country-option--active").style.backgroundColor = "#6cbc3d";
+		document.querySelector(".trivia__country-option--active").style.boxShadow = " 4px 4px 0px 2px #6cbc3d";
 
-		new Audio("/assets/audio/bertrof__game-sound-correct.wav").play();
+		// play audio for correct response
+		playFile("/assets/audio/correct.mp3", audioCtx);
 
-		if (questionNumber == user.questionLimit) return gameBuild("results", "Question Limit Reached");
+		if (questionIndex() + 1 === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
 
 		return gameBuild();
 	}
 
-	// if user makes an incorrect guess then give 10 points
+	// if user makes an incorrect guess then give points
 	if (guessOptions.timeRemaining) {
-		user.score += 5;
-		resultsObject.points = 5;
-		document.querySelector(".fwf__country-option--active").style.backgroundColor = "#e2482d";
-		document.querySelector(".fwf__country-option--active").style.boxShadow = " 4px 4px 0px 2px #e2482d";
+		user.score += 9;
+		resultsObject.points = 9;
+		document.querySelector(".trivia__country-option--active").style.backgroundColor = "#e2482d";
+		document.querySelector(".trivia__country-option--active").style.boxShadow = " 4px 4px 0px 2px #e2482d";
 	}
 
-	new Audio("/assets/audio/bertrof__game-sound-incorrect-with-delay.wav").play();
+	// play audio for incorrect response
+	playFile("/assets/audio/incorrect.mp3", audioCtx);
 
+	// subtract lives and store result
 	user.lives--;
+
+	resultsObject.choice = guessOptions.choice;
 	user.guessResults.incorrectFlags.push(resultsObject);
 
-	if (questionNumber == user.questionLimit) return gameBuild("results", "Question Limit Reached");
+	if (questionIndex() + 1 === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
 
-	if (user.lives === 0) return gameBuild("results", "You ran out of lives");
+	if (user.lives === 0) return gameBuild("lives", "You ran out of lives");
+
 	return gameBuild();
 }
 
-/**
- * Countdown from the variable set in the args
- */
-const startCountdown = async (timeLimit) => {
+function startCountdown(timeLimit) {
 	countdown = timeLimit;
-	move(timeLimit);
+	move(timeLimit, questionIndex());
 
 	const timer = setInterval(() => {
 		countdown = countdown - 1000;
@@ -191,67 +213,51 @@ const startCountdown = async (timeLimit) => {
 			checkAnswer();
 		}
 	}, 1000);
-};
+}
 
 function gameBuild(results, string) {
-	// if question limit reached end the game
-
-	if (results === "results") {
-		document.querySelector(".fwf__display").classList.add("hide");
-		document.querySelector(".user-info").classList.add("hide");
-		document.querySelector(".fwf__gameover").classList.add("show");
-		document.querySelector(".fwf__gameover-reason").innerText = string;
-
-		new Audio("/assets/audio/themusicalnomad__negative-beeps.wav").play();
-
-		users.push(user);
-		localStorage.setItem("users", JSON.stringify(users));
-		localStorage.setItem("user", JSON.stringify(user));
-
-		return;
-	}
-
 	// timeout for animation between questions
+	localStorage.setItem("user", JSON.stringify(user));
+
 	setTimeout(() => {
+		if (results) {
+			document.querySelector(".fwf__display").classList.add("hide");
+			document.querySelector(".gameover").classList.remove("hide");
+			document.querySelector(".gameover__reason").innerText = string;
+
+			users.push(user);
+			localStorage.setItem("users", JSON.stringify(users));
+
+			if (results === "limit") {
+				playFile("/assets/audio/tada.wav", audioCtx);
+				document.querySelector(".gameover__reason").classList.add("gameover__reason--success");
+			}
+			if (results === "lives") playFile("/assets/audio/failure.wav", audioCtx);
+
+			return;
+		}
+
 		// reset game options
 		guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
 
 		buildUserInfo(user);
-		buildGameContainer(showCountryFlag(apiResponseWithoutStates));
-	}, 1000);
+		buildGameContainer(createTriviaObject());
+	}, 100);
 }
 
-/*
- Defines the variables from API and saves to local storage
-*/
-const define = (data) => {
-	localStorage.setItem("apiResponse", JSON.stringify(data));
-	apiResponse = data;
+function startGame() {
+	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
 
-	const filteredApiResponse = Object.entries(apiResponse).filter((code) => !code[0].startsWith("us-"));
+	// if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
+	// if (user.lives <= 0) return gameBuild("lives", "You ran out of lives");
 
-	apiResponseWithoutStates = filteredApiResponse.reduce((acc, curr) => {
-		let key = curr[0],
-			value = curr[1];
-		acc[key] = value;
-		return acc;
-	}, {});
-
-	gameFlags = shuffle(Object.keys(apiResponseWithoutStates));
-};
-
-const startGame = async () => {
-	if (user.lives === 0) return gameBuild("results", "ran out of lives");
-	if (user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length === user.questionLimit)
-		return gameBuild("results", "Question Limit Reached");
-
-	await fetch("https://flagcdn.com/en/codes.json")
-		.then((response) => response.json())
-		.then((data) => define(data))
-		.then(() => {
-			buildUserInfo(user);
-			buildGameContainer(showCountryFlag(apiResponseWithoutStates));
-		});
-};
+	document.querySelector(".fwf__display").classList.remove("hide");
+	gameBuild();
+}
 
 startGame();
+
+document.querySelector(".fwf__results-button").addEventListener("click", () => {
+	playFile("/assets/audio/click.wav", audioCtx);
+	setTimeout(() => window.location.assign("../ResultsPage/index.html"), 350);
+});

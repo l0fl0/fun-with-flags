@@ -2,6 +2,12 @@
 @use "./typography" as *;
 
 // Media queries
+@mixin mobile-breakpoint {
+	@media (min-width: 512px) {
+		@content;
+	}
+}
+
 @mixin tablet-breakpoint {
 	@media (min-width: $tablet-screen-size) {
 		@content;
@@ -18,7 +24,7 @@
 	font-family: "Arcade";
 	background-color: $highlight-color;
 	color: $background-secondary-color;
-	box-shadow: 4px 4px 0px 2px $highlight-second;
+	box-shadow: 4px 4px 0px 4px $highlight-second;
 	font-size: 1rem;
 	padding: 0.5rem 1rem;
 	border: none;
@@ -29,10 +35,13 @@
 		background-color: $highlight-second;
 	}
 
+	@include tablet-breakpoint() {
+		font-size: 1.5rem;
+	}
+
 	@include desktop-breakpoint() {
 		&:hover {
 			background-color: $highlight-second;
-			box-shadow: 4px 4px 0px 2px $highlight-color;
 		}
 	}
 }
@@ -42,7 +51,7 @@
 	background-color: $highlight-color;
 	color: $background-secondary-color;
 	border: none;
-	box-shadow: 4px 4px 0px 2px $highlight-second;
+	box-shadow: 4px 4px 0px 4px $highlight-second;
 	border-radius: 0.625rem;
 	font-size: 1.5rem;
 	padding: 1rem 1.5rem;
@@ -52,13 +61,13 @@
 
 	&:active {
 		background-color: $highlight-second;
-		box-shadow: 4px 4px 0px 2px $highlight-color;
+		box-shadow: 4px 4px 0px 4px $highlight-color;
 	}
 
 	@include desktop-breakpoint() {
 		&:hover {
 			background-color: $highlight-second;
-			box-shadow: 4px 4px 0px 2px $highlight-color;
+			box-shadow: 4px 4px 0px 4px $highlight-color;
 		}
 	}
 }
@@ -94,6 +103,18 @@
 
 	@include tablet-breakpoint() {
 		font-size: 1.5rem;
+	}
+}
+
+@mixin inputs {
+	font-size: 0.8rem;
+
+	@include mobile-breakpoint() {
+		font-size: 0.9rem;
+	}
+
+	@include tablet-breakpoint() {
+		font-size: 1rem;
 	}
 }
 

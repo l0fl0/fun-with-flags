@@ -31,65 +31,64 @@
 </head>
 
 <body>
+  <h1 class="title">
+    <div class="title__word-container">
+      <span class="title__word">fun</span>
+      <span class="title__word--shadow">fun</span>
+    </div>
+    <div class="title__word-container">
+      <span class="title__word">with</span>
+      <span class="title__word--shadow">with</span>
+    </div>
+    <div class="title__word-container">
+      <span class="title__word">flags</span>
+      <span class="title__word--shadow">flags</span>
+    </div>
+  </h1>
   <main class="fwf">
+    <section class="fwf__display hide">
 
+      <div class="user-info">
+        <div class=user-info__container>
+          <p class="user-info__question-total"></p>
+        </div>
+        <div class=user-info__container>
+          <h2 class="user-info__username"></h2>
+          <p class="user-info__currentscore"></p>
+        </div>
 
-    <article class="fwf__display">
-      <header>
-        <h1 class="header__title">
-          <div class="header__title-word-container">
-            <span class="header__title-word">fun</span>
-            <span class="header__title-word--shadow">fun</span>
-          </div>
-          <div class="header__title-word-container">
-            <span class="header__title-word">with</span>
-            <span class="header__title-word--shadow">with</span>
-          </div>
-          <div class="header__title-word-container">
-            <span class="header__title-word">flags</span>
-            <span class="header__title-word--shadow">flags</span>
-          </div>
-        </h1>
+      </div>
+      </header>
 
-
-        <div class="user-info">
-          <div class=user-info__container>
-            <p class="user-info__question-total"></p>
-          </div>
-          <div class=user-info__container>
-            <h2 class="user-info__username"></h2>
-            <p class="user-info__currentscore">1</p>
-          </div>
-
+      <section class="trivia">
+        <!-- <article class="trivia__question">
           <div class="progressbar">
             <div id="barStatus" class="progressbar__barstatus"></div>
           </div>
-        </div>
-      </header>
-      <div class="fwf__flag-container">
-      </div>
-      <ul class="fwf__options">
-      </ul>
-    </article>
+          <div class="trivia__flag-container">
+          </div>
+          <ul class="trivia__options">
+          </ul>
+        </article> -->
+      </section>
+    </section>
 
-    <section class="fwf__gameover hide">
-      <header>
-        <h2 class="header__title">
-          <div class="header__title-word-container">
-            <span class="header__title-word">game</span>
-            <span class="header__title-word--shadow">game</span>
-          </div>
-          <div class="header__title-word-container">
-            <span class="header__title-word">over</span>
-            <span class="header__title-word--shadow">over</span>
-          </div>
-        </h2>
-      </header>
-      <p class="fwf__gameover-reason"></p>
-      <div class="fwf__gameover-img">
+    <section class="gameover hide">
+      <h2 class="title">
+        <div class="title__word-container">
+          <span class="title__word">game</span>
+          <span class="title__word--shadow">game</span>
+        </div>
+        <div class="title__word-container">
+          <span class="title__word">over</span>
+          <span class="title__word--shadow">over</span>
+        </div>
+      </h2>
+      <p class="gameover__reason"></p>
+      <div class="gameover__img">
         <img src="../../assets/images/bazinga.png" alt="bazinga">
       </div>
-      <a class="fwf__results-button" href="../ResultsPage/index.html">View Results</a>
+      <div class="fwf__results-button">View Results</div>
     </section>
   </main>
   <script src="./FWFGame.js" type="module"></script>

@@ -11,23 +11,30 @@ main {
 .background {
 	&__container {
 		position: absolute;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-around;
+		display: grid;
+		grid-template-rows: repeat(4, 25%);
+		grid-template-columns: repeat(2, 50%);
+
 		opacity: 5%;
-		max-height: 100vh;
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
 	}
 
 	&__image {
-		width: 15%;
-		height: 5%;
+		width: auto;
+
+		@include tablet-breakpoint {
+			height: auto;
+			width: 100%;
+		}
 	}
 }
 
 //* Register to play
 .registration-form {
 	&__content {
-		padding: 0 1rem;
+		margin: 0 1rem;
 		text-align: center;
 	}
 
@@ -56,6 +63,7 @@ main {
 
 	&__difficulty-label,
 	&__limit-label {
+		@include inputs;
 		text-transform: uppercase;
 		display: inline-block;
 		padding: 0.3rem;
@@ -69,8 +77,8 @@ main {
 	}
 
 	&__username {
+		@include inputs;
 		font-family: "Arcade";
-		font-size: 0.8rem;
 		height: 2rem;
 		border: none;
 		background-color: transparent;
@@ -103,8 +111,8 @@ main {
 		text-align: center;
 		letter-spacing: 5px;
 		text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe, 4px 0 0 #4405fc;
-		animation: blink 1s steps(4, start) infinite;
 		padding: 0 1rem;
+		animation: blink 1s steps(4, start) infinite;
 	}
 }
 
@@ -112,33 +120,4 @@ main {
 	to {
 		visibility: hidden;
 	}
-
-	// &__background-photo {
-	// 	// https://jsfiddle.net/pyojwq77/1/
-	// 	background-image: url("../../../assets/images/sheldon-cooper-background.jpg");
-	// 	background-position: top center;
-	// 	background-repeat: no-repeat;
-	// 	background-size: cover;
-	// 	font-size: 0;
-	// 	position: absolute;
-	// 	width: 100%;
-	// 	height: 100%;
-	// 	margin: auto;
-	// 	top: 0;
-	// 	left: 0;
-	// 	bottom: 0;
-	// 	right: 0;
-
-	// 	@include tablet-breakpoint {
-	// 		background-size: cover;
-	// 	}
-	// }
-
-	// &__overlay {
-	// 	position: absolute;
-	// 	background: linear-gradient(purple, pink);
-	// 	opacity: 60%;
-	// 	width: 100%;
-	// 	height: 100%;
-	// }
 }

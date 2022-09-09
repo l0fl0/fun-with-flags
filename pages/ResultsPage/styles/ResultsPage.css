@@ -46,12 +46,18 @@ a {
   font-style: normal;
   font-weight: normal;
 }
+@font-face {
+  font-family: "AvenirNext";
+  src: url(/assets/fonts/AvenirNext-Demi.ttc) format("truetype");
+  font-style: normal;
+  font-weight: bold;
+}
 body {
   position: relative;
   font-family: "Arcade", "Courier New", Courier, monospace;
   font-size: 0.8rem;
   height: 100%;
-  min-height: 97vh;
+  min-height: 99.9vh;
   overflow: hidden;
   background-color: #2e2e2e;
   color: #e5e5e5;
@@ -62,17 +68,18 @@ body {
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
+@media (min-width: 512px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
 @media (min-width: 768px) {
   body {
     font-size: 1rem;
   }
 }
 
-main {
-  z-index: 3;
-}
-
-.header__title {
+.title {
   font-family: "ArcadeInterlaced", "Arcade";
   margin: 1.5rem 0;
   font-size: 2.5rem;
@@ -82,37 +89,46 @@ main {
   flex-flow: wrap row;
   gap: 1rem;
   justify-content: center;
+  margin: 1rem;
 }
 @media (min-width: 768px) {
-  .header__title {
+  .title {
     font-size: 4rem;
   }
 }
 @media (min-width: 768px) {
-  .header__title {
+  .title {
     flex-direction: row;
+    gap: 1.5rem;
+    margin: 2rem 1rem;
   }
 }
-.header__title-word-container {
+@media (min-width: 1280px) {
+  .title {
+    gap: 3rem;
+    margin: 3rem 1rem;
+  }
+}
+.title__word-container {
   position: relative;
   display: flex;
   justify-content: center;
 }
-.header__title-word {
-  background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 69, 19), rgb(255, 45, 16));
+.title__word {
+  background: linear-gradient(rgb(255, 216, 62), rgb(255, 182, 43), rgb(255, 135, 45), rgb(255, 105, 27), rgb(255, 45, 16));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   z-index: 1;
 }
-.header__title-word--shadow {
+.title__word--shadow {
   z-index: 0;
   position: absolute;
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 4px 2px blue;
 }
 @media (min-width: 768px) {
-  .header__title-word--shadow {
+  .title__word--shadow {
     font-size: 3.9rem;
     text-shadow: 2px 9px 2px blue;
   }
@@ -145,7 +161,7 @@ body {
   background-color: rgb(255, 216, 62);
   color: #2e2e2e;
   border: none;
-  box-shadow: 4px 4px 0px 2px rgb(210, 174, 28);
+  box-shadow: 4px 4px 0px 4px rgb(210, 174, 28);
   border-radius: 0.625rem;
   font-size: 1.5rem;
   padding: 1rem 1.5rem;
@@ -157,12 +173,12 @@ body {
 }
 .header__play-again:active {
   background-color: rgb(210, 174, 28);
-  box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
+  box-shadow: 4px 4px 0px 4px rgb(255, 216, 62);
 }
 @media (min-width: 1280px) {
   .header__play-again:hover {
     background-color: rgb(210, 174, 28);
-    box-shadow: 4px 4px 0px 2px rgb(255, 216, 62);
+    box-shadow: 4px 4px 0px 4px rgb(255, 216, 62);
   }
 }
 @media (min-width: 768px) {

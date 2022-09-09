@@ -4,18 +4,19 @@
 	"icons": [
 		{
 			"src": "assets/icons/android-chrome_192.png",
-			"sizes": "192x192",
+			"sizes": "191x191",
 			"type": "image/png"
 		},
 		{
 			"src": "assets/icons/android-chrome_384.png",
-			"sizes": "384x384",
+			"sizes": "383x384",
 			"type": "image/png"
 		}
 	],
 	"theme_color": "#ffffff",
 	"background_color": "#ffffff",
 
+	"id": "/index.html",
 	"start_url": "/index.html",
 	"display": "standalone"
 }
