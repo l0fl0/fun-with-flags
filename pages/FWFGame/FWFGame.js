@@ -15,6 +15,11 @@ let guessOptions = {
 	timeRemaining: null,
 };
 
+/** Returns the current question index position */
+function questionIndex() {
+	return user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length;
+}
+
 // Audio api
 // for cross browser
 const AudioContext = window.AudioContext || window.webkitAudioContext,
@@ -26,20 +31,22 @@ function buildUserInfo(user) {
 	if (!username.innerText) username.innerText = `${user.name}`;
 
 	const currentscore = document.querySelector(".user-info__currentscore");
-	if (Number(currentscore.innerText) === user.score) currentscore.innerText = `${user.score}`;
-
-	let currentQuestion = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
+	if (Number(currentscore.innerText) !== user.score) currentscore.innerText = `${user.score}`;
 
 	const questionTotal = document.querySelector(".user-info__question-total");
-	questionTotal.innerText = `${currentQuestion}/${gameCodes.length}`;
+	questionTotal.innerText = `${questionIndex() + 1}/${gameCodes.length}`;
 }
 
 function buildGameContainer(data) {
-	const flagContainer = document.querySelector(".trivia__flag-container"),
-		options = document.querySelector(".trivia__options");
+	const triviaQuestion = createPageElement("article", "trivia__question"),
+		flagContainer = createPageElement("div", "trivia__flag-container"),
+		options = createPageElement("ul", "trivia__options"),
+		progressBar = createPageElement("div", "progressbar"),
+		barStatus = createPageElement("div", "progressbar__barstatus");
 
-	flagContainer.innerHTML = "";
-	options.innerHTML = "";
+	// Progressbar
+	barStatus.setAttribute("id", `barStatus${questionIndex()}`);
+	progressBar.appendChild(barStatus);
 
 	// Flag
 	const flagEl = createPageElement("img", "trivia__flag");
@@ -55,11 +62,47 @@ function buildGameContainer(data) {
 		options.appendChild(countryOptionBtn);
 	});
 
-	startCountdown(timeLimit);
+	triviaQuestion.appendChild(progressBar);
+	triviaQuestion.appendChild(flagContainer);
+	triviaQuestion.appendChild(options);
+	const trivia = document.querySelector(".trivia");
+	trivia.appendChild(triviaQuestion);
+	trivia.addEventListener("touchmove", noScroll);
+
+	let scrollTrivia = setInterval(scroll, 5);
+	function scroll() {
+		trivia.scrollLeft += 10;
+		if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
+			clearInterval(scrollTrivia);
+			startCountdown(timeLimit);
+		}
+	}
+}
+
+function scrollAnimation() {
+	const trivia = document.querySelector(".trivia");
+
+	let scrollTrivia = setInterval(scroll, 5);
+	function scroll() {
+		trivia.scrollLeft += 10;
+		if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
+			clearInterval(scrollTrivia);
+			startCountdown(timeLimit);
+		}
+	}
+}
+
+function noScroll(e) {
+	return e.preventDefault();
 }
 
 function handleOptionSelect(event) {
 	event.preventDefault();
+
+	// allow scroll after guessing
+	const trivia = document.querySelector(".trivia");
+	trivia.removeEventListener("touchmove", noScroll);
+
 	//set variable for time remaining if choice is selected
 	guessOptions.timeRemaining = countdown;
 
@@ -75,15 +118,13 @@ function handleOptionSelect(event) {
 	guessOptions.choice = event.target.attributes["data-cc"].value;
 }
 
-function createTriviaObject(countries) {
-	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length,
-		countryCode = gameCodes[questionNumber][0];
-
+function createTriviaObject() {
+	const countryCode = gameCodes[questionIndex()][0];
 	//set the correct answer
 	guessOptions.correctChoice = countryCode;
 
 	// Generate country options
-	let countryOptions = gameCodes[questionNumber].map((code) => ({ code, country: countries[code] }));
+	let countryOptions = gameCodes[questionIndex()].map((code) => ({ code, country: filteredApiResponse[code] }));
 	return {
 		flag: `https://flagcdn.com/${countryCode}.svg`,
 		countries: shuffle(countryOptions),
@@ -101,8 +142,6 @@ function checkAnswer() {
 		points: 0,
 		correctChoice: guessOptions.correctChoice,
 	};
-
-	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
 
 	// For correct response
 	if (guessOptions.choice === guessOptions.correctChoice) {
@@ -133,7 +172,7 @@ function checkAnswer() {
 		// play audio for correct response
 		playFile("/assets/audio/correct.mp3", audioCtx);
 
-		if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
+		if (questionIndex() + 1 === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
 
 		return gameBuild();
 	}
@@ -155,19 +194,16 @@ function checkAnswer() {
 	resultsObject.choice = guessOptions.choice;
 	user.guessResults.incorrectFlags.push(resultsObject);
 
-	if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
+	if (questionIndex() + 1 === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
 
 	if (user.lives === 0) return gameBuild("lives", "You ran out of lives");
 
 	return gameBuild();
 }
 
-/**
- * Countdown from the variable set in the args
- */
 function startCountdown(timeLimit) {
 	countdown = timeLimit;
-	move(timeLimit);
+	move(timeLimit, questionIndex());
 
 	const timer = setInterval(() => {
 		countdown = countdown - 1000;
@@ -186,7 +222,7 @@ function gameBuild(results, string) {
 	setTimeout(() => {
 		if (results) {
 			document.querySelector(".fwf__display").classList.add("hide");
-			document.querySelector(".gameover").classList.add("show");
+			document.querySelector(".gameover").classList.remove("hide");
 			document.querySelector(".gameover__reason").innerText = string;
 
 			users.push(user);
@@ -194,7 +230,7 @@ function gameBuild(results, string) {
 
 			if (results === "limit") {
 				playFile("/assets/audio/tada.wav", audioCtx);
-				document.querySelector(".gameover__reason").style.color = "#6cbc3d";
+				document.querySelector(".gameover__reason").classList.add("gameover__reason--success");
 			}
 			if (results === "lives") playFile("/assets/audio/failure.wav", audioCtx);
 
@@ -205,15 +241,17 @@ function gameBuild(results, string) {
 		guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
 
 		buildUserInfo(user);
-		buildGameContainer(createTriviaObject(filteredApiResponse));
-	}, 1000);
+		buildGameContainer(createTriviaObject());
+	}, 100);
 }
 
 function startGame() {
 	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
+
 	// if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
 	// if (user.lives <= 0) return gameBuild("lives", "You ran out of lives");
 
+	document.querySelector(".fwf__display").classList.remove("hide");
 	gameBuild();
 }
 

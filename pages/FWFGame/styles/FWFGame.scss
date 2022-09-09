@@ -13,7 +13,7 @@ body {
 	}
 
 	&__display {
-		margin: 0 1rem;
+		margin: 0 2rem;
 
 		@include mobile-breakpoint {
 			max-width: 30rem;
@@ -100,11 +100,14 @@ body {
 }
 
 .trivia {
+	outline: blue 2px dotted;
 	display: grid;
 	grid-auto-flow: column;
-	grid-auto-columns: calc(100vw - 2rem);
+	grid-auto-columns: calc(100vw - 4rem);
 	overflow-x: auto;
 	overscroll-behavior-inline: contain;
+	gap: 2rem;
+	transition: margin-left;
 
 	@include mobile-breakpoint {
 		grid-auto-columns: 30rem;
@@ -173,6 +176,16 @@ body {
 			background-color: $success-color !important;
 			box-shadow: 4px 4px 0px 4px $success-color !important;
 		}
+	}
+
+	&__animate {
+		margin-left: -30rem;
+	}
+}
+
+@keyframes sweep {
+	to {
+		margin-left: -30rem;
 	}
 }
 

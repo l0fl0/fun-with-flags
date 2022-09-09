@@ -160,7 +160,7 @@ body {
   }
 }
 .fwf__display {
-  margin: 0 1rem;
+  margin: 0 2rem;
 }
 @media (min-width: 512px) {
   .fwf__display {
@@ -279,11 +279,14 @@ body {
 }
 
 .trivia {
+  outline: blue 2px dotted;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: calc(100vw - 2rem);
+  grid-auto-columns: calc(100vw - 4rem);
   overflow-x: auto;
   overscroll-behavior-inline: contain;
+  gap: 2rem;
+  transition: margin-left;
 }
 @media (min-width: 512px) {
   .trivia {
@@ -374,7 +377,21 @@ body {
   background-color: #6cbc3d !important;
   box-shadow: 4px 4px 0px 4px #6cbc3d !important;
 }
+.trivia__animate {
+  margin-left: -30rem;
+}
 
+@-webkit-keyframes sweep {
+  to {
+    margin-left: -30rem;
+  }
+}
+
+@keyframes sweep {
+  to {
+    margin-left: -30rem;
+  }
+}
 .gameover {
   text-align: center;
 }
