@@ -65,32 +65,33 @@ function buildGameContainer(data) {
 	triviaQuestion.appendChild(progressBar);
 	triviaQuestion.appendChild(flagContainer);
 	triviaQuestion.appendChild(options);
+
 	const trivia = document.querySelector(".trivia");
 	trivia.appendChild(triviaQuestion);
 	trivia.addEventListener("touchmove", noScroll);
 
-	let scrollTrivia = setInterval(scroll, 5);
-	function scroll() {
+	let scrollTrivia = setInterval(scrollRightAnimation, 5);
+
+	function scrollRightAnimation() {
 		trivia.scrollLeft += 10;
 		if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
 			clearInterval(scrollTrivia);
-			startCountdown(timeLimit);
 		}
 	}
 }
 
-function scrollAnimation() {
-	const trivia = document.querySelector(".trivia");
+// function scrollRightAnimation() {
+// 	const trivia = document.querySelector(".trivia");
 
-	let scrollTrivia = setInterval(scroll, 5);
-	function scroll() {
-		trivia.scrollLeft += 10;
-		if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
-			clearInterval(scrollTrivia);
-			startCountdown(timeLimit);
-		}
-	}
-}
+// 	let scrollTrivia = setInterval(scroll, 5);
+// 	function scroll() {
+// 		trivia.scrollLeft += 10;
+// 		if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
+// 			clearInterval(scrollTrivia);
+// 			startCountdown(timeLimit);
+// 		}
+// 	}
+// }
 
 function noScroll(e) {
 	return e.preventDefault();
@@ -225,9 +226,11 @@ function gameBuild(results, string) {
 			document.querySelector(".gameover").classList.remove("hide");
 			document.querySelector(".gameover__reason").innerText = string;
 
+			// Store user information in database
 			users.push(user);
 			localStorage.setItem("users", JSON.stringify(users));
 
+			// Conditionals for reaching question limit or running out of lives
 			if (results === "limit") {
 				playFile("/assets/audio/tada.wav", audioCtx);
 				document.querySelector(".gameover__reason").classList.add("gameover__reason--success");
@@ -257,6 +260,7 @@ function startGame() {
 
 startGame();
 
+// Button click delay to results page
 document.querySelector(".fwf__results-button").addEventListener("click", () => {
 	playFile("/assets/audio/click.wav", audioCtx);
 	setTimeout(() => window.location.assign("../ResultsPage/index.html"), 350);
