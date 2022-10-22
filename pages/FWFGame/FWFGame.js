@@ -75,23 +75,11 @@ function buildGameContainer(data) {
 	function scrollRightAnimation() {
 		trivia.scrollLeft += 10;
 		if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
+			startCountdown(timeLimit);
 			clearInterval(scrollTrivia);
 		}
 	}
 }
-
-// function scrollRightAnimation() {
-// 	const trivia = document.querySelector(".trivia");
-
-// 	let scrollTrivia = setInterval(scroll, 5);
-// 	function scroll() {
-// 		trivia.scrollLeft += 10;
-// 		if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
-// 			clearInterval(scrollTrivia);
-// 			startCountdown(timeLimit);
-// 		}
-// 	}
-// }
 
 function noScroll(e) {
 	return e.preventDefault();
@@ -251,8 +239,8 @@ function gameBuild(results, string) {
 function startGame() {
 	const questionNumber = user.guessResults.correctFlags.length + user.guessResults.incorrectFlags.length + 1;
 
-	// if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
-	// if (user.lives <= 0) return gameBuild("lives", "You ran out of lives");
+	if (questionNumber === user.questionLimit) return gameBuild("limit", "Question Limit Reached");
+	if (user.lives <= 0) return gameBuild("lives", "You ran out of lives");
 
 	document.querySelector(".fwf__display").classList.remove("hide");
 	gameBuild();
