@@ -1,5 +1,6 @@
 import { createPageElement, shuffle, playFile } from "../../scripts/utils.js";
 import { move } from "../../scripts/ProgressBarAnimation.js";
+import { attachObservers } from "../../scripts/inersectionObserver.js";
 
 let filteredApiResponse = JSON.parse(sessionStorage.getItem("filteredApiResponse")),
 	gameCodes = JSON.parse(sessionStorage.getItem("gameCodes")),
@@ -37,12 +38,14 @@ function buildUserInfo(user) {
 	questionTotal.innerText = `${questionIndex() + 1}/${gameCodes.length}`;
 }
 
-function buildQuestionContainer(data) {
+function buildQuestionContainer(data, questionNumber) {
 	const triviaQuestion = createPageElement("article", "trivia__question"),
 		flagContainer = createPageElement("div", "trivia__flag-container"),
 		options = createPageElement("ul", "trivia__options"),
 		progressBar = createPageElement("div", "progressbar"),
 		barStatus = createPageElement("div", "progressbar__barstatus");
+
+	triviaQuestion.setAttribute("id", `triviaQuestion${questionNumber}`);
 
 	// Progressbar
 	barStatus.setAttribute("id", `barStatus${questionIndex()}`);
@@ -232,10 +235,16 @@ function gameBuild(results, string) {
 		// reset game options
 		guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
 
-		buildUserInfo(user);
-		for (let code in gameCodes) {
-			buildQuestionContainer(createTriviaObject(code));
-		}
+		//Build the html
+		new Promise((resolve, reject) => {
+			resolve(buildUserInfo(user));
+		})
+			.then(() => {
+				for (let code in gameCodes) {
+					buildQuestionContainer(createTriviaObject(code), code);
+				}
+			})
+			.then(() => attachObservers(document.querySelectorAll(".trivia__question")));
 	}, 100);
 }
 

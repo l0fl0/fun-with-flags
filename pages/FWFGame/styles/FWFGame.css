@@ -283,7 +283,7 @@ body {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: calc(100vw - 4rem);
-  overflow-x: auto;
+  overflow-x: scroll;
   overscroll-behavior-inline: contain;
   gap: 2rem;
   transition: margin-left;
