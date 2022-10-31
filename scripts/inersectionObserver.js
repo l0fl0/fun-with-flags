@@ -7,7 +7,7 @@ const options = {
 };
 
 const questionObserver = new IntersectionObserver(function (entries, observer) {
-	entries.forEach((entry) => console.log(entry));
+	entries.forEach((entry) => console.log(entry.target));
 }, options);
 
 questions.forEach((question) => {

@@ -37,7 +37,7 @@ function buildUserInfo(user) {
 	questionTotal.innerText = `${questionIndex() + 1}/${gameCodes.length}`;
 }
 
-function buildGameContainer(data) {
+function buildQuestionContainer(data) {
 	const triviaQuestion = createPageElement("article", "trivia__question"),
 		flagContainer = createPageElement("div", "trivia__flag-container"),
 		options = createPageElement("ul", "trivia__options"),
@@ -70,15 +70,15 @@ function buildGameContainer(data) {
 	trivia.appendChild(triviaQuestion);
 	trivia.addEventListener("touchmove", noScroll);
 
-	let scrollTrivia = setInterval(scrollRightAnimation, 5);
+	// let scrollTrivia = setInterval(scrollRightAnimation, 5);
 
-	function scrollRightAnimation() {
-		trivia.scrollLeft += 10;
-		if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
-			startCountdown(timeLimit);
-			clearInterval(scrollTrivia);
-		}
-	}
+	// function scrollRightAnimation() {
+	// 	trivia.scrollLeft += 10;
+	// 	if (trivia.scrollLeft === trivia.scrollWidth - trivia.clientWidth) {
+	// 		startCountdown(timeLimit);
+	// 		clearInterval(scrollTrivia);
+	// 	}
+	// }
 }
 
 function noScroll(e) {
@@ -107,13 +107,14 @@ function handleOptionSelect(event) {
 	guessOptions.choice = event.target.attributes["data-cc"].value;
 }
 
-function createTriviaObject() {
-	const countryCode = gameCodes[questionIndex()][0];
+function createTriviaObject(code) {
+	const countryCode = gameCodes[code][0];
 	//set the correct answer
 	guessOptions.correctChoice = countryCode;
 
 	// Generate country options
-	let countryOptions = gameCodes[questionIndex()].map((code) => ({ code, country: filteredApiResponse[code] }));
+	let countryOptions = gameCodes[code].map((code) => ({ code, country: filteredApiResponse[code] }));
+
 	return {
 		flag: `https://flagcdn.com/${countryCode}.svg`,
 		countries: shuffle(countryOptions),
@@ -232,7 +233,9 @@ function gameBuild(results, string) {
 		guessOptions = { choice: null, correctChoice: null, timeRemaining: null };
 
 		buildUserInfo(user);
-		buildGameContainer(createTriviaObject());
+		for (let code in gameCodes) {
+			buildQuestionContainer(createTriviaObject(code));
+		}
 	}, 100);
 }
 
@@ -243,9 +246,11 @@ function startGame() {
 	if (user.lives <= 0) return gameBuild("lives", "You ran out of lives");
 
 	document.querySelector(".fwf__display").classList.remove("hide");
+
 	gameBuild();
 }
 
+//callback to start game on page load
 startGame();
 
 // Button click delay to results page
